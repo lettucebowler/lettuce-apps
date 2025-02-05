@@ -33,3 +33,5 @@ export function setTokens(event: RequestEvent, access: string, refresh: string) 
 import { subjects } from 'auth';
 
 export type UserSubject = v.InferOutput<typeof subjects.user>;
+
+export const bleh = 'blah';
