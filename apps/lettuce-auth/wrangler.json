@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lettuce-auth",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-03",
+  "kv_namespaces": [
+    {
+      "binding": "lettuce_auth_sessions",
+      "id": "7b701343a2ab454cb1d7593c093b6d3b",
+      "preview_id": "8013d0dd42eb417581f10aa04274397f"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "USERS_DB",
+      "database_name": "lettuce-auth",
+      "database_id": "b7e70e38-3805-4307-b0d4-ffb4486abdf8"
+    }
+  ],
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu"
+  },
+  "placement": {
+    "mode": "smart"
+  },
+  "dev": {
+    "port": 8787
+  }
+}

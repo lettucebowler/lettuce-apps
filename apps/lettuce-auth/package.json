@@ -1,0 +1,17 @@
+{
+  "name": "lettuce-auth",
+  "scripts": {
+    "dev": "wrangler dev",
+    "ship": "wrangler deploy --minify"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "@openauthjs/openauth": "0.3.7",
+    "@types/node": "^22.13.1",
+    "auth": "workspace:*",
+    "hono": "^4.6.20",
+    "itty-fetcher": "^0.9.4",
+    "valibot": "1.0.0-beta.15",
+    "wrangler": "^3.107.3"
+  }
+}
