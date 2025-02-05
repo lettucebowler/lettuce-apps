@@ -7,7 +7,7 @@
 {#if data.authenticated}
 	<p>hello {data.session.username}</p>
 	<img
-		class="pointer-events-none inline aspect-square h-32 w-32 w-full rounded-xl"
+		class="pointer-events-none inline aspect-square h-32 w-32 rounded-xl"
 		src="https://api.dicebear.com/7.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundColor=81A1C1&seed={encodeURIComponent(
 			data.session.username
 		)}"
