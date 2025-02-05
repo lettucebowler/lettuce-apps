@@ -34,10 +34,10 @@ function m(e) {
   return t === "string" ? `"${e}"` : t === "number" || t === "bigint" || t === "boolean" ? `${e}` : t === "object" || t === "function" ? (e && ((u = (n = Object.getPrototypeOf(e)) == null ? void 0 : n.constructor) == null ? void 0 : u.name)) ?? "null" : t;
 }
 function b(e, t, n, u, s) {
-  const y = s && "input" in s ? s.input : n.value, i = (s == null ? void 0 : s.expected) ?? e.expects ?? null, r = (s == null ? void 0 : s.received) ?? /* @__PURE__ */ m(y), l = {
+  const c = s && "input" in s ? s.input : n.value, i = (s == null ? void 0 : s.expected) ?? e.expects ?? null, r = (s == null ? void 0 : s.received) ?? /* @__PURE__ */ m(c), l = {
     kind: e.kind,
     type: e.type,
-    input: y,
+    input: c,
     expected: i,
     received: r,
     message: `Invalid ${t}: ${i ? `Expected ${i} but r` : "R"}eceived ${r}`,
@@ -47,11 +47,11 @@ function b(e, t, n, u, s) {
     lang: u.lang,
     abortEarly: u.abortEarly,
     abortPipeEarly: u.abortPipeEarly
-  }, p = e.kind === "schema", c = (s == null ? void 0 : s.message) ?? e.message ?? /* @__PURE__ */ _(e.reference, l.lang) ?? (p ? /* @__PURE__ */ x(l.lang) : null) ?? u.message ?? /* @__PURE__ */ S(l.lang);
-  c && (l.message = typeof c == "function" ? (
+  }, p = e.kind === "schema", y = (s == null ? void 0 : s.message) ?? e.message ?? /* @__PURE__ */ _(e.reference, l.lang) ?? (p ? /* @__PURE__ */ x(l.lang) : null) ?? u.message ?? /* @__PURE__ */ S(l.lang);
+  y && (l.message = typeof y == "function" ? (
     // @ts-expect-error
-    c(l)
-  ) : c), p && (n.typed = !1), n.issues ? n.issues.push(l) : n.issues = [l];
+    y(l)
+  ) : y), p && (n.typed = !1), n.issues ? n.issues.push(l) : n.issues = [l];
 }
 // @__NO_SIDE_EFFECTS__
 function k(e) {
@@ -69,7 +69,7 @@ function I(e, t) {
   return n.length > 1 ? `(${n.join(` ${t} `)})` : n[0] ?? "never";
 }
 // @__NO_SIDE_EFFECTS__
-function w(e, t, n) {
+function M(e, t, n) {
   return typeof e.fallback == "function" ? (
     // @ts-expect-error
     e.fallback(t, n)
@@ -79,7 +79,7 @@ function w(e, t, n) {
   );
 }
 // @__NO_SIDE_EFFECTS__
-function M(e, t, n) {
+function O(e, t, n) {
   return typeof e.default == "function" ? (
     // @ts-expect-error
     e.default(t, n)
@@ -102,7 +102,7 @@ function E(e, t) {
       return /* @__PURE__ */ k(this);
     },
     "~run"(n, u) {
-      var y;
+      var c;
       const s = n.value;
       if (s && typeof s == "object") {
         n.typed = !0, n.value = {};
@@ -113,9 +113,9 @@ function E(e, t) {
             const l = i in s ? (
               // @ts-expect-error
               s[i]
-            ) : /* @__PURE__ */ M(r), p = r["~run"]({ value: l }, u);
+            ) : /* @__PURE__ */ O(r), p = r["~run"]({ value: l }, u);
             if (p.issues) {
-              const c = {
+              const y = {
                 type: "object",
                 origin: "value",
                 input: s,
@@ -123,7 +123,7 @@ function E(e, t) {
                 value: l
               };
               for (const f of p.issues)
-                f.path ? f.path.unshift(c) : f.path = [c], (y = n.issues) == null || y.push(f);
+                f.path ? f.path.unshift(y) : f.path = [y], (c = n.issues) == null || c.push(f);
               if (n.issues || (n.issues = p.issues), u.abortEarly) {
                 n.typed = !1;
                 break;
@@ -131,7 +131,7 @@ function E(e, t) {
             }
             p.typed || (n.typed = !1), n.value[i] = p.value;
           } else if (r.fallback !== void 0)
-            n.value[i] = /* @__PURE__ */ w(r);
+            n.value[i] = /* @__PURE__ */ M(r);
           else if (r.type !== "exact_optional" && r.type !== "optional" && r.type !== "nullish" && (b(this, "key", n, u, {
             input: void 0,
             expected: `"${i}"`,
@@ -189,14 +189,13 @@ function g(e) {
     }
   };
 }
-const O = $({
+const q = $({
   user: /* @__PURE__ */ E({
     provider: /* @__PURE__ */ j(["github"]),
     providerId: /* @__PURE__ */ g(),
     username: /* @__PURE__ */ g()
   })
-}), h = "woah";
+});
 export {
-  O as subjects,
-  h as what
+  q as subjects
 };
