@@ -3,15 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/auth.js",
-  "types": "./dist/main.d.ts",
+  "main": "src/main.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0",
     "@openauthjs/openauth": "^0.3.7",
+    "@standard-schema/spec": "^1.0.0",
+    "jose": "^5.9.6",
     "typescript": "~5.6.2",
     "valibot": "1.0.0-beta.15",
     "vite": "^6.0.5",

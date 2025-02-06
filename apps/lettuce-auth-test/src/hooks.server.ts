@@ -6,7 +6,7 @@ import { subjects } from 'auth';
 const authHandler: Handle = async ({ event, resolve }) => {
 	const authClient = createAuthClient(event);
 	const access_token = event.cookies.get('access_token');
-	if (access_token && event.url.pathname !== '/auth') {
+	if (access_token && event.url.pathname !== '/auth' && event.url.pathname !== '/callback') {
 		const before = performance.now();
 		const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
 			refresh: event.cookies.get('refresh_token') || undefined

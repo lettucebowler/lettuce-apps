@@ -1,19 +1,18 @@
-import { createClient } from '@openauthjs/openauth/client';
 import type { RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
+import { createAuthClient } from 'auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
-export function createAuthClient(event: RequestEvent) {
-	return createClient({
+function _createAuthClient(event: RequestEvent) {
+	return createAuthClient({
 		clientID: 'lettuce-auth-test',
-		issuer: AUTH_HOST ? AUTH_HOST : 'https://auth.lettucebowler.net',
-		fetch: (url: string, options = {}) => {
-			console.log('fetch', url);
-			return event.fetch(url, options);
-		}
-	});
+		issuer: AUTH_HOST,
+		fetch: event.fetch,
+	})
 }
+
+export { _createAuthClient as createAuthClient };
 
 export function setTokens(event: RequestEvent, access: string, refresh: string) {
 	event.cookies.set('refresh_token', refresh, {
@@ -33,5 +32,3 @@ export function setTokens(event: RequestEvent, access: string, refresh: string) 
 import { subjects } from 'auth';
 
 export type UserSubject = v.InferOutput<typeof subjects.user>;
-
-export const bleh = 'blah';
