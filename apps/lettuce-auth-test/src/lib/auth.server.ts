@@ -1,23 +1,23 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
-import { createClient } from '@openauthjs/openauth/client';
 import { createAuthClient } from 'auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
 function _createAuthClient(event: RequestEvent) {
-	const customFetch = async (url: string, options: any) => {
-		const before = performance.now();
-		const result = await event.fetch(url, options);
-		const after = performance.now();
-		console.log('fetch', url, after - before);
-		return result;
-	};
+	// const customFetch = async (url: string, options: any) => {
+	// 	const before = performance.now();
+	// 	const result = await event.fetch(url, options);
+	// 	const after = performance.now();
+	// 	console.log('fetch', url, after - before);
+	// 	return result;
+	// };
 
 	return createAuthClient({
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
-		fetch: customFetch,
+		// fetch: customFetch,
+		fetch: event.fetch,
 		storage: event.platform?.env.lettuce_auth_test
 	});
 }

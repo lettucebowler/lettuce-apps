@@ -31,18 +31,15 @@ export function createAuthClient(input: AuthClientInput) {
 
   function getIssuerKey(issuer: string) {
     const key = `oauth:issuer:${issuer}`;
-    console.log("issuer key", key);
     return key;
   }
 
   async function getIssuer(): Promise<WellKnown> {
-    console.log("storage?", !!input.storage);
     if (input.storage) {
       const cached = await input.storage.get(
         getIssuerKey(input.issuer),
         "json",
       );
-      console.log("cached issuer", cached);
       if (cached) {
         return cached as WellKnown;
       }
