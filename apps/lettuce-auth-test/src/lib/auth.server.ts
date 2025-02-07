@@ -8,8 +8,9 @@ function _createAuthClient(event: RequestEvent) {
 	return createAuthClient({
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
-		fetch: event.fetch,
-	})
+		storage: event.platform?.env.lettuce_auth_test,
+		fetch: event.fetch
+	});
 }
 
 export { _createAuthClient as createAuthClient };

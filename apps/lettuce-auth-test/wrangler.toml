@@ -1,0 +1,11 @@
+name = "lettuce-auth-test"
+compatibility_date = "2024-10-22"
+
+[[kv_namespaces]]
+binding = "lettuce_auth_test"
+id = "edddb17fe13a41c98aa4798b856d7aa3"
+
+[env.prod]
+routes = [
+  { pattern = "auth-test.lettucebowler.net", custom_domain = true }
+]
