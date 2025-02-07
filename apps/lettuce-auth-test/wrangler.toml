@@ -20,6 +20,6 @@ mode = "smart"
 AUTH_HOST = "https://auth.lettucebowler.net"
 NODE_VERSION = "22"
 
-[[env.production.kv_namespaces]]
-id = "c4c734815f294c2e973669a23e26d387"
+[[kv_namespaces]]
 binding = "lettuce_auth_test"
+id = "edddb17fe13a41c98aa4798b856d7aa3"
