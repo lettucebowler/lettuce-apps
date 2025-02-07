@@ -1,5 +1,6 @@
 name = "lettuce-auth-test"
-compatibility_date = "2024-10-22"
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2024-09-23"
 
 [[kv_namespaces]]
 binding = "lettuce_auth_test"
