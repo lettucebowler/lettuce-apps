@@ -107,7 +107,7 @@ export function createAuthClient(input: AuthClientInput) {
           err: new InvalidSubjectError(),
         };
       } catch (e) {
-        console.log('generic error', e);
+        console.log("generic error", e);
         if (e instanceof errors.JWTExpired && options?.refresh) {
           console.log("try refresh");
           const refreshed = await this.refresh(options.refresh);

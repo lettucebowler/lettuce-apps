@@ -10,9 +10,6 @@ mode = "off"
 AUTH_HOST = "https://auth.lettucebowler.net"
 NODE_VERSION = "22"
 
-[env.production]
-compatibility_flags = [ "nodejs_compat" ]
-
 [env.production.placement]
 mode = "smart"
 
