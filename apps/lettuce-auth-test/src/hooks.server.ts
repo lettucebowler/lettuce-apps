@@ -11,7 +11,6 @@ const authHandler: Handle = async ({ event, resolve }) => {
 		const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
 			refresh: event.cookies.get('refresh_token') || undefined
 		});
-		console.log('verified', verified);
 		if (!verified.err) {
 			event.locals.session = verified.subject.properties;
 		}

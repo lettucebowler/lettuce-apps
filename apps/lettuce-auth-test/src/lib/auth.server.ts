@@ -2,14 +2,15 @@ import type { RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
 import { createAuthClient } from 'auth';
 
-import { AUTH_HOST } from '$env/static/private';
+import { AUTH_HOST, AUTH_KEYSET } from '$env/static/private';
 
 function _createAuthClient(event: RequestEvent) {
 	return createAuthClient({
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
 		storage: event.platform?.env.lettuce_auth_test,
-		fetch: event.fetch
+		fetch: event.fetch,
+		keyset: JSON.parse(AUTH_KEYSET)
 	});
 }
 

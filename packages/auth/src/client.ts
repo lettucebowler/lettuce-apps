@@ -1,5 +1,10 @@
 import type { KVNamespace } from "@cloudflare/workers-types";
-import { createLocalJWKSet, errors, JSONWebKeySet, jwtVerify } from "../node_modules/jose/dist/browser";
+import {
+  createLocalJWKSet,
+  errors,
+  JSONWebKeySet,
+  jwtVerify,
+} from "../node_modules/jose/dist/browser";
 import type { StandardSchemaV1 as v1 } from "@standard-schema/spec";
 
 import {
@@ -19,6 +24,7 @@ import {
 type AuthClientInput = ClientInput & {
   storage?: KVNamespace;
   issuer: string;
+  keyset?: JSONWebKeySet;
 };
 export function createAuthClient(input: AuthClientInput) {
   const f = input.fetch ?? fetch;
@@ -48,8 +54,10 @@ export function createAuthClient(input: AuthClientInput) {
   }
 
   async function getJWKS() {
+    if (input.keyset) {
+      return createLocalJWKSet(input.keyset);
+    }
     const wk = await getIssuer();
-    console.log("well-known", wk);
     let keyset: JSONWebKeySet | undefined = undefined;
     if (input.storage) {
       const cachedKeyset = await input.storage
@@ -57,7 +65,6 @@ export function createAuthClient(input: AuthClientInput) {
         .then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
         keyset = cachedKeyset;
-        console.log("keyset", keyset);
         return createLocalJWKSet(keyset);
       }
     }
@@ -80,7 +87,6 @@ export function createAuthClient(input: AuthClientInput) {
       options: VerifyOptions,
     ): Promise<VerifyResult<T> | VerifyError> {
       const jwks = await getJWKS();
-      console.log("jwks", jwks);
       const issuer = input.issuer;
       try {
         const result = await jwtVerify<{
@@ -90,11 +96,9 @@ export function createAuthClient(input: AuthClientInput) {
         }>(token, jwks, {
           issuer,
         });
-        console.log("result", result);
         const validated = await subjects[result.payload.type][
           "~standard"
         ].validate(result.payload.properties);
-        console.log("validated", validated);
         if (!validated.issues && result.payload.mode === "access")
           return {
             aud: result.payload.aud as string,
@@ -107,9 +111,7 @@ export function createAuthClient(input: AuthClientInput) {
           err: new InvalidSubjectError(),
         };
       } catch (e) {
-        console.log("generic error", e);
         if (e instanceof errors.JWTExpired && options?.refresh) {
-          console.log("try refresh");
           const refreshed = await this.refresh(options.refresh);
           if (refreshed.err) return refreshed;
           const verified = await result.verify(
