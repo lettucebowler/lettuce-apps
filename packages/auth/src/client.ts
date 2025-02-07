@@ -49,6 +49,7 @@ export function createAuthClient(input: AuthClientInput) {
 
   async function getJWKS() {
     const wk = await getIssuer();
+    console.log("well-known", wk);
     let keyset: JSONWebKeySet | undefined = undefined;
     if (input.storage) {
       const cachedKeyset = await input.storage
@@ -56,6 +57,7 @@ export function createAuthClient(input: AuthClientInput) {
         .then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
         keyset = cachedKeyset;
+        console.log("keyset", keyset);
         return createLocalJWKSet(keyset);
       }
     }
@@ -90,6 +92,7 @@ export function createAuthClient(input: AuthClientInput) {
         const validated = await subjects[result.payload.type][
           "~standard"
         ].validate(result.payload.properties);
+        console.log("validated", validated.issues);
         if (!validated.issues && result.payload.mode === "access")
           return {
             aud: result.payload.aud as string,
