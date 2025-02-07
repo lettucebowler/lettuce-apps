@@ -6,21 +6,11 @@ import { AUTH_HOST } from '$env/static/private';
 
 function _createAuthClient(event: RequestEvent) {
 	const customFetch = async (url: string, options: any) => {
-		if (
-			['/.well-known/oauth-authorization-server', '/.well-known/jwks.json'].includes(
-				new URL(url).pathname
-			)
-		) {
-			console.log('yeah buddy');
-			return fetch(url, {
-				...options,
-				cf: {
-					cacheTtl: 60 * 60 * 24,
-					cacheEverything: true
-				}
-			});
-		}
-		return event.fetch(url, options);
+		const before = performance.now();
+		const result = await event.fetch(url, options);
+		const after = performance.now();
+		console.log('fetch', url, after - before);
+		return result;
 	};
 
 	return createClient({
