@@ -8,9 +8,9 @@ function _createAuthClient(event: RequestEvent) {
 	return createAuthClient({
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
-		storage: event.platform?.env.lettuce_auth_test,
-		fetch: event.fetch,
-		keyset: JSON.parse(AUTH_KEYSET)
+		// storage: event.platform?.env.lettuce_auth_test,
+		fetch: event.fetch
+		// keyset: JSON.parse(AUTH_KEYSET)
 	});
 }
 
