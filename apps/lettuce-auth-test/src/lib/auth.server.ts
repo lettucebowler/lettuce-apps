@@ -1,6 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
 import { createClient } from '@openauthjs/openauth/client';
+import { createAuthClient } from 'auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
@@ -13,10 +14,11 @@ function _createAuthClient(event: RequestEvent) {
 		return result;
 	};
 
-	return createClient({
+	return createAuthClient({
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
-		fetch: customFetch
+		fetch: customFetch,
+		storage: event.platform?.env.lettuce_auth_test
 	});
 }
 
