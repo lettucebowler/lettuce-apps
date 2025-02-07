@@ -80,6 +80,7 @@ export function createAuthClient(input: AuthClientInput) {
       options: VerifyOptions,
     ): Promise<VerifyResult<T> | VerifyError> {
       const jwks = await getJWKS();
+      console.log("jwks", jwks);
       const issuer = input.issuer;
       try {
         const result = await jwtVerify<{
@@ -107,6 +108,7 @@ export function createAuthClient(input: AuthClientInput) {
         };
       } catch (e) {
         if (e instanceof errors.JWTExpired && options?.refresh) {
+          console.log("try refresh");
           const refreshed = await this.refresh(options.refresh);
           if (refreshed.err) return refreshed;
           const verified = await result.verify(
