@@ -56,6 +56,13 @@ export default {
         cacheControl: "max-age-300",
       }),
     );
+    app.use(
+      "/.well-known/oauth-authorization-server",
+      cache({
+        cacheName: "lettuce-auth-jwks",
+        cacheControl: "max-age-300",
+      }),
+    );
     app.route("/", auth);
     return app.fetch(request, env, ctx);
     // return issuer({
