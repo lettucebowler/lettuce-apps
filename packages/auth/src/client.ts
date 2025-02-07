@@ -36,10 +36,10 @@ export function createAuthClient(input: AuthClientInput) {
 
   async function getIssuer(): Promise<WellKnown> {
     if (input.storage) {
-      const cached = await input.storage.get(
-        getIssuerKey(input.issuer),
-        "json",
-      );
+      const cached = await input.storage.get(getIssuerKey(input.issuer), {
+        type: "json",
+        cacheTtl: 3600,
+      });
       if (cached) {
         return cached as WellKnown;
       }
@@ -65,7 +65,7 @@ export function createAuthClient(input: AuthClientInput) {
     let keyset: JSONWebKeySet | undefined = undefined;
     if (input.storage) {
       const cachedKeyset = await input.storage
-        .get(getJWKSKey(input.issuer), "json")
+        .get(getJWKSKey(input.issuer), { type: "json", cacheTtl: 3600 })
         .then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
         keyset = cachedKeyset;
