@@ -94,7 +94,7 @@ export function createAuthClient(input: AuthClientInput) {
         const validated = await subjects[result.payload.type][
           "~standard"
         ].validate(result.payload.properties);
-        console.log("validated", validated.issues);
+        console.log("validated", validated);
         if (!validated.issues && result.payload.mode === "access")
           return {
             aud: result.payload.aud as string,
