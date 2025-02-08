@@ -28,7 +28,7 @@ export default {
       "/.well-known/jwks.json",
       cache({
         cacheName: "lettuce-auth-jwks",
-        cacheControl: "max-age-3600",
+        cacheControl: "max-age-604800",
       }),
     );
     app.use(
@@ -36,7 +36,7 @@ export default {
 
       cache({
         cacheName: "lettuce-auth-oauth-authorization-server",
-        cacheControl: "max-age-3600",
+        cacheControl: "max-age-604800",
       }),
     );
     const auth = issuer({
@@ -51,6 +51,9 @@ export default {
       storage: CloudflareStorage({
         namespace: env.lettuce_auth_sessions,
       }),
+      ttl: {
+        access: 604800,
+      },
       success: async (ctx, value) => {
         const user = await github.get<{ login: string; id: number }>(
           "/user",
