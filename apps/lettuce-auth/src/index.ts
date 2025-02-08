@@ -1,5 +1,5 @@
 import { issuer } from "@openauthjs/openauth";
-import { subjects } from "auth";
+import { subjects } from "@lettuce-apps-packages/auth";
 
 import { GithubProvider } from "@openauthjs/openauth/provider/github";
 import { CloudflareStorage } from "@openauthjs/openauth/storage/cloudflare";
