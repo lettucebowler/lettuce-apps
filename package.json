@@ -8,8 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "packages": "pnpm --filter @lettuce-apps-packages/*",
     "auth": "pnpm --filter auth",
-    "lettuce-auth": "pnpm --filter lettuce-auth",
+    "lettuce-auth": "pnpm --filter @lettuce-apps-packages/auth",
     "lettuce-auth-test": "pnpm --filter lettuce-auth-test"
   },
   "keywords": [],

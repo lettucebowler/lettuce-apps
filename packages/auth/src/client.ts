@@ -1,10 +1,5 @@
 import type { KVNamespace } from "@cloudflare/workers-types";
-import {
-  createLocalJWKSet,
-  errors,
-  JSONWebKeySet,
-  jwtVerify,
-} from "../node_modules/jose/dist/browser";
+import { createLocalJWKSet, errors, JSONWebKeySet, jwtVerify } from "jose";
 import type { StandardSchemaV1 as v1 } from "@standard-schema/spec";
 
 import {
