@@ -11,14 +11,15 @@
     "packages": "pnpm --filter @lettuce-apps-packages/*",
     "auth": "pnpm --filter auth",
     "lettuce-auth": "pnpm --filter @lettuce-apps-packages/auth",
-    "lettuce-auth-test": "pnpm --filter lettuce-auth-test"
+    "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
+    "lettuce-wordle": "pnpm --filter lettuce-wordle"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "eslint": "^9.19.0",
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^15.14.0",
