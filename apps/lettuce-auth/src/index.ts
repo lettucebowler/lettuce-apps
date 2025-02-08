@@ -24,21 +24,21 @@ const github = fetcher({
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const app = new Hono();
-    app.use(
-      "/.well-known/jwks.json",
-      cache({
-        cacheName: "lettuce-auth-jwks",
-        cacheControl: "max-age-3600",
-      }),
-    );
-    app.use(
-      "/.well-known/oauth-authorization-server",
+    // app.use(
+    //   "/.well-known/jwks.json",
+    //   cache({
+    //     cacheName: "lettuce-auth-jwks",
+    //     cacheControl: "max-age-3600",
+    //   }),
+    // );
+    // app.use(
+    //   "/.well-known/oauth-authorization-server",
 
-      cache({
-        cacheName: "lettuce-auth-oauth-authorization-server",
-        cacheControl: "max-age-3600",
-      }),
-    );
+    //   cache({
+    //     cacheName: "lettuce-auth-oauth-authorization-server",
+    //     cacheControl: "max-age-3600",
+    //   }),
+    // );
     const auth = issuer({
       providers: {
         github: GithubProvider({
