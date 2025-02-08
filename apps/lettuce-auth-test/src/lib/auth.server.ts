@@ -1,6 +1,6 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
-import { createAuthClient } from 'auth';
+import { createAuthClient, subjects } from '@lettuce-apps-packages/auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
@@ -39,7 +39,5 @@ export function setTokens(event: RequestEvent, access: string, refresh: string) 
 		maxAge: 34560000
 	});
 }
-
-import { subjects } from 'auth';
 
 export type UserSubject = v.InferOutput<typeof subjects.user>;
