@@ -1,4 +1,4 @@
-import { KVNamespace } from '@cloudflare/workers-types';
+import { KVNamespace, Service } from '@cloudflare/workers-types';
 
 declare global {
 	namespace App {
@@ -11,6 +11,7 @@ declare global {
 		interface Platform {
 			env: {
 				lettuce_auth_test: KVNamespace;
+				lettuce_auth: Service;
 			};
 		}
 	}

@@ -24,3 +24,7 @@ id = "c4c734815f294c2e973669a23e26d387"
 [[env.production.kv_namespaces]]
 id = "c4c734815f294c2e973669a23e26d387"
 binding = "lettuce_auth_test"
+
+services = [
+  { binding = "lettuce_auth", service = "lettuce-auth" }
+]

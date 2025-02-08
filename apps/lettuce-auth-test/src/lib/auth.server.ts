@@ -17,8 +17,8 @@ function _createAuthClient(event: RequestEvent) {
 		clientID: 'lettuce-auth-test',
 		issuer: AUTH_HOST,
 		// fetch: customFetch,
-		fetch: event.fetch,
-		storage: event.platform?.env.lettuce_auth_test
+		fetch: event.platform?.env.lettuce_auth?.fetch ?? event.fetch
+		// storage: event.platform?.env.lettuce_auth_test
 	});
 }
 
