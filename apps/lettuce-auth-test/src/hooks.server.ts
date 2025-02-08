@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { type Handle } from '@sveltejs/kit';
 import { createAuthClient } from '$lib/auth.server';
-import { subjects } from 'auth';
+import { subjects } from '@lettuce-apps-packages/auth';
 
 const authHandler: Handle = async ({ event, resolve }) => {
 	const authClient = createAuthClient(event);
