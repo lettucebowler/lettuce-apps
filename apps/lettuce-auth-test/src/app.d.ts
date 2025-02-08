@@ -11,7 +11,6 @@ declare global {
 		interface Platform {
 			env: {
 				lettuce_auth_test: KVNamespace;
-				lettuce_auth: Service;
 			};
 		}
 	}
