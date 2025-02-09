@@ -16,3 +16,7 @@ AUTH_HOST="https://auth.lettucebowler.net"
 [[kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
 id = "c4c734815f294c2e973669a23e26d387"
+
+[[env.production.kv_namespaces]]
+binding = "lettuce_auth_signing_keys"
+id = "c4c734815f294c2e973669a23e26d387"
