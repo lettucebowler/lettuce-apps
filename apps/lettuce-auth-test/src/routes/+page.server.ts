@@ -7,13 +7,13 @@ export async function load(event) {
 		const authClient = createAuthClient(event);
 		const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code');
 		return {
-			authenticated: false as false,
+			authenticated: false as const,
 			loginUrl: url
 		};
 	}
 
 	return {
-		authenticated: true as true,
+		authenticated: true as const,
 		session
 	};
 }

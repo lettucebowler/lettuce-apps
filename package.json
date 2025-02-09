@@ -10,8 +10,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "packages": "pnpm --filter @lettuce-apps-packages/*",
-    "auth": "pnpm --filter auth",
-    "lettuce-auth": "pnpm --filter @lettuce-apps-packages/auth",
+    "auth": "pnpm --filter @lettuce-apps-packages/auth",
+    "lettuce-auth": "pnpm --filter @lettuce-apps/lettuce-auth",
     "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
     "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce"
   },

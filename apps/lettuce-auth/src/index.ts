@@ -13,6 +13,8 @@ interface Env {
 import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
+import { v4 as uuidV4 } from 'uuid';
+import test from 'node:test';
 
 const github = fetcher({
   base: 'https://api.github.com',
@@ -55,15 +57,23 @@ export default {
         access: 604800,
       },
       success: async (ctx, value) => {
-        const user = await github.get<{ login: string; id: number }>(
+        const user = await github.get<{
+          login: string;
+          id: number;
+          email: string;
+        }>(
           '/user',
           {},
           { headers: { ['Authorization']: `token ${value.tokenset.access}` } },
         );
         return ctx.subject('user', {
-          provider: 'github',
-          providerId: user.id.toString(),
-          username: user.login,
+          id: uuidV4(),
+          email: user.email,
+          display_name: user.login,
+          account: {
+            provider: 'github',
+            providerId: user.id.toString(),
+          },
         });
       },
     });

@@ -1,16 +1,24 @@
 {
-  "name": "lettuce-auth",
+  "name": "@lettuce-apps/lettuce-auth",
   "scripts": {
     "dev": "wrangler dev",
-    "ship": "wrangler deploy --minify"
+    "ship": "wrangler deploy --minify",
+    "db:push": "wrangler d1 migrations apply lettuce-auth",
+    "db:migrate": "drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",
+    "@lettuce-apps-packages/auth": "workspace:*",
     "@openauthjs/openauth": "0.3.7",
     "@types/node": "^22.13.1",
-    "@lettuce-apps-packages/auth": "workspace:*",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.30.4",
+    "drizzle-orm": "^0.39.1",
     "hono": "^4.6.20",
     "itty-fetcher": "^0.9.4",
+    "uuid": "^11.0.5",
     "valibot": "1.0.0-beta.15",
     "wrangler": "^3.107.3"
   }

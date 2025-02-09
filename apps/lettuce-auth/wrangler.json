@@ -12,9 +12,10 @@
   ],
   "d1_databases": [
     {
-      "binding": "USERS_DB",
+      "binding": "lettuce_auth_db",
       "database_name": "lettuce-auth",
-      "database_id": "b7e70e38-3805-4307-b0d4-ffb4486abdf8"
+      "database_id": "b7e70e38-3805-4307-b0d4-ffb4486abdf8",
+      "migrations_dir": "drizzle"
     }
   ],
   "compatibility_flags": ["nodejs_compat"],
