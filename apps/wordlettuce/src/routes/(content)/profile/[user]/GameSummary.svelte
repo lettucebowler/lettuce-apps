@@ -12,8 +12,7 @@
       data-answer={answer}
       class={{
         'tile bg-(--bg-color) aspect-square w-full rounded-lg': true,
-        'border-(--highlight-color) border-t-[1px] shadow-[0_var(--depth)_4px_0_rgb(0_0_0_/_0.2)]':
-          answer !== '_',
+        'border-(--highlight-color) border-t-[1px] shadow-[0_var(--depth)_4px_0_rgb(0_0_0_/_0.2)]': answer !== '_',
       }}
     ></div>
   {/each}

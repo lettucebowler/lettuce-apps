@@ -55,10 +55,7 @@ function throttle(fn: VoidFunction, delay: number) {
 
 function getScrollTop<T extends Element>(element: T | Window) {
   if (isWindow(element)) {
-    return Math.max(
-      window.pageYOffset || 0,
-      document.documentElement.scrollTop,
-    );
+    return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
   }
 
   return element.scrollTop;
@@ -117,18 +114,14 @@ function check(
 ) {
   if (force !== true && disabled) return;
   const viewportScrollTop = getScrollTop(scrollEventTarget);
-  const viewportBottom =
-    viewportScrollTop + getVisibleHeight(scrollEventTarget);
+  const viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
 
   let shouldTrigger = false;
   if (scrollEventTarget === element) {
     shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
   } else {
     const elementBottom =
-      getElementTop(element) -
-      getElementTop(scrollEventTarget) +
-      element.offsetHeight +
-      viewportScrollTop;
+      getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
 
     shouldTrigger = viewportBottom + distance >= elementBottom;
   }
@@ -161,8 +154,7 @@ export function infiniteScrollAction<T extends HTMLElement>(
       check({ ...params, scrollEventTarget, element: node });
     }
 
-    stop = () =>
-      scrollEventTarget.removeEventListener('scroll', scrollEventListener);
+    stop = () => scrollEventTarget.removeEventListener('scroll', scrollEventListener);
   };
 
   update({ ...defaultParams, ...params });

@@ -3,10 +3,7 @@
   import type { NavLinkProps } from '$lib/types';
   import { navigationSend, navigationRecieve } from './transitions';
 
-  let {
-    link,
-    enableTransition = true,
-  }: { enableTransition?: boolean; link: NavLinkProps } = $props();
+  let { link, enableTransition = true }: { enableTransition?: boolean; link: NavLinkProps } = $props();
 
   let current = $derived(page.url.pathname === link.path);
 </script>
@@ -19,9 +16,7 @@
   aria-current={current}
   href={link.path}
 >
-  <div
-    class="col-[1] row-[1] box-border grid hidden h-14 h-full w-full sm:block"
-  >
+  <div class="col-[1] row-[1] box-border grid hidden h-14 h-full w-full sm:block">
     {#if enableTransition}
       {#if current}
         <div
@@ -34,8 +29,5 @@
       <div class="grid h-full rounded-xl" class:bg-charade-800={current}></div>
     {/if}
   </div>
-  <span
-    class="z-10 col-[1] row-[1] my-auto grid items-center sm:h-14 sm:px-4 sm:py-2"
-    >{link.name}</span
-  >
+  <span class="z-10 col-[1] row-[1] my-auto grid items-center sm:h-14 sm:px-4 sm:py-2">{link.name}</span>
 </a>

@@ -11,10 +11,7 @@ import {
   VerifyError,
 } from '@openauthjs/openauth/client';
 import { SubjectSchema } from '@openauthjs/openauth/subject';
-import {
-  InvalidAccessTokenError,
-  InvalidSubjectError,
-} from '@openauthjs/openauth/error';
+import { InvalidAccessTokenError, InvalidSubjectError } from '@openauthjs/openauth/error';
 
 type AuthClientInput = ClientInput & {
   storage?: KVNamespace;
@@ -39,9 +36,9 @@ export function createAuthClient(input: AuthClientInput) {
         return cached as WellKnown;
       }
     }
-    const wellKnown = (await (f || fetch)(
-      `${input.issuer}/.well-known/oauth-authorization-server`,
-    ).then((r) => r.json())) as WellKnown;
+    const wellKnown = (await (f || fetch)(`${input.issuer}/.well-known/oauth-authorization-server`).then((r) =>
+      r.json(),
+    )) as WellKnown;
     if (input.storage) {
       input.storage.put(getIssuerKey(input.issuer), JSON.stringify(wellKnown));
     }
@@ -68,9 +65,7 @@ export function createAuthClient(input: AuthClientInput) {
     }
     if (!keyset) {
       const wk = await getIssuer();
-      keyset = (await (f || fetch)(wk.jwks_uri).then((r) =>
-        r.json(),
-      )) as JSONWebKeySet;
+      keyset = (await (f || fetch)(wk.jwks_uri).then((r) => r.json())) as JSONWebKeySet;
     }
     if (input.storage) {
       input.storage.put(getJWKSKey(input.issuer), JSON.stringify(keyset));
@@ -95,9 +90,7 @@ export function createAuthClient(input: AuthClientInput) {
         }>(token, jwks, {
           issuer,
         });
-        const validated = await subjects[result.payload.type][
-          '~standard'
-        ].validate(result.payload.properties);
+        const validated = await subjects[result.payload.type]['~standard'].validate(result.payload.properties);
         if (!validated.issues && result.payload.mode === 'access')
           return {
             aud: result.payload.aud as string,
@@ -113,15 +106,11 @@ export function createAuthClient(input: AuthClientInput) {
         if (e instanceof errors.JWTExpired && options?.refresh) {
           const refreshed = await this.refresh(options.refresh);
           if (refreshed.err) return refreshed;
-          const verified = await result.verify(
-            subjects,
-            refreshed.tokens!.access,
-            {
-              refresh: refreshed.tokens!.refresh,
-              issuer,
-              fetch: options?.fetch,
-            },
-          );
+          const verified = await result.verify(subjects, refreshed.tokens!.access, {
+            refresh: refreshed.tokens!.refresh,
+            issuer,
+            fetch: options?.fetch,
+          });
           if (verified.err) return verified;
           verified.tokens = refreshed.tokens;
           return verified;

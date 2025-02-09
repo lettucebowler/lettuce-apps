@@ -1,4 +1,5 @@
 export const prerender = false;
+import { createAuthClient } from '$lib/auth.server.js';
 import type { NavLinkProps } from '$lib/types.js';
 export async function load(event) {
   event.depends('data:gamenum');
@@ -22,11 +23,21 @@ export async function load(event) {
       prefetch: true,
     },
   ];
-  const auth = await event.locals.auth();
   const gameNum = event.locals.getGameStateV3().gameNum;
+  if (!event.locals.session) {
+    const authClient = createAuthClient(event);
+    const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code');
+    return {
+      authenticated: false as const,
+      loginUrl: url,
+      nav: links,
+      gameNum,
+    };
+  }
   return {
+    authenticated: true as const,
     nav: links,
-    session: auth,
+    session: event.locals.session,
     gameNum,
   };
 }

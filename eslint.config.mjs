@@ -13,13 +13,7 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 export default [
   { files: ['**/*.{js,mjs,cjs,ts}'] },
   {
-    ignores: [
-      'coverage',
-      '**/public',
-      '**/dist',
-      'pnpm-lock.yaml',
-      'pnpm-workspace.yaml',
-    ],
+    ignores: ['coverage', '**/public', '**/dist', 'pnpm-lock.yaml', 'pnpm-workspace.yaml'],
   },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,

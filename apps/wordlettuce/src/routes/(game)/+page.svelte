@@ -78,9 +78,7 @@
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
 
-    const previousGuesses = game.guesses
-      .map((guess, index) => ({ index, guess }))
-      .slice(-1 * maxPreviousGuesses);
+    const previousGuesses = game.guesses.map((guess, index) => ({ index, guess })).slice(-1 * maxPreviousGuesses);
     const currentGuesses = game.success
       ? []
       : [
@@ -95,9 +93,7 @@
         index: game.guesses.length + (game.success ? 0 : 1) + index,
         guess: '',
       }));
-    const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses]
-      .filter(Boolean)
-      .slice(0, 6);
+    const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses].filter(Boolean).slice(0, 6);
     return items;
   }
 
@@ -146,12 +142,8 @@
     handleKey(e.key.toLowerCase());
   }}
 />
-<div
-  class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2"
->
-  <main
-    class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4"
-  >
+<div class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2">
+  <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
     <form
       method="POST"
       action="?/word"
@@ -171,17 +163,13 @@
             style="--tile-height:2px;"
           >
             {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-              {@const doJump =
-                browser && game.answers.at(item.index)?.length === 5}
+              {@const doJump = browser && game.answers.at(item.index)?.length === 5}
               {@const doWiggle = browser && wordIsInvalid.value && current}
               {@const doWiggleOnce = !browser && form?.invalid && current}
               <div
                 class={[
                   'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                  !item.guess &&
-                    current &&
-                    wordIsInvalid.value &&
-                    'animate-wiggle-once',
+                  !item.guess && current && wordIsInvalid.value && 'animate-wiggle-once',
                 ]}
               >
                 <Tile
@@ -209,10 +197,7 @@
         cancel();
       }}
     >
-      <div
-        class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1"
-        style="--keyboard-height: 1px;"
-      >
+      <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
         {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
           {@const status = game.letterStatuses[letter]}
           {#if letter}

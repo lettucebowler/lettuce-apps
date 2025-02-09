@@ -7,15 +7,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 export function createWordLettuceDao(event: RequestEvent) {
   const db = drizzle(event.platform?.env?.WORDLETTUCE_DB);
 
-  async function saveGame({
-    userId,
-    gameNum,
-    answers,
-  }: {
-    userId: number;
-    gameNum: number;
-    answers: string;
-  }) {
+  async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
     return db
       .insert(gameResults)
@@ -38,19 +30,13 @@ export function createWordLettuceDao(event: RequestEvent) {
       .select({
         user: users.username,
         games: count(gameResults.attempts),
-        score:
-          sql`count(${gameResults.attempts}) + sum(max(0, 6 - ${gameResults.attempts}))`
-            .mapWith(Number)
-            .as('score'),
+        score: sql`count(${gameResults.attempts}) + sum(max(0, 6 - ${gameResults.attempts}))`
+          .mapWith(Number)
+          .as('score'),
       })
       .from(users)
       .innerJoin(gameResults, eq(users.githubId, gameResults.userId))
-      .where(
-        and(
-          gt(gameResults.gamenum, gameNum - 7),
-          lte(gameResults.gamenum, gameNum),
-        ),
-      )
+      .where(and(gt(gameResults.gamenum, gameNum - 7), lte(gameResults.gamenum, gameNum)))
       .groupBy(users.githubId)
       .orderBy(desc(sql`score`))
       .limit(10);
@@ -86,13 +72,7 @@ export function createWordLettuceDao(event: RequestEvent) {
     };
   }
 
-  async function upsertUser({
-    userId,
-    username,
-  }: {
-    userId: number;
-    username: string;
-  }) {
+  async function upsertUser({ userId, username }: { userId: number; username: string }) {
     return db
       .insert(users)
       .values({ username: username, githubId: userId })

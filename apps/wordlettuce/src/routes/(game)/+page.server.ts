@@ -1,8 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import {
-  STATE_COOKIE_NAME_V2,
-  STATE_COOKIE_SETTINGS,
-} from '$lib/constants/app-constants.js';
+import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '$lib/constants/app-constants.js';
 import { createApiWordlettuceClient } from '$lib/client/api-wordlettuce.server.js';
 import * as v from 'valibot';
 import { GuessLetter } from '$lib/schemas/game.js';
@@ -12,11 +9,7 @@ export const trailingSlash = 'never';
 
 export async function load(event) {
   const game = event.locals.getGameStateV3();
-  event.cookies.set(
-    STATE_COOKIE_NAME_V2,
-    game.toStateString(),
-    STATE_COOKIE_SETTINGS,
-  );
+  event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
   return {
     game: {
       currentGuess: game.currentGuess as string,
@@ -42,11 +35,7 @@ export const actions: import('./$types').Actions = {
 
     game.doLetter(parseResult.output);
 
-    event.cookies.set(
-      STATE_COOKIE_NAME_V2,
-      game.toStateString(),
-      STATE_COOKIE_SETTINGS,
-    );
+    event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
 
     return {
       success: false,
@@ -57,11 +46,7 @@ export const actions: import('./$types').Actions = {
     const game = event.locals.getGameStateV3();
     game.doUndo();
 
-    event.cookies.set(
-      STATE_COOKIE_NAME_V2,
-      game.toStateString(),
-      STATE_COOKIE_SETTINGS,
-    );
+    event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
 
     return {
       success: false,
@@ -94,15 +79,11 @@ export const actions: import('./$types').Actions = {
         invalid: true,
       });
     }
-    event.cookies.set(
-      STATE_COOKIE_NAME_V2,
-      game.toStateString(),
-      STATE_COOKIE_SETTINGS,
-    );
+    event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
     if (game.success) {
-      const session = await event.locals.auth();
-      if (session?.user) {
-        const userId = session.user.githubId;
+      const session = await event.locals.session;
+      if (session) {
+        const userId = session.account.providerId;
         // const wordLettuce = createWordLettuceDao(event);
         // const inserts = await wordLettuce.saveGame({
         //   userId: userId,
@@ -112,7 +93,7 @@ export const actions: import('./$types').Actions = {
         const apiWordlettuce = createApiWordlettuceClient(event);
         const inserts = await apiWordlettuce.saveGame({
           answers: game.answers.join(''),
-          userId,
+          userId: Number(userId),
           gameNum: game.gameNum,
         });
         if (!inserts.length) {

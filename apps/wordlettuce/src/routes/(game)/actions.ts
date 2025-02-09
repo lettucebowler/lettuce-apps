@@ -6,10 +6,7 @@ interface Attributes {
 
 type Callback = () => unknown;
 
-export function clickOutsideAction(
-  node: HTMLElement,
-  callback?: Callback,
-): ActionReturn<void, Attributes> {
+export function clickOutsideAction(node: HTMLElement, callback?: Callback): ActionReturn<void, Attributes> {
   const handleClick = (event: Event) => {
     if (event.target !== null && !node.contains(event.target as Node)) {
       node.dispatchEvent(new CustomEvent('clickoutside'));
@@ -37,9 +34,7 @@ export function trapFocus(node: HTMLElement) {
 
   function focusable() {
     return Array.from(
-      node.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      ),
+      node.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),
     );
   }
 

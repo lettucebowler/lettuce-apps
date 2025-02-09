@@ -1,6 +1,5 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
-import { handle as authHandler } from './auth';
 import { STATE_COOKIE_NAME_V2 } from '$lib/constants/app-constants';
 import { WordlettuceGame } from '$lib/game/wordlettuce-game.svelte';
 import { getGameNum } from '$lib/util/words';
@@ -32,17 +31,9 @@ async function createGetGameState(event: RequestEvent) {
 }
 
 const gameStateHandler: Handle = async ({ event, resolve }) => {
-  const before = performance.now();
   const { getGameStateV3 } = await createGetGameState(event);
   event.locals.getGameStateV3 = getGameStateV3;
-  const result = await resolve(event);
-  const after = performance.now();
-  console.log(
-    event.request.method,
-    new URL(event.request.url).pathname,
-    after - before,
-  );
-  return result;
+  return resolve(event);
 };
 
 const fetchHandler: Handle = ({ event, resolve }) => {
@@ -51,4 +42,34 @@ const fetchHandler: Handle = ({ event, resolve }) => {
   });
 };
 
-export const handle = sequence(gameStateHandler, authHandler, fetchHandler);
+import { createAuthClient } from '$lib/auth.server';
+import { subjects } from '@lettuce-apps-packages/auth';
+
+const authHandler: Handle = async ({ event, resolve }) => {
+  const authClient = createAuthClient(event);
+  const access_token = event.cookies.get('access_token');
+  if (access_token && event.url.pathname !== '/auth' && event.url.pathname !== '/callback') {
+    const before = performance.now();
+    const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
+      refresh: event.cookies.get('refresh_token') || undefined,
+    });
+    console.log('verified', verified);
+    if (!verified.err) {
+      event.locals.session = verified.subject.properties;
+    }
+    const after = performance.now();
+    console.log('verify', after - before);
+  }
+
+  return await resolve(event);
+};
+
+const timingsHandler: Handle = async ({ event, resolve }) => {
+  const before = performance.now();
+  const result = await resolve(event);
+  const after = performance.now();
+  console.log(event.request.method, new URL(event.request.url).pathname, after - before);
+  return result;
+};
+
+export const handle = sequence(timingsHandler, gameStateHandler, authHandler, fetchHandler);

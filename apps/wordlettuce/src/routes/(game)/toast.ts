@@ -14,10 +14,7 @@ export function toastError(message: string, opts?: { id: string | undefined }) {
   });
 }
 
-export function toastSuccess(
-  message: string,
-  opts?: { id: string | undefined },
-) {
+export function toastSuccess(message: string, opts?: { id: string | undefined }) {
   toast.success(message, {
     style: baseToastStyles,
     id: opts ? opts.id : undefined,
@@ -28,10 +25,7 @@ export function toastSuccess(
   });
 }
 
-export function toastLoading(
-  message: string,
-  opts?: { id: string | undefined } | undefined,
-) {
+export function toastLoading(message: string, opts?: { id: string | undefined } | undefined) {
   return toast.loading(message, {
     style: baseToastStyles,
     id: opts ? opts.id : undefined,

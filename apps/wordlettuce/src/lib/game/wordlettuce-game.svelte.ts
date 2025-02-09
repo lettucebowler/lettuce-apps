@@ -16,19 +16,11 @@ export class WordlettuceGame {
   #answers: Array<string> = $state([]);
   // #success: boolean = $state(false);
 
-  constructor({
-    gameNum,
-    guesses = [],
-    currentGuess = '',
-  }: WordlettuceGameConstructorArgs) {
+  constructor({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) {
     this.replaceState({ gameNum, guesses, currentGuess });
   }
 
-  replaceState = ({
-    gameNum,
-    guesses = [],
-    currentGuess = '',
-  }: WordlettuceGameConstructorArgs) => {
+  replaceState = ({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) => {
     this.#gameNum = gameNum;
     this.#currentGuess = currentGuess;
     if (guesses) {
@@ -38,13 +30,7 @@ export class WordlettuceGame {
     }
   };
 
-  static fromStateString = ({
-    state,
-    currentGameNum,
-  }: {
-    state: string;
-    currentGameNum: number;
-  }) => {
+  static fromStateString = ({ state, currentGameNum }: { state: string; currentGameNum: number }) => {
     if (!state) {
       return new WordlettuceGame({ gameNum: currentGameNum });
     }
@@ -97,24 +83,12 @@ export class WordlettuceGame {
           .flat(),
       ),
     );
-    const correctList = letters
-      .filter((letter) => letter.status === 'x')
-      .map((l) => ({ [l.letter]: l.status }));
+    const correctList = letters.filter((letter) => letter.status === 'x').map((l) => ({ [l.letter]: l.status }));
     const correct: { [x: string]: string } = Object.assign({}, ...correctList);
-    const containsList = letters
-      .filter((letter) => letter.status === 'c')
-      .map((l) => ({ [l.letter]: l.status }));
-    const contains: { [x: string]: string } = Object.assign(
-      {},
-      ...containsList,
-    );
-    const incorrectList = letters
-      .filter((letter) => letter.status === 'i')
-      .map((l) => ({ [l.letter]: l.status }));
-    const incorrect: { [x: string]: string } = Object.assign(
-      {},
-      ...incorrectList,
-    );
+    const containsList = letters.filter((letter) => letter.status === 'c').map((l) => ({ [l.letter]: l.status }));
+    const contains: { [x: string]: string } = Object.assign({}, ...containsList);
+    const incorrectList = letters.filter((letter) => letter.status === 'i').map((l) => ({ [l.letter]: l.status }));
+    const incorrect: { [x: string]: string } = Object.assign({}, ...incorrectList);
 
     return { ...incorrect, ...contains, ...correct };
   }
@@ -174,25 +148,14 @@ const getLetterLocations = (s: string, l: string) => {
     .map((slot) => slot.index);
 };
 
-function containsLetter({
-  index,
-  guess,
-  answer,
-}: {
-  index: number;
-  guess: string;
-  answer: string;
-}) {
+function containsLetter({ index, guess, answer }: { index: number; guess: string; answer: string }) {
   const letter = guess.charAt(index);
   const guessLocations = getLetterLocations(guess, letter);
   const answerLocations = getLetterLocations(answer, letter);
-  const correctCount = guessLocations.filter((location) =>
-    answerLocations.includes(location),
+  const correctCount = guessLocations.filter((location) => answerLocations.includes(location)).length;
+  const previousContainsCount = getLetterLocations(guess.slice(0, index), letter).filter(
+    (index) => !answerLocations.includes(index),
   ).length;
-  const previousContainsCount = getLetterLocations(
-    guess.slice(0, index),
-    letter,
-  ).filter((index) => !answerLocations.includes(index)).length;
   return correctCount + previousContainsCount < answerLocations.length;
 }
 
@@ -200,12 +163,8 @@ function checkWord({ guess, answer }: { guess: string; answer: string }) {
   if (!guess.length) {
     return '_____';
   }
-  const contains = guess
-    .split('')
-    .map((_, i) => (containsLetter({ index: i, guess, answer }) ? 'c' : 'i'));
-  const correct = guess
-    .split('')
-    .map((char, i) => (answer[i] === char ? 'x' : ''));
+  const contains = guess.split('').map((_, i) => (containsLetter({ index: i, guess, answer }) ? 'c' : 'i'));
+  const correct = guess.split('').map((char, i) => (answer[i] === char ? 'x' : ''));
 
   const statuses = correct.map((status, i) => (status ? status : contains[i]));
   return statuses.join('');

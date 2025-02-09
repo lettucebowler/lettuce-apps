@@ -6,18 +6,16 @@
   import { navigationSend, navigationRecieve } from './transitions';
 
   import type { NavLinkProps } from '$lib/types';
-  import type { User } from '@auth/sveltekit';
   import { page } from '$app/state';
 
-  let { user, links }: { user: User | undefined; links: NavLinkProps[] } =
-    $props();
+  let { user, links }: { user: string | undefined; links: NavLinkProps[] } = $props();
 
   let dropdownVisible = $state(false);
 
   function getSubnavItems() {
     return [
       {
-        path: user ? `/profile/${user.login}` : '/profile',
+        path: user ? `/profile/${user}` : '/profile',
         name: 'Profile',
         prefetch: true,
       },
@@ -29,9 +27,7 @@
     subnavItems = getSubnavItems();
   });
 
-  let current = $derived(
-    user ? page.url.pathname === '/profile/' + user.login : false,
-  );
+  let current = $derived(user ? page.url.pathname === '/profile/' + user : false);
 
   afterNavigate(() => {
     if (dropdownVisible) dropdownVisible = false;
@@ -91,13 +87,16 @@
                 </div>
                 <a
                   class="border-snow-300 z-10 col-[1] row-[1] m-1 box-border grid aspect-square overflow-hidden rounded-xl transition transition-all duration-150 hover:m-0"
-                  href="/profile/{user.login}"
+                  href="/profile/{user}"
                 >
-                  <LettuceAvatar name={user.login} />
+                  <LettuceAvatar name={user} />
                 </a>
               </div>
             {:else}
-              <AuthForm mode="login" />
+              <a
+                class="text-snow-100 block grid h-full h-full items-center rounded-xl px-6 py-2 text-center text-3xl font-medium capitalize hover:underline"
+                href="/signin">Login</a
+              >
             {/if}
           </div>
         </div>
@@ -121,29 +120,21 @@
             {/each}
           </div>
           <div class="border-charade-800 flex flex-col gap-2 p-4">
-            {#if user?.login}
+            {#if user}
               <div class="mb-2 flex items-center justify-start gap-4">
-                <span
-                  class="box-border h-[44px] w-[44px] w-max overflow-hidden rounded-sm"
-                  ><LettuceAvatar name={user.login} /></span
+                <span class="box-border h-[44px] w-[44px] w-max overflow-hidden rounded-sm"
+                  ><LettuceAvatar name={user} /></span
                 >
-                <span class="text-snow-300 text-xl font-medium"
-                  >{user.login}</span
-                >
+                <span class="text-snow-300 text-xl font-medium">{user}</span>
               </div>
               {#each subnavItems as subnavItem}
-                <a
-                  href={subnavItem.path}
-                  class="text-snow-300 cursor-pointer p-0 text-2xl font-medium hover:underline"
+                <a href={subnavItem.path} class="text-snow-300 cursor-pointer p-0 text-2xl font-medium hover:underline"
                   >{subnavItem.name}</a
                 >
               {/each}
             {/if}
-            <AuthForm mode={user?.login ? 'logout' : 'login'}
-              ><button
-                class="text-snow-300 text-2xl font-medium hover:underline"
-                >{user?.login ? 'Logout' : 'Login'}</button
-              >
+            <AuthForm mode={user ? 'logout' : 'login'}
+              ><button class="text-snow-300 text-2xl font-medium hover:underline">{user ? 'Logout' : 'Login'}</button>
             </AuthForm>
           </div>
         </nav>

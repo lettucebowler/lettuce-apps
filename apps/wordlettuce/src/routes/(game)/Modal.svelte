@@ -3,10 +3,7 @@
   import { clickOutsideAction, trapFocus } from './actions';
   import { appName } from '$lib/constants/app-constants';
   import AuthForm from '$lib/components/AuthForm.svelte';
-  import {
-    createExpiringString,
-    createNewGameCountDownTimer,
-  } from './spells.svelte';
+  import { createExpiringString, createNewGameCountDownTimer } from './spells.svelte';
 
   type ModalProps = {
     gameNum: number;
@@ -47,9 +44,7 @@
 
   function shareGame() {
     if (!navigator?.clipboard) {
-      clipboardMessage.write(
-        'navigator clipboard api not supported in this browser',
-      );
+      clipboardMessage.write('navigator clipboard api not supported in this browser');
     }
 
     navigator.clipboard
@@ -110,9 +105,7 @@
   <div class="flex flex-col gap-2" use:clickOutsideAction={cleanup}>
     <div class="flex h-8 justify-between">
       <div class="aspect-square h-full"></div>
-      <h2 class="text-snow-300 col-start-2 mt-0 flex-auto text-center text-2xl">
-        &nbsp;Success!
-      </h2>
+      <h2 class="text-snow-300 col-start-2 mt-0 flex-auto text-center text-2xl">&nbsp;Success!</h2>
       <button
         aria-label="close modal"
         onclick={cleanup}
@@ -125,44 +118,34 @@
           stroke="currentColor"
           class="box-border aspect-square h-full"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
     <p class="text-snow-300 p-2 text-center">
-      You solved today's WordLettuce in {attempts} guess{attempts > 1
-        ? 'es'
-        : ''}. Come back tomorrow and play again!
+      You solved today's WordLettuce in {attempts} guess{attempts > 1 ? 'es' : ''}. Come back tomorrow and play again!
     </p>
     <div class="grid h-8 place-items-center">
       {#if clipboardMessage.value}
         <span
           class="text-snow-300 -z-10 p-2 text-center"
           in:fly={{ duration: 400, y: 50, opacity: 0 }}
-          out:fly={{ duration: 400, y: 50, opacity: 0 }}
-          >{clipboardMessage.value}</span
+          out:fly={{ duration: 400, y: 50, opacity: 0 }}>{clipboardMessage.value}</span
         >
       {/if}
     </div>
-    <div
-      class="text-snow-300 grid place-items-center p-2 text-center font-bold"
-    >
+    <div class="text-snow-300 grid place-items-center p-2 text-center font-bold">
       Next word in {formatTime(timeUntilNextGame.value)}
     </div>
     {#if !isAuthenticated}
-      <AuthForm mode="login">
-        <div class="flex w-full flex-row justify-center gap-3">
-          <button
-            class="bg-antique-brass-500 text-antique-brass-800 h-12 w-full cursor-pointer rounded-lg border-transparent p-0 font-bold transition transition-all duration-500 hover:brightness-90"
-          >
-            Login to save your results
-          </button>
-        </div>
-      </AuthForm>
+      <div class="flex w-full flex-row justify-center gap-3">
+        <a
+          class="bg-antique-brass-500 text-antique-brass-800 grid h-12 w-full cursor-pointer place-items-center rounded-lg border-transparent p-0 font-bold transition transition-all duration-500 hover:brightness-90"
+          href="/signin"
+        >
+          Sign in to save your results
+        </a>
+      </div>
     {/if}
     <div class="flex w-full flex-row justify-center">
       <button

@@ -24,8 +24,8 @@
 </script>
 
 <div
-  style="--tile-column: var({column}, 0); --animation-delay:{column *
-    0.03}s; --transition-delay:{column * delayScale + duration}s"
+  style="--tile-column: var({column}, 0); --animation-delay:{column * 0.03}s; --transition-delay:{column * delayScale +
+    duration}s"
   class={[
     'pt-(--tile-height) delay-(--transition-delay) aspect-square rounded-xl transition',
     !doWiggle && !doWiggleOnce && '[animation-delay:var(--animation-delay)]',
@@ -46,12 +46,7 @@
       answer && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0_/_0.2)]',
     ]}
   >
-    <input
-      type="hidden"
-      readonly
-      value={letter.toUpperCase()}
-      name={current ? 'guess' : undefined}
-    />
+    <input type="hidden" readonly value={letter.toUpperCase()} name={current ? 'guess' : undefined} />
     {letter.toUpperCase()}
   </div>
 </div>

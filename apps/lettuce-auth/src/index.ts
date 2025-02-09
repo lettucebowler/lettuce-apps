@@ -61,11 +61,7 @@ export default {
           login: string;
           id: number;
           email: string;
-        }>(
-          '/user',
-          {},
-          { headers: { ['Authorization']: `token ${value.tokenset.access}` } },
-        );
+        }>('/user', {}, { headers: { ['Authorization']: `token ${value.tokenset.access}` } });
         return ctx.subject('user', {
           id: uuidV4(),
           email: user.email,

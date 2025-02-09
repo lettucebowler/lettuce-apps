@@ -6,6 +6,7 @@ const config = {
   tabWidth: 2,
   semi: true,
   singleQuote: true,
+  printWidth: 120,
   plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss'],
 };
 

@@ -22,15 +22,7 @@ export function createApiWordlettuceClient(event: RequestEvent) {
     }
   }
 
-  async function saveGame({
-    userId,
-    gameNum,
-    answers,
-  }: {
-    userId: number;
-    gameNum: number;
-    answers: string;
-  }) {
+  async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
     const { data, error } = await api
       .post<{
         gameNum: number;
@@ -77,9 +69,7 @@ export function createApiWordlettuceClient(event: RequestEvent) {
 
   async function getRankings() {
     const { data, error } = await api
-      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>(
-        '/v2/rankings',
-      )
+      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>('/v2/rankings')
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error || !data) {
