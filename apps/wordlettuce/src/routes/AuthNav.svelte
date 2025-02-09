@@ -1,6 +1,5 @@
 <script lang="ts">
   import { afterNavigate } from '$app/navigation';
-  import AuthForm from '$lib/components/AuthForm.svelte';
   import LettuceAvatar from '$lib/components/LettuceAvatar.svelte';
   import NavLink from './NavLink.svelte';
   import { navigationSend, navigationRecieve } from './transitions';
@@ -95,7 +94,7 @@
             {:else}
               <a
                 class="text-snow-100 block grid h-full h-full items-center rounded-xl px-6 py-2 text-center text-3xl font-medium capitalize hover:underline"
-                href="/signin">Login</a
+                href="/signin">Sign in</a
               >
             {/if}
           </div>
@@ -133,9 +132,9 @@
                 >
               {/each}
             {/if}
-            <AuthForm mode={user ? 'logout' : 'login'}
-              ><button class="text-snow-300 text-2xl font-medium hover:underline">{user ? 'Logout' : 'Login'}</button>
-            </AuthForm>
+            <a class="text-snow-300 text-xl font-medium hover:underline" href={user ? '/signout' : '/signin'}
+              >{user ? 'Sign out' : 'Sign in'}</a
+            >
           </div>
         </nav>
       </div>

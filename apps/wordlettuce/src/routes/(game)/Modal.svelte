@@ -2,7 +2,6 @@
   import { fly } from 'svelte/transition';
   import { clickOutsideAction, trapFocus } from './actions';
   import { appName } from '$lib/constants/app-constants';
-  import AuthForm from '$lib/components/AuthForm.svelte';
   import { createExpiringString, createNewGameCountDownTimer } from './spells.svelte';
 
   type ModalProps = {
