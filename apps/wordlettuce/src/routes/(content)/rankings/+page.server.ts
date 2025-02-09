@@ -1,5 +1,5 @@
 // import { createWordLettuceDao } from "$lib/dao/wordlettuce.server";
-import { createApiWordlettuceClient } from '$lib/client/api-wordlettuce.server.js';
+import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
 
 export async function load(event) {
   // const db = createWordLettuceDao(event);

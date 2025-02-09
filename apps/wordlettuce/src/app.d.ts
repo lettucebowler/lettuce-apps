@@ -1,6 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 import { KVNamespace } from '@cloudflare/workers-types';
-import { WordlettuceGame } from '$lib/game/wordlettuce-game.svelte';
+import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
 import { UserSubject } from '$lib/auth.server';
 
 declare global {

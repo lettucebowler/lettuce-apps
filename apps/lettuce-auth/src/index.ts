@@ -4,17 +4,12 @@ import { subjects } from '@lettuce-apps-packages/auth';
 import { GithubProvider } from '@openauthjs/openauth/provider/github';
 import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
-interface Env {
-  lettuce_auth_sessions: KVNamespace;
-  GITHUB_CLIENT_ID: string;
-  GITHUB_CLIENT_SECRET: string;
-}
+import type { Env } from './types';
 
 import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
 import { v4 as uuidV4 } from 'uuid';
-import test from 'node:test';
 
 const github = fetcher({
   base: 'https://api.github.com',

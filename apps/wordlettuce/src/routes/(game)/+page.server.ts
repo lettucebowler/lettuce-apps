@@ -1,8 +1,8 @@
 import { fail } from '@sveltejs/kit';
-import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '$lib/constants/app-constants.js';
-import { createApiWordlettuceClient } from '$lib/client/api-wordlettuce.server.js';
+import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '$lib/app-constants.js';
+import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
 import * as v from 'valibot';
-import { GuessLetter } from '$lib/schemas/game.js';
+import { GuessLetter } from '$lib/game-schemas.js';
 // import { createWordLettuceDao } from "$lib/dao/wordlettuce.server.js";
 
 export const trailingSlash = 'never';

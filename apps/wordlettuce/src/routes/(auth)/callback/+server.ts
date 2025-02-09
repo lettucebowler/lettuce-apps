@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { createAuthClient, setTokens } from '$lib/auth.server';
-import { createApiWordlettuceClient } from '$lib/client/api-wordlettuce.server.js';
+import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
 import { subjects } from '@lettuce-apps-packages/auth';
 
 export async function GET(event) {

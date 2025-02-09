@@ -1,5 +1,5 @@
 <script>
-  import { appName } from '$lib/constants/app-constants';
+  import { appName } from '$lib/app-constants';
 </script>
 
 <main class="grid gap-8">

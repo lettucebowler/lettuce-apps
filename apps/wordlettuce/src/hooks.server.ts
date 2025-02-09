@@ -1,8 +1,8 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
-import { STATE_COOKIE_NAME_V2 } from '$lib/constants/app-constants';
-import { WordlettuceGame } from '$lib/game/wordlettuce-game.svelte';
-import { getGameNum } from '$lib/util/words';
+import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
+import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
+import { getGameNum } from '$lib/words';
 
 async function createGetGameState(event: RequestEvent) {
   const stateString = event.cookies.get(STATE_COOKIE_NAME_V2) || '';

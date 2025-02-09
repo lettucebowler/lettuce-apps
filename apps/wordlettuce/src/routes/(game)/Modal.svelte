@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { clickOutsideAction, trapFocus } from './actions';
-  import { appName } from '$lib/constants/app-constants';
+  import { appName } from '$lib/app-constants';
   import { createExpiringString, createNewGameCountDownTimer } from './spells.svelte';
 
   type ModalProps = {

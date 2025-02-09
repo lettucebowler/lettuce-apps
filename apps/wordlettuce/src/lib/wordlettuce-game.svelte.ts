@@ -1,7 +1,6 @@
-import { getGameWord } from '$lib/util/words';
-import { successAnswer } from '$lib/constants/app-constants';
-import { isAllowedGuess } from '$lib/util/words';
-import { GuessLetter } from '$lib/schemas/game';
+import { successAnswer } from '$lib/app-constants';
+import { isAllowedGuess, getGameWord } from '$lib/words';
+import { GuessLetter } from '$lib/game-schemas';
 
 type WordlettuceGameConstructorArgs = {
   gameNum: number;

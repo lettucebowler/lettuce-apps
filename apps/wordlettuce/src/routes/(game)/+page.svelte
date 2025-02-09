@@ -14,10 +14,10 @@
   import ShareIcon from '$lib/components/ShareIcon.svelte';
   import EnterIcon from '$lib/components/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/BackSpaceIcon.svelte';
-  import { WordlettuceGame } from '$lib/game/wordlettuce-game.svelte';
-  import { STATE_COOKIE_NAME_V2 } from '$lib/constants/app-constants';
+  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
+  import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import * as v from 'valibot';
-  import { GameKey, LetterStatus } from '$lib/schemas/game';
+  import { GameKey, LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
 
@@ -119,7 +119,7 @@
     }
 
     let saveGameToastId: string;
-    if (data.session?.user) {
+    if (data.session) {
       saveGameToastId = toastLoading('Saving results...');
     }
     return async ({ result, update }) => {
@@ -249,7 +249,7 @@
     <BetterModal
       gameNum={game.gameNum}
       answers={game.answers}
-      user={data.session?.user?.login}
+      user={data.session?.display_name}
       close={() => history.back()}
     />
   {/if}

@@ -1,8 +1,8 @@
 import * as v from 'valibot';
 import { error, json } from '@sveltejs/kit';
 // import { createWordLettuceDao } from "$lib/dao/wordlettuce.server.js";
-import { getGameNum } from '$lib/util/words.js';
-import { createApiWordlettuceClient } from '$lib/client/api-wordlettuce.server.js';
+import { getGameNum } from '$lib/words.js';
+import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
 
 const EventToObjectSchema = v.pipe(
   v.object({

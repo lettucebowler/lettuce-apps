@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LetterStatus } from '$lib/schemas/game';
+  import type { LetterStatus } from '$lib/game-schemas';
   import type { Snippet } from 'svelte';
   import type { HTMLButtonAttributes } from 'svelte/elements';
 
