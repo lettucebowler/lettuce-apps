@@ -1,8 +1,8 @@
-import { issuer } from "@openauthjs/openauth";
-import { subjects } from "@lettuce-apps-packages/auth";
+import { issuer } from '@openauthjs/openauth';
+import { subjects } from '@lettuce-apps-packages/auth';
 
-import { GithubProvider } from "@openauthjs/openauth/provider/github";
-import { CloudflareStorage } from "@openauthjs/openauth/storage/cloudflare";
+import { GithubProvider } from '@openauthjs/openauth/provider/github';
+import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
 interface Env {
   lettuce_auth_sessions: KVNamespace;
@@ -10,14 +10,14 @@ interface Env {
   GITHUB_CLIENT_SECRET: string;
 }
 
-import { fetcher } from "itty-fetcher";
-import { Hono } from "hono";
-import { cache } from "hono/cache";
+import { fetcher } from 'itty-fetcher';
+import { Hono } from 'hono';
+import { cache } from 'hono/cache';
 
 const github = fetcher({
-  base: "https://api.github.com",
+  base: 'https://api.github.com',
   headers: {
-    "user-agent": "lettuce-auth",
+    'user-agent': 'lettuce-auth',
   },
 });
 
@@ -25,18 +25,18 @@ export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const app = new Hono();
     app.use(
-      "/.well-known/jwks.json",
+      '/.well-known/jwks.json',
       cache({
-        cacheName: "lettuce-auth-jwks",
-        cacheControl: "max-age-604800",
+        cacheName: 'lettuce-auth-jwks',
+        cacheControl: 'max-age-604800',
       }),
     );
     app.use(
-      "/.well-known/oauth-authorization-server",
+      '/.well-known/oauth-authorization-server',
 
       cache({
-        cacheName: "lettuce-auth-oauth-authorization-server",
-        cacheControl: "max-age-604800",
+        cacheName: 'lettuce-auth-oauth-authorization-server',
+        cacheControl: 'max-age-604800',
       }),
     );
     const auth = issuer({
@@ -44,7 +44,7 @@ export default {
         github: GithubProvider({
           clientID: env.GITHUB_CLIENT_ID!,
           clientSecret: env.GITHUB_CLIENT_SECRET!,
-          scopes: ["user:email", "user:profile"],
+          scopes: ['user:email', 'user:profile'],
         }),
       },
       subjects,
@@ -56,18 +56,18 @@ export default {
       },
       success: async (ctx, value) => {
         const user = await github.get<{ login: string; id: number }>(
-          "/user",
+          '/user',
           {},
-          { headers: { ["Authorization"]: `token ${value.tokenset.access}` } },
+          { headers: { ['Authorization']: `token ${value.tokenset.access}` } },
         );
-        return ctx.subject("user", {
-          provider: "github",
+        return ctx.subject('user', {
+          provider: 'github',
           providerId: user.id.toString(),
           username: user.login,
         });
       },
     });
-    app.route("/", auth);
+    app.route('/', auth);
     return app.fetch(request, env, ctx);
   },
 } satisfies ExportedHandler<Env>;

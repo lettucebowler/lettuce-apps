@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "packageManager": "pnpm@9.15.4",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
@@ -12,7 +13,7 @@
     "auth": "pnpm --filter auth",
     "lettuce-auth": "pnpm --filter @lettuce-apps-packages/auth",
     "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
-    "lettuce-wordle": "pnpm --filter lettuce-wordle"
+    "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,8 @@
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
+    "prettier-plugin-svelte": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript-eslint": "^8.23.0"
   }
 }
