@@ -11,23 +11,6 @@
 
   let dropdownVisible = $state(false);
 
-  function getSubnavItems() {
-    return [
-      {
-        path: user ? `/profile/${user}` : '/profile',
-        name: 'Profile',
-        prefetch: true,
-      },
-    ];
-  }
-  let subnavItems = $state(getSubnavItems());
-
-  $effect(() => {
-    subnavItems = getSubnavItems();
-  });
-
-  let current = $derived(user ? page.url.pathname === '/profile/' + user : false);
-
   afterNavigate(() => {
     if (dropdownVisible) dropdownVisible = false;
   });
@@ -76,7 +59,7 @@
             {#if user}
               <div class="grid h-14 w-14">
                 <div class="col-[1] row-[1] h-14">
-                  {#if current}
+                  {#if user && page.url.pathname === '/profile/' + user}
                     <div
                       in:navigationRecieve={{ key: 'current-link' }}
                       out:navigationSend={{ key: 'current-link' }}
@@ -110,7 +93,7 @@
         />
         <nav
           id="subnav-content"
-          class="bg-charade-900 absolute bottom-0 left-0 right-0 top-[72px] z-10 hidden flex-col divide-y peer-checked:block"
+          class="bg-charade-900 divide-charade-600 absolute bottom-0 left-0 right-0 top-[72px] z-10 hidden flex-col divide-y peer-checked:block"
           class:hidden={!dropdownVisible}
         >
           <div class="space-y-4 p-4">
@@ -126,11 +109,9 @@
                 >
                 <span class="text-snow-300 text-xl font-medium">{user}</span>
               </div>
-              {#each subnavItems as subnavItem}
-                <a href={subnavItem.path} class="text-snow-300 cursor-pointer p-0 text-2xl font-medium hover:underline"
-                  >{subnavItem.name}</a
-                >
-              {/each}
+              <a href="/profile/{user}" class="text-snow-300 cursor-pointer p-0 text-xl font-medium hover:underline"
+                >Profile</a
+              >
             {/if}
             <a class="text-snow-300 text-xl font-medium hover:underline" href={user ? '/signout' : '/signin'}
               >{user ? 'Sign out' : 'Sign in'}</a
