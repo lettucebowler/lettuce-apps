@@ -4,11 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/auth.js",
-  "types": "./dist/main.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/auth.js",
+      "types": "./dist/auth.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    }
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",

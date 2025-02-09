@@ -5,4 +5,5 @@ export interface Env extends Bindings {
 
 export type Bindings = {
   lettuce_auth_sessions: KVNamespace;
+  lettuce_auth_db: D1Database;
 };
