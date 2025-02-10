@@ -29,6 +29,6 @@
   class="max-w-(--breakpoint-md) mx-auto flex w-full flex-auto flex-col gap-2 p-2 sm:gap-4 sm:p-1 sm:pb-4 sm:pt-4"
   data-sveltekit-preload-data="hover"
 >
-  <AuthNav links={data.nav} user={data.authenticated ? data.session.displayName : undefined} />
+  <AuthNav links={data.nav} user={data.authenticated ? data.user.displayName : undefined} />
   {@render children()}
 </div>

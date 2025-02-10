@@ -4,12 +4,14 @@ import { Account, subjects } from '@lettuce-apps-packages/auth';
 import { GithubProvider } from '@openauthjs/openauth/provider/github';
 import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
-import type { Env, ProviderUser } from './types';
+import type { Bindings, Env, ProviderUser } from './types';
 
 import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
+import { sValidator } from '@hono/standard-validator';
+import * as v from 'valibot';
 
 const github = fetcher({
   base: 'https://api.github.com',
@@ -20,12 +22,12 @@ const github = fetcher({
 
 export default {
   fetch(request: Request, env: Env, ctx: ExecutionContext) {
-    const app = new Hono();
+    const app = new Hono<{ Bindings: Bindings }>();
     app.use(
       '/.well-known/jwks.json',
       cache({
         cacheName: 'lettuce-auth-jwks',
-        cacheControl: 'max-age-604800',
+        cacheControl: 'max-age=604800',
       }),
     );
     app.use(
@@ -33,8 +35,24 @@ export default {
 
       cache({
         cacheName: 'lettuce-auth-oauth-authorization-server',
-        cacheControl: 'max-age-604800',
+        cacheControl: 'max-age=604800',
       }),
+    );
+    app.get(
+      '/users/:userID',
+      cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=300' }),
+      sValidator(
+        'param',
+        v.object({
+          userID: v.pipe(v.string(), v.digits(), v.transform(Number)),
+        }),
+      ),
+      async (c) => {
+        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const { userID } = c.req.valid('param');
+        const user = await dao.getUser({ userID });
+        return c.json(user);
+      },
     );
     const auth = issuer({
       providers: {
@@ -65,16 +83,13 @@ export default {
           throw new Error('idk how we got here');
         }
         const dao = createLettuceAuthDao(env.lettuce_auth_db);
-        const account: Account = { provider: value.provider, providerId: providerUser.id.toString() };
+        const account: Account = { provider: value.provider, providerID: providerUser.id.toString() };
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);
         if (userForAccount) {
-          await dao.updateUserEmailByUuid({ userId: userForAccount.id, email: providerUser.email });
+          await dao.updateUserEmail({ userId: userForAccount.id, email: providerUser.email });
           return ctx.subject('user', {
-            id: userForAccount.id,
-            email: userForAccount.email,
-            displayName: userForAccount.displayName,
-            account,
+            userID: userForAccount.id,
           });
         }
         // Check if email is already tied to an account before creating one.
@@ -83,15 +98,19 @@ export default {
           throw new Error('email_already_in_use');
         }
         // Create new user if email is not already taken
-        const newUser = await dao.createUser({
-          email: providerUser.email,
-          displayName: providerUser.username,
+        const inserts = await dao.createUser({
+          user: {
+            email: providerUser.email,
+            displayName: providerUser.username,
+          },
           account,
         });
-        if (!newUser) {
+        if (!inserts) {
           throw new Error('Error_creating_user');
         }
-        return ctx.subject('user', newUser);
+        return ctx.subject('user', {
+          userID: inserts.user.id,
+        });
       },
     });
     app.route('/', auth);

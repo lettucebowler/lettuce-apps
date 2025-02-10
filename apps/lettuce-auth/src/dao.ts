@@ -6,11 +6,11 @@ import { and, eq, inArray } from 'drizzle-orm';
 export function createLettuceAuthDao(database: D1Database) {
   const db = drizzle(database);
 
-  async function getUserByAccount(account: Account): Promise<Omit<User, 'account'> | undefined> {
+  async function getUserByAccount(account: Account): Promise<User | undefined> {
     const accountResults = db
-      .select({ userId: accounts.userId })
+      .select({ userId: accounts.userID })
       .from(accounts)
-      .where(and(eq(accounts.provider, account.provider), eq(accounts.providerId, account.providerId)));
+      .where(and(eq(accounts.provider, account.provider), eq(accounts.providerID, account.providerID)));
     return db
       .select({
         id: users.id,
@@ -22,7 +22,7 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
-  async function getUserByEmail(email: string): Promise<Omit<User, 'account'> | undefined> {
+  async function getUserByEmail(email: string): Promise<User | undefined> {
     return db
       .select({
         id: users.id,
@@ -35,7 +35,22 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
-  async function createUser(user: Omit<User, 'id'>): Promise<User | undefined> {
+  async function getUser({ userID }: { userID: number }) {
+    return db
+      .select()
+      .from(users)
+      .where(eq(users.id, userID))
+      .limit(1)
+      .then((r) => r.at(0));
+  }
+
+  async function createUser({
+    user,
+    account,
+  }: {
+    user: Omit<User, 'id'>;
+    account: Account;
+  }): Promise<{ user: User; account: Account }> {
     const userInserts = await db.insert(users).values({ email: user.email, displayName: user.displayName }).returning();
     const newUser = userInserts.at(0);
     if (!newUser) {
@@ -43,25 +58,19 @@ export function createLettuceAuthDao(database: D1Database) {
     }
     const accountInserts = await db
       .insert(accounts)
-      .values({ provider: user.account.provider, providerId: user.account.providerId, userId: newUser.id })
+      .values({ provider: account.provider, providerID: account.providerID, userID: newUser.id })
       .returning();
     const newAccount = accountInserts.at(0);
     if (!newAccount) {
       throw new Error('oh no account insert failed');
     }
-    const returnValue: User = {
-      displayName: newUser.displayName,
-      email: newUser.email,
-      id: newUser.id,
-      account: {
-        provider: newAccount.provider,
-        providerId: newAccount.providerId,
-      },
+    return {
+      user: newUser,
+      account: newAccount,
     };
-    return returnValue;
   }
 
-  async function updateUserEmailByUuid({ userId, email }: { userId: number; email: string }) {
+  async function updateUserEmail({ userId, email }: { userId: number; email: string }) {
     return db.update(users).set({ email }).where(eq(users.id, userId));
   }
 
@@ -69,6 +78,7 @@ export function createLettuceAuthDao(database: D1Database) {
     getUserByAccount,
     getUserByEmail,
     createUser,
-    updateUserEmailByUuid,
+    updateUserEmail,
+    getUser,
   };
 }

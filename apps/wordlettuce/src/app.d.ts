@@ -1,13 +1,13 @@
 /// <reference types="@sveltejs/kit" />
 import { KVNamespace } from '@cloudflare/workers-types';
 import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
-import { UserSubject } from '$lib/auth.server';
+import { User, UserSubject } from '@lettuce-apps-packages/auth';
 
 declare global {
   declare namespace App {
     interface Locals {
       getGameStateV3: () => WordlettuceGame;
-      session: UserSubject | undefined;
+      session: User | undefined;
     }
     interface PageState {
       showModal: boolean;

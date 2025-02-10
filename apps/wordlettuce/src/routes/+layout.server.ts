@@ -37,7 +37,7 @@ export async function load(event) {
   return {
     authenticated: true as const,
     nav: links,
-    session: event.locals.session,
+    user: event.locals.session,
     gameNum,
   };
 }

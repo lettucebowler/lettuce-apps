@@ -12,11 +12,14 @@ import {
 } from '@openauthjs/openauth/client';
 import { SubjectSchema } from '@openauthjs/openauth/subject';
 import { InvalidAccessTokenError, InvalidSubjectError } from '@openauthjs/openauth/error';
+import { fetcher } from 'itty-fetcher';
+import { User } from './schemas';
 
-type AuthClientInput = ClientInput & {
+type AuthClientInput = Omit<ClientInput, 'fetch'> & {
   storage?: KVNamespace;
   issuer: string;
   keyset?: JSONWebKeySet;
+  fetch: typeof fetch;
 };
 export function createAuthClient(input: AuthClientInput) {
   const f = input.fetch ?? fetch;
@@ -73,6 +76,15 @@ export function createAuthClient(input: AuthClientInput) {
     return createLocalJWKSet(keyset);
   }
 
+  const api = fetcher({
+    base: input.issuer,
+    fetch: f,
+  });
+
+  async function getUser({ userID }: { userID: number }) {
+    return api.get<User>(`/users/${userID}`);
+  }
+
   const result = {
     ...createClient(input),
     async verify<T extends SubjectSchema>(
@@ -120,6 +132,7 @@ export function createAuthClient(input: AuthClientInput) {
         };
       }
     },
+    getUser,
   };
   return result;
 }

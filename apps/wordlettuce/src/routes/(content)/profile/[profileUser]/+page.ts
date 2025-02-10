@@ -7,7 +7,7 @@ type GameResult = {
 
 export async function load(event) {
   const parentData = await event.parent();
-  const { user } = event.params;
+  const { profileUser } = event.params;
   const searchParams = event.url.searchParams;
   const startParam = Number(searchParams.get('start')) || parentData.gameNum;
   const apiWordlettuce = fetcher({ fetch: event.fetch });
@@ -15,9 +15,9 @@ export async function load(event) {
     results: GameResult[];
     next: number;
     limit: number;
-  }>('/api/v1/game-results', { user, start: startParam });
+  }>('/api/v1/game-results', { user: profileUser, start: startParam });
   return {
-    user,
+    profileUser,
     results,
     next,
     limit,

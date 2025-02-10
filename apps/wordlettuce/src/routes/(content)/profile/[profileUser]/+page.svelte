@@ -54,15 +54,15 @@
     <figure class="flex flex-col gap-2">
       {#each [data.user] as user (user)}
         <div class="mx-auto h-40 w-40">
-          <LettuceAvatar name={user} />
+          <LettuceAvatar name={data.profileUser} />
         </div>
       {/each}
       <figcaption class="text-snow-300 text-center text-xl font-medium">
-        {data.user}
+        {data.profileUser}
       </figcaption>
     </figure>
 
-    {#if data.session?.displayName === data.user}
+    {#if data.user === data.user}
       <div class="flex justify-center">
         <a
           class="text-snow-100 block grid h-full h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"

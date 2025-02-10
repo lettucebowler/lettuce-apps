@@ -1,6 +1,5 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import * as v from 'valibot';
-import { createAuthClient, subjects } from '@lettuce-apps-packages/auth';
+import { createAuthClient } from '@lettuce-apps-packages/auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
@@ -50,5 +49,3 @@ export function clearTokens(event: RequestEvent) {
     maxAge: 0,
   });
 }
-
-export type UserSubject = v.InferOutput<typeof subjects.user>;

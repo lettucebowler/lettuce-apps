@@ -5,10 +5,10 @@ export const accounts = sqliteTable(
   'accounts',
   {
     provider: text().notNull(),
-    providerId: text('provider_id').notNull(),
-    userId: int('user_id'),
+    providerID: text('provider_id').notNull(),
+    userID: int('user_id'),
   },
-  (table) => [primaryKey({ columns: [table.provider, table.providerId] })],
+  (table) => [primaryKey({ columns: [table.provider, table.providerID] })],
 );
 
 export const users = sqliteTable('users', {
