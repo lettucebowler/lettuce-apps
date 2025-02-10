@@ -3,6 +3,9 @@ name = "wordlettuce"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_date = "2025-02-09"
 
+[placement]
+mode = "smart"
+
 [vars]
 NODE_VERSION = "22"
 PUBLIC_API_WORDLETTUCE_HOST = "https://api.word.lettucebowler.net"
