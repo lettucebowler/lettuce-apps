@@ -82,15 +82,8 @@ export const actions: import('./$types').Actions = {
     event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
     if (game.success) {
       const session = event.locals.session;
-      console.log('try to save game');
       if (session) {
         const userId = session.id;
-        // const wordLettuce = createWordLettuceDao(event);
-        // const inserts = await wordLettuce.saveGame({
-        //   userId: userId,
-        //   gameNum: game.gameNum,
-        //   answers: game.answers.join(""),
-        // });
         const apiWordlettuce = createApiWordlettuceClient(event);
         const inserts = await apiWordlettuce.saveGame({
           answers: game.answers.join(''),
