@@ -6,7 +6,8 @@
     "db:push": "wrangler d1 migrations apply lettuce-auth",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "wrangler": "wrangler"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",

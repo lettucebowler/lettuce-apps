@@ -1,7 +1,7 @@
 import * as v from 'valibot';
 
 export const Account = v.object({
-  provider: v.picklist(['github']),
+  provider: v.string(),
   providerId: v.string(),
 });
 
