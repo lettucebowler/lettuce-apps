@@ -22,7 +22,7 @@ export async function GET(event) {
       if (!verified.err) {
         const apiWordlettuce = createApiWordlettuceClient(event);
         await apiWordlettuce.saveGame({
-          userId: Number(verified.subject.properties.account.providerId),
+          userId: verified.subject.properties.id,
           gameNum: game.gameNum,
           answers: game.answers.join(''),
         });

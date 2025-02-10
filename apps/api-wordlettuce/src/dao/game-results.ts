@@ -1,32 +1,25 @@
 import { drizzle } from 'drizzle-orm/d1';
-import { gameResults, users } from '../schema/drizzle';
+import { gameResults, users } from '../../drizzle/schema';
 import { and, count, desc, eq, gt, lte, sql } from 'drizzle-orm';
 import { getGameNum } from '../util/game-num';
 import { Context } from 'hono';
 import { ApiWordLettuceBindings } from '../util/env';
 
 export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindings }>) {
-  // const db = drizzle({
-  // 	connection: {
-  // 		url: c.env.TURSO_DATABASE_URL,
-  // 		authToken: c.env.TURSO_AUTH_TOKEN
-  // 	}
-  // });
+  const db = drizzle(c.env.wordlettuce);
 
-  const db = drizzle(c.env.WORDLETTUCE_DB);
-
-  async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
+  async function saveGame({ userId, gameNum, answers }: { userId: string; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
     return db
       .insert(gameResults)
       .values({
-        gamenum: gameNum,
+        gameNum,
         userId,
         answers,
         attempts,
       })
       .onConflictDoUpdate({
-        target: [gameResults.userId, gameResults.gamenum],
+        target: [gameResults.userId, gameResults.gameNum],
         set: { answers, attempts },
       })
       .returning();
@@ -43,9 +36,9 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindin
           .as('score'),
       })
       .from(users)
-      .innerJoin(gameResults, eq(users.githubId, gameResults.userId))
-      .where(and(gt(gameResults.gamenum, gameNum - 7), lte(gameResults.gamenum, gameNum)))
-      .groupBy(users.githubId)
+      .innerJoin(gameResults, eq(users.id, gameResults.userId))
+      .where(and(gt(gameResults.gameNum, gameNum - 7), lte(gameResults.gameNum, gameNum)))
+      .groupBy(users.id)
       .orderBy(desc(sql`score`))
       .limit(10);
     return query.all();
@@ -62,15 +55,15 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindin
   }) {
     const query = db
       .select({
-        gameNum: gameResults.gamenum,
+        gameNum: gameResults.gameNum,
         answers: gameResults.answers,
         userId: gameResults.userId,
         attempts: gameResults.attempts,
       })
       .from(users)
-      .innerJoin(gameResults, eq(users.githubId, gameResults.userId))
-      .where(and(eq(users.username, username), lte(gameResults.gamenum, start)))
-      .orderBy(desc(gameResults.gamenum))
+      .innerJoin(gameResults, eq(users.id, gameResults.userId))
+      .where(and(eq(users.username, username), lte(gameResults.gameNum, start)))
+      .orderBy(desc(gameResults.gameNum))
       .limit(limit + 1);
     const results = await query.all();
     return {
@@ -80,11 +73,11 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindin
     };
   }
 
-  async function upsertUser({ userId, username }: { userId: number; username: string }) {
+  async function upsertUser({ userId, username }: { userId: string; username: string }) {
     return db
       .insert(users)
-      .values({ username: username, githubId: userId })
-      .onConflictDoUpdate({ target: users.githubId, set: { username } })
+      .values({ username, id: userId })
+      .onConflictDoUpdate({ target: users.id, set: { username } })
       .returning();
   }
 

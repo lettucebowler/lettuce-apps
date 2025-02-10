@@ -9,7 +9,6 @@ import type { Env, ProviderUser } from './types';
 import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
-import { v4 as uuidV4 } from 'uuid';
 import { createLettuceAuthDao } from './dao';
 
 const github = fetcher({
@@ -67,29 +66,34 @@ export default {
         }
         const dao = createLettuceAuthDao(env.lettuce_auth_db);
         const account: Account = { provider: value.provider, providerId: providerUser.id.toString() };
+        console.log('account', account);
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);
+        console.log('userForAccount', userForAccount);
         if (userForAccount) {
           await dao.updateUserEmailByUuid({ userId: userForAccount.id, email: providerUser.email });
           return ctx.subject('user', {
             id: userForAccount.id,
             email: userForAccount.email,
-            display_name: userForAccount.display_name,
+            displayName: userForAccount.displayName,
             account,
           });
         }
         // Check if email is already tied to an account before creating one.
         const userForEmail = await dao.getUserByEmail(providerUser.email);
+        console.log('userForEmail', userForEmail);
         if (userForEmail) {
           throw new Error('email_already_in_use');
         }
         // Create new user if email is not already taken
         const newUser = await dao.createUser({
-          id: uuidV4(),
           email: providerUser.email,
-          display_name: providerUser.username,
+          displayName: providerUser.username,
           account,
         });
+        if (!newUser) {
+          throw new Error('Error_creating_user');
+        }
         return ctx.subject('user', newUser);
       },
     });

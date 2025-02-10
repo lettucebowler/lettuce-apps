@@ -1,6 +1,9 @@
--- Current sql file was generated after introspecting the database
--- If you want to run this migration please uncomment this code before executing migrations
-/*
+-- CREATE TABLE `d1_migrations` (
+-- 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+-- 	`name` text,
+-- 	`applied_at` numeric DEFAULT (CURRENT_TIMESTAMP) NOT NULL
+-- );
+--> statement-breakpoint
 CREATE TABLE `game_results` (
 	`gamenum` integer NOT NULL,
 	`answers` text(30) NOT NULL,
@@ -15,9 +18,4 @@ CREATE TABLE `users` (
 	`username` text
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `username_unique` ON `users` (`username`);--> statement-breakpoint
-CREATE TABLE `_cf_KV` (
-
-);
-
-*/
+CREATE UNIQUE INDEX `username_unique` ON `users` (`username`);

@@ -1,0 +1,1 @@
+ALTER TABLE `accounts` ADD `user_id_2` integer;

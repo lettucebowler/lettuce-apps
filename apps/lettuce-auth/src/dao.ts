@@ -6,15 +6,15 @@ import { and, eq, inArray } from 'drizzle-orm';
 export function createLettuceAuthDao(database: D1Database) {
   const db = drizzle(database);
 
-  async function getUserByAccount(account: Account) {
+  async function getUserByAccount(account: Account): Promise<Omit<User, 'account'> | undefined> {
     const accountResults = db
-      .select({ user_id: accounts.user_id })
+      .select({ userId: accounts.userId })
       .from(accounts)
-      .where(and(eq(accounts.provider, account.provider), eq(accounts.provider_id, account.providerId)));
+      .where(and(eq(accounts.provider, account.provider), eq(accounts.providerId, account.providerId)));
     return db
       .select({
         id: users.id,
-        display_name: users.display_name,
+        displayName: users.displayName,
         email: users.email,
       })
       .from(users)
@@ -22,11 +22,11 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
-  async function getUserByEmail(email: string) {
+  async function getUserByEmail(email: string): Promise<Omit<User, 'account'> | undefined> {
     return db
       .select({
         id: users.id,
-        display_name: users.display_name,
+        displayName: users.displayName,
         email: users.email,
       })
       .from(users)
@@ -35,36 +35,33 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
-  async function createUser(user: User): Promise<User> {
-    const userInserts = await db
-      .insert(users)
-      .values({ id: user.id, display_name: user.display_name, email: user.email })
-      .returning();
+  async function createUser(user: Omit<User, 'id'>): Promise<User | undefined> {
+    const userInserts = await db.insert(users).values({ email: user.email, displayName: user.displayName }).returning();
     const newUser = userInserts.at(0);
     if (!newUser) {
       throw new Error('oh no user insert failed');
     }
     const accountInserts = await db
       .insert(accounts)
-      .values({ provider: user.account.provider, provider_id: user.account.providerId, user_id: newUser.id })
+      .values({ provider: user.account.provider, providerId: user.account.providerId, userId: newUser.id })
       .returning();
     const newAccount = accountInserts.at(0);
     if (!newAccount) {
       throw new Error('oh no account insert failed');
     }
-    const returnValue = {
-      display_name: newUser.display_name,
+    const returnValue: User = {
+      displayName: newUser.displayName,
       email: newUser.email,
       id: newUser.id,
       account: {
         provider: newAccount.provider,
-        providerId: newAccount.provider_id,
+        providerId: newAccount.providerId,
       },
     };
     return returnValue;
   }
 
-  async function updateUserEmailByUuid({ userId, email }: { userId: string; email: string }) {
+  async function updateUserEmailByUuid({ userId, email }: { userId: number; email: string }) {
     return db.update(users).set({ email }).where(eq(users.id, userId));
   }
 

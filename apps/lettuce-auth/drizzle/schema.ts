@@ -5,16 +5,16 @@ export const accounts = sqliteTable(
   'accounts',
   {
     provider: text().notNull(),
-    provider_id: text().notNull(),
-    user_id: text(),
+    providerId: text('provider_id').notNull(),
+    userId: int('user_id'),
   },
-  (table) => [primaryKey({ columns: [table.provider, table.provider_id] })],
+  (table) => [primaryKey({ columns: [table.provider, table.providerId] })],
 );
 
 export const users = sqliteTable('users', {
-  id: text().notNull().unique().primaryKey(),
+  id: int().primaryKey({ autoIncrement: true }),
   email: text().notNull().unique(),
-  display_name: text().notNull().unique(),
+  displayName: text('display_name').notNull().unique(),
 });
 
 export const d1Migrations = sqliteTable('d1_migrations', {

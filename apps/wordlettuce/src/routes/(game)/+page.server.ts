@@ -81,9 +81,9 @@ export const actions: import('./$types').Actions = {
     }
     event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
     if (game.success) {
-      const session = await event.locals.session;
+      const session = event.locals.session;
       if (session) {
-        const userId = session.account.providerId;
+        const userId = session.id;
         // const wordLettuce = createWordLettuceDao(event);
         // const inserts = await wordLettuce.saveGame({
         //   userId: userId,
@@ -93,7 +93,7 @@ export const actions: import('./$types').Actions = {
         const apiWordlettuce = createApiWordlettuceClient(event);
         const inserts = await apiWordlettuce.saveGame({
           answers: game.answers.join(''),
-          userId: Number(userId),
+          userId,
           gameNum: game.gameNum,
         });
         if (!inserts.length) {
