@@ -249,7 +249,7 @@
     <BetterModal
       gameNum={game.gameNum}
       answers={game.answers}
-      user={data.session?.display_name}
+      user={data.session?.displayName}
       close={() => history.back()}
     />
   {/if}

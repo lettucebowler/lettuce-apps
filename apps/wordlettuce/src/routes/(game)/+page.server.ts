@@ -82,6 +82,7 @@ export const actions: import('./$types').Actions = {
     event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
     if (game.success) {
       const session = event.locals.session;
+      console.log('try to save game');
       if (session) {
         const userId = session.id;
         // const wordLettuce = createWordLettuceDao(event);
@@ -96,6 +97,7 @@ export const actions: import('./$types').Actions = {
           userId,
           gameNum: game.gameNum,
         });
+        console.log(inserts);
         if (!inserts.length) {
           fail(500, { message: 'Error saving to database' });
         }

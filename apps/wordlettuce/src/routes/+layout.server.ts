@@ -24,7 +24,6 @@ export async function load(event) {
     },
   ];
   const gameNum = event.locals.getGameStateV3().gameNum;
-  console.log(event.locals.session);
   if (!event.locals.session) {
     const authClient = createAuthClient(event);
     const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code');

@@ -4,8 +4,6 @@ import { createAuthClient, subjects } from '@lettuce-apps-packages/auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
-console.log(AUTH_HOST);
-
 function _createAuthClient(event: RequestEvent) {
   return createAuthClient({
     clientID: 'lettuce-auth-test',

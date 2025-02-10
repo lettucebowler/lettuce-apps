@@ -66,10 +66,8 @@ export default {
         }
         const dao = createLettuceAuthDao(env.lettuce_auth_db);
         const account: Account = { provider: value.provider, providerId: providerUser.id.toString() };
-        console.log('account', account);
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);
-        console.log('userForAccount', userForAccount);
         if (userForAccount) {
           await dao.updateUserEmailByUuid({ userId: userForAccount.id, email: providerUser.email });
           return ctx.subject('user', {
@@ -81,7 +79,6 @@ export default {
         }
         // Check if email is already tied to an account before creating one.
         const userForEmail = await dao.getUserByEmail(providerUser.email);
-        console.log('userForEmail', userForEmail);
         if (userForEmail) {
           throw new Error('email_already_in_use');
         }

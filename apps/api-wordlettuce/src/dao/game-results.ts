@@ -8,7 +8,7 @@ import { ApiWordLettuceBindings } from '../util/env';
 export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindings }>) {
   const db = drizzle(c.env.wordlettuce);
 
-  async function saveGame({ userId, gameNum, answers }: { userId: string; gameNum: number; answers: string }) {
+  async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
     return db
       .insert(gameResults)
@@ -73,7 +73,7 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindin
     };
   }
 
-  async function upsertUser({ userId, username }: { userId: string; username: string }) {
+  async function upsertUser({ userId, username }: { userId: number; username: string }) {
     return db
       .insert(users)
       .values({ username, id: userId })
