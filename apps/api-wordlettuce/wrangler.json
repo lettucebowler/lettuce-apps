@@ -19,7 +19,7 @@
   ],
   "compatibility_flags": ["nodejs_compat"],
   "placement": {
-    "mode": "off"
+    "mode": "smart"
   },
   "routes": [
     {
