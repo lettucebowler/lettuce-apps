@@ -6,14 +6,13 @@ export const accounts = sqliteTable(
   {
     provider: text().notNull(),
     provider_id: text().notNull(),
-    user_id: int().notNull(),
+    user_id: text(),
   },
   (table) => [primaryKey({ columns: [table.provider, table.provider_id] })],
 );
 
 export const users = sqliteTable('users', {
-  id: int().primaryKey({ autoIncrement: true }).notNull(),
-  uuid: text().notNull().unique(),
+  id: text().notNull().unique().primaryKey(),
   email: text().notNull().unique(),
   display_name: text().notNull().unique(),
 });

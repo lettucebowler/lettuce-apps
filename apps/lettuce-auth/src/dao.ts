@@ -1,7 +1,5 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { users, accounts } from '../drizzle/schema';
-import type { Bindings } from './types';
-import type { Context } from 'hono';
 import type { Account, User } from '@lettuce-apps-packages/auth';
 import { and, eq, inArray } from 'drizzle-orm';
 
@@ -15,7 +13,7 @@ export function createLettuceAuthDao(database: D1Database) {
       .where(and(eq(accounts.provider, account.provider), eq(accounts.provider_id, account.providerId)));
     return db
       .select({
-        id: users.uuid,
+        id: users.id,
         display_name: users.display_name,
         email: users.email,
       })
@@ -27,7 +25,7 @@ export function createLettuceAuthDao(database: D1Database) {
   async function getUserByEmail(email: string) {
     return db
       .select({
-        id: users.uuid,
+        id: users.id,
         display_name: users.display_name,
         email: users.email,
       })
@@ -40,7 +38,7 @@ export function createLettuceAuthDao(database: D1Database) {
   async function createUser(user: User): Promise<User> {
     const userInserts = await db
       .insert(users)
-      .values({ uuid: user.id, display_name: user.display_name, email: user.email })
+      .values({ id: user.id, display_name: user.display_name, email: user.email })
       .returning();
     const newUser = userInserts.at(0);
     if (!newUser) {
@@ -57,7 +55,7 @@ export function createLettuceAuthDao(database: D1Database) {
     const returnValue = {
       display_name: newUser.display_name,
       email: newUser.email,
-      id: newUser.uuid,
+      id: newUser.id,
       account: {
         provider: newAccount.provider,
         providerId: newAccount.provider_id,
@@ -66,9 +64,14 @@ export function createLettuceAuthDao(database: D1Database) {
     return returnValue;
   }
 
+  async function updateUserEmailByUuid({ userId, email }: { userId: string; email: string }) {
+    return db.update(users).set({ email }).where(eq(users.id, userId));
+  }
+
   return {
     getUserByAccount,
     getUserByEmail,
     createUser,
+    updateUserEmailByUuid,
   };
 }
