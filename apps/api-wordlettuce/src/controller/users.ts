@@ -4,6 +4,7 @@ import { ApiWordLettuceBindings } from '../util/env';
 import { UserIdSchema, Username } from '../util/schemas';
 import { vValidator } from '@hono/valibot-validator';
 import { createGameResultsDao } from '../dao/game-results';
+import { requireToken } from '../middleware/requireToken';
 
 const usersController = new Hono<{ Bindings: ApiWordLettuceBindings }>();
 
@@ -16,6 +17,7 @@ const UpserUserParamSchema = v.object({
 
 usersController.put(
   '/:userId',
+  requireToken,
   vValidator('json', UpsertUserJsonSchema),
   vValidator('param', UpserUserParamSchema),
   async (c) => {

@@ -5,6 +5,8 @@ import { vValidator } from '@hono/valibot-validator';
 import { Username, GameNumSchema, AnswerSchema, UserIdSchema } from '../util/schemas';
 import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
+import { requireToken } from '../middleware/requireToken';
+
 const gameResultsController = new Hono<{ Bindings: ApiWordLettuceBindings }>();
 
 const GetGameResultsQuerySchema = v.object({
@@ -42,7 +44,7 @@ const CreateGameResultJsonSchema = v.object({
   answers: AnswerSchema,
 });
 
-gameResultsController.post('/', vValidator('json', CreateGameResultJsonSchema), async (c) => {
+gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userId, answers } = c.req.valid('json');
   const { saveGame } = createGameResultsDao(c);
   const inserts = await saveGame({ gameNum, userId, answers });

@@ -6,7 +6,7 @@ import gameResultsController from './controller/game-results';
 import { requireToken } from './middleware/requireToken';
 
 const app = new Hono<{ Bindings: ApiWordLettuceBindings }>();
-app.use(requireToken);
+// app.use(requireToken);
 
 app.route('/v2/rankings', rankingsControllerV2);
 app.route('/v1/game-results', gameResultsController);
