@@ -52,9 +52,9 @@ export async function GET(event) {
     start,
   });
 
-  // event.setHeaders({
-  // 	'Cache-Control': 'public,max-age=300'
-  // });
+  event.setHeaders({
+    'Cache-Control': 'public,max-age=60',
+  });
   return json({
     results: results.slice(0, limit),
     start,
