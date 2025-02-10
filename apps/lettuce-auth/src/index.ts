@@ -70,6 +70,7 @@ export default {
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);
         if (userForAccount) {
+          await dao.updateUserEmailByUuid({ userId: userForAccount.id, email: providerUser.email });
           return ctx.subject('user', {
             id: userForAccount.id,
             email: userForAccount.email,
