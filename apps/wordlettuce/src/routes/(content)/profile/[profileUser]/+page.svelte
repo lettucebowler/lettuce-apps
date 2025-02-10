@@ -20,7 +20,7 @@
       more: boolean;
       start: number;
       next: number;
-    }>('/api/v1/game-results', { user: data.user, start });
+    }>('/api/v1/game-results', { user: data.profileUser, start });
     // return getNextPageAfter({ username: data.user, start });
   }
 
