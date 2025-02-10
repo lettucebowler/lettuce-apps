@@ -13,7 +13,8 @@
     "auth": "pnpm --filter @lettuce-apps-packages/auth",
     "lettuce-auth": "pnpm --filter @lettuce-apps/lettuce-auth",
     "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
-    "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce"
+    "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce",
+    "api-wordlettuce": "pnpm --filter @lettuce-apps/api-wordlettuce"
   },
   "keywords": [],
   "author": "",

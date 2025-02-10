@@ -19,8 +19,8 @@ NODE_VERSION = "22"
 
 [[kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
-id = "c4c734815f294c2e973669a23e26d387"
+id = "31a684ad1101462c9f76deb754fc92fe"
 
 [[env.production.kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
-id = "c4c734815f294c2e973669a23e26d387"
+id = "31a684ad1101462c9f76deb754fc92fe"
