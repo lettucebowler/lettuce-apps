@@ -6,7 +6,7 @@ export const gameResults = sqliteTable(
   {
     gameNum: int('game_num').notNull(),
     answers: text({ length: 30 }).notNull(),
-    userId: text('user_id').notNull(),
+    userId: int('user_id').notNull(),
     attempts: int().notNull(),
   },
   (table) => [
@@ -18,7 +18,7 @@ export const gameResults = sqliteTable(
 export const users = sqliteTable(
   'users',
   {
-    id: text().primaryKey().notNull(),
+    id: int().primaryKey().notNull(),
     username: text(),
   },
   (table) => [uniqueIndex('username_unique').on(table.username)],
