@@ -7,7 +7,7 @@ declare global {
   declare namespace App {
     interface Locals {
       getGameStateV3: () => WordlettuceGame;
-      session: User | undefined;
+      session: UserSubject | undefined;
     }
     interface PageState {
       showModal: boolean;

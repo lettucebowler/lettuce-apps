@@ -34,10 +34,12 @@ export async function load(event) {
       gameNum,
     };
   }
+  const authClient = createAuthClient(event);
+  const user = await authClient.getUser({ userID: event.locals.session.userID });
   return {
     authenticated: true as const,
     nav: links,
-    user: event.locals.session,
+    user,
     gameNum,
   };
 }

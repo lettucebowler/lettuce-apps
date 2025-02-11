@@ -80,19 +80,15 @@ export const actions: import('./$types').Actions = {
       });
     }
     event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
-    if (game.success) {
-      const user = event.locals.session;
-      if (user) {
-        const userId = user.id;
-        const apiWordlettuce = createApiWordlettuceClient(event);
-        const inserts = await apiWordlettuce.saveGame({
-          answers: game.answers.join(''),
-          userId,
-          gameNum: game.gameNum,
-        });
-        if (!inserts.length) {
-          fail(500, { message: 'Error saving to database' });
-        }
+    if (game.success && event.locals.session) {
+      const apiWordlettuce = createApiWordlettuceClient(event);
+      const inserts = await apiWordlettuce.saveGame({
+        answers: game.answers.join(''),
+        userID: event.locals.session.userID,
+        gameNum: game.gameNum,
+      });
+      if (!inserts.length) {
+        fail(500, { message: 'Error saving to database' });
       }
       return {
         success: true,

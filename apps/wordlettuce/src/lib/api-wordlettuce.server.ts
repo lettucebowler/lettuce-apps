@@ -22,14 +22,14 @@ export function createApiWordlettuceClient(event: RequestEvent) {
     }
   }
 
-  async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
+  async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {
     const { data, error } = await api
       .post<{
         gameNum: number;
         userId: string;
         answers: string;
         attempts: number;
-      }>('/v1/game-results', { userId, gameNum, answers })
+      }>('/v1/game-results', { userId: userID, gameNum, answers })
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error) {

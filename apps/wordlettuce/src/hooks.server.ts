@@ -54,8 +54,7 @@ const authHandler: Handle = async ({ event, resolve }) => {
       refresh: event.cookies.get('refresh_token') || undefined,
     });
     if (!verified.err) {
-      const user = await authClient.getUser({ userID: verified.subject.properties.userID });
-      event.locals.session = user;
+      event.locals.session = verified.subject.properties;
     } else {
       clearTokens(event);
     }
