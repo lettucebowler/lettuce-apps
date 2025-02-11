@@ -24,6 +24,7 @@ rankingsControllerV2.get(
   async (c) => {
     const { getRankings } = createGameResultsDao(c);
     const results = await getRankings();
+    c.res.headers.append('Cache-Control', 'public, max-age=60');
     return c.json({
       rankings: results,
     });
