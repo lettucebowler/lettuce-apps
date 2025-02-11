@@ -15,6 +15,5 @@ export async function load(event) {
     next,
     limit,
     start: startParam,
-    getNextPageAfter,
   };
 }

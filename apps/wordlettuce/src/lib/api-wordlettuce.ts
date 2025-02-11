@@ -3,12 +3,12 @@ import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 
 type CreateApiWordLettuceClientInput = {
-  fetch: typeof fetch;
+  fetch?: typeof fetch;
 };
 
-export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClientInput) {
+export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInput) {
   const api = fetcher({
-    fetch: fetch,
+    fetch: input.fetch ? input.fetch : fetch,
     base: PUBLIC_API_WORDLETTUCE_HOST,
   });
 
@@ -43,7 +43,7 @@ export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClient
 
   async function getRankings() {
     const { data, error } = await api
-      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>('/v2/rankings')
+      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>('/v2/rankings', {})
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error || !data) {

@@ -5,12 +5,14 @@
   import { browser } from '$app/environment';
   import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
+  import { createApiWordlettuceClient } from '$lib/api-wordlettuce.js';
 
   let { data } = $props();
   const gameNum = getGameNum();
 
+  const { getNextPageAfter } = createApiWordlettuceClient({ fetch });
   async function getResults({ start }: { start: number }) {
-    return data.getNextPageAfter({ username: data.profileUser, start });
+    return getNextPageAfter({ username: data.profileUser, start });
   }
 
   let query = createInfiniteQuery(() => ({
