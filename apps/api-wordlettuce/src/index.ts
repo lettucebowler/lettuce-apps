@@ -7,7 +7,7 @@ import { cors } from 'hono/cors';
 
 const app = new Hono<{ Bindings: ApiWordLettuceBindings }>();
 
-app.use('/*', cors());
+app.use('/*', cors({ origin: '*' }));
 app.route('/v2/rankings', rankingsControllerV2);
 app.route('/v1/game-results', gameResultsController);
 app.route('/v1/users', usersController);

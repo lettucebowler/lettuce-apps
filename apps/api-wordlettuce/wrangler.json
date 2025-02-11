@@ -11,12 +11,6 @@
   ],
   "d1_databases": [
     {
-      "binding": "wordlettuce",
-      "database_name": "api-wordlettuce",
-      "database_id": "87ede6ef-7999-4337-8028-faf58b8b327e",
-      "migrations_dir": "drizzle"
-    },
-    {
       "binding": "wordlettuce_db",
       "database_name": "wordlettuce",
       "database_id": "b51df405-caa6-48ea-a00f-26ca705fc208",
@@ -26,7 +20,7 @@
 
   "compatibility_flags": ["nodejs_compat"],
   "placement": {
-    "mode": "smart"
+    "mode": "off"
   },
   "routes": [
     {
