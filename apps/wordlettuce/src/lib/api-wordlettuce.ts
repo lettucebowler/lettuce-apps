@@ -31,6 +31,7 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
           attempts: number;
           answers: string;
           userId: number;
+          score: number;
         }>;
       }>('/v1/game-results', { username, limit, start })
       .then((data) => ({ data, error: undefined }))

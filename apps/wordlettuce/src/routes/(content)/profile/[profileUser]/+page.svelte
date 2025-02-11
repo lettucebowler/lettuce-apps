@@ -71,9 +71,7 @@
         {#each page.results as gameResult (gameResult)}
           <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
             <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
-              <span class="text-left">#{gameResult.gameNum}</span><span class="text-right"
-                >{1 + 6 - gameResult.answers.length / 5} pts</span
-              >
+              <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
             </h2>
             <GameSummary answers={gameResult.answers} />
           </div>

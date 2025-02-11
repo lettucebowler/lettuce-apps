@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { gameResults, users } from '../../drizzle/schema';
-import { and, count, desc, eq, gt, lte, sql } from 'drizzle-orm';
+import { and, count, desc, eq, gt, lte, max, sql } from 'drizzle-orm';
 import { getGameNum } from '../util/game-num';
 import { Context } from 'hono';
 import { ApiWordLettuceBindings } from '../util/env';
@@ -59,6 +59,7 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindin
         answers: gameResults.answers,
         userId: gameResults.userId,
         attempts: gameResults.attempts,
+        score: sql`max(7 - attempts, 1)`.mapWith(gameResults.attempts),
       })
       .from(users)
       .innerJoin(gameResults, eq(users.id, gameResults.userId))
