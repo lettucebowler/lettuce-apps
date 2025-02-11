@@ -20,11 +20,13 @@ const GetRankingsQuerySchema = v.object({
 rankingsControllerV2.get(
   '/',
   vValidator('query', GetRankingsQuerySchema),
-  cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
+  cache({
+    cacheName: 'wordlettuce-rankings-2',
+    cacheControl: 'public, max-age=60',
+  }),
   async (c) => {
     const { getRankings } = createGameResultsDao(c);
     const results = await getRankings();
-    c.res.headers.append('Cache-Control', 'public, max-age=60');
     return c.json({
       rankings: results,
     });
