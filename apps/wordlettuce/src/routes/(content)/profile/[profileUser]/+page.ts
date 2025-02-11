@@ -1,26 +1,20 @@
-import { fetcher } from 'itty-fetcher';
+import { createApiWordlettuceClient } from '$lib/api-wordlettuce.js';
 
-type GameResult = {
-  gameNum: number;
-  answers: string;
-};
+import { getGameNum } from '$lib/words.js';
 
 export async function load(event) {
-  const parentData = await event.parent();
   const { profileUser } = event.params;
   const searchParams = event.url.searchParams;
-  const startParam = Number(searchParams.get('start')) || parentData.gameNum;
-  const apiWordlettuce = fetcher({ fetch: event.fetch });
-  const { results, next, limit } = await apiWordlettuce.get<{
-    results: GameResult[];
-    next: number;
-    limit: number;
-  }>('/api/v1/game-results', { user: profileUser, start: startParam });
+  const gameNum = getGameNum();
+  const startParam = Number(searchParams.get('start')) || gameNum;
+  const { getNextPageAfter } = createApiWordlettuceClient(event);
+  const { results, next, limit } = await getNextPageAfter({ username: profileUser, start: startParam });
   return {
     profileUser,
     results,
     next,
     limit,
     start: startParam,
+    getNextPageAfter,
   };
 }

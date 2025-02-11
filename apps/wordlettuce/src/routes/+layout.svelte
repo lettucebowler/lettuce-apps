@@ -6,13 +6,7 @@
   import { appName } from '$lib/app-constants';
   import AuthNav from './AuthNav.svelte';
   import '$lib/assets/app.css';
-  import { invalidate, onNavigate } from '$app/navigation';
-
   let { data, children } = $props();
-
-  onNavigate(() => {
-    invalidate('data:gamenum');
-  });
 </script>
 
 <svelte:head>
@@ -21,7 +15,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href={smallFavicon} />
   <link rel="mask-icon" href={safariPinnedTabIcon} color="#a3be8c" />
   <meta name="description" content="Lettuce Wordle`" />
-  <title>{appName} #{data.gameNum}</title>
+  <title>{appName}</title>
 </svelte:head>
 
 <div

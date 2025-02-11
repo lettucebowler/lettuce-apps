@@ -119,7 +119,7 @@
     }
 
     let saveGameToastId: string;
-    if (data.session) {
+    if (data.user) {
       saveGameToastId = toastLoading('Saving results...');
     }
     return async ({ result, update }) => {
@@ -249,7 +249,7 @@
     <BetterModal
       gameNum={game.gameNum}
       answers={game.answers}
-      user={data.session?.displayName}
+      user={data.user?.displayName}
       close={() => history.back()}
     />
   {/if}

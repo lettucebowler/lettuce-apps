@@ -1,27 +1,16 @@
 <script lang="ts">
   import { infiniteScrollAction } from './actions.js';
   import LettuceAvatar from '$lib/components/LettuceAvatar.svelte';
-  import { fetcher } from 'itty-fetcher';
   import GameSummary from './GameSummary.svelte';
   import { browser } from '$app/environment';
   import { createInfiniteQuery } from '@tanstack/svelte-query';
+  import { getGameNum } from '$lib/words.js';
 
   let { data } = $props();
+  const gameNum = getGameNum();
 
   async function getResults({ start }: { start: number }) {
-    const api = fetcher({ base: window.location.origin });
-    return api.get<{
-      results: Array<{
-        gameNum: number;
-        attempts: number;
-        answers: string;
-        userId: number;
-      }>;
-      more: boolean;
-      start: number;
-      next: number;
-    }>('/api/v1/game-results', { user: data.profileUser, start });
-    // return getNextPageAfter({ username: data.user, start });
+    return data.getNextPageAfter({ username: data.profileUser, start });
   }
 
   let query = createInfiniteQuery(() => ({
@@ -46,7 +35,7 @@
     cb: query?.fetchNextPage,
     delay: 250,
     immediate: true,
-    disabled: !data.next || data.start !== data.gameNum || !query.hasNextPage,
+    disabled: !data.next || data.start !== gameNum || !query.hasNextPage,
   }}
 />
 <main class="grid w-full gap-8">
@@ -92,7 +81,7 @@
       {/each}
     {/if}
   </div>
-  {#if browser && query.hasNextPage && data.start === data.gameNum}
+  {#if browser && query.hasNextPage && data.start === gameNum}
     <div class="flex flex-col items-center gap-2">
       <svg class="text-snow-100 h-8 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="text-charade-800" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -103,11 +92,10 @@
       </svg>
       <p class="text-snow-100 text-center text-xl font-medium">loading...</p>
     </div>
-  {:else if data.start < data.gameNum || !browser}
+  {:else if data.start < gameNum || !browser}
     <nav class="mx-4 flex justify-end gap-2">
-      {#if data.start < data.gameNum}
-        <a href="?start={data.gameNum}" title="Back to start" class="text-snow-300 text-lg font-medium">Back to start</a
-        >
+      {#if data.start < gameNum}
+        <a href="?start={gameNum}" title="Back to start" class="text-snow-300 text-lg font-medium">Back to start</a>
       {/if}
       {#if data.next}
         <a href="?start={data.next}" title="Next" class="text-snow-300 ml-auto text-lg font-medium">Next</a>

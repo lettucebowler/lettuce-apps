@@ -21,13 +21,11 @@ export async function GET(event) {
       clearTokens(event);
       return redirect(302, `${event.url.origin}/`);
     }
-    const { upsertUser } = createApiWordlettuceClient(event);
-    await upsertUser({ id: verified.subject.properties.id, login: verified.subject.properties.displayName });
     const game = event.locals.getGameStateV3();
     if (game.success) {
-      const apiWordlettuce = createApiWordlettuceClient(event);
-      await apiWordlettuce.saveGame({
-        userId: verified.subject.properties.id,
+      const { saveGame } = createApiWordlettuceClient(event);
+      await saveGame({
+        userID: verified.subject.properties.userID,
         gameNum: game.gameNum,
         answers: game.answers.join(''),
       });
