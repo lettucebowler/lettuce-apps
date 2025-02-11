@@ -1,5 +1,5 @@
 import { successAnswer } from '$lib/app-constants';
-import { isAllowedGuess, getGameWord } from '$lib/words';
+import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
 import { GuessLetter } from '$lib/game-schemas';
 
 type WordlettuceGameConstructorArgs = {
@@ -29,7 +29,7 @@ export class WordlettuceGame {
     }
   };
 
-  static fromStateString = ({ state, currentGameNum }: { state: string; currentGameNum: number }) => {
+  static fromStateString = ({ state, currentGameNum = getGameNum() }: { state: string; currentGameNum?: number }) => {
     if (!state) {
       return new WordlettuceGame({ gameNum: currentGameNum });
     }

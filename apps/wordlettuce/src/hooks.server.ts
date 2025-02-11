@@ -6,25 +6,10 @@ import { getGameNum } from '$lib/words';
 
 async function createGetGameState(event: RequestEvent) {
   const stateString = event.cookies.get(STATE_COOKIE_NAME_V2) || '';
-  const requestClone = event.request.clone();
-  let currentGameNum = getGameNum();
-  if (requestClone.method === 'GET') {
-    const searchParams = new URL(requestClone.url).searchParams;
-    if (searchParams.has('gameNum') && Number(searchParams.get('gameNum'))) {
-      currentGameNum = Number(searchParams.get('gameNum'));
-    }
-  }
-  if (requestClone.method === 'POST') {
-    const formData = await requestClone.formData();
-    if (Number(formData.get('gameNum'))) {
-      currentGameNum = Number(formData.get('gameNum'));
-    }
-  }
   return {
     getGameStateV3: () => {
       return WordlettuceGame.fromStateString({
         state: stateString,
-        currentGameNum: currentGameNum,
       });
     },
   };

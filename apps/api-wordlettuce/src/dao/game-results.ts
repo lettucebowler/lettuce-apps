@@ -6,7 +6,7 @@ import { Context } from 'hono';
 import { ApiWordLettuceBindings } from '../util/env';
 
 export function createGameResultsDao(c: Context<{ Bindings: ApiWordLettuceBindings }>) {
-  const db = drizzle(c.env.wordlettuce);
+  const db = drizzle(c.env.wordlettuce_db);
 
   async function saveGame({ userId, gameNum, answers }: { userId: number; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
