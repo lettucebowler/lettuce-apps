@@ -17,6 +17,7 @@ import { User } from './schemas';
 
 interface ResponseLike {
   json(): Promise<unknown>;
+  text(): Promise<string>;
   ok: Response['ok'];
 }
 type FetchLike = (...args: any[]) => Promise<ResponseLike>;
@@ -88,7 +89,9 @@ export function createAuthClient(input: AuthClientInput) {
   // });
 
   async function getUser({ userID }: { userID: number }): Promise<User> {
-    return f(`${input.issuer}/users/${userID}`).then((r) => r.json()) as Promise<User>;
+    const test = await f(`${input.issuer}/users/${userID}`).then((r) => r.text());
+    console.log(test);
+    return JSON.parse(test) as User;
   }
 
   const result = {
