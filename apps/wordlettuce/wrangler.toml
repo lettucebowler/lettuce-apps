@@ -7,6 +7,10 @@ compatibility_date = "2025-02-09"
 binding = "lettuce_auth"
 service = "lettuce-auth"
 
+[[env.production.services]]
+binding = "lettuce_auth"
+service = "lettuce-auth"
+
 [placement]
 mode = "smart"
 
