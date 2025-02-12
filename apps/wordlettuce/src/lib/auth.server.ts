@@ -1,5 +1,6 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { createAuthClient } from '@lettuce-apps-packages/auth';
+import { dev } from '$app/environment';
 
 import { AUTH_HOST } from '$env/static/private';
 
@@ -7,7 +8,8 @@ function _createAuthClient(event: RequestEvent) {
   return createAuthClient({
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
-    fetch: event.fetch,
+    // fetch: event.fetch,
+    fetch: dev ? event.fetch : event.platform!.env!.lettuce_auth!.fetch,
     // fetch: event.platform?.env.lettuce_auth?.fetch ?? event.fetch,
     // fetch: event.platform?.env?.lettuce_auth.fetch ? event.platform.env.lettuce_auth.fetch : event.fetch,
     storage: event.platform?.env?.lettuce_auth_signing_keys,
