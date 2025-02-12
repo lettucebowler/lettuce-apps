@@ -16,6 +16,7 @@ declare global {
       env?: {
         lettuce_auth_signing_keys: KVNamespace;
         api_wordlettuce: Service;
+        lettuce_auth: Service;
       };
     }
   }

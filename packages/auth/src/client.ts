@@ -12,14 +12,20 @@ import {
 } from '@openauthjs/openauth/client';
 import { SubjectSchema } from '@openauthjs/openauth/subject';
 import { InvalidAccessTokenError, InvalidSubjectError } from '@openauthjs/openauth/error';
-import { fetcher } from 'itty-fetcher';
+// import { fetcher } from 'itty-fetcher';
 import { User } from './schemas';
+
+interface ResponseLike {
+  json(): Promise<unknown>;
+  ok: Response['ok'];
+}
+type FetchLike = (...args: any[]) => Promise<ResponseLike>;
 
 type AuthClientInput = Omit<ClientInput, 'fetch'> & {
   storage?: KVNamespace;
   issuer: string;
   keyset?: JSONWebKeySet;
-  fetch: typeof fetch;
+  fetch: FetchLike;
 };
 export function createAuthClient(input: AuthClientInput) {
   const f = input.fetch ?? fetch;
@@ -76,13 +82,13 @@ export function createAuthClient(input: AuthClientInput) {
     return createLocalJWKSet(keyset);
   }
 
-  const api = fetcher({
-    base: input.issuer,
-    fetch: f,
-  });
+  // const api = fetcher({
+  //   base: input.issuer,
+  //   fetch: f,
+  // });
 
-  async function getUser({ userID }: { userID: number }) {
-    return api.get<User>(`/users/${userID}`);
+  async function getUser({ userID }: { userID: number }): Promise<User> {
+    return f(`${input.issuer}/users/${userID}`).then((r) => r.json()) as Promise<User>;
   }
 
   const result = {

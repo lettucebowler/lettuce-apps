@@ -19,6 +19,7 @@ const GetRankingsQuerySchema = v.object({
 rankingsControllerV2.get('/', vValidator('query', GetRankingsQuerySchema), async (c) => {
   const { getRankings } = createGameResultsDao(c);
   const results = await getRankings();
+  c.res.headers.set('Cache-Control', 'public, max-age=60');
   return c.json({
     rankings: results,
   });
