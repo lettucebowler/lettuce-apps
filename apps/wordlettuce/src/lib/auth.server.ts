@@ -12,7 +12,7 @@ function _createAuthClient(event: RequestEvent) {
     fetch: dev ? event.fetch : (a, b) => event.platform!.env!.lettuce_auth!.fetch(a, b),
     // fetch: event.platform?.env.lettuce_auth?.fetch ?? event.fetch,
     // fetch: event.platform?.env?.lettuce_auth.fetch ? event.platform.env.lettuce_auth.fetch : event.fetch,
-    storage: event.platform?.env?.lettuce_auth_signing_keys,
+    // storage: event.platform?.env?.lettuce_auth_signing_keys,
   });
 }
 
