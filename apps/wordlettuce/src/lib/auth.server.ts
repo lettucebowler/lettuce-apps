@@ -9,7 +9,7 @@ function _createAuthClient(event: RequestEvent) {
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
     // fetch: event.fetch,
-    fetch: dev ? event.fetch : event.platform!.env!.lettuce_auth!.fetch.bind(globalThis),
+    fetch: dev ? event.fetch : (a, b) => event.platform!.env!.lettuce_auth!.fetch(a, b),
     // fetch: event.platform?.env.lettuce_auth?.fetch ?? event.fetch,
     // fetch: event.platform?.env?.lettuce_auth.fetch ? event.platform.env.lettuce_auth.fetch : event.fetch,
     storage: event.platform?.env?.lettuce_auth_signing_keys,
