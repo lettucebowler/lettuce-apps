@@ -5,6 +5,7 @@ import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
 import { vValidator } from '@hono/valibot-validator';
 import { createGameResultsDao } from '../dao/game-results';
+import { cache } from 'hono/cache';
 
 const rankingsControllerV2 = new Hono<{ Bindings: ApiWordLettuceBindings }>();
 
@@ -16,13 +17,17 @@ const GetRankingsQuerySchema = v.object({
   ),
 });
 
-rankingsControllerV2.get('/', vValidator('query', GetRankingsQuerySchema), async (c) => {
-  const { getRankings } = createGameResultsDao(c);
-  const results = await getRankings();
-  c.res.headers.set('Cache-Control', 'public, max-age=60');
-  return c.json({
-    rankings: results,
-  });
-});
+rankingsControllerV2.get(
+  '/',
+  vValidator('query', GetRankingsQuerySchema),
+  cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
+  async (c) => {
+    const { getRankings } = createGameResultsDao(c);
+    const results = await getRankings();
+    return c.json({
+      rankings: results,
+    });
+  },
+);
 
 export { rankingsControllerV2 };
