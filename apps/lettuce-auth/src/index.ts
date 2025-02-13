@@ -51,7 +51,11 @@ export default {
         const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
         const { userID } = c.req.valid('param');
         const user = await dao.getUser({ userID });
-        return c.json(user);
+        if (!user) {
+          return c.json({ message: 'Not found' }, 404);
+        }
+        const { id, displayName } = user;
+        return c.json({ id, displayName });
       },
     );
     const auth = issuer({

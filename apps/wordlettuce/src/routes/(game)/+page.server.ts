@@ -3,6 +3,7 @@ import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '$lib/app-constants.
 import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
 import * as v from 'valibot';
 import { GuessLetter } from '$lib/game-schemas.js';
+import type { WordlettuceGame } from '$lib/wordlettuce-game.svelte.js';
 // import { createWordLettuceDao } from "$lib/dao/wordlettuce.server.js";
 
 export const trailingSlash = 'never';
@@ -11,12 +12,7 @@ export async function load(event) {
   const game = event.locals.getGameStateV3();
   event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
   return {
-    game: {
-      currentGuess: game.currentGuess as string,
-      success: game.success as boolean,
-      guesses: game.guesses as Array<string>,
-      gameNum: game.gameNum as number,
-    },
+    game: game as WordlettuceGame,
   };
 }
 

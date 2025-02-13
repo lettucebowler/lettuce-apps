@@ -14,25 +14,18 @@
   import ShareIcon from '$lib/components/ShareIcon.svelte';
   import EnterIcon from '$lib/components/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/BackSpaceIcon.svelte';
-  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import * as v from 'valibot';
   import { GameKey, LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
 
-  let { form, data }: PageProps = $props();
+  let { form, data = $bindable() }: PageProps = $props();
   let wordForm: HTMLFormElement | undefined = $state();
 
   const wordIsInvalid = createExpiringBoolean();
   const submittingWord = createExpiringBoolean();
   const duration = 0.15;
-
-  const game = new WordlettuceGame({
-    gameNum: data.game.gameNum,
-    guesses: data.game.guesses,
-    currentGuess: data.game.currentGuess,
-  });
 
   function showModal() {
     pushState('', {
@@ -41,7 +34,7 @@
   }
 
   function saveGameStateToCookie() {
-    Cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), {
+    Cookies.set(STATE_COOKIE_NAME_V2, data.game.toStateString(), {
       path: '/',
       httpOnly: false,
       expires: 1,
@@ -59,10 +52,10 @@
       return;
     }
     if (parseResult.output === 'backspace') {
-      game.doUndo();
+      data.game.doUndo();
       return;
     }
-    game.doLetter(parseResult.output);
+    data.game.doLetter(parseResult.output);
   }
 
   function invalidForm(message = 'Invalid word') {
@@ -75,22 +68,22 @@
   }
 
   function getItemsForGrid() {
-    const maxPreviousGuesses = game.success ? 6 : 5;
+    const maxPreviousGuesses = data.game.success ? 6 : 5;
     const maxFillerGuesses = 5;
 
-    const previousGuesses = game.guesses.map((guess, index) => ({ index, guess })).slice(-1 * maxPreviousGuesses);
-    const currentGuesses = game.success
+    const previousGuesses = data.game.guesses.map((guess, index) => ({ index, guess })).slice(-1 * maxPreviousGuesses);
+    const currentGuesses = data.game.success
       ? []
       : [
           {
-            index: game.guesses.length,
-            guess: game.currentGuess,
+            index: data.game.guesses.length,
+            guess: data.game.currentGuess,
           },
         ];
     const fillerGuesses = Array(maxFillerGuesses)
       .fill(null)
       .map((_, index) => ({
-        index: game.guesses.length + (game.success ? 0 : 1) + index,
+        index: data.game.guesses.length + (data.game.success ? 0 : 1) + index,
         guess: '',
       }));
     const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses].filter(Boolean).slice(0, 6);
@@ -98,21 +91,21 @@
   }
 
   const enhanceForm: SubmitFunction = async ({ cancel }) => {
-    if (submittingWord.value || game.success) {
+    if (submittingWord.value || data.game.success) {
       cancel();
       return;
     }
     submittingWord.truthify();
-    const { error } = game.doSumbit();
+    const { error } = data.game.doSumbit();
     if (error) {
       cancel();
       return invalidForm();
     }
     form = {
-      success: game.success,
+      success: data.game.success,
       invalid: false,
     };
-    if (!game.success) {
+    if (!data.game.success) {
       cancel();
       saveGameStateToCookie();
       return;
@@ -152,10 +145,10 @@
       bind:this={wordForm}
       class="my-auto flex w-full max-w-[min(700px,_55vh)]"
     >
-      <input type="hidden" value={game.gameNum} name="gameNum" />
+      <input type="hidden" value={data.game.gameNum} name="gameNum" />
       <div class="max-w-700 grid w-full grid-rows-[repeat(6,1fr)] gap-2">
         {#each getItemsForGrid() as item (item.index)}
-          {@const current = item.index === game.answers.length}
+          {@const current = item.index === data.game.answers.length}
           <div
             class="grid w-full grid-cols-[repeat(5,1fr)] gap-2"
             animate:flip={{ duration: duration * 1000 }}
@@ -163,7 +156,7 @@
             style="--tile-height:2px;"
           >
             {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-              {@const doJump = browser && game.answers.at(item.index)?.length === 5}
+              {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
               {@const doWiggle = browser && wordIsInvalid.value && current}
               {@const doWiggleOnce = !browser && form?.invalid && current}
               <div
@@ -174,7 +167,7 @@
               >
                 <Tile
                   letter={letter === ' ' ? '' : letter}
-                  answer={game.answers.at(item.index)?.charAt(j)}
+                  answer={data.game.answers.at(item.index)?.charAt(j)}
                   column={j}
                   {doJump}
                   {doWiggle}
@@ -199,7 +192,7 @@
     >
       <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
         {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
-          {@const status = game.letterStatuses[letter]}
+          {@const status = data.game.letterStatuses[letter]}
           {#if letter}
             <Key
               status={status as LetterStatus}
@@ -225,7 +218,7 @@
             <BackSpaceIcon />
           </div>
         </Key>
-        {#if game.success}
+        {#if data.game.success}
           <Key aria-label="share" title="share" onclick={() => showModal()}>
             <div class="h-5 w-full lg:h-7">
               <ShareIcon />
@@ -240,15 +233,15 @@
       method="POST"
       action="?/undo"
       use:enhance={({ cancel }) => {
-        game.doUndo();
+        data.game.doUndo();
         cancel();
       }}
     ></form>
   </main>
   {#if page.state.showModal}
     <BetterModal
-      gameNum={game.gameNum}
-      answers={game.answers}
+      gameNum={data.game.gameNum}
+      answers={data.game.answers}
       user={data.user?.displayName}
       close={() => history.back()}
     />

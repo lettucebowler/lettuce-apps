@@ -2,13 +2,20 @@ import { fetcher } from 'itty-fetcher';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 
+interface ResponseLike {
+  json(): Promise<unknown>;
+  text(): Promise<string>;
+  ok: Response['ok'];
+}
+type FetchLike = (...args: any[]) => Promise<ResponseLike>;
+
 type CreateApiWordLettuceClientInput = {
-  fetch?: typeof fetch;
+  fetch?: FetchLike;
 };
 
 export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInput) {
   const api = fetcher({
-    fetch: input.fetch ? input.fetch : fetch,
+    fetch: input.fetch as typeof fetch,
     base: PUBLIC_API_WORDLETTUCE_HOST,
   });
 
@@ -48,7 +55,6 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error || !data) {
-      console.log(error);
       throw svelteError(500, error);
     }
     return data.rankings;

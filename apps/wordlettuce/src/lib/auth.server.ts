@@ -3,16 +3,18 @@ import { createAuthClient } from '@lettuce-apps-packages/auth';
 import { dev } from '$app/environment';
 
 import { AUTH_HOST } from '$env/static/private';
+import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 
 function _createAuthClient(event: RequestEvent) {
   return createAuthClient({
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
     // fetch: event.fetch,
-    fetch: dev ? event.fetch : (a, b) => event.platform!.env!.lettuce_auth!.fetch(a, b),
-    // fetch: event.platform?.env.lettuce_auth?.fetch ?? event.fetch,
-    // fetch: event.platform?.env?.lettuce_auth.fetch ? event.platform.env.lettuce_auth.fetch : event.fetch,
-    // storage: event.platform?.env?.lettuce_auth_signing_keys,
+    fetch: dev
+      ? event.fetch
+      : (((a: URL | RequestInfo<unknown, CfProperties<unknown>>, b: RequestInit<CfProperties<unknown>> | undefined) =>
+          event.platform!.env!.lettuce_auth!.fetch(a, b)) as unknown as typeof fetch),
+    storage: event.platform?.env?.lettuce_auth_signing_keys,
   });
 }
 

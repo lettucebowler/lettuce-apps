@@ -6,36 +6,54 @@ import { Username, GameNumSchema, AnswerSchema, UserIdSchema } from '../util/sch
 import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
 import { requireToken } from '../middleware/requireToken';
+import { HTTPException } from 'hono/http-exception';
 
 const gameResultsController = new Hono<{ Bindings: ApiWordLettuceBindings }>();
 
-const GetGameResultsQuerySchema = v.object({
-  username: Username,
-  limit: v.pipe(
-    v.optional(v.string(), '30'),
-    v.transform((input) => Number(input)),
-    v.integer(),
-    v.minValue(1),
-  ),
-  start: v.pipe(
-    v.optional(v.string(), () => getGameNum().toString()),
-    v.transform((input) => Number(input)),
-    v.integer(),
-    v.minValue(0),
-  ),
-});
+const GetGameResultsQuerySchema = v.pipe(
+  v.object({
+    username: v.optional(Username, undefined),
+    limit: v.pipe(
+      v.optional(v.string(), '30'),
+      v.transform((input) => Number(input)),
+      v.integer(),
+      v.minValue(1),
+    ),
+    start: v.pipe(
+      v.optional(v.string(), () => getGameNum().toString()),
+      v.transform((input) => Number(input)),
+      v.integer(),
+      v.minValue(0),
+    ),
+    userID: v.optional(v.pipe(v.string(), v.digits(), v.transform(Number)), undefined),
+  }),
+  v.check((input) => !!input.userID || !!input.username, 'Must provider username or userID'),
+);
 
 gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), async (c) => {
-  const { username, limit, start } = c.req.valid('query');
-  const { getNextPageAfter } = createGameResultsDao(c);
+  const { username, limit, start, userID } = c.req.valid('query');
+  const { getNextPageAfter, getUserGameResults } = createGameResultsDao(c);
 
-  const { results, next } = await getNextPageAfter({ username, limit, start });
-  return c.json({
-    results: results.slice(0, limit),
-    next,
-    limit,
-    start,
-  });
+  if (userID) {
+    return getUserGameResults({ userID, limit, start }).then(({ results, next }) => {
+      return c.json({
+        results: results.slice(0, limit),
+        next,
+        limit,
+        start,
+      });
+    });
+  } else if (username) {
+    return getNextPageAfter({ username, limit, start }).then(({ results, next }) => {
+      return c.json({
+        results: results.slice(0, limit),
+        next,
+        limit,
+        start,
+      });
+    });
+  }
+  throw new HTTPException(400, { message: 'Must provider username or userID' });
 });
 
 const CreateGameResultJsonSchema = v.object({
