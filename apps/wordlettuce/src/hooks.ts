@@ -7,8 +7,6 @@ export const transport: Transport = {
       if (!(value instanceof WordlettuceGame)) {
         return false;
       }
-      console.log('value', value);
-      console.log('encode');
       return [value.gameNum, value.currentGuess, ...value.guesses];
     },
     decode: ([gameNum, currentGuess, ...guesses]) => new WordlettuceGame({ gameNum, guesses, currentGuess }),

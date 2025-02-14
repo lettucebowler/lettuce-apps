@@ -1,13 +1,17 @@
 import { error } from '@sveltejs/kit';
 
-const host = 'https://api.dicebear.com/7.x/bottts-neutral/svg';
-const bgs = ['BF616A', 'D08770', 'EBCB8B', 'A3BE8C', 'B48EAD', '88C0D0', '81A1C1'];
+const host = 'https://api.dicebear.com/9.x/bottts-neutral/svg';
+const bgs = ['BF616A', 'D08770', 'EBCB8B', 'A3BE8C', 'B48EAD', '5e81ac', '8fbcbb'];
 
 export async function GET(event) {
   const hostUrl = new URL(host);
-  bgs.forEach((backgroundColor) => {
-    hostUrl.searchParams.append('backgroundColor', backgroundColor);
-  });
+  // bgs.forEach((backgroundColor) => {
+  //   hostUrl.searchParams.append('backgroundColor', backgroundColor);
+  // });
+  hostUrl.searchParams.append(
+    'backgroundColor',
+    bgs.at(Math.floor(Math.random() * bgs.length))?.toString() ?? 'D08770',
+  );
   const username = event.url.searchParams.get('username');
   if (!username) {
     error(400, 'username is a required query param');
