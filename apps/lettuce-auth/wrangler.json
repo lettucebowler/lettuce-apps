@@ -13,8 +13,8 @@
   "d1_databases": [
     {
       "binding": "lettuce_auth_db",
-      "database_name": "lettuce-auth",
-      "database_id": "b7e70e38-3805-4307-b0d4-ffb4486abdf8",
+      "database_name": "lettuce-auth-users",
+      "database_id": "e6e289ed-144b-4d9f-90df-5165e4e584de",
       "migrations_dir": "drizzle"
     }
   ],
