@@ -6,7 +6,8 @@
   "kv_namespaces": [
     {
       "binding": "lettuce_auth_signing_keys",
-      "id": "31a684ad1101462c9f76deb754fc92fe"
+      "id": "31a684ad1101462c9f76deb754fc92fe",
+      "preview_id": "c428c917b2d246c88c763a1cf0951410"
     }
   ],
   "d1_databases": [

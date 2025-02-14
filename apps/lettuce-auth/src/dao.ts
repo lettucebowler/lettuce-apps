@@ -8,7 +8,7 @@ export function createLettuceAuthDao(database: D1Database) {
 
   async function getUserByAccount(account: Account): Promise<User | undefined> {
     const accountResults = db
-      .select({ userId: accounts.userID })
+      .select({ userID: accounts.userID })
       .from(accounts)
       .where(and(eq(accounts.provider, account.provider), eq(accounts.providerID, account.providerID)));
     return db
@@ -35,11 +35,23 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
-  async function getUser({ userID }: { userID: number }) {
+  type GetUserInput =
+    | {
+        userID: number;
+      }
+    | {
+        username: string;
+      };
+  async function getUser(input: GetUserInput) {
     return db
       .select()
       .from(users)
-      .where(eq(users.id, userID))
+      .where(
+        and(
+          'userID' in input ? eq(users.id, input.userID) : undefined,
+          'username' in input ? eq(users.displayName, input.username) : undefined,
+        ),
+      )
       .limit(1)
       .then((r) => r.at(0));
   }
@@ -70,10 +82,6 @@ export function createLettuceAuthDao(database: D1Database) {
     };
   }
 
-  async function updateUserEmail({ userId, email }: { userId: number; email: string }) {
-    return db.update(users).set({ email }).where(eq(users.id, userId));
-  }
-
   async function getUsers({
     userIDs,
     offset = 0,
@@ -101,7 +109,6 @@ export function createLettuceAuthDao(database: D1Database) {
     getUserByAccount,
     getUserByEmail,
     createUser,
-    updateUserEmail,
     getUser,
     getUsers,
   };

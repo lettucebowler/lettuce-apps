@@ -39,18 +39,21 @@ export default {
       }),
     );
     app.get(
-      '/users/:userID',
+      '/users/:user',
       cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=60' }),
       sValidator(
         'param',
         v.object({
-          userID: v.pipe(v.string(), v.digits(), v.transform(Number)),
+          user: v.union([v.pipe(v.string(), v.digits(), v.transform(Number)), v.string()]),
         }),
       ),
       async (c) => {
         const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
-        const { userID } = c.req.valid('param');
-        const user = await dao.getUser({ userID });
+        const { user: userParam } = c.req.valid('param');
+        const user =
+          typeof userParam === 'string'
+            ? await dao.getUser({ username: userParam })
+            : await dao.getUser({ userID: userParam });
         if (!user) {
           return c.json({ message: 'Not found' }, 404);
         }
@@ -118,7 +121,6 @@ export default {
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);
         if (userForAccount) {
-          await dao.updateUserEmail({ userId: userForAccount.id, email: providerUser.email });
           return ctx.subject('user', {
             userID: userForAccount.id,
           });

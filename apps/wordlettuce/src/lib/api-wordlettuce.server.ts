@@ -30,10 +30,10 @@ export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClient
     const { data, error } = await api
       .post<{
         gameNum: number;
-        userId: string;
+        userID: string;
         answers: string;
         attempts: number;
-      }>('/v1/game-results', { userId: userID, gameNum, answers })
+      }>('/v1/game-results', { userID, gameNum, answers })
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error) {
@@ -60,7 +60,7 @@ export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClient
           gameNum: number;
           attempts: number;
           answers: string;
-          userId: number;
+          userID: number;
         }>;
       }>('/v1/game-results', { username, limit, start })
       .then((data) => ({ data, error: undefined }))

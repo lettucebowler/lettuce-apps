@@ -7,6 +7,7 @@ import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
 import { requireToken } from '../middleware/requireToken';
 import { HTTPException } from 'hono/http-exception';
+import { createLettuceAuthClient } from '../client/lettuce-auth';
 
 const gameResultsController = new Hono<{ Bindings: ApiWordlettuceBindings }>();
 
@@ -28,11 +29,17 @@ const GetGameResultsQuerySchema = v.pipe(
     userID: v.optional(v.pipe(v.string(), v.digits(), v.transform(Number)), undefined),
   }),
   v.check((input) => !!input.userID || !!input.username, 'Must provider username or userID'),
+  v.check((input) => !(input.userID && input.username), 'Must provider either username or userID'),
 );
 
 gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), async (c) => {
   const { username, limit, start, userID } = c.req.valid('query');
   const { getNextPageAfter, getUserGameResults } = createGameResultsDao(c);
+
+  if (username) {
+    const client = createLettuceAuthClient(c);
+    const user = await client.getUserById({});
+  }
 
   if (userID) {
     return getUserGameResults({ userID, limit, start }).then(({ results, next }) => {
