@@ -34,33 +34,26 @@ const GetGameResultsQuerySchema = v.pipe(
 
 gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), async (c) => {
   const { username, limit, start, userID } = c.req.valid('query');
-  const { getNextPageAfter, getUserGameResults } = createGameResultsDao(c);
+  const { getUserGameResults } = createGameResultsDao(c);
 
+  let searchID: number;
   if (username) {
     const client = createLettuceAuthClient(c);
-    const user = await client.getUserById({});
+    const user = await client.getUser(username);
+    searchID = user.id;
+  } else if (userID) {
+    searchID = userID;
+  } else {
+    throw new HTTPException(400, { message: 'Must provider either username or userID ' });
   }
-
-  if (userID) {
-    return getUserGameResults({ userID, limit, start }).then(({ results, next }) => {
-      return c.json({
-        results: results.slice(0, limit),
-        next,
-        limit,
-        start,
-      });
+  return getUserGameResults({ userID: searchID, limit, start }).then(({ results, next }) => {
+    return c.json({
+      results: results.slice(0, limit),
+      next,
+      limit,
+      start,
     });
-  } else if (username) {
-    return getNextPageAfter({ username, limit, start }).then(({ results, next }) => {
-      return c.json({
-        results: results.slice(0, limit),
-        next,
-        limit,
-        start,
-      });
-    });
-  }
-  throw new HTTPException(400, { message: 'Must provider username or userID' });
+  });
 });
 
 const CreateGameResultJsonSchema = v.object({

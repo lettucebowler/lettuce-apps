@@ -74,36 +74,6 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordlettuceBindin
       });
   }
 
-  async function getNextPageAfter({
-    username,
-    limit = 30,
-    start = getGameNum(),
-  }: {
-    username: string;
-    limit: number;
-    start: number;
-  }) {
-    const query = db
-      .select({
-        gameNum: gameResults.gameNum,
-        answers: gameResults.answers,
-        userID: gameResults.userID,
-        attempts: gameResults.attempts,
-        score: sql`max(7 - attempts, 1)`.mapWith(gameResults.attempts),
-      })
-      .from(users)
-      .innerJoin(gameResults, eq(users.id, gameResults.userID))
-      .where(and(eq(users.username, username), lte(gameResults.gameNum, start)))
-      .orderBy(desc(gameResults.gameNum))
-      .limit(limit + 1);
-    const results = await query.all();
-    return {
-      results: results.slice(0, limit),
-      next: results.length > limit ? results.at(-1)?.gameNum : null,
-      limit,
-    };
-  }
-
   async function upsertUser({ userID, username }: { userID: number; username: string }) {
     return db
       .insert(users)
@@ -116,7 +86,6 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordlettuceBindin
     saveGame,
     getRankings,
     upsertUser,
-    getNextPageAfter,
     getUserGameResults,
   };
 }
