@@ -1,13 +1,14 @@
 import { Hono } from 'hono';
 import * as v from 'valibot';
-import { ApiWordLettuceBindings } from '../util/env';
+import { ApiWordlettuceBindings } from '../util/env';
 import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
 import { vValidator } from '@hono/valibot-validator';
 import { createGameResultsDao } from '../dao/game-results';
 import { cache } from 'hono/cache';
+import { createLettuceAuthClient } from '../client/lettuce-auth';
 
-const rankingsControllerV2 = new Hono<{ Bindings: ApiWordLettuceBindings }>();
+const rankingsControllerV2 = new Hono<{ Bindings: ApiWordlettuceBindings }>();
 
 const GetRankingsQuerySchema = v.object({
   gameNum: v.pipe(
@@ -24,8 +25,17 @@ rankingsControllerV2.get(
   async (c) => {
     const { getRankings } = createGameResultsDao(c);
     const results = await getRankings();
+    const { getUsers } = createLettuceAuthClient({
+      fetch: ((a: RequestInfo | URL, b: RequestInit) => c.env.lettuce_auth.fetch(a, b)) as typeof fetch,
+    });
+    const userIDs = results.map((result) => result.userID);
+    const users = await getUsers({ userIDs });
+    const group = Object.groupBy(users.users, (r) => {
+      return r.id;
+    });
+
     return c.json({
-      rankings: results,
+      rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.displayName })),
     });
   },
 );

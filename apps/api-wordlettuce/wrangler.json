@@ -17,6 +17,12 @@
       "migrations_dir": "drizzle"
     }
   ],
+  "services": [
+    {
+      "binding": "lettuce_auth",
+      "service": "lettuce-auth"
+    }
+  ],
   "compatibility_flags": ["nodejs_compat"],
   "placement": {
     "mode": "smart"

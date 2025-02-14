@@ -86,7 +86,7 @@ export function createLettuceAuthDao(database: D1Database) {
     const query = db
       .select({
         displayName: users.displayName,
-        userID: users.id,
+        id: users.id,
       })
       .from(users)
       .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))

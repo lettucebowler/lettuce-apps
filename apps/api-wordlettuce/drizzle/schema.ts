@@ -6,12 +6,12 @@ export const gameResults = sqliteTable(
   {
     gameNum: int('game_num').notNull(),
     answers: text({ length: 30 }).notNull(),
-    userId: int('user_id').notNull(),
+    userID: int('user_id').notNull(),
     attempts: int().notNull(),
   },
   (table) => [
     index('game_results_gamenum_desc').on(table.gameNum),
-    primaryKey({ columns: [table.gameNum, table.userId], name: 'game_results_gamenum_user_id_pk' }),
+    primaryKey({ columns: [table.gameNum, table.userID], name: 'game_results_gamenum_user_id_pk' }),
   ],
 );
 

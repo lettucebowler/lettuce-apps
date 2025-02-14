@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lettuce-auth",
   "main": "src/index.ts",
-  "compatibility_date": "2025-02-03",
+  "compatibility_date": "2025-01-29",
   "kv_namespaces": [
     {
       "binding": "lettuce_auth_sessions",

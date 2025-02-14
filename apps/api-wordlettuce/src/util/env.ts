@@ -1,5 +1,5 @@
-export type ApiWordLettuceBindings = {
-  wordlettuce: D1Database;
+export type ApiWordlettuceBindings = {
   wordlettuce_db: D1Database;
+  lettuce_auth: Service;
   TOKEN: string;
 };

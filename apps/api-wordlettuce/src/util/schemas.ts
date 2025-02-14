@@ -1,8 +1,9 @@
 import * as v from 'valibot';
-export const PositiveIntegerSchema = v.pipe(v.number(), v.integer(), v.minValue(1));
-export const UserIdSchema = PositiveIntegerSchema;
+
+export const PositiveInteger = v.pipe(v.number(), v.integer(), v.minValue(1));
+export const UserID = PositiveInteger;
 export const Username = v.string();
-export const GameNumSchema = PositiveIntegerSchema;
+export const GameNumSchema = PositiveInteger;
 export const AnswerSchema = v.pipe(
   v.string(),
   v.regex(/[xci_]/),

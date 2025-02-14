@@ -4,7 +4,7 @@ import { Account, subjects } from '@lettuce-apps-packages/auth';
 import { GithubProvider } from '@openauthjs/openauth/provider/github';
 import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
-import type { Bindings, Env, ProviderUser } from './types';
+import type { LettuceAuthBindings, ProviderUser } from './types';
 
 import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
@@ -12,7 +12,6 @@ import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
 import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
-import { innerProduct } from 'drizzle-orm';
 
 const github = fetcher({
   base: 'https://api.github.com',
@@ -22,8 +21,8 @@ const github = fetcher({
 });
 
 export default {
-  fetch(request: Request, env: Env, ctx: ExecutionContext) {
-    const app = new Hono<{ Bindings: Bindings }>();
+  fetch(request: Request, env: LettuceAuthBindings, ctx: ExecutionContext) {
+    const app = new Hono<{ Bindings: LettuceAuthBindings }>();
     app.use(
       '/.well-known/jwks.json',
       cache({
@@ -148,4 +147,4 @@ export default {
     app.route('/', auth);
     return app.fetch(request, env, ctx);
   },
-} satisfies ExportedHandler<Env>;
+} satisfies ExportedHandler<LettuceAuthBindings>;

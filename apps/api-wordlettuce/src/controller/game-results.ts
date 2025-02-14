@@ -1,23 +1,23 @@
 import { Hono } from 'hono';
 import * as v from 'valibot';
-import { ApiWordLettuceBindings } from '../util/env';
+import { ApiWordlettuceBindings } from '../util/env';
 import { vValidator } from '@hono/valibot-validator';
-import { Username, GameNumSchema, AnswerSchema, UserIdSchema } from '../util/schemas';
+import { Username, GameNumSchema, AnswerSchema, UserID, PositiveInteger } from '../util/schemas';
 import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
 import { requireToken } from '../middleware/requireToken';
 import { HTTPException } from 'hono/http-exception';
 
-const gameResultsController = new Hono<{ Bindings: ApiWordLettuceBindings }>();
+const gameResultsController = new Hono<{ Bindings: ApiWordlettuceBindings }>();
 
 const GetGameResultsQuerySchema = v.pipe(
   v.object({
     username: v.optional(Username, undefined),
     limit: v.pipe(
       v.optional(v.string(), '30'),
+      v.digits(),
       v.transform((input) => Number(input)),
-      v.integer(),
-      v.minValue(1),
+      PositiveInteger,
     ),
     start: v.pipe(
       v.optional(v.string(), () => getGameNum().toString()),
@@ -58,14 +58,14 @@ gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), a
 
 const CreateGameResultJsonSchema = v.object({
   gameNum: GameNumSchema,
-  userId: UserIdSchema,
+  userID: UserID,
   answers: AnswerSchema,
 });
 
 gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
-  const { gameNum, userId, answers } = c.req.valid('json');
+  const { gameNum, userID, answers } = c.req.valid('json');
   const { saveGame } = createGameResultsDao(c);
-  const inserts = await saveGame({ gameNum, userId, answers });
+  const inserts = await saveGame({ gameNum, userID, answers });
   if (!inserts.length) {
     return c.json(
       {
