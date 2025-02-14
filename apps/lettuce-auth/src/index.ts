@@ -12,6 +12,7 @@ import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
 import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
+import { innerProduct } from 'drizzle-orm';
 
 const github = fetcher({
   base: 'https://api.github.com',
@@ -40,7 +41,7 @@ export default {
     );
     app.get(
       '/users/:userID',
-      cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=300' }),
+      cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=60' }),
       sValidator(
         'param',
         v.object({
@@ -56,6 +57,33 @@ export default {
         }
         const { id, displayName } = user;
         return c.json({ id, displayName });
+      },
+    );
+    const UsersQuery = v.object({
+      userID: v.optional(
+        v.union([
+          v.array(v.pipe(v.string(), v.digits(), v.transform(Number))),
+          v.pipe(
+            v.string(),
+            v.digits(),
+            v.transform(Number),
+            v.transform((input) => [input]),
+          ),
+        ]),
+        [],
+      ),
+      limit: v.optional(v.pipe(v.string(), v.digits(), v.transform(Number), v.integer()), '10'),
+      offset: v.optional(v.pipe(v.string(), v.digits(), v.transform(Number), v.integer()), '0'),
+    });
+    app.get(
+      '/users',
+      cache({ cacheName: 'lettuce-auth-users-multi', cacheControl: 'public max-age=60' }),
+      sValidator('query', UsersQuery),
+      async (c) => {
+        const query = c.req.valid('query');
+        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const users = await dao.getUsers({ userIDs: query.userID, limit: query.limit, offset: query.offset });
+        return c.json({ users });
       },
     );
     const auth = issuer({

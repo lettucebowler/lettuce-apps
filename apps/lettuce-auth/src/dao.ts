@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { users, accounts } from '../drizzle/schema';
 import type { Account, User } from '@lettuce-apps-packages/auth';
-import { and, eq, inArray } from 'drizzle-orm';
+import { and, asc, eq, inArray } from 'drizzle-orm';
 
 export function createLettuceAuthDao(database: D1Database) {
   const db = drizzle(database);
@@ -74,11 +74,35 @@ export function createLettuceAuthDao(database: D1Database) {
     return db.update(users).set({ email }).where(eq(users.id, userId));
   }
 
+  async function getUsers({
+    userIDs,
+    offset = 0,
+    limit = 10,
+  }: {
+    userIDs: Array<number>;
+    offset?: number;
+    limit?: number;
+  }) {
+    const query = db
+      .select({
+        displayName: users.displayName,
+        userID: users.id,
+      })
+      .from(users)
+      .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))
+      .orderBy(asc(users.id))
+      .limit(limit)
+      .offset(offset);
+    const results = await query.all();
+    return results;
+  }
+
   return {
     getUserByAccount,
     getUserByEmail,
     createUser,
     updateUserEmail,
     getUser,
+    getUsers,
   };
 }
