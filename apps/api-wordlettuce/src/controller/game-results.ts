@@ -8,6 +8,7 @@ import { getGameNum } from '../util/game-num';
 import { requireToken } from '../middleware/requireToken';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
+import { cache } from 'hono/cache';
 
 const gameResultsController = new Hono<{ Bindings: ApiWordlettuceBindings }>();
 
@@ -32,30 +33,34 @@ const GetGameResultsQuerySchema = v.pipe(
   v.check((input) => !(input.userID && input.username), 'Must provider either username or userID'),
 );
 
-gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), async (c) => {
-  const { username, limit, start, userID } = c.req.valid('query');
-  const { getUserGameResults } = createGameResultsDao(c);
+gameResultsController.get(
+  '/',
+  vValidator('query', GetGameResultsQuerySchema),
+  cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
+  async (c) => {
+    const { username, limit, start, userID } = c.req.valid('query');
+    const { getUserGameResults } = createGameResultsDao(c);
 
-  let searchID: number;
-  if (username) {
-    const client = createLettuceAuthClient(c);
-    const user = await client.getUser(username);
-    searchID = user.id;
-    console.log('searchID', searchID);
-  } else if (userID) {
-    searchID = userID;
-  } else {
-    throw new HTTPException(400, { message: 'Must provider either username or userID ' });
-  }
-  return getUserGameResults({ userID: searchID, limit, start }).then(({ results, next }) => {
-    return c.json({
-      results: results.slice(0, limit),
-      next,
-      limit,
-      start,
+    let searchID: number;
+    if (username) {
+      const client = createLettuceAuthClient(c);
+      const user = await client.getUser(username);
+      searchID = user.id;
+    } else if (userID) {
+      searchID = userID;
+    } else {
+      throw new HTTPException(400, { message: 'Must provider either username or userID ' });
+    }
+    return getUserGameResults({ userID: searchID, limit, start }).then(({ results, next }) => {
+      return c.json({
+        results: results.slice(0, limit),
+        next,
+        limit,
+        start,
+      });
     });
-  });
-});
+  },
+);
 
 const CreateGameResultJsonSchema = v.object({
   gameNum: GameNumSchema,
