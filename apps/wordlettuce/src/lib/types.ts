@@ -6,3 +6,11 @@ export type NavLinkProps = {
   margin?: string;
   icon?: string;
 };
+
+export type GameResult = {
+  gameNum: number;
+  attempts: number;
+  answers: string;
+  userID: number;
+  score: number;
+};

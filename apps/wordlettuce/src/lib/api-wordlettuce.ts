@@ -1,6 +1,7 @@
 import { fetcher } from 'itty-fetcher';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
+import type { GameResult } from './types';
 
 interface ResponseLike {
   json(): Promise<unknown>;
@@ -21,10 +22,12 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
 
   async function getNextPageAfter({
     username,
+    userID,
     limit = 30,
     start,
   }: {
-    username: string;
+    username?: string;
+    userID?: number;
     limit?: number;
     start: number;
   }) {
@@ -33,14 +36,8 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
         limit: number;
         start: number;
         next: number;
-        results: Array<{
-          gameNum: number;
-          attempts: number;
-          answers: string;
-          userID: number;
-          score: number;
-        }>;
-      }>('/v1/game-results', { username, limit, start })
+        results: Array<GameResult>;
+      }>('/v1/game-results', userID ? { userID, start, limit } : { username: username!, start, limit })
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error: error as Error, data: undefined }));
     if (error) {

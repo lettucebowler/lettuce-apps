@@ -1,8 +1,9 @@
 <script lang="ts">
   type GameSummaryProps = {
     answers: string;
+    radius?: 'lg' | 'md' | 'sm';
   };
-  let { answers }: GameSummaryProps = $props();
+  let { answers, radius = 'lg' }: GameSummaryProps = $props();
 </script>
 
 <div class="grid grid-cols-5 gap-1">
@@ -10,10 +11,12 @@
     {@const answer = answers.charAt(i) || '_'}
     <div
       data-answer={answer}
-      class={{
-        'tile bg-(--bg-color) aspect-square w-full rounded-lg': true,
-        'border-(--highlight-color) border-t-[1px] shadow-[0_var(--depth)_4px_0_rgb(0_0_0_/_0.2)]': answer !== '_',
-      }}
+      class={[
+        'tile bg-(--bg-color) aspect-square w-full',
+        radius === 'lg' && 'rounded-lg',
+        radius === 'md' && 'rounded',
+        answer !== '_' && 'border-(--highlight-color) border-t-[1px] shadow-[0_var(--depth)_4px_0_rgb(0_0_0_/_0.2)]',
+      ]}
     ></div>
   {/each}
 </div>
