@@ -60,12 +60,12 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordlettuceBindin
         attempts: gameResults.attempts,
         score: sql`max(7 - attempts, 1)`.mapWith(gameResults.attempts),
       })
-      .from(users)
-      .innerJoin(gameResults, eq(users.id, gameResults.userID))
-      .where(and(eq(users.id, userID), lte(gameResults.gameNum, start)))
+      .from(gameResults)
+      .where(and(eq(gameResults.userID, userID), lte(gameResults.gameNum, start)))
       .orderBy(desc(gameResults.gameNum))
       .limit(limit + 1)
       .then((r) => {
+        console.log('r', r);
         return {
           results: r.slice(0, limit),
           next: r.length > limit ? r.at(-1)?.gameNum : null,

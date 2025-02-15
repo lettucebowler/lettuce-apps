@@ -41,6 +41,7 @@ gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), a
     const client = createLettuceAuthClient(c);
     const user = await client.getUser(username);
     searchID = user.id;
+    console.log('searchID', searchID);
   } else if (userID) {
     searchID = userID;
   } else {
