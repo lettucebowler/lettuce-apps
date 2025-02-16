@@ -20,8 +20,7 @@
   ],
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
-    "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu",
-    "NODE_VERSION": "22.14"
+    "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu"
   },
   "placement": {
     "mode": "off"
