@@ -15,7 +15,7 @@ service = "lettuce-auth"
 mode = "smart"
 
 [vars]
-NODE_VERSION = "22"
+NODE_VERSION = "22.14"
 PUBLIC_API_WORDLETTUCE_HOST = "https://api.word.lettucebowler.net"
 AUTH_HOST="https://auth.lettucebowler.net"
 
