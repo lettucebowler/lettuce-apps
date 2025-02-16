@@ -23,14 +23,6 @@
     "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu",
     "NODE_VERSION": "22.14"
   },
-  "env": {
-    "production": {
-      "vars": {
-        "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu",
-        "NODE_VERSION": "22.14"
-      }
-    }
-  },
   "placement": {
     "mode": "off"
   },
