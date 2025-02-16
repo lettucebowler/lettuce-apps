@@ -67,26 +67,28 @@
     {/if}
   </div>
 
-  <h1 class="text-snow-300 text-center text-3xl font-bold">Recent Games</h1>
+  {#if data.currentResults.length}
+    <h1 class="text-snow-300 text-center text-3xl font-bold">Recent Games</h1>
 
-  <p class="text-snow-300 text-center text-xl">
-    These games contribute to {data.profileUser}'s rolling 7-day score of {data.currentResults
-      .map((r) => r.score)
-      .reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
-  </p>
+    <p class="text-snow-300 text-center text-xl">
+      These games contribute to {data.profileUser}'s rolling 7-day score of {data.currentResults
+        .map((r) => r.score)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
+    </p>
 
-  <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-4 sm:gap-3">
-    {#each data.currentResults as gameResult (gameResult)}
-      <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
-        <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
-          <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
-        </h2>
-        <GameSummary radius="md" answers={gameResult.answers} />
-      </div>
-    {:else}
-      <div class="text-lg font-medium text-snow-300 text-center col-span-3">This user has no play history</div>
-    {/each}
-  </div>
+    <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-4 sm:gap-3">
+      {#each data.currentResults as gameResult (gameResult)}
+        <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
+          <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
+            <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
+          </h2>
+          <GameSummary radius="md" answers={gameResult.answers} />
+        </div>
+      {:else}
+        <div class="text-lg font-medium text-snow-300 text-center col-span-3">This user has no play history</div>
+      {/each}
+    </div>
+  {/if}
 
   <h2 class="text-snow-300 text-center text-3xl font-bold">Play History</h2>
 
@@ -120,10 +122,18 @@
   {:else if data.start < gameNum || !browser}
     <nav class="mx-4 flex justify-end gap-2">
       {#if data.start < gameNum}
-        <a href="?start={gameNum}" title="Back to start" class="text-snow-300 text-lg font-medium">Back to start</a>
+        <a
+          href="?start={gameNum}"
+          title="Back to start"
+          class="text-snow-300 mr-auto text-lg font-medium hover:underline">Back to start</a
+        >
       {/if}
       {#if data.next}
-        <a href="?start={data.next}" title="Next" class="text-snow-300 ml-auto text-lg font-medium">Next</a>
+        <a
+          href="?start={data.next}&prevStart={data.start}"
+          title="Next"
+          class="text-snow-300 text-lg font-medium hover:underline">Next</a
+        >
       {/if}
     </nav>
   {/if}

@@ -9,7 +9,7 @@ export async function load(event) {
   const startParam = Number(searchParams.get('start')) || gameNum;
   const { getNextPageAfter } = createApiWordlettuceClient(event);
   const { results, next, limit } = await getNextPageAfter({ username: profileUser, start: startParam });
-  const currentResults = results.filter((result) => result.gameNum > getGameNum() - 7);
+  const currentResults = startParam === gameNum ? results.filter((result) => result.gameNum > getGameNum() - 7) : [];
   const pastResults = results.slice(currentResults.length);
   return {
     profileUser,

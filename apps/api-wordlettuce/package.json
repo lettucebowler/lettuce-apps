@@ -12,26 +12,26 @@
     "wrangler": "wrangler"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250129.0",
+    "@cloudflare/workers-types": "^4.20250214.0",
     "@hono/valibot-validator": "0.5.2",
     "@libsql/client": "^0.14.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@types/node": "^22.13.0",
+    "@types/node": "^22.13.4",
     "@lettuce-apps-packages/auth": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@typescript-eslint/parser": "^8.22.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
     "better-sqlite3": "^11.8.1",
     "dotenv": "^16.4.7",
     "drizzle-kit": "^0.30.4",
-    "drizzle-orm": "^0.39.1",
-    "eslint": "^9.19.0",
-    "hono": "^4.6.20",
+    "drizzle-orm": "^0.39.3",
+    "eslint": "^9.20.1",
+    "hono": "^4.7.1",
     "itty-fetcher": "^0.9.4",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "valibot": "^1.0.0-beta.14",
-    "wrangler": "^3.107.2"
+    "valibot": "^1.0.0-rc.0",
+    "wrangler": "^3.109.1"
   }
 }

@@ -1,3 +1,5 @@
+import { mulberry } from './util';
+
 export function getGameNum() {
   const msInADay = 1000 * 60 * 60 * 24;
   const initial = new Date(1643673600000);
@@ -12980,20 +12982,6 @@ export const allowedGuesses: ReadonlyArray<string> = [
   'zymes',
   'zymic',
 ];
-
-// I have no idea what this does
-function mulberry(a: number) {
-  let t = (a += 0x6d2b79f5);
-  t = Math.imul(t ^ (t >>> 15), t | 1);
-  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-}
-
-export function getDailyWord() {
-  const gameNum = getGameNum();
-  const wordIndex = mulberry(gameNum) * answerList.length;
-  return answerList.at(wordIndex) ?? 'slate';
-}
 
 export function getGameWord(gameNum: number) {
   const wordIndex = mulberry(gameNum) * answerList.length;
