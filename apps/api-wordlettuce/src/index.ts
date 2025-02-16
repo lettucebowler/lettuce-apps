@@ -8,7 +8,13 @@ const app = new Hono<{ Bindings: ApiWordlettuceBindings }>();
 
 app.use(
   cors({
-    origin: '*',
+    origin: (origin, c) => {
+      console.log(c.env);
+      if (c.env.ALLOW_LOCALHOST === 'true' && origin.includes('http://localhost:')) {
+        return origin;
+      }
+      return origin.endsWith('.lettucebowler.net') ? origin : 'https://lettucebowler.net';
+    },
     allowMethods: ['GET', 'POST', 'OPTIONS'],
     exposeHeaders: ['Content-Length'],
     maxAge: 600,

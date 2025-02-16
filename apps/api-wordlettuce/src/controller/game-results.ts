@@ -38,6 +38,7 @@ gameResultsController.get(
   vValidator('query', GetGameResultsQuerySchema),
   // cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
   async (c) => {
+    console.log(c.req.header('cookie'));
     const { username, limit, start, userID } = c.req.valid('query');
     const { getUserGameResults } = createGameResultsDao(c);
 

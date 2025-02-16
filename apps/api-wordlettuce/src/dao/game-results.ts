@@ -65,7 +65,6 @@ export function createGameResultsDao(c: Context<{ Bindings: ApiWordlettuceBindin
       .orderBy(desc(gameResults.gameNum))
       .limit(limit + 1)
       .then((r) => {
-        console.log('r', r);
         return {
           results: r.slice(0, limit),
           next: r.length > limit ? r.at(-1)?.gameNum : null,

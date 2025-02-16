@@ -3,4 +3,5 @@ export type ApiWordlettuceBindings = {
   lettuce_auth: Service;
   TOKEN: string;
   AUTH_HOST?: string;
+  ALLOW_LOCALHOST?: string;
 };

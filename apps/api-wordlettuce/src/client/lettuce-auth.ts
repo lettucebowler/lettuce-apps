@@ -7,7 +7,7 @@ const DEFAULT_HOST = 'https://auth.lettucebowler.net';
 export function createLettuceAuthClient(c: Context<{ Bindings: ApiWordlettuceBindings }>) {
   const lettuceAuth = fetcher({
     base: c.env.AUTH_HOST ?? DEFAULT_HOST,
-    fetch: (a, b) => c.env.lettuce_auth.fetch(a, b),
+    fetch: c.env.lettuce_auth ? (a, b) => c.env.lettuce_auth.fetch(a, b) : fetch,
   });
 
   async function getUsers({ userIDs }: { userIDs: Array<number> }): Promise<{ users: Array<Omit<User, 'email'>> }> {
