@@ -1,6 +1,5 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { createAuthClient, User } from '@lettuce-apps-packages/auth';
-import { fetcher } from 'itty-fetcher';
+import { createAuthClient } from '@lettuce-apps-packages/auth';
 
 import { AUTH_HOST } from '$env/static/private';
 
