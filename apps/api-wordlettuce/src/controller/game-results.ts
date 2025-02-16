@@ -36,7 +36,7 @@ const GetGameResultsQuerySchema = v.pipe(
 gameResultsController.get(
   '/',
   vValidator('query', GetGameResultsQuerySchema),
-  // cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
+  cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
   async (c) => {
     const { username, limit, start, userID } = c.req.valid('query');
     const { getUserGameResults } = createGameResultsDao(c);
