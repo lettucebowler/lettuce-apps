@@ -24,6 +24,9 @@
       "service": "lettuce-auth"
     }
   ],
+  "vars": {
+    "NODE_VERSION": "22.14"
+  },
   "compatibility_flags": ["nodejs_compat"],
   "placement": {
     "mode": "smart"

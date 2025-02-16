@@ -8,14 +8,14 @@ mode = "smart"
 
 [vars]
 AUTH_HOST = "https://auth.lettucebowler.net"
-NODE_VERSION = "22"
+NODE_VERSION = "22.14"
 
 [env.production.placement]
 mode = "smart"
 
 [env.production.vars]
 AUTH_HOST = "https://auth.lettucebowler.net"
-NODE_VERSION = "22"
+NODE_VERSION = "22.14"
 
 [[kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
