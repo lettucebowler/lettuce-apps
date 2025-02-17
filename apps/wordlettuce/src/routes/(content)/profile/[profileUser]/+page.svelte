@@ -49,7 +49,7 @@
     <figure class="flex flex-col gap-2">
       {#each [data.user] as user (user)}
         <div class="mx-auto h-40 w-40">
-          <LettuceAvatar name={data.profileUser} />
+          <LettuceAvatar name={data.profileUser} size="lg" />
         </div>
       {/each}
       <figcaption class="text-snow-300 text-center text-xl font-medium">

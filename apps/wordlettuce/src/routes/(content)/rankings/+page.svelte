@@ -37,9 +37,7 @@
             </div>
             <div class="border-box border-charade-700 table-cell border-t py-4 text-left sm:p-2">
               <div class="flex gap-2 sm:gap-4">
-                <span class="box-border h-11 w-max overflow-hidden rounded-sm"
-                  ><LettuceAvatar name={ranking.user} /></span
-                >
+                <span class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></span>
                 <span class="grid items-center">
                   {ranking.user}
                 </span>
