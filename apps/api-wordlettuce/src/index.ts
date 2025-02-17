@@ -21,7 +21,7 @@ app.use(
     credentials: true,
   }),
 );
-// app.use(lettuceAuth());
+app.use(lettuceAuth());
 app.route('/v2/rankings', rankingsControllerV2);
 app.route('/v1/game-results', gameResultsController);
 

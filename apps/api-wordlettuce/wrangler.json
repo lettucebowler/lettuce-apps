@@ -29,7 +29,7 @@
   },
   "compatibility_flags": ["nodejs_compat"],
   "placement": {
-    "mode": "smart"
+    "mode": "off"
   },
   "routes": [
     {
