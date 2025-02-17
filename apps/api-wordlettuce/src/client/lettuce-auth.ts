@@ -1,10 +1,10 @@
 import { fetcher } from 'itty-fetcher';
-import { User } from '@lettuce-apps-packages/auth/src/auth';
-import { ApiWordlettuceBindings } from '../util/env';
+import { User } from '@lettuce-apps-packages/auth';
+import { ApiWordlettuceHono } from '../util/env';
 import { Context } from 'hono';
 const DEFAULT_HOST = 'https://auth.lettucebowler.net';
 
-export function createLettuceAuthClient(c: Context<{ Bindings: ApiWordlettuceBindings }>) {
+export function createLettuceAuthClient(c: Context<ApiWordlettuceHono>) {
   const lettuceAuth = fetcher({
     base: c.env.AUTH_HOST ?? DEFAULT_HOST,
     fetch: c.env.lettuce_auth ? (a, b) => c.env.lettuce_auth.fetch(a, b) : fetch,

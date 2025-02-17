@@ -3,9 +3,9 @@ import { gameResults, users } from '../../drizzle/schema';
 import { and, count, desc, eq, gt, lte, sql } from 'drizzle-orm';
 import { getGameNum } from '../util/game-num';
 import { Context } from 'hono';
-import { ApiWordlettuceBindings } from '../util/env';
+import { ApiWordlettuceHono } from '../util/env';
 
-export function createGameResultsDao(c: Context<{ Bindings: ApiWordlettuceBindings }>) {
+export function createGameResultsDao(c: Context<ApiWordlettuceHono>) {
   const db = drizzle(c.env.wordlettuce_db);
 
   async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {

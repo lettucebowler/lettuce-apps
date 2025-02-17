@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import * as v from 'valibot';
-import { ApiWordlettuceBindings } from '../util/env';
+import { ApiWordlettuceHono } from '../util/env';
 import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
 import { vValidator } from '@hono/valibot-validator';
@@ -8,7 +8,7 @@ import { createGameResultsDao } from '../dao/game-results';
 import { cache } from 'hono/cache';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 
-const rankingsControllerV2 = new Hono<{ Bindings: ApiWordlettuceBindings }>();
+const rankingsControllerV2 = new Hono<ApiWordlettuceHono>();
 
 const GetRankingsQuerySchema = v.object({
   gameNum: v.pipe(

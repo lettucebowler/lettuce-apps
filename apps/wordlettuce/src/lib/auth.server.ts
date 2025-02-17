@@ -28,12 +28,14 @@ export async function getSigninUrl(event: RequestEvent) {
 
 export function setTokens(event: RequestEvent, access: string, refresh: string) {
   event.cookies.set('refresh_token', refresh, {
+    domain: dev ? undefined : '.lettucebowler.net',
     httpOnly: true,
     sameSite: 'lax',
     path: '/',
     maxAge: 34560000,
   });
   event.cookies.set('access_token', access, {
+    domain: dev ? undefined : '.lettucebowler.net',
     httpOnly: true,
     sameSite: 'lax',
     path: '/',

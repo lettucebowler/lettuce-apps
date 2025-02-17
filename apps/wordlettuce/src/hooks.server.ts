@@ -27,7 +27,7 @@ const fetchHandler: Handle = ({ event, resolve }) => {
   });
 };
 
-import { clearTokens, createAuthClient } from '$lib/auth.server';
+import { clearTokens, createAuthClient, setTokens } from '$lib/auth.server';
 import { subjects } from '@lettuce-apps-packages/auth';
 
 const authHandler: Handle = async ({ event, resolve }) => {
@@ -39,6 +39,9 @@ const authHandler: Handle = async ({ event, resolve }) => {
     });
     if (!verified.err) {
       event.locals.session = verified.subject.properties;
+      if (verified.tokens) {
+        setTokens(event, verified.tokens.access, verified.tokens?.refresh);
+      }
     } else {
       clearTokens(event);
     }

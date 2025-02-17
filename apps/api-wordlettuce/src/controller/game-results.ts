@@ -1,16 +1,15 @@
 import { Hono } from 'hono';
 import * as v from 'valibot';
-import { ApiWordlettuceBindings } from '../util/env';
+import { ApiWordlettuceHono } from '../util/env';
 import { vValidator } from '@hono/valibot-validator';
 import { Username, GameNumSchema, AnswerSchema, UserID, PositiveInteger } from '../util/schemas';
 import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
-import { requireToken } from '../middleware/requireToken';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
-import { cache } from 'hono/cache';
+import { requireAuth } from '../middleware/lettuceAuth';
 
-const gameResultsController = new Hono<{ Bindings: ApiWordlettuceBindings }>();
+const gameResultsController = new Hono<ApiWordlettuceHono>();
 
 const GetGameResultsQuerySchema = v.pipe(
   v.object({
@@ -38,7 +37,6 @@ gameResultsController.get(
   vValidator('query', GetGameResultsQuerySchema),
   // cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
   async (c) => {
-    console.log(c.req.header('cookie'));
     const { username, limit, start, userID } = c.req.valid('query');
     const { getUserGameResults } = createGameResultsDao(c);
 
@@ -69,7 +67,7 @@ const CreateGameResultJsonSchema = v.object({
   answers: AnswerSchema,
 });
 
-gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
+gameResultsController.post('/', requireAuth(), vValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userID, answers } = c.req.valid('json');
   const { saveGame } = createGameResultsDao(c);
   const inserts = await saveGame({ gameNum, userID, answers });
