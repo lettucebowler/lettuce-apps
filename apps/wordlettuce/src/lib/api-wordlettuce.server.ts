@@ -16,16 +16,6 @@ export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClient
     },
   });
 
-  async function upsertUser({ id, login }: { id: number; login: string }) {
-    const { error } = await api
-      .put(`/v1/users/${id}`, { username: login })
-      .then((data) => ({ data, error: undefined }))
-      .catch((error) => ({ error, data: undefined }));
-    if (error) {
-      throw svelteError(500, error);
-    }
-  }
-
   async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {
     const { data, error } = await api
       .post<{
@@ -84,7 +74,6 @@ export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClient
   }
 
   return {
-    upsertUser,
     saveGame,
     getNextPageAfter,
     getRankings,

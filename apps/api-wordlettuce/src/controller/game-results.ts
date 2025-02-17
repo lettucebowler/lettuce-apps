@@ -7,7 +7,7 @@ import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
-import { requireAuth } from '../middleware/lettuceAuth';
+import { requireToken } from '../middleware/requireToken';
 
 const gameResultsController = new Hono<ApiWordlettuceHono>();
 
@@ -67,7 +67,7 @@ const CreateGameResultJsonSchema = v.object({
   answers: AnswerSchema,
 });
 
-gameResultsController.post('/', requireAuth(), vValidator('json', CreateGameResultJsonSchema), async (c) => {
+gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userID, answers } = c.req.valid('json');
   const { saveGame } = createGameResultsDao(c);
   const inserts = await saveGame({ gameNum, userID, answers });
