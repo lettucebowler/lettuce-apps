@@ -8,14 +8,12 @@ mode = "smart"
 
 [vars]
 AUTH_HOST = "https://auth.lettucebowler.net"
-NODE_VERSION = "22.14"
 
 [env.production.placement]
 mode = "smart"
 
 [env.production.vars]
 AUTH_HOST = "https://auth.lettucebowler.net"
-NODE_VERSION = "22.14"
 BUN_VERSION = "1.2.2"
 
 [[kv_namespaces]]
