@@ -10,17 +10,10 @@
       "preview_id": "8013d0dd42eb417581f10aa04274397f"
     }
   ],
-  "d1_databases": [
-    {
-      "binding": "lettuce_auth_db",
-      "database_name": "lettuce-auth-users",
-      "database_id": "e6e289ed-144b-4d9f-90df-5165e4e584de",
-      "migrations_dir": "drizzle"
-    }
-  ],
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
-    "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu"
+    "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu",
+    "TURSO_CONNECTION_URL": "libsql://lettuce-auth-lettucebowler.aws-us-east-1.turso.io"
   },
   "placement": {
     "mode": "off"

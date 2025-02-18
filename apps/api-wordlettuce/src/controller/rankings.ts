@@ -5,8 +5,8 @@ import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
 import { vValidator } from '@hono/valibot-validator';
 import { createGameResultsDao } from '../dao/game-results';
-import { cache } from 'hono/cache';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
+import { createGameResultsTursoDao } from '../dao/game-results-turso';
 
 const rankingsControllerV2 = new Hono<ApiWordlettuceHono>();
 
@@ -23,7 +23,11 @@ rankingsControllerV2.get(
   vValidator('query', GetRankingsQuerySchema),
   // cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
   async (c) => {
-    const { getRankings } = createGameResultsDao(c);
+    // const { getRankings } = createGameResultsDao(c);
+    const { getRankings } = createGameResultsTursoDao({
+      url: c.env.TURSO_CONNECTION_URL,
+      authToken: c.env.TURSO_AUTH_TOKEN,
+    });
     const results = await getRankings();
     const { getUsers } = createLettuceAuthClient(c);
     const userIDs = results.map((result) => result.userID);

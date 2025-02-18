@@ -9,4 +9,6 @@ export type LettuceAuthBindings = {
   lettuce_auth_db: D1Database;
   GITHUB_CLIENT_ID: string;
   GITHUB_CLIENT_SECRET: string;
+  TURSO_CONNECTION_URL: string;
+  TURSO_AUTH_TOKEN: string;
 };

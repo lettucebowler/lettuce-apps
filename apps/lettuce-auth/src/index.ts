@@ -12,6 +12,7 @@ import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
 import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
+import { createLettuceAuthTursoDao } from './lettuce-auth-turso-dao';
 
 const github = fetcher({
   base: 'https://api.github.com',
@@ -48,7 +49,8 @@ export default {
         }),
       ),
       async (c) => {
-        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        // const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const dao = createLettuceAuthTursoDao({ url: c.env.TURSO_CONNECTION_URL, authToken: c.env.TURSO_AUTH_TOKEN });
         const { user: userParam } = c.req.valid('param');
         const user =
           typeof userParam === 'string'
@@ -83,7 +85,7 @@ export default {
       sValidator('query', UsersQuery),
       async (c) => {
         const query = c.req.valid('query');
-        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const dao = createLettuceAuthTursoDao({ url: c.env.TURSO_CONNECTION_URL, authToken: c.env.TURSO_AUTH_TOKEN });
         const users = await dao.getUsers({ userIDs: query.userID, limit: query.limit, offset: query.offset });
         return c.json({ users });
       },
@@ -116,7 +118,7 @@ export default {
         } else {
           throw new Error('idk how we got here');
         }
-        const dao = createLettuceAuthDao(env.lettuce_auth_db);
+        const dao = createLettuceAuthTursoDao({ url: env.TURSO_CONNECTION_URL, authToken: env.TURSO_AUTH_TOKEN });
         const account: Account = { provider: value.provider, providerID: providerUser.id.toString() };
         // Check if provider account is already tied to an account
         const userForAccount = await dao.getUserByAccount(account);

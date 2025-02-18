@@ -8,6 +8,7 @@ import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
+import { createGameResultsTursoDao } from '../dao/game-results-turso';
 
 const gameResultsController = new Hono<ApiWordlettuceHono>();
 
@@ -38,7 +39,11 @@ gameResultsController.get(
   // cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
   async (c) => {
     const { username, limit, start, userID } = c.req.valid('query');
-    const { getUserGameResults } = createGameResultsDao(c);
+    // const { getUserGameResults } = createGameResultsDao(c);
+    const { getUserGameResults } = createGameResultsTursoDao({
+      url: c.env.TURSO_CONNECTION_URL,
+      authToken: c.env.TURSO_AUTH_TOKEN,
+    });
 
     let searchID: number;
     if (username) {
@@ -69,7 +74,11 @@ const CreateGameResultJsonSchema = v.object({
 
 gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userID, answers } = c.req.valid('json');
-  const { saveGame } = createGameResultsDao(c);
+  // const { saveGame } = createGameResultsDao(c);
+  const { saveGame } = createGameResultsTursoDao({
+    url: c.env.TURSO_CONNECTION_URL,
+    authToken: c.env.TURSO_AUTH_TOKEN,
+  });
   const inserts = await saveGame({ gameNum, userID, answers });
   if (!inserts.length) {
     return c.json(
