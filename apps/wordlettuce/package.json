@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 3000",
-    "build": "pnpm --filter @lettuce-apps-packages/* build && vite build",
+    "build": "vite build",
     "package": "svelte-kit package",
-    "preview2": "vite preview --host 0.0.0.0 --port=3000",
     "preview": "wrangler pages dev .svelte-kit/cloudflare",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
