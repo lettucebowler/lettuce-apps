@@ -21,6 +21,7 @@ AUTH_HOST="https://auth.lettucebowler.net"
 
 [env.production.vars]
 NODE_VERSION = "22.14"
+BUN_VERSION = "1.2.2"
 PUBLIC_API_WORDLETTUCE_HOST = "https://api.word.lettucebowler.net"
 AUTH_HOST="https://auth.lettucebowler.net"
 
@@ -31,3 +32,6 @@ id = "31a684ad1101462c9f76deb754fc92fe"
 [[env.production.kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
 id = "31a684ad1101462c9f76deb754fc92fe"
+
+[dev]
+port=3000

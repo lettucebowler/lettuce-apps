@@ -1,10 +1,4 @@
-<script lang="ts">
-  type LettuceAvatarProps = {
-    name: string;
-    size?: 'sm' | 'lg';
-  };
-  let { name, size = 'sm' }: LettuceAvatarProps = $props();
-
+<script module>
   function stringToIntHash(str: string) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -17,10 +11,20 @@
 
   const host = 'https://api.dicebear.com/9.x/bottts-neutral/svg';
   const bgs = ['BF616A', 'D08770', 'EBCB8B', 'A3BE8C', 'B48EAD', '88C0D0'];
-  const hostUrl = new URL(host);
+</script>
 
-  hostUrl.searchParams.set('backgroundColor', bgs.at(stringToIntHash(name) % bgs.length)!);
-  hostUrl.searchParams.set('seed', name);
+<script lang="ts">
+  type LettuceAvatarProps = {
+    name: string;
+    size?: 'sm' | 'lg';
+  };
+  let { name, size = 'sm' }: LettuceAvatarProps = $props();
+  const imageURL = $derived.by(() => {
+    const hostUrl = new URL(host);
+    hostUrl.searchParams.set('backgroundColor', bgs.at(stringToIntHash(name) % bgs.length)!);
+    hostUrl.searchParams.set('seed', name);
+    return hostUrl.toString();
+  });
 </script>
 
 <img
@@ -29,6 +33,6 @@
     size === 'sm' && 'rounded-xl',
     size === 'lg' && 'rounded-3xl',
   ]}
-  src={hostUrl.toString()}
+  src={imageURL}
   alt="{name} avatar image"
 />

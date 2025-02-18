@@ -6,7 +6,6 @@
   import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
   import { createApiWordlettuceClient } from '$lib/api-wordlettuce.js';
-  import type { GameResult } from '$lib/types.js';
 
   let { data } = $props();
   const gameNum = getGameNum();
@@ -15,6 +14,8 @@
   async function getResults({ start }: { start: number }) {
     return getNextPageAfter({ userID: data.profileUserID, start, limit: 60 });
   }
+
+  $inspect(data.profileUser);
 
   let query = createInfiniteQuery(() => ({
     queryKey: ['game-results', data.user, data.start],
@@ -47,11 +48,9 @@
 <main class="grid w-full gap-8">
   <div>
     <figure class="flex flex-col gap-2">
-      {#each [data.user] as user (user)}
-        <div class="mx-auto h-40 w-40">
-          <LettuceAvatar name={data.profileUser} size="lg" />
-        </div>
-      {/each}
+      <div class="mx-auto h-40 w-40">
+        <LettuceAvatar name={data.profileUser} size="lg" />
+      </div>
       <figcaption class="text-snow-300 text-center text-xl font-medium">
         {data.profileUser}
       </figcaption>

@@ -6,18 +6,12 @@
   "main": "./dist/auth.js",
   "types": "./dist/auth.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && bun build --outdir ./dist src/auth.ts"
   },
   "exports": {
     ".": {
       "import": "./dist/auth.js",
       "types": "./dist/auth.d.ts"
-    },
-    "./*": {
-      "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
     }
   },
   "devDependencies": {

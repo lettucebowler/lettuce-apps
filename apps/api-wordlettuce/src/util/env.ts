@@ -1,4 +1,5 @@
 import { UserSubject } from '@lettuce-apps-packages/auth';
+import type { KVNamespace, D1Database } from '@cloudflare/workers-types';
 
 export type ApiWordlettuceBindings = {
   wordlettuce_db: D1Database;

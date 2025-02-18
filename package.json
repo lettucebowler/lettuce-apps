@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "packageManager": "pnpm@10.4.0",
+  "packageManager": "bun@1.2.2",
   "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "packages": "pnpm --filter @lettuce-apps-packages/*",
-    "auth": "pnpm --filter @lettuce-apps-packages/auth",
-    "lettuce-auth": "pnpm --filter @lettuce-apps/lettuce-auth",
-    "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
-    "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce",
-    "api-wordlettuce": "pnpm --filter @lettuce-apps/api-wordlettuce"
+    "packages": "bun --filter @lettuce-apps-packages/*",
+    "auth": "bun --filter @lettuce-apps-packages/auth",
+    "lettuce-auth": "bun --filter @lettuce-apps/lettuce-auth",
+    "lettuce-auth-test": "bun --filter lettuce-auth-test",
+    "wordlettuce": "bun --filter @lettuce-apps/wordlettuce",
+    "api-wordlettuce": "bun --filter @lettuce-apps/api-wordlettuce"
   },
   "keywords": [],
   "author": "",
