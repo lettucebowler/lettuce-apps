@@ -14,8 +14,7 @@
     "lettuce-auth": "pnpm --filter @lettuce-apps/lettuce-auth",
     "lettuce-auth-test": "pnpm --filter lettuce-auth-test",
     "wordlettuce": "pnpm --filter @lettuce-apps/wordlettuce",
-    "api-wordlettuce": "pnpm --filter @lettuce-apps/api-wordlettuce",
-    "lettuce-auth-fly": "pnpm --filter @lettuce-apps/lettuce-auth-fly"
+    "api-wordlettuce": "pnpm --filter @lettuce-apps/api-wordlettuce"
   },
   "keywords": [],
   "author": "",

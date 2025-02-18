@@ -23,7 +23,7 @@
     "GITHUB_CLIENT_ID": "Ov23liqpSeC4d4ztWEMu"
   },
   "placement": {
-    "mode": "off"
+    "mode": "smart"
   },
   "dev": {
     "port": 8787
