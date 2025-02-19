@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "packages": "bun --filter 'packages/*'",
+    "packages": "bun --filter './packages/*'",
     "lettuce-auth-common": "bun --filter 'lettuce-auth-common'",
     "lettuce-auth": "bun --filter 'lettuce-auth'",
     "lettuce-auth-test": "bun --filter 'lettuce-auth-test'",
