@@ -8,6 +8,8 @@ import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
+import { createGameResultsTursoDao } from '../dao/game-results-turso';
+import { createClient } from '@libsql/client';
 
 const gameResultsController = new Hono<ApiWordlettuceHono>();
 
@@ -69,8 +71,14 @@ const CreateGameResultJsonSchema = v.object({
 
 gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userID, answers } = c.req.valid('json');
-  const { saveGame } = createGameResultsDao(c);
-  const inserts = await saveGame({ gameNum, userID, answers });
+  const d1Dao = createGameResultsDao(c);
+  const inserts = await d1Dao.saveGame({ gameNum, userID, answers });
+  const client = createClient({
+    url: c.env.TURSO_CONNECTION_URL!,
+    authToken: c.env.TURSO_AUTH_TOKEN!,
+  });
+  const tursoDao = createGameResultsTursoDao({ client });
+  await tursoDao.saveGame({ gameNum, userID, answers });
   if (!inserts.length) {
     return c.json(
       {

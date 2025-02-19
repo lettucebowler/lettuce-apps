@@ -28,6 +28,9 @@
   "placement": {
     "mode": "off"
   },
+  "vars": {
+    "TURSO_CONNECTION_URL": "libsql://wordlettuce-lettucebowler.turso.io"
+  },
   "routes": [
     {
       "pattern": "api.word.lettucebowler.net",
