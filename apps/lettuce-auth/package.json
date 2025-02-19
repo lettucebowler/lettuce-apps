@@ -12,7 +12,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",
     "@hono/standard-validator": "^0.1.2",
-    "lettuce-auth-common": "workspace:*",
+    "@lettuce-apps-packages/auth": "workspace:*",
     "@openauthjs/openauth": "0.3.7",
     "@types/node": "^22.13.1",
     "dotenv": "^16.4.7",

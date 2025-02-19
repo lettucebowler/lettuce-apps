@@ -29,7 +29,7 @@ app.use(
     credentials: true,
   }),
 );
-app.route('/v1/rankings', rankingsController({ client }));
-app.route('/v2/game-results', gameResultsController({ client }));
+app.route('/v2/rankings', rankingsController({ client }));
+app.route('/v1/game-results', gameResultsController({ client }));
 
 export default app;

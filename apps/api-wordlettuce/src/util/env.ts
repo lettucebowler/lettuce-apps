@@ -1,4 +1,4 @@
-import { UserSubject } from 'lettuce-auth-common';
+import { UserSubject } from '@lettuce-apps-packages/auth';
 import type { KVNamespace, D1Database } from '@cloudflare/workers-types';
 
 export type ApiWordlettuceBindings = {

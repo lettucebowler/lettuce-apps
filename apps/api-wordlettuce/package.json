@@ -20,7 +20,7 @@
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@types/node": "^22.13.4",
-    "lettuce-auth-common": "workspace:*",
+    "@lettuce-apps-packages/auth": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "better-sqlite3": "^11.8.1",
