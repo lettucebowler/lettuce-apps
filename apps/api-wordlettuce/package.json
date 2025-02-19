@@ -1,5 +1,5 @@
 {
-  "name": "@lettuce-apps/api-wordlettuce",
+  "name": "api-wordlettuce",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "ship": "wrangler deploy src/index.ts",

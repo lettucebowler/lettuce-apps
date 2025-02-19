@@ -1,5 +1,5 @@
 {
-  "name": "@lettuce-apps/lettuce-auth",
+  "name": "lettuce-auth",
   "scripts": {
     "dev": "wrangler dev",
     "ship": "wrangler deploy --minify",
