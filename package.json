@@ -20,7 +20,9 @@
     "wordlettuce": "bun --filter 'wordlettuce'",
     "api-wordlettuce": "bun --filter 'api-wordlettuce'"
   },
-  "keywords": [],
+  "keywords": [
+    "lettuce-apps"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
