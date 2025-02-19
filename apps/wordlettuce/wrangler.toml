@@ -16,14 +16,14 @@ mode = "off"
 
 [vars]
 NODE_VERSION = "22.14"
-PUBLIC_API_WORDLETTUCE_HOST = "https://api.word.lettucebowler.net"
-AUTH_HOST="https://api-wordlettuce.fly.dev/"
+PUBLIC_API_WORDLETTUCE_HOST = "https://api-wordlettuce.fly.dev/"
+AUTH_HOST="https://auth.lettucebowler.net"
 
 [env.production.vars]
 NODE_VERSION = "22.14"
 BUN_VERSION = "1.2.2"
-PUBLIC_API_WORDLETTUCE_HOST = "https://api.word.lettucebowler.net"
-AUTH_HOST="https://api-wordlettuce.fly.dev/"
+PUBLIC_API_WORDLETTUCE_HOST = "https://api-wordlettuce.fly.dev/"
+AUTH_HOST="https://auth.lettucebowler.net"
 
 [[kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
