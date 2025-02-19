@@ -2,6 +2,7 @@
   "name": "api-wordlettuce",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
+    "start": "bun src/index.ts",
     "ship": "wrangler deploy src/index.ts",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",

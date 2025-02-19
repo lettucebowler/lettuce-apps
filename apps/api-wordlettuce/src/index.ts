@@ -1,9 +1,17 @@
 import { Hono } from 'hono';
 import type { ApiWordlettuceHono } from './util/env';
-import { rankingsControllerV2 } from './controller/rankings';
-import gameResultsController from './controller/game-results';
+import { rankingsController } from './controller/rankings';
+import { gameResultsController } from './controller/game-results';
 import { cors } from 'hono/cors';
-import { lettuceAuth } from './middleware/lettuceAuth';
+import { createClient } from '@libsql/client';
+// import { lettuceAuth } from './middleware/lettuceAuth';
+
+const client = createClient({
+  syncUrl: process.env.TURSO_CONNECTION_URL!,
+  url: process.env.DEV_MODE ? 'file:.replica.db' : 'file:/app/data/local.db',
+  authToken: process.env.TURSO_AUTH_TOKEN!,
+  syncInterval: 60,
+});
 
 const app = new Hono<ApiWordlettuceHono>();
 
@@ -21,8 +29,7 @@ app.use(
     credentials: true,
   }),
 );
-app.use(lettuceAuth());
-app.route('/v2/rankings', rankingsControllerV2);
-app.route('/v1/game-results', gameResultsController);
+app.route('/v2/rankings', rankingsController({ client }));
+app.route('/v1/game-results', gameResultsController({ client }));
 
 export default app;
