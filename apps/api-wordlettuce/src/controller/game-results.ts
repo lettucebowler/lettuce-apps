@@ -8,8 +8,9 @@ import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
-
-const gameResultsController = new Hono<ApiWordlettuceHono>();
+import { createGameResultsTursoDao } from '../dao/game-results-turso';
+import { env } from 'hono/adapter';
+import type { Client } from '@libsql/client';
 
 const GetGameResultsQuerySchema = v.pipe(
   v.object({
@@ -32,13 +33,18 @@ const GetGameResultsQuerySchema = v.pipe(
   v.check((input) => !(input.userID && input.username), 'Must provider either username or userID'),
 );
 
-gameResultsController.get(
-  '/',
-  vValidator('query', GetGameResultsQuerySchema),
-  // cache({ cacheName: 'wordlettuce-game-results', cacheControl: 'max-age=60' }),
-  async (c) => {
+const CreateGameResultJsonSchema = v.object({
+  gameNum: GameNumSchema,
+  userID: UserID,
+  answers: AnswerSchema,
+});
+
+export function gameResultsController({ client }: { client: Client }) {
+  const gameResultsController = new Hono<ApiWordlettuceHono>();
+
+  gameResultsController.get('/', vValidator('query', GetGameResultsQuerySchema), async (c) => {
     const { username, limit, start, userID } = c.req.valid('query');
-    const { getUserGameResults } = createGameResultsDao(c);
+    const { getUserGameResults } = createGameResultsTursoDao({ client });
 
     let searchID: number;
     if (username) {
@@ -58,27 +64,21 @@ gameResultsController.get(
         start,
       });
     });
-  },
-);
+  });
 
-const CreateGameResultJsonSchema = v.object({
-  gameNum: GameNumSchema,
-  userID: UserID,
-  answers: AnswerSchema,
-});
-
-gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
-  const { gameNum, userID, answers } = c.req.valid('json');
-  const { saveGame } = createGameResultsDao(c);
-  const inserts = await saveGame({ gameNum, userID, answers });
-  if (!inserts.length) {
-    return c.json(
-      {
-        success: false,
-      },
-      500,
-    );
-  }
-  return c.json(inserts.at(0));
-});
-export default gameResultsController;
+  gameResultsController.post('/', requireToken, vValidator('json', CreateGameResultJsonSchema), async (c) => {
+    const { gameNum, userID, answers } = c.req.valid('json');
+    const { saveGame } = createGameResultsTursoDao({ client });
+    const inserts = await saveGame({ gameNum, userID, answers });
+    if (!inserts.length) {
+      return c.json(
+        {
+          success: false,
+        },
+        500,
+      );
+    }
+    return c.json(inserts.at(0));
+  });
+  return gameResultsController;
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@lettuce-apps-packages/auth",
+  "name": "lettuce-auth-common",
   "private": true,
   "version": "0.0.0",
   "type": "module",

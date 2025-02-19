@@ -2,6 +2,7 @@
   "name": "api-wordlettuce",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
+    "start": "bun src/index.ts",
     "ship": "wrangler deploy src/index.ts",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
@@ -19,7 +20,7 @@
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@types/node": "^22.13.4",
-    "@lettuce-apps-packages/auth": "workspace:*",
+    "lettuce-auth-common": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "better-sqlite3": "^11.8.1",

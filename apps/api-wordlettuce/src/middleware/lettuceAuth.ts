@@ -1,7 +1,7 @@
 import { Context, Next } from 'hono';
 import { ApiWordlettuceHono } from '../util/env';
 import { HTTPException } from 'hono/http-exception';
-import { createAuthClient, subjects } from '@lettuce-apps-packages/auth';
+import { createAuthClient, subjects } from 'lettuce-auth-common';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 
 export function requireAuth() {

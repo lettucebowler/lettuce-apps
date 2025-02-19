@@ -1,4 +1,4 @@
-import { UserSubject } from '@lettuce-apps-packages/auth';
+import { UserSubject } from 'lettuce-auth-common';
 import type { KVNamespace, D1Database } from '@cloudflare/workers-types';
 
 export type ApiWordlettuceBindings = {
@@ -7,6 +7,8 @@ export type ApiWordlettuceBindings = {
   TOKEN: string;
   AUTH_HOST?: string;
   lettuce_auth_signing_keys: KVNamespace;
+  TURSO_CONNECTION_URL: string;
+  TURSO_AUTH_TOKEN: string;
 };
 
 export type ApiWordlettuceVariables = {

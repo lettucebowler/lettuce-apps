@@ -4,26 +4,23 @@ import { ApiWordlettuceHono } from '../util/env';
 import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
 import { vValidator } from '@hono/valibot-validator';
-import { createGameResultsDao } from '../dao/game-results';
-import { cache } from 'hono/cache';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
+import { createGameResultsTursoDao } from '../dao/game-results-turso';
+import { Client } from '@libsql/client';
 
-const rankingsControllerV2 = new Hono<ApiWordlettuceHono>();
+export function rankingsController({ client }: { client: Client }) {
+  const rankingsController = new Hono<ApiWordlettuceHono>();
 
-const GetRankingsQuerySchema = v.object({
-  gameNum: v.pipe(
-    v.optional(v.string(), () => getGameNum().toString()),
-    v.transform((input) => Number(input)),
-    GameNumSchema,
-  ),
-});
+  const GetRankingsQuerySchema = v.object({
+    gameNum: v.pipe(
+      v.optional(v.string(), () => getGameNum().toString()),
+      v.transform((input) => Number(input)),
+      GameNumSchema,
+    ),
+  });
 
-rankingsControllerV2.get(
-  '/',
-  vValidator('query', GetRankingsQuerySchema),
-  // cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
-  async (c) => {
-    const { getRankings } = createGameResultsDao(c);
+  rankingsController.get('/', vValidator('query', GetRankingsQuerySchema), async (c) => {
+    const { getRankings } = createGameResultsTursoDao({ client });
     const results = await getRankings();
     const { getUsers } = createLettuceAuthClient(c);
     const userIDs = results.map((result) => result.userID);
@@ -35,7 +32,6 @@ rankingsControllerV2.get(
     return c.json({
       rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.displayName })),
     });
-  },
-);
-
-export { rankingsControllerV2 };
+  });
+  return rankingsController;
+}
