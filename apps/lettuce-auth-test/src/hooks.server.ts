@@ -29,7 +29,6 @@ const authHandler: Handle = async ({ event, resolve }) => {
   if (!verified.err) {
     event.locals.session = verified.subject.properties;
   } else {
-    console.log(verified);
     clearTokens(event);
   }
   const after = performance.now();

@@ -102,7 +102,6 @@ export function createAuthClient(input: AuthClientInput) {
         }>(token, jwks, {
           issuer,
         });
-        console.log('result', result);
         const validated = await subjects[result.payload.type]['~standard'].validate(result.payload.properties);
         if (!validated.issues && result.payload.mode === 'access')
           return {

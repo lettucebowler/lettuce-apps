@@ -18,7 +18,9 @@
     name: string;
     size?: 'sm' | 'lg';
   };
+
   let { name, size = 'sm' }: LettuceAvatarProps = $props();
+
   const imageURL = $derived.by(() => {
     const hostUrl = new URL(host);
     hostUrl.searchParams.set('backgroundColor', bgs.at(stringToIntHash(name) % bgs.length)!);

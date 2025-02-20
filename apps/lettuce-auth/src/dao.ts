@@ -93,7 +93,7 @@ export function createLettuceAuthDao(database: D1Database) {
   }) {
     const query = db
       .select({
-        displayName: users.username,
+        username: users.username,
         id: users.id,
       })
       .from(users)

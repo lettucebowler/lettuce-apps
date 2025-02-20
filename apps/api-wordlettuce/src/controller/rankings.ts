@@ -32,6 +32,8 @@ rankingsControllerV2.get(
       return r.id;
     });
 
+    console.log(JSON.stringify(users.users));
+
     return c.json({
       rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.username })),
     });
