@@ -7,6 +7,7 @@ export async function GET(event) {
   const code = event.url.searchParams.get('code');
   const authClient = createAuthClient(event);
   const tokens = await authClient.exchange(code!, event.url.origin + '/callback');
+  console.log('tokens', tokens);
   if (!tokens.err) {
     setTokens(event, tokens.tokens.access, tokens.tokens.refresh);
   } else {
@@ -17,6 +18,7 @@ export async function GET(event) {
     const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
       refresh: event.cookies.get('refresh_token') || undefined,
     });
+    console.log('callback verified', verified);
     if (verified.err) {
       clearTokens(event);
       return redirect(302, `${event.url.origin}/`);

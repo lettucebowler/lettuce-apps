@@ -1,3 +1,5 @@
+import type { KVNamespace } from '@cloudflare/workers-types';
+
 export type ProviderUser = {
   email: string;
   id: string;

@@ -57,8 +57,8 @@ export default {
         if (!user) {
           return c.json({ message: 'Not found' }, 404);
         }
-        const { id, displayName } = user;
-        return c.json({ id, displayName });
+        const { id, username } = user;
+        return c.json({ id, username });
       },
     );
     const UsersQuery = v.object({
@@ -123,6 +123,7 @@ export default {
         if (userForAccount) {
           return ctx.subject('user', {
             userID: userForAccount.id,
+            username: userForAccount.username,
           });
         }
         // Check if email is already tied to an account before creating one.
@@ -134,7 +135,7 @@ export default {
         const inserts = await dao.createUser({
           user: {
             email: providerUser.email,
-            displayName: providerUser.username,
+            username: providerUser.username,
           },
           account,
         });
@@ -143,6 +144,7 @@ export default {
         }
         return ctx.subject('user', {
           userID: inserts.user.id,
+          username: inserts.user.username,
         });
       },
     });

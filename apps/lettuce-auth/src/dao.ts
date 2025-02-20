@@ -14,7 +14,7 @@ export function createLettuceAuthDao(database: D1Database) {
     return db
       .select({
         id: users.id,
-        displayName: users.displayName,
+        username: users.username,
         email: users.email,
       })
       .from(users)
@@ -26,7 +26,7 @@ export function createLettuceAuthDao(database: D1Database) {
     return db
       .select({
         id: users.id,
-        displayName: users.displayName,
+        username: users.username,
         email: users.email,
       })
       .from(users)
@@ -49,7 +49,7 @@ export function createLettuceAuthDao(database: D1Database) {
       .where(
         and(
           'userID' in input ? eq(users.id, input.userID) : undefined,
-          'username' in input ? eq(users.displayName, input.username) : undefined,
+          'username' in input ? eq(users.username, input.username) : undefined,
         ),
       )
       .limit(1)
@@ -63,7 +63,7 @@ export function createLettuceAuthDao(database: D1Database) {
     user: Omit<User, 'id'>;
     account: Account;
   }): Promise<{ user: User; account: Account }> {
-    const userInserts = await db.insert(users).values({ email: user.email, displayName: user.displayName }).returning();
+    const userInserts = await db.insert(users).values({ email: user.email, username: user.username }).returning();
     const newUser = userInserts.at(0);
     if (!newUser) {
       throw new Error('oh no user insert failed');
@@ -93,7 +93,7 @@ export function createLettuceAuthDao(database: D1Database) {
   }) {
     const query = db
       .select({
-        displayName: users.displayName,
+        displayName: users.username,
         id: users.id,
       })
       .from(users)

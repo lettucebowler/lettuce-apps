@@ -31,8 +31,7 @@ export async function load(event) {
       nav: links,
     };
   }
-  const authClient = createAuthClient(event);
-  const user = await authClient.getUser({ userID: event.locals.session.userID });
+  const user = event.locals.session;
   return {
     authenticated: true as const,
     nav: links,

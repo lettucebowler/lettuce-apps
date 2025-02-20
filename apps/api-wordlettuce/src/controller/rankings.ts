@@ -33,7 +33,7 @@ rankingsControllerV2.get(
     });
 
     return c.json({
-      rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.displayName })),
+      rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.username })),
     });
   },
 );

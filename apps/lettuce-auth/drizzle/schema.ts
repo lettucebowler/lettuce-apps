@@ -14,7 +14,7 @@ export const accounts = sqliteTable(
 export const users = sqliteTable('users', {
   id: int().primaryKey({ autoIncrement: true }),
   email: text().notNull().unique(),
-  displayName: text('display_name').notNull().unique(),
+  username: text('display_name').notNull().unique(),
 });
 
 export const d1Migrations = sqliteTable('d1_migrations', {

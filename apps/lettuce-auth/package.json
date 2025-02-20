@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "ship": "wrangler deploy --minify",
-    "db:push": "wrangler d1 migrations apply lettuce-auth",
+    "db:push": "wrangler d1 migrations apply lettuce-auth-users",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
     "db:studio": "drizzle-kit studio",

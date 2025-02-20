@@ -32,11 +32,13 @@ import { subjects } from '@lettuce-apps-packages/auth';
 
 const authHandler: Handle = async ({ event, resolve }) => {
   const authClient = createAuthClient(event);
+  console.log('client created');
   const access_token = event.cookies.get('access_token');
   if (access_token && event.url.pathname !== '/auth' && event.url.pathname !== '/callback') {
     const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
       refresh: event.cookies.get('refresh_token') || undefined,
     });
+    console.log(verified);
     if (!verified.err) {
       event.locals.session = verified.subject.properties;
       if (verified.tokens) {
