@@ -45,12 +45,14 @@ export function setTokens(event: RequestEvent, access: string, refresh: string) 
 
 export function clearTokens(event: RequestEvent) {
   event.cookies.set('refresh_token', '', {
+    domain: dev ? undefined : '.lettucebowler.net',
     httpOnly: true,
     sameSite: 'lax',
     path: '/',
     maxAge: 0,
   });
   event.cookies.set('access_token', '', {
+    domain: dev ? undefined : '.lettucebowler.net',
     httpOnly: true,
     sameSite: 'lax',
     path: '/',
