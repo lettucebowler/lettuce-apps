@@ -2,7 +2,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { type Handle, type RequestEvent } from '@sveltejs/kit';
 import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
 import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
-import { getGameNum } from '$lib/words';
 
 async function createGetGameState(event: RequestEvent) {
   const stateString = event.cookies.get(STATE_COOKIE_NAME_V2) || '';
@@ -32,20 +31,34 @@ import { subjects } from '@lettuce-apps-packages/auth';
 
 const authHandler: Handle = async ({ event, resolve }) => {
   const authClient = createAuthClient(event);
-  const access_token = event.cookies.get('access_token');
-  if (access_token && event.url.pathname !== '/auth' && event.url.pathname !== '/callback') {
-    const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
-      refresh: event.cookies.get('refresh_token') || undefined,
-    });
-    if (!verified.err) {
-      event.locals.session = verified.subject.properties;
-      if (verified.tokens) {
-        setTokens(event, verified.tokens.access, verified.tokens?.refresh);
+  const access_token = event.cookies.get('access_token') || '';
+  const refresh_token = event.cookies.get('refresh_token');
+  if (!access_token && !refresh_token) {
+    clearTokens(event);
+    return resolve(event);
+  }
+  if (event.url.pathname === '/auth' || event.url.pathname === '/callback') {
+    return resolve(event);
+  }
+  if (!access_token && refresh_token) {
+    const result = await authClient.refresh(refresh_token);
+    if (!result.err) {
+      if (result.tokens) {
+        setTokens(event, result.tokens.access, result.tokens.refresh);
       }
-    } else {
-      clearTokens(event);
     }
   }
+  const before = performance.now();
+  const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
+    refresh: event.cookies.get('refresh_token') || undefined,
+  });
+  if (!verified.err) {
+    event.locals.session = verified.subject.properties;
+  } else {
+    clearTokens(event);
+  }
+  const after = performance.now();
+  console.log('verify', after - before);
 
   return await resolve(event);
 };
