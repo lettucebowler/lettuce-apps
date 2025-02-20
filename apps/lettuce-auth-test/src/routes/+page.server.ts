@@ -1,9 +1,9 @@
 import { createAuthClient } from '$lib/auth.server';
 
 export async function load(event) {
-  const user = event.locals.user;
+  const session = event.locals.session;
 
-  if (!user) {
+  if (!session) {
     const authClient = createAuthClient(event);
     const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code');
     return {
@@ -11,9 +11,11 @@ export async function load(event) {
       loginUrl: url,
     };
   }
-
   return {
     authenticated: true as const,
-    user,
+    user: {
+      id: session.userID,
+      username: session.username,
+    },
   };
 }
