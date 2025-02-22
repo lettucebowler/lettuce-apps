@@ -18,7 +18,8 @@
     "lettuce-auth": "bun --filter 'lettuce-auth'",
     "lettuce-auth-test": "bun --filter 'lettuce-auth-test'",
     "wordlettuce": "bun --filter 'wordlettuce'",
-    "api-wordlettuce": "bun --filter 'api-wordlettuce'"
+    "api-wordlettuce": "bun --filter 'api-wordlettuce'",
+    "svelte-common": "bun --filter @lettuce-apps-packages/svelte-common"
   },
   "keywords": [
     "lettuce-apps"

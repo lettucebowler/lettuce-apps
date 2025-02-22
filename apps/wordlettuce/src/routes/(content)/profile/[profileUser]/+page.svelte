@@ -1,6 +1,6 @@
 <script lang="ts">
   import { infiniteScrollAction } from './actions.js';
-  import LettuceAvatar from '$lib/components/LettuceAvatar.svelte';
+  import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import GameSummary from './GameSummary.svelte';
   import { browser } from '$app/environment';
   import { createInfiniteQuery } from '@tanstack/svelte-query';

@@ -1,3 +1,216 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+@source "../../app.html";
+
+@theme {
+  --color-transparent: transparent;
+
+  --color-snow-100: #d8dee9;
+  --color-snow-200: #e5e9f0;
+  --color-snow-300: #eceff4;
+
+  --color-frost-100: #8fbcbb;
+  --color-frost-200: #88c0d0;
+  --color-frost-300: #81a1c1;
+  --color-frost-400: #5e81ac;
+
+  --color-contessa-50: #f4e4e5;
+  --color-contessa-100: #eed5d8;
+  --color-contessa-200: #e2b8bc;
+  --color-contessa-300: #d79ba1;
+  --color-contessa-400: #cb7e85;
+  --color-contessa-500: #bf616a;
+  --color-contessa-600: #a5434c;
+  --color-contessa-700: #7d333a;
+  --color-contessa-800: #552327;
+  --color-contessa-900: #2d1215;
+  --color-contessa-950: #190a0c;
+  --color-contessa: #bf616a;
+
+  --color-antique-brass-50: var(--antique-brass-50);
+  --color-antique-brass-100: var(--antique-brass-100);
+  --color-antique-brass-200: var(--antique-brass-200);
+  --color-antique-brass-300: var(--antique-brass-300);
+  --color-antique-brass-400: var(--antique-brass-400);
+  --color-antique-brass-500: var(--antique-brass-500);
+  --color-antique-brass-600: var(--antique-brass-600);
+  --color-antique-brass-700: var(--antique-brass-700);
+  --color-antique-brass-800: var(--antique-brass-800);
+  --color-antique-brass-900: var(--antique-brass-900);
+  --color-antique-brass: var(--antique-brass-500);
+
+  --color-swamp-green-50: var(--swamp-green-50);
+  --color-swamp-green-100: var(--swamp-green-100);
+  --color-swamp-green-200: var(--swamp-green-200);
+  --color-swamp-green-300: var(--swamp-green-300);
+  --color-swamp-green-400: var(--swamp-green-400);
+  --color-swamp-green-500: var(--swamp-green-500);
+  --color-swamp-green-600: var(--swamp-green-600);
+  --color-swamp-green-700: var(--swamp-green-700);
+  --color-swamp-green-800: var(--swamp-green-800);
+  --color-swamp-green-900: var(--swamp-green-900);
+  --color-swamp-green: var(--swamp-green-500);
+
+  --color-putty-50: var(--putty-50);
+  --color-putty-100: var(--putty-100);
+  --color-putty-200: var(--putty-200);
+  --color-putty-300: var(--putty-300);
+  --color-putty-400: var(--putty-400);
+  --color-putty-500: var(--putty-500);
+  --color-putty-600: var(--putty-600);
+  --color-putty-700: var(--putty-700);
+  --color-putty-800: var(--putty-800);
+  --color-putty-900: var(--putty-900);
+  --color-putty: var(--putty-500);
+
+  --color-charade-50: #e6e8ed;
+  --color-charade-100: #dadee5;
+  --color-charade-200: #c2c8d4;
+  --color-charade-300: #aab2c3;
+  --color-charade-400: #939db2;
+  --color-charade-500: #7b87a1;
+  --color-charade-600: #65738e;
+  --color-charade-700: #545f76;
+  --color-charade-800: #434c5e;
+  --color-charade-900: #323946;
+  --color-charade-950: #2a2f3a;
+  --color-charade: #434c5e;
+
+  --animate-jump: jump 0.3s ease-in-out 1;
+  --animate-wiggle: wiggle 0.15s ease-in infinite;
+  --animate-wiggle-once: wiggle 0.15s ease-in 1;
+  --animate-flyup: flyup 0.5s ease-in 1;
+  --animate-fadein: fadein 0.5s ease-in 1;
+
+  @keyframes jump {
+    50% {
+      transform: scale(1.05) translateY(-10%) translateX(5%);
+    }
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: translateX(0%);
+    }
+
+    25% {
+      transform: translateX(-10%);
+    }
+
+    75% {
+      transform: translateX(10%);
+    }
+  }
+
+  @keyframes flyup {
+    0% {
+      transform: translateY(+100%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+:root {
+  --transparent: transparent;
+
+  --snow-100: #d8dee9;
+  --snow-200: #e5e9f0;
+  --snow-300: #eceff4;
+
+  --frost-100: #8fbcbb;
+  --frost-200: #88c0d0;
+  --frost-300: #81a1c1;
+  --frost-400: #5e81ac;
+
+  --charade-50: #e6e8ed;
+  --charade-100: #dadee5;
+  --charade-200: #c2c8d4;
+  --charade-300: #aab2c3;
+  --charade-400: #939db2;
+  --charade-500: #7b87a1;
+  --charade-600: #65738e;
+  --charade-700: #545f76;
+  --charade-800: #434c5e;
+  --charade-900: #323946;
+  --charade-950: #2a2f3a;
+
+  --contessa-50: #f4e4e5;
+  --contessa-100: #eed5d8;
+  --contessa-200: #e2b8bc;
+  --contessa-300: #d79ba1;
+  --contessa-400: #cb7e85;
+  --contessa-500: #bf616a;
+  --contessa-600: #a5434c;
+  --contessa-700: #7d333a;
+  --contessa-800: #552327;
+  --contessa-900: #2d1215;
+  --contessa-950: #190a0c;
+
+  --antique-brass-50: #fdfbfa;
+  --antique-brass-100: #f8eeeb;
+  --antique-brass-200: #eed4cc;
+  --antique-brass-300: #e4bbad;
+  --antique-brass-400: #daa18f;
+  --antique-brass-500: #d08770;
+  --antique-brass-600: #c26446;
+  --antique-brass-700: #9c4d33;
+  --antique-brass-800: #723826;
+  --antique-brass-900: #482318;
+  --antique-brass-950: #331911;
+
+  --putty-50: #ffffff;
+  --putty-100: #ffffff;
+  --putty-200: #fdfaf3;
+  --putty-300: #f7ead1;
+  --putty-400: #f1dbae;
+  --putty-500: #ebcb8b;
+  --putty-600: #e3b65b;
+  --putty-700: #daa02b;
+  --putty-800: #af7f1e;
+  --putty-900: #805c16;
+  --putty-950: #684b12;
+
+  --swamp-green-50: #ffffff;
+  --swamp-green-100: #f6f9f4;
+  --swamp-green-200: #e2eada;
+  --swamp-green-300: #cddbc0;
+  --swamp-green-400: #b8cda6;
+  --swamp-green-500: #a3be8c;
+  --swamp-green-600: #86aa68;
+  --swamp-green-700: #6a8b4f;
+  --swamp-green-800: #4f673a;
+  --swamp-green-900: #344326;
+  --swamp-green-950: #26321c;
+
+  --bouquet-50: #fdfcfd;
+  --bouquet-100: #f5f0f4;
+  --bouquet-200: #e5d8e2;
+  --bouquet-300: #d5bfd1;
+  --bouquet-400: #c4a7bf;
+  --bouquet-500: #b48ead;
+  --bouquet-600: #9e6c95;
+  --bouquet-700: #7e5476;
+  --bouquet-800: #5c3d57;
+  --bouquet-900: #3b2737;
+  --bouquet-950: #2a1c27;
+}

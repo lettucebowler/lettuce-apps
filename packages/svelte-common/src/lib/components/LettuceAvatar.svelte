@@ -23,7 +23,10 @@
 
   const imageURL = $derived.by(() => {
     const hostUrl = new URL(host);
-    hostUrl.searchParams.set('backgroundColor', bgs.at(stringToIntHash(name) % bgs.length)!);
+    bgs.forEach((bg) => {
+      hostUrl.searchParams.append('backgroundColor', bg);
+    });
+    hostUrl.searchParams.set('backgroundType', 'gradientLinear');
     hostUrl.searchParams.set('seed', name);
     return hostUrl.toString();
   });

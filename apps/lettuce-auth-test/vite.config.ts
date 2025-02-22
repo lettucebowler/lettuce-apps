@@ -1,6 +1,12 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+import type { UserConfig } from 'vite';
 
-export default defineConfig({
-  plugins: [sveltekit()],
-});
+const config: UserConfig = {
+  plugins: [tailwindcss(), sveltekit()],
+  build: {
+    assetsInlineLimit: 1024,
+  },
+};
+
+export default config;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import FireIcon from '$lib/components/FireIcon.svelte';
-  import LettuceAvatar from '$lib/components/LettuceAvatar.svelte';
+  import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import Spinner from '../Spinner.svelte';
   let { data } = $props();
 </script>
