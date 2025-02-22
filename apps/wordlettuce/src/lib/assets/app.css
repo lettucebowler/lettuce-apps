@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @source "../../app.html";
+@source "../../../../../packages/svelte-common";
 
 @theme {
   --color-transparent: transparent;
