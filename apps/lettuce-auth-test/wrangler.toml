@@ -14,7 +14,7 @@ mode = "smart"
 
 [env.production.vars]
 AUTH_HOST = "https://auth.lettucebowler.net"
-BUN_VERSION = "1.2.2"
+NODE_VERSION = "22.14"
 
 [[kv_namespaces]]
 binding = "lettuce_auth_signing_keys"
