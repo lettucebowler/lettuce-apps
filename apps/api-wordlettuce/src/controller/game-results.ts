@@ -78,7 +78,7 @@ gameResultsController.post('/', requireToken, vValidator('json', CreateGameResul
     authToken: c.env.TURSO_AUTH_TOKEN!,
   });
   const tursoDao = createGameResultsTursoDao({ client });
-  await tursoDao.saveGame({ gameNum, userID, answers });
+  tursoDao.saveGame({ gameNum, userID, answers });
   if (!inserts.length) {
     return c.json(
       {
