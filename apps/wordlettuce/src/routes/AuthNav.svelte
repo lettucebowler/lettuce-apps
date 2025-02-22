@@ -19,7 +19,7 @@
 <div class="w-full">
   <div id="big-papa-nav" class="flex justify-end">
     <nav
-      class="border-t-charade-500 z-10 ml-0 ml-auto box-content h-18 max-h-[72px] w-full justify-end gap-x-4"
+      class="border-t-charade-500 h-18 z-10 ml-0 ml-auto box-content max-h-[72px] w-full justify-end gap-x-4"
       id="primary-nav"
     >
       <div class="flex">
@@ -32,7 +32,7 @@
           <div class="flex h-full flex-col sm:hidden">
             <label
               for="subnav-toggle-small"
-              class="text-snow-100 hover:bg-charade-800 active:bg-charade-900 box-border flex h-full flex-[0_0_auto] cursor-pointer items-center justify-center gap-2 rounded-xl text-center text-3xl transition ease-in-out select-none sm:hidden"
+              class="text-snow-100 hover:bg-charade-800 active:bg-charade-900 box-border flex h-full flex-[0_0_auto] cursor-pointer select-none items-center justify-center gap-2 rounded-xl text-center text-3xl transition ease-in-out sm:hidden"
             >
               <span
                 class="border-snow-300 box-border aspect-square h-full overflow-hidden rounded-xl transition-transform"
@@ -93,7 +93,7 @@
         />
         <nav
           id="subnav-content"
-          class="bg-charade-900 divide-charade-600 absolute top-[72px] right-0 bottom-0 left-0 z-10 hidden flex-col divide-y peer-checked:block"
+          class="bg-charade-900 divide-charade-600 absolute bottom-0 left-0 right-0 top-[72px] z-10 hidden flex-col divide-y peer-checked:block"
           class:hidden={!dropdownVisible}
         >
           <div class="space-y-4 p-4">

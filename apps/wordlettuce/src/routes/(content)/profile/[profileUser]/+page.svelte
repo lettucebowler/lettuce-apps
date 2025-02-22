@@ -15,8 +15,6 @@
     return getNextPageAfter({ userID: data.profileUserID, start, limit: 60 });
   }
 
-  $inspect(data.profileUser);
-
   let query = createInfiniteQuery(() => ({
     queryKey: ['game-results', data.user, data.start],
     initialPageParam: data.start,

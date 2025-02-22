@@ -27,7 +27,7 @@
   style="--tile-column: var({column}, 0); --animation-delay:{column * 0.03}s; --transition-delay:{column * delayScale +
     duration}s"
   class={[
-    'aspect-square rounded-xl pt-(--tile-height) transition delay-(--transition-delay)',
+    'pt-(--tile-height) delay-(--transition-delay) aspect-square rounded-xl transition',
     !doWiggle && !doWiggleOnce && '[animation-delay:var(--animation-delay)]',
     answer === 'c' && 'bg-putty-300',
     answer === 'x' && 'bg-swamp-green-300',
@@ -39,7 +39,7 @@
 >
   <div
     class={[
-      'text-charade-100 relative box-content grid aspect-square items-center rounded-xl text-center text-2xl font-bold transition transition-all delay-(--transition-delay) duration-0 sm:text-3xl',
+      'text-charade-100 delay-(--transition-delay) relative box-content grid aspect-square items-center rounded-xl text-center text-2xl font-bold transition transition-all duration-0 sm:text-3xl',
       answer === 'x' && 'bg-swamp-green-500 text-swamp-green-800',
       answer === 'c' && 'bg-putty-500 text-putty-800',
       answer === 'i' && 'bg-charade-700',

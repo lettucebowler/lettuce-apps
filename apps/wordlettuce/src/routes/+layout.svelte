@@ -5,7 +5,7 @@
   import safariPinnedTabIcon from '$lib/assets/safari-pinned-tab.svg';
   import { appName } from '$lib/app-constants';
   import AuthNav from './AuthNav.svelte';
-  import '$lib/assets/app.css';
+  import '../app.css';
   let { data, children } = $props();
 </script>
 
@@ -20,7 +20,7 @@
 
 <div
   id="lettuce-wordle-root"
-  class="mx-auto flex w-full max-w-(--breakpoint-md) flex-auto flex-col gap-2 p-2 sm:gap-4 sm:p-1 sm:pt-4 sm:pb-4"
+  class="max-w-(--breakpoint-md) mx-auto flex w-full flex-auto flex-col gap-2 p-2 sm:gap-4 sm:p-1 sm:pb-4 sm:pt-4"
   data-sveltekit-preload-data="hover"
 >
   <AuthNav links={data.nav} user={data.authenticated ? data.user.username : undefined} />

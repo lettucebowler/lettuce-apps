@@ -15,7 +15,7 @@
   data-status={status}
   {...rest}
   class={[
-    'col-span-4 mt-(--keyboard-height) grid h-full w-full cursor-pointer place-items-center rounded-md bg-(--bg-color) text-center text-sm font-bold text-(--text-color)  active:shadow-none sm:py-2 md:text-xl',
+    'mt-(--keyboard-height) bg-(--bg-color) text-(--text-color) col-span-4 grid h-full w-full cursor-pointer place-items-center rounded-md text-center text-sm font-bold  active:shadow-none sm:py-2 md:text-xl',
     status && 'bg-(--bg-color) text-(--text-color)',
     ['x', 'c', undefined].includes(status) &&
       'shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] active:mt-0',

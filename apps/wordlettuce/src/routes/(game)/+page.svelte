@@ -136,7 +136,7 @@
   }}
 />
 <div class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2">
-  <main class="flex w-full flex-auto flex-col items-center justify-between justify-end gap-2 sm:gap-4">
+  <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
     <form
       method="POST"
       action="?/word"
@@ -146,7 +146,7 @@
       class="my-auto flex w-full max-w-[min(700px,_55vh)]"
     >
       <input type="hidden" value={data.game.gameNum} name="gameNum" />
-      <div class="grid w-full max-w-700 grid-rows-[repeat(6,1fr)] gap-2">
+      <div class="max-w-700 grid w-full grid-rows-[repeat(6,1fr)] gap-2">
         {#each getItemsForGrid() as item (item.index)}
           {@const current = item.index === data.game.answers.length}
           <div

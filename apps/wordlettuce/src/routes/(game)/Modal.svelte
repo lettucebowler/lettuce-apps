@@ -94,7 +94,7 @@
 
 <dialog
   bind:this={dialog}
-  class="bg-charade-900 backdrop:animate-fadein open:animate-flyup m-auto box-border w-full max-w-xs rounded-2xl p-2 backdrop:backdrop-blur-xs open:pointer-events-auto"
+  class="bg-charade-900 backdrop:animate-fadein open:animate-flyup backdrop:backdrop-blur-xs m-auto box-border w-full max-w-xs rounded-2xl p-2 open:pointer-events-auto"
   open={false}
   use:trapFocus
   onclose={() => {
