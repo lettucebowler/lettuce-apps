@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "api-wordlettuce-fly",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-03",
+  "kv_namespaces": [
+    {
+      "binding": "lettuce_auth_signing_keys",
+      "id": "31a684ad1101462c9f76deb754fc92fe",
+      "preview_id": "c428c917b2d246c88c763a1cf0951410"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "wordlettuce_db",
+      "database_name": "wordlettuce",
+      "database_id": "b51df405-caa6-48ea-a00f-26ca705fc208",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "services": [
+    {
+      "binding": "lettuce_auth",
+      "service": "lettuce-auth"
+    }
+  ],
+  "compatibility_flags": ["nodejs_compat"],
+  "placement": {
+    "mode": "off"
+  },
+  "vars": {
+    "TURSO_CONNECTION_URL": "libsql://wordlettuce-lettucebowler.turso.io"
+  },
+  "routes": [
+    {
+      "pattern": "api.word.lettucebowler.net",
+      "custom_domain": true
+    }
+  ],
+  "dev": {
+    "port": 8888
+  }
+}
