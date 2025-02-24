@@ -1,15 +1,14 @@
 {
   "name": "api-wordlettuce-fly",
   "scripts": {
-    "dev": "wrangler dev src/index.ts",
-    "ship": "wrangler deploy src/index.ts",
+    "dev": "bun src/index.ts --hot",
+    "start": "bun src/index.ts",
     "lint": "prettier --check . && eslint --ignore-path .gitignore .",
     "format": "prettier --write .",
-    "db:push": "wrangler d1 migrations apply api-wordlettuce",
+    "db:push": "drizzle-kit push",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
-    "db:pull": "drizzle-kit pull",
-    "wrangler": "wrangler"
+    "db:pull": "drizzle-kit pull"
   },
   "type": "module",
   "devDependencies": {
