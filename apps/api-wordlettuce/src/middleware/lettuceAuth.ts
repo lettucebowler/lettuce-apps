@@ -3,22 +3,23 @@ import { ApiWordlettuceHono } from '../util/env';
 import { HTTPException } from 'hono/http-exception';
 import { createAuthClient, subjects } from '@lettuce-apps-packages/auth';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
+import { createMiddleware } from 'hono/factory';
 
 export function requireAuth() {
-  return async (c: Context<ApiWordlettuceHono>, next: Next) => {
+  return createMiddleware(async (c: Context<ApiWordlettuceHono>, next: Next) => {
     const session = c.get('jwtPayload');
     if (!session) {
       throw new HTTPException(401, { message: 'Unauthorized' });
     }
     await next();
-  };
+  });
 }
 
 const ACCESS_TOKEN_COOKIE_NAME = 'access_token';
 const REFRESH_TOKEN_COOKIE_NAME = 'refresh_token';
 
 export function lettuceAuth() {
-  return async (c: Context<ApiWordlettuceHono>, next: Next) => {
+  return createMiddleware(async (c: Context<ApiWordlettuceHono>, next: Next) => {
     const { verify } = createAuthClient({
       issuer: 'https://auth.lettucebowler.net',
       clientID: 'api-wordlettuce',
@@ -54,5 +55,5 @@ export function lettuceAuth() {
     }
     c.set('jwtPayload', verified.subject.properties);
     await next();
-  };
+  });
 }
