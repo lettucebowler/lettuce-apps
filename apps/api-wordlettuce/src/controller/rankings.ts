@@ -3,9 +3,8 @@ import * as v from 'valibot';
 import { ApiWordlettuceHono } from '../util/env';
 import { GameNumSchema } from '../util/schemas';
 import { getGameNum } from '../util/game-num';
-import { vValidator } from '@hono/valibot-validator';
+import { sValidator } from '@hono/standard-validator';
 import { createGameResultsDao } from '../dao/game-results';
-import { cache } from 'hono/cache';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 
 const rankingsControllerV2 = new Hono<ApiWordlettuceHono>();
@@ -20,7 +19,7 @@ const GetRankingsQuerySchema = v.object({
 
 rankingsControllerV2.get(
   '/',
-  vValidator('query', GetRankingsQuerySchema),
+  sValidator('query', GetRankingsQuerySchema),
   // cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
   async (c) => {
     const { getRankings } = createGameResultsDao(c);

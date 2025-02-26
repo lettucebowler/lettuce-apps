@@ -8,7 +8,6 @@ export const cache = (options: {
   keyGenerator?: (c: Context) => Promise<string> | string;
   shouldICacheThisResponse: (res: Response) => Promise<boolean>;
 }): MiddlewareHandler => {
-  // @ts-expect-error idk just don't want to deal with it
   if (!globalThis.caches) {
     console.log('Cache Middleware is not enabled because caches is not defined.');
     return async (_c, next) => await next();
@@ -74,7 +73,6 @@ export const cache = (options: {
     if (!c.res.ok) {
       return;
     }
-    addHeader(c);
     const res = c.res.clone();
     if (options.shouldICacheThisResponse) {
       const res = c.res.clone();
@@ -83,6 +81,7 @@ export const cache = (options: {
         return;
       }
     }
+    addHeader(c);
     c.executionCtx.waitUntil(cache.put(key, res));
   };
 };
