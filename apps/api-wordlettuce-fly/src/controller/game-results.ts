@@ -3,13 +3,11 @@ import * as v from 'valibot';
 import { ApiWordlettuceHono } from '../util/env';
 import { vValidator } from '@hono/valibot-validator';
 import { Username, GameNumSchema, AnswerSchema, UserID, PositiveInteger } from '../util/schemas';
-import { createGameResultsDao } from '../dao/game-results';
 import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
 import { createGameResultsTursoDao } from '../dao/game-results-turso';
-import { env } from 'hono/adapter';
 import type { Client } from '@libsql/client';
 
 const GetGameResultsQuerySchema = v.pipe(
