@@ -63,7 +63,7 @@
                     <div
                       in:navigationRecieve={{ key: 'current-link' }}
                       out:navigationSend={{ key: 'current-link' }}
-                      class="bg-charade-800 grid h-14 rounded-2xl"
+                      class="bg-charade-800 border-charade-600 grid h-14 rounded-2xl border-t shadow-md"
                     ></div>
                   {/if}
                 </div>

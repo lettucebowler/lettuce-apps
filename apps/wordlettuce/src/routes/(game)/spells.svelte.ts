@@ -7,7 +7,11 @@ export function timeUntilNextGame() {
 
 export function createNewGameCountDownTimer() {
   let value = $state(timeUntilNextGame());
-  let countdownInterval: NodeJS.Timeout | undefined = $state();
+  let countdownInterval: NodeJS.Timeout | undefined = $state(
+    setInterval(() => {
+      value = timeUntilNextGame();
+    }, 1000),
+  );
 
   return {
     get value() {
@@ -15,11 +19,15 @@ export function createNewGameCountDownTimer() {
     },
     pause() {
       clearInterval(countdownInterval);
+      countdownInterval = undefined;
     },
     start() {
-      countdownInterval = setInterval(() => {
-        value = timeUntilNextGame();
-      }, 1000);
+      value = timeUntilNextGame();
+      if (!countdownInterval) {
+        countdownInterval = setInterval(() => {
+          value = timeUntilNextGame();
+        }, 1000);
+      }
     },
   };
 }

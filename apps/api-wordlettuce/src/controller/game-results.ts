@@ -59,7 +59,6 @@ gameResultsController.get(
         }
         if (gameNumMatch) {
           const should = json.results.at(0)?.gameNum === gameNum;
-          console.log('should', should);
           return should;
         }
         return true;

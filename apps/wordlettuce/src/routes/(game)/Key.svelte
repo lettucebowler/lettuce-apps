@@ -2,6 +2,7 @@
   import type { LetterStatus } from '$lib/game-schemas';
   import type { Snippet } from 'svelte';
   import type { HTMLButtonAttributes } from 'svelte/elements';
+  import { hotKey } from '$lib/actions/hot-key.svelte';
 
   type KeyProps = {
     status?: LetterStatus;
@@ -9,9 +10,18 @@
   } & HTMLButtonAttributes;
 
   const { status, children, ...rest }: KeyProps = $props();
+
+  let el: HTMLButtonElement;
 </script>
 
 <button
+  bind:this={el}
+  use:hotKey={{
+    key: rest.value?.toString() || '',
+    onKeydown() {
+      el.click();
+    },
+  }}
   data-status={status}
   {...rest}
   class={[

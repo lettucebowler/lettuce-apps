@@ -34,7 +34,7 @@
 
 <img
   class={[
-    'pointer-events-none inline aspect-square h-full w-full',
+    'pointer-events-none inline aspect-square size-full',
     size === 'sm' && 'rounded-xl',
     size === 'lg' && 'rounded-3xl',
   ]}

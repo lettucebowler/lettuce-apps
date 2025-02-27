@@ -1,5 +1,4 @@
 <script lang="ts">
-  import BetterModal from './Modal.svelte';
   import { flip } from 'svelte/animate';
   import { applyAction, enhance } from '$app/forms';
   import Tile from './Tile.svelte';
@@ -19,6 +18,7 @@
   import { GameKey, LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
+  import MegaModal from './MegaModal.svelte';
 
   let { form, data = $bindable() }: PageProps = $props();
   let wordForm: HTMLFormElement | undefined = $state();
@@ -130,11 +130,6 @@
   };
 </script>
 
-<svelte:window
-  on:keydown={(e) => {
-    handleKey(e.key.toLowerCase());
-  }}
-/>
 <div class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2">
   <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
     <form
@@ -161,7 +156,8 @@
               {@const doWiggleOnce = !browser && form?.invalid && current}
               <div
                 class={[
-                  'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
+                  'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl',
+                  'shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
                   !item.guess && current && wordIsInvalid.value && 'animate-wiggle-once',
                 ]}
               >
@@ -208,12 +204,12 @@
             <div></div>
           {/if}
         {/each}
-        <Key aria-label="enter" title="enter" form="game">
+        <Key aria-label="enter" title="enter" form="game" value="Enter">
           <div class="h-5 w-full lg:h-7">
             <EnterIcon />
           </div>
         </Key>
-        <Key aria-label="undo" title="undo" form="undo-form">
+        <Key aria-label="undo" title="undo" form="undo-form" value="Backspace">
           <div class="h-5 w-full lg:h-7">
             <BackSpaceIcon />
           </div>
@@ -238,13 +234,12 @@
       }}
     ></form>
   </main>
-  {#if page.state.showModal}
-    <BetterModal
-      gameNum={data.game.gameNum}
-      answers={data.game.answers}
-      user={data.user?.username}
-      close={() => history.back()}
-    />
-  {/if}
+  <MegaModal
+    open={!!page.state.showModal}
+    onclose={() => history.back()}
+    gameNum={data.game.gameNum}
+    answers={data.game.answers}
+    authenticated={data.authenticated}
+  />
   <Toaster />
 </div>
