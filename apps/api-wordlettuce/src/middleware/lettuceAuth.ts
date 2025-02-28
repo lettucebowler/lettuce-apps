@@ -21,7 +21,7 @@ const REFRESH_TOKEN_COOKIE_NAME = 'refresh_token';
 export function lettuceAuth() {
   return createMiddleware(async (c: Context<ApiWordlettuceHono>, next: Next) => {
     const { verify } = createAuthClient({
-      issuer: 'https://auth.lettucebowler.net',
+      issuer: c.env.AUTH_HOST!,
       clientID: 'api-wordlettuce',
       fetch: (a, b) => c.env.lettuce_auth.fetch(a, b),
       storage: c.env.lettuce_auth_signing_keys,

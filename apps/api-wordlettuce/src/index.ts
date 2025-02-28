@@ -3,8 +3,7 @@ import type { ApiWordlettuceHono } from './util/env';
 import { rankingsControllerV2 } from './controller/rankings';
 import gameResultsController from './controller/game-results';
 import { cors } from 'hono/cors';
-import { lettuceAuth } from './middleware/lettuceAuth';
-
+// import { lettuceAuth } from './middleware/lettuceAuth';
 const app = new Hono<ApiWordlettuceHono>();
 
 app.use(
