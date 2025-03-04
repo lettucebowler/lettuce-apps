@@ -25,10 +25,26 @@ export default {
     const app = new Hono<{ Bindings: LettuceAuthBindings }>();
     app.use(
       '/.well-known/jwks.json',
-      cache({
-        cacheName: 'lettuce-auth-jwks',
-        cacheControl: 'max-age=604800',
-      }),
+      // cache({
+      //   cacheName: 'lettuce-auth-jwks',
+      //   cacheControl: 'max-age=604800',
+      // }),
+      async (c, next) => {
+        const cachedJwks = await c.env.lettuce_auth_sessions.get('jwks-cache', 'json');
+        console.log('cached jwks', cachedJwks);
+        if (cachedJwks) {
+          console.log('jwks cached in kv');
+          return c.json(cachedJwks);
+        }
+        await next();
+        const json = await c.res.clone().json();
+        if (json) {
+          console.log('caching jwks in kv');
+          c.executionCtx.waitUntil(
+            c.env.lettuce_auth_sessions.put('jwks-cache', JSON.stringify(json), { expirationTtl: 60 * 60 * 24 * 7 }),
+          );
+        }
+      },
     );
     app.use(
       '/.well-known/oauth-authorization-server',
