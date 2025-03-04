@@ -25,10 +25,10 @@ export default {
     const app = new Hono<{ Bindings: LettuceAuthBindings }>();
     app.use(
       '/.well-known/jwks.json',
-      // cache({
-      //   cacheName: 'lettuce-auth-jwks',
-      //   cacheControl: 'max-age=604800',
-      // }),
+      cache({
+        cacheName: 'lettuce-auth-jwks',
+        cacheControl: 'max-age=604800',
+      }),
       async (c, next) => {
         const cachedJwks = await c.env.lettuce_auth_sessions.get('jwks-cache', 'json');
         console.log('cached jwks', cachedJwks);
