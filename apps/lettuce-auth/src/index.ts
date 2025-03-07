@@ -12,13 +12,8 @@ import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
 import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
-
-const github = fetcher({
-  base: 'https://api.github.com',
-  headers: {
-    'user-agent': 'lettuce-auth',
-  },
-});
+import * as githubClient from './clients/github';
+import { PerformanceNodeTiming } from 'perf_hooks';
 
 export default {
   fetch(request: Request, env: LettuceAuthBindings, ctx: ExecutionContext) {
@@ -122,13 +117,7 @@ export default {
       success: async (ctx, value) => {
         let providerUser: ProviderUser;
         if (value.provider === 'github') {
-          providerUser = await github
-            .get<{
-              login: string;
-              id: number;
-              email: string;
-            }>('/user', {}, { headers: { ['Authorization']: `token ${value.tokenset.access}` } })
-            .then((r) => ({ id: r.id.toString(), email: r.email, username: r.login }));
+          providerUser = await githubClient.getUser({ accessToken: value.tokenset.access });
         } else {
           throw new Error('idk how we got here');
         }
