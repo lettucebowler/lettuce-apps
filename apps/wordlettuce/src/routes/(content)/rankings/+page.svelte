@@ -14,48 +14,64 @@
   {#await data.rankings}
     <Spinner />
   {:then rankings}
-    <div class="text-snow-200 table w-full sm:text-xl">
-      <div class="table-header-group">
-        <div class="table-row gap-2 font-bold">
-          <div class="sm:bg-charade-700 table-cell rounded-tl-xl p-4 font-bold capitalize">rank</div>
-          <div class="p-y-4 sm:bg-charade-700 table-cell px-2 font-bold capitalize">user</div>
-          <div class="sm:bg-charade-700 table-cell rounded-tr-xl p-4 text-center font-bold capitalize">score</div>
+    {#if rankings.length}
+      <div class="text-snow-200 table w-full rounded-xl shadow-lg sm:text-xl">
+        <div class="table-header-group">
+          <div class="table-row gap-2 font-bold">
+            <div
+              class="sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell rounded-tl-xl p-4 font-bold capitalize"
+            >
+              rank
+            </div>
+            <div class="p-y-4 sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell px-2 font-bold capitalize">
+              user
+            </div>
+            <div
+              class="sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell rounded-tr-xl p-4 text-center font-bold capitalize"
+            >
+              score
+            </div>
+          </div>
+        </div>
+        <div class="table-row-group">
+          {#each rankings as ranking, i (i)}
+            {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
+
+            <a
+              class="hover:bg-charade-800 sm:bg-charade-950 group table-row cursor-pointer hover:brightness-90"
+              href={`/profile/${ranking.user}`}
+            >
+              <div
+                class="border-box border-charade-700 mx-auto table-cell border-t py-4 text-left group-last:rounded-bl-xl sm:p-2 sm:pl-4"
+              >
+                #{position}
+              </div>
+              <div class="border-box border-charade-700 table-cell border-t py-4 text-left sm:p-2">
+                <div class="flex gap-2 sm:gap-4">
+                  <span class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></span>
+                  <span class="grid items-center">
+                    {ranking.user}
+                  </span>
+                  {#if position === 1}
+                    <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
+                      <FireIcon />
+                    </div>
+                  {/if}
+                </div>
+              </div>
+              <div
+                class="border-box border-charade-700 mx-auto table-cell w-[2ch] border-t py-4 text-right group-last:rounded-br-xl sm:p-2 sm:pr-4"
+              >
+                {ranking.score}
+              </div>
+            </a>
+          {/each}
         </div>
       </div>
-      <div class="table-row-group">
-        {#each rankings as ranking, i (i)}
-          {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
-
-          <a
-            class="hover:bg-charade-800 sm:bg-charade-950 group table-row cursor-pointer hover:brightness-90"
-            href={`/profile/${ranking.user}`}
-          >
-            <div
-              class="border-box border-charade-700 mx-auto table-cell border-t py-4 text-left group-last:rounded-bl-xl sm:p-2 sm:pl-4"
-            >
-              #{position}
-            </div>
-            <div class="border-box border-charade-700 table-cell border-t py-4 text-left sm:p-2">
-              <div class="flex gap-2 sm:gap-4">
-                <span class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></span>
-                <span class="grid items-center">
-                  {ranking.user}
-                </span>
-                {#if position === 1}
-                  <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
-                    <FireIcon />
-                  </div>
-                {/if}
-              </div>
-            </div>
-            <div
-              class="border-box border-charade-700 mx-auto table-cell w-[2ch] border-t py-4 text-right group-last:rounded-br-xl sm:p-2 sm:pr-4"
-            >
-              {ranking.score}
-            </div>
-          </a>
-        {/each}
-      </div>
-    </div>
+    {:else}
+      <p class="text-snow-300 box-border px-4 text-left text-lg">
+        No game results from the last 7 days. Play now and take the #1 spot!
+      </p>
+    {/if}
   {/await}
 </main>
