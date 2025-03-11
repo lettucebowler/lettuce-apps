@@ -10,9 +10,9 @@
   let { data } = $props();
   const gameNum = getGameNum();
 
-  const { getNextPageAfter } = createApiWordlettuceClient({ fetch });
+  const { getGameResults } = createApiWordlettuceClient({ fetch });
   async function getResults({ start }: { start: number }) {
-    return getNextPageAfter({ userID: data.profileUserID, start, limit: 60 });
+    return getGameResults({ userID: data.profileUserID, start, limit: 60 });
   }
 
   let query = createInfiniteQuery(() => ({
@@ -24,7 +24,7 @@
     queryFn: ({ pageParam }) => getResults({ start: pageParam }),
     initialData: {
       pageParams: [data.start],
-      pages: [{ results: data.results, start: data.start, next: data.next }],
+      pages: [{ results: data.pastResults, start: data.start, next: data.next }],
     },
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -81,30 +81,34 @@
           </h2>
           <GameSummary radius="md" answers={gameResult.answers} />
         </div>
-      {:else}
-        <div class="text-lg font-medium text-snow-300 text-center col-span-3">This user has no play history</div>
       {/each}
     </div>
   {/if}
 
-  <h2 class="text-snow-300 text-center text-3xl font-bold">Play History</h2>
+  {#if data.pastResults.length}
+    <h2 class="text-snow-300 text-center text-3xl font-bold">Play History</h2>
 
-  <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-3 sm:gap-3">
-    {#if query.data}
-      {#each query.data.pages ?? [] as page (page)}
-        {#each page.results as gameResult (gameResult)}
-          <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
-            <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
-              <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
-            </h2>
-            <GameSummary answers={gameResult.answers} />
-          </div>
-        {:else}
-          <div class="text-lg font-medium text-snow-300 text-center col-span-3">This user has no play history</div>
+    <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-3 sm:gap-3">
+      {#if query.data}
+        {#each query.data.pages ?? [] as page (page)}
+          {#each page.results as gameResult (gameResult)}
+            <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
+              <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
+                <span class="text-left">#{gameResult.gameNum}</span><span class="text-right"
+                  >{gameResult.score} pts</span
+                >
+              </h2>
+              <GameSummary answers={gameResult.answers} />
+            </div>
+          {/each}
         {/each}
-      {/each}
-    {/if}
-  </div>
+      {/if}
+    </div>
+  {/if}
+  {#if !data.currentResults.length && !data.currentResults.length}
+    <div class="text-snow-300 col-span-3 text-center text-lg font-medium">This user has no play history</div>
+  {/if}
+
   {#if browser && query.hasNextPage && data.start === gameNum}
     <div class="flex flex-col items-center gap-2">
       <svg class="text-snow-100 h-8 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

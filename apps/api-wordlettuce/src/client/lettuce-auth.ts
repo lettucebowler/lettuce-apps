@@ -1,4 +1,4 @@
-import { fetcher } from 'itty-fetcher';
+import { fetcher, StatusError } from 'itty-fetcher';
 import { User } from '@lettuce-apps-packages/auth';
 import { ApiWordlettuceHono } from '../util/env';
 import { Context } from 'hono';
@@ -17,7 +17,10 @@ export function createLettuceAuthClient(c: Context<ApiWordlettuceHono>) {
   }
 
   async function getUser(user: string | number) {
-    return lettuceAuth.get<Omit<User, 'email'>>('/users/' + user);
+    return lettuceAuth
+      .get<Omit<User, 'email'>>('/users/' + user)
+      .then((user) => ({ user, error: undefined }))
+      .catch((error: StatusError) => ({ error, user: undefined }));
   }
 
   return {

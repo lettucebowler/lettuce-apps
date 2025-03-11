@@ -9,6 +9,7 @@ import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
 import { cache } from '../middleware/cache';
+import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 const gameResultsController = new Hono<ApiWordlettuceHono>();
 
@@ -72,7 +73,16 @@ gameResultsController.get(
     let searchID: number;
     if (username) {
       const client = createLettuceAuthClient(c);
-      const user = await client.getUser(username);
+      const { user, error } = await client.getUser(username);
+      if (error) {
+        if (error.status === 404) {
+          throw new HTTPException(404, { message: `User ${username} not found` });
+        }
+        throw new HTTPException(
+          (error?.status as ContentfulStatusCode) ?? 500,
+          error?.message ? { message: error.message } : undefined,
+        );
+      }
       searchID = user.id;
     } else if (userID) {
       searchID = userID;

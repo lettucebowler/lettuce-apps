@@ -1,4 +1,4 @@
-import { fetcher } from 'itty-fetcher';
+import { fetcher, StatusError } from 'itty-fetcher';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 import type { GameResult } from './types';
@@ -20,7 +20,7 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
     base: PUBLIC_API_WORDLETTUCE_HOST,
   });
 
-  async function getNextPageAfter({
+  async function getGameResults({
     username,
     userID,
     limit = 30,
@@ -39,9 +39,12 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
         results: Array<GameResult>;
       }>('/v1/game-results', userID ? { userID, start, limit } : { username: username!, start, limit })
       .then((data) => ({ data, error: undefined }))
-      .catch((error) => ({ error: error as Error, data: undefined }));
+      .catch((error) => ({ error: error as StatusError, data: undefined }));
     if (error) {
-      throw svelteError(500, error);
+      if (error.status === 404) {
+        throw svelteError(404, 'User not found');
+      }
+      throw svelteError(error.status);
     }
     return data;
   }
@@ -58,7 +61,7 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
   }
 
   return {
-    getNextPageAfter,
+    getGameResults,
     getRankings,
   };
 }
