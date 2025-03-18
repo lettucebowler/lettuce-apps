@@ -1,4 +1,5 @@
-import { fetcher, StatusError } from 'itty-fetcher';
+import { fetcher } from 'itty-fetcher';
+import type { StatusError } from 'itty-fetcher';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 import type { GameResult } from './types';

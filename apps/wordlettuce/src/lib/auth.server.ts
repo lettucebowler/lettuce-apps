@@ -4,12 +4,13 @@ import { dev } from '$app/environment';
 
 import { AUTH_HOST } from '$env/static/private';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
+import { getRequestEvent } from '$app/server';
 
-function _createAuthClient(event: RequestEvent) {
+function _createAuthClient() {
+  const event = getRequestEvent();
   return createAuthClient({
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
-    // fetch: event.fetch,
     fetch:
       dev || !event.platform?.env
         ? event.fetch
@@ -20,12 +21,6 @@ function _createAuthClient(event: RequestEvent) {
 }
 
 export { _createAuthClient as createAuthClient };
-
-export async function getSigninUrl(event: RequestEvent) {
-  const authClient = _createAuthClient(event);
-  const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code');
-  return url;
-}
 
 export function setTokens(event: RequestEvent, access: string, refresh: string) {
   event.cookies.set('refresh_token', refresh, {

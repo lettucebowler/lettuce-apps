@@ -1,5 +1,5 @@
 import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
-import type { Transport } from '@sveltejs/kit';
+import type { Reroute, Transport } from '@sveltejs/kit';
 
 export const transport: Transport = {
   WordlettuceGame: {
@@ -11,4 +11,8 @@ export const transport: Transport = {
     },
     decode: ([gameNum, currentGuess, ...guesses]) => new WordlettuceGame({ gameNum, guesses, currentGuess }),
   },
+};
+
+export const reroute: Reroute = ({ url }) => {
+  return url.pathname;
 };
