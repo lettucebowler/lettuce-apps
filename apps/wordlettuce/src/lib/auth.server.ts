@@ -6,8 +6,8 @@ import { AUTH_HOST } from '$env/static/private';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 import { getRequestEvent } from '$app/server';
 
-function _createAuthClient() {
-  const event = getRequestEvent();
+function _createAuthClient(e: RequestEvent | undefined) {
+  const event = e ?? getRequestEvent();
   return createAuthClient({
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
