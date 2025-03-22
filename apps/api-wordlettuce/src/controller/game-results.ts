@@ -8,7 +8,7 @@ import { getGameNum } from '../util/game-num';
 import { HTTPException } from 'hono/http-exception';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
 import { requireToken } from '../middleware/requireToken';
-import { cache } from '../middleware/cache';
+import { cache } from 'hono/cache';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 const gameResultsController = new Hono<ApiWordlettuceHono>();
@@ -41,30 +41,14 @@ gameResultsController.get(
     const { username, start } = c.req.valid('query');
     const gameNum = getGameNum();
     const gameNumMatch = start === gameNum;
-    return cache({
-      cacheName: 'wordlettuce-game-results',
-      cacheControl: `max-age=${60 * 60 * 24}`,
-      async shouldICacheThisResponse(res) {
-        if (username) {
-          return false;
-        }
-        if (!start) {
-          return false;
-        }
-        const json = await res.json<{ results: Array<{ gameNum: number }> }>();
-        if (!json?.results) {
-          return false;
-        }
-        if (!json.results.length) {
-          return false;
-        }
-        if (gameNumMatch) {
-          const should = json.results.at(0)?.gameNum === gameNum;
-          return should;
-        }
-        return true;
-      },
-    })(c, next);
+    if (gameNumMatch) {
+      return await next();
+    } else {
+      return cache({
+        cacheName: 'wordlettuce-game-results',
+        cacheControl: `max-age=${60 * 60 * 24}`,
+      })(c, next);
+    }
   },
   async (c) => {
     const { username, limit, start, userID } = c.req.valid('query');
