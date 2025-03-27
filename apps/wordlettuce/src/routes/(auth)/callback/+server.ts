@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { clearTokens, createAuthClient, setTokens } from '$lib/auth.server';
-import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
+import { createApiWordlettuceServerClient } from '$lib/api-wordlettuce.server.js';
 import { subjects } from '@lettuce-apps-packages/auth';
 
 export async function GET(event) {
@@ -23,7 +23,7 @@ export async function GET(event) {
     }
     const game = event.locals.getGameStateV3();
     if (game.success) {
-      const { saveGame } = createApiWordlettuceClient(event);
+      const { saveGame } = createApiWordlettuceServerClient(event);
       await saveGame({
         userID: verified.subject.properties.userID,
         gameNum: game.gameNum,

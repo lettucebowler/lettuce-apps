@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '$lib/app-constants.js';
-import { createApiWordlettuceClient } from '$lib/api-wordlettuce.server.js';
+import { createApiWordlettuceServerClient } from '$lib/api-wordlettuce.server.js';
 import * as v from 'valibot';
 import { GuessLetter } from '$lib/game-schemas.js';
 import type { WordlettuceGame } from '$lib/wordlettuce-game.svelte.js';
@@ -77,7 +77,7 @@ export const actions: import('./$types').Actions = {
     }
     event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
     if (game.success && event.locals.session) {
-      const apiWordlettuce = createApiWordlettuceClient(event);
+      const apiWordlettuce = createApiWordlettuceServerClient(event);
       const inserts = await apiWordlettuce.saveGame({
         answers: game.answers.join(''),
         userID: event.locals.session.userID,
