@@ -1,4 +1,3 @@
-import { fetcher } from 'itty-fetcher';
 import ky from 'ky';
 import { API_WORDLETTUCE_TOKEN } from '$env/static/private';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';

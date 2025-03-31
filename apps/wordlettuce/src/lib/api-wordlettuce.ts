@@ -1,4 +1,5 @@
-import ky, { HTTPError } from 'ky';
+import ky from 'ky';
+import type { HTTPError } from 'ky';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import type { GameResult } from './types';
 import { error as svelteError } from '@sveltejs/kit';
