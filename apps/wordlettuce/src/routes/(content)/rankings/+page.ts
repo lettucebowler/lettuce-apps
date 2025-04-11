@@ -10,7 +10,7 @@ export async function load(event) {
   const { getRankings } = createApiWordlettuceClient(event);
 
   try {
-    const result = await Promise.race([delay(150), rankings]);
+    // const result = await Promise.race([delay(150), rankings]);
     // return {
     //   rankings: browser ? (result ?? rankings) : await rankings,
     // };
