@@ -4,15 +4,8 @@ import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import type { GameResult } from './types';
 import { error as svelteError } from '@sveltejs/kit';
 
-interface ResponseLike {
-  json(): Promise<unknown>;
-  text(): Promise<string>;
-  ok: Response['ok'];
-}
-type FetchLike = (...args: any[]) => Promise<ResponseLike>;
-
 type CreateApiWordLettuceClientInput = {
-  fetch?: FetchLike;
+  fetch: typeof fetch;
 };
 
 type GetGameResultsInput = { start: number; limit?: number } & (
@@ -22,7 +15,7 @@ type GetGameResultsInput = { start: number; limit?: number } & (
 
 export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInput) {
   const api = ky.create({
-    fetch: input.fetch as typeof fetch,
+    fetch: (a, b) => input.fetch(a, b),
     prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
   });
 
