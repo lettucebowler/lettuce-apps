@@ -16,7 +16,9 @@ export async function load(event) {
     // };
     const rankings = await getRankings();
 
-    return rankings;
+    return {
+      rankings,
+    };
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
