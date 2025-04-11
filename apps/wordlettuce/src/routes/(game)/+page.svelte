@@ -21,7 +21,7 @@
   import MegaModal from './MegaModal.svelte';
 
   let { form, data = $bindable() }: PageProps = $props();
-  let wordForm: HTMLFormElement | undefined = $state();
+  let wordForm: HTMLFormElement | undefined;
 
   const wordIsInvalid = createExpiringBoolean();
   const submittingWord = createExpiringBoolean();
