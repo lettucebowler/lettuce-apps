@@ -1,4 +1,5 @@
 import ky from 'ky';
+import { fetcher } from 'itty-fetcher';
 import type { HTTPError } from 'ky';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import type { GameResult } from './types';
@@ -15,7 +16,7 @@ type GetGameResultsInput = { start: number; limit?: number } & (
 
 export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInput) {
   const api = ky.create({
-    fetch: (a, b) => input.fetch(a, b),
+    fetch: input.fetch.bind(globalThis),
     prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
   });
 
