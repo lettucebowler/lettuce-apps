@@ -58,16 +58,7 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
   }
 
   async function getRankings() {
-    const { data, error } = await api
-      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>('v2/rankings', {})
-      .json()
-      .then((data) => ({ data, error: undefined }))
-      .catch((error) => ({ error, data: undefined }));
-    if (error || !data) {
-      throw svelteError(500, error);
-    }
-    console.log(data, error);
-    return data.rankings;
+    return api.get<{ rankings: Array<{ user: string; games: number; score: number }> }>('v2/rankings', {}).json();
   }
 
   return {

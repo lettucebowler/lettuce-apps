@@ -8,14 +8,15 @@ function delay(ms: number): Promise<undefined> {
 
 export async function load(event) {
   const { getRankings } = createApiWordlettuceClient(event);
-  const rankings = getRankings();
 
   try {
     const result = await Promise.race([delay(150), rankings]);
-    console.log('result', result);
-    return {
-      rankings: browser ? (result ?? rankings) : await rankings,
-    };
+    // return {
+    //   rankings: browser ? (result ?? rankings) : await rankings,
+    // };
+    const rankings = await getRankings();
+
+    return rankings;
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
