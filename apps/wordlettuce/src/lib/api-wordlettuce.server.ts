@@ -7,7 +7,7 @@ type CreateApiWordLettuceClientInput = {
   fetch: typeof fetch;
 };
 
-export function createApiWordlettuceClient({ fetch }: CreateApiWordLettuceClientInput) {
+export function createApiWordlettuceServerClient({ fetch }: CreateApiWordLettuceClientInput) {
   const api = fetcher({
     fetch: fetch,
     base: PUBLIC_API_WORDLETTUCE_HOST,
