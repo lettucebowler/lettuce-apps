@@ -66,6 +66,7 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
     if (error || !data) {
       throw svelteError(500, error);
     }
+    console.log(data, error);
     return data.rankings;
   }
 
