@@ -10,14 +10,10 @@ export async function load(event) {
   const { getRankings } = createApiWordlettuceClient(event);
 
   try {
-    // const result = await Promise.race([delay(150), rankings]);
-    // return {
-    //   rankings: browser ? (result ?? rankings) : await rankings,
-    // };
-    const rankings = await getRankings();
-
+    const rankings = getRankings();
+    const result = await Promise.race([delay(150), rankings]);
     return {
-      rankings,
+      rankings: browser ? (result ?? rankings) : await rankings,
     };
   } catch (e) {
     console.error(e);
