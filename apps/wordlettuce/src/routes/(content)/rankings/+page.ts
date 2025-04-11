@@ -12,6 +12,7 @@ export async function load(event) {
 
   try {
     const result = await Promise.race([delay(150), rankings]);
+    console.log('result', result);
     return {
       rankings: browser ? (result ?? rankings) : await rankings,
     };
