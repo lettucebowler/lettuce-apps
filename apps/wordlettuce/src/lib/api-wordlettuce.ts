@@ -1,24 +1,12 @@
-import { fetcher } from 'itty-fetcher';
-import type { StatusError } from 'itty-fetcher';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
-import { error as svelteError } from '@sveltejs/kit';
+import { type RequestEvent } from '@sveltejs/kit';
 import type { GameResult } from './types';
+import ky from 'ky';
 
-interface ResponseLike {
-  json(): Promise<unknown>;
-  text(): Promise<string>;
-  ok: Response['ok'];
-}
-type FetchLike = (...args: any[]) => Promise<ResponseLike>;
-
-type CreateApiWordLettuceClientInput = {
-  fetch?: FetchLike;
-};
-
-export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInput) {
-  const api = fetcher({
-    fetch: input.fetch as typeof fetch,
-    base: PUBLIC_API_WORDLETTUCE_HOST,
+export function createApiWordlettuceClient(event: RequestEvent) {
+  const client = ky.create({
+    prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
+    fetch: event.fetch,
   });
 
   async function getGameResults({
@@ -32,33 +20,21 @@ export function createApiWordlettuceClient(input: CreateApiWordLettuceClientInpu
     limit?: number;
     start: number;
   }) {
-    const { data, error } = await api
-      .get<{
-        limit: number;
-        start: number;
-        next: number;
-        results: Array<GameResult>;
-      }>('/v1/game-results', userID ? { userID, start, limit } : { username: username!, start, limit })
-      .then((data) => ({ data, error: undefined }))
-      .catch((error) => ({ error: error as StatusError, data: undefined }));
-    if (error) {
-      if (error.status === 404) {
-        throw svelteError(404, 'User not found');
-      }
-      throw svelteError(error.status);
-    }
-    return data;
+    const gameResultsResponse = await client.get<{
+      limit: number;
+      start: number;
+      next: number;
+      results: Array<GameResult>;
+    }>('v1/game-results', { searchParams: userID ? { userID, start, limit } : { username: username!, start, limit } });
+    return await gameResultsResponse.json();
   }
 
   async function getRankings() {
-    const { data, error } = await api
-      .get<{ rankings: Array<{ user: string; games: number; score: number }> }>('/v2/rankings', {})
-      .then((data) => ({ data, error: undefined }))
-      .catch((error) => ({ error, data: undefined }));
-    if (error || !data) {
-      throw svelteError(500, error);
-    }
-    return data.rankings;
+    const rankingsResponse = await client.get<{ rankings: Array<{ user: string; games: number; score: number }> }>(
+      'v2/rankings',
+    );
+    const rankingsJson = await rankingsResponse.json();
+    return rankingsJson.rankings;
   }
 
   return {
