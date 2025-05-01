@@ -6,6 +6,7 @@ import { getGameNum } from '../util/game-num';
 import { sValidator } from '@hono/standard-validator';
 import { createGameResultsDao } from '../dao/game-results';
 import { createLettuceAuthClient } from '../client/lettuce-auth';
+import { cache } from 'hono/cache';
 
 const rankingsControllerV2 = new Hono<ApiWordlettuceHono>();
 
@@ -20,7 +21,7 @@ const GetRankingsQuerySchema = v.object({
 rankingsControllerV2.get(
   '/',
   sValidator('query', GetRankingsQuerySchema),
-  // cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
+  cache({ cacheName: 'wordlettuce-rankings', cacheControl: 'max-age=60' }),
   async (c) => {
     const { getRankings } = createGameResultsDao(c);
     const results = await getRankings();
