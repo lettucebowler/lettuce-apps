@@ -128,6 +128,12 @@
       setTimeout(() => showModal(), 500);
     };
   };
+
+  $effect(() => {
+    if (browser) {
+      document.title = `WordLettuce ${data.game.gameNum}`;
+    }
+  });
 </script>
 
 <div class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2">
