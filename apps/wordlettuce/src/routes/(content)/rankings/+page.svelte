@@ -15,58 +15,39 @@
     <Spinner />
   {:then rankings}
     {#if rankings.length}
-      <div class="text-snow-200 table w-full rounded-xl shadow-lg sm:text-xl">
-        <div class="table-header-group">
-          <div class="table-row gap-2 font-bold">
-            <div
-              class="sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell rounded-tl-xl p-4 font-bold capitalize"
-            >
-              rank
-            </div>
-            <div class="p-y-4 sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell px-2 font-bold capitalize">
-              user
-            </div>
-            <div
-              class="sm:bg-charade-700 border-t-1 border-t-charade-500 table-cell rounded-tr-xl p-4 text-center font-bold capitalize"
-            >
-              score
-            </div>
-          </div>
+      <div
+        class="bg-charade-700 border-box text-snow-200 grid w-full gap-x-2 gap-y-[1px] overflow-hidden sm:grid-cols-[1fr_max-content] sm:gap-x-4 sm:rounded-xl sm:text-xl sm:shadow-lg"
+      >
+        <div class="bg-charade-700 hidden grid-cols-subgrid p-4 sm:col-span-2 sm:grid">
+          <div class="font-bold capitalize">user</div>
+          <div class="hidden text-right font-bold capitalize sm:block">score</div>
         </div>
-        <div class="table-row-group">
-          {#each rankings as ranking, i (i)}
-            {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
-
-            <a
-              class="hover:bg-charade-800 sm:bg-charade-950 group block table-row cursor-pointer hover:brightness-90"
-              href={`/profile/${ranking.user}`}
-            >
-              <div
-                class="border-box border-charade-700 mx-auto table-cell border-t py-4 text-left group-last:rounded-bl-xl sm:p-2 sm:pl-4"
-              >
-                #{position}
+        {#each rankings as ranking, i (i)}
+          {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
+          <a
+            class="bg-charade-900 sm:bg-charade-950 hover:bg-charade-800 grid grid-cols-subgrid px-4 py-2 sm:col-span-2"
+            href={`/profile/${ranking.user}`}
+          >
+            <div class="flex items-center gap-4">
+              #{position}
+              <div class="size-8 overflow-hidden rounded sm:size-11">
+                <LettuceAvatar name={ranking.user} />
               </div>
-              <div class="border-box border-charade-700 table-cell border-t py-4 text-left sm:p-2">
-                <div class="flex h-11 gap-2 sm:gap-4">
-                  <div class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></div>
-                  <div class="grid items-center">
-                    {ranking.user}
-                  </div>
-                  {#if position === 1}
-                    <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
-                      <FireIcon />
-                    </div>
-                  {/if}
+              {ranking.user}
+              {#if position === 1}
+                <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
+                  <FireIcon />
                 </div>
-              </div>
-              <div
-                class="border-box border-charade-700 mx-auto table-cell w-[2ch] border-t py-4 text-right group-last:rounded-br-xl sm:p-2 sm:pr-4"
-              >
-                {ranking.score}
-              </div>
-            </a>
-          {/each}
-        </div>
+              {/if}
+              <span class="ml-auto text-right sm:hidden">
+                {ranking.score}pts
+              </span>
+            </div>
+            <div class="hidden items-center justify-end text-right sm:flex">
+              {ranking.score}
+            </div>
+          </a>
+        {/each}
       </div>
     {:else}
       <p class="text-snow-300 box-border px-4 text-left text-lg">
