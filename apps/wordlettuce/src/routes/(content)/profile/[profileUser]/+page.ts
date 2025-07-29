@@ -1,7 +1,6 @@
 import { createApiWordlettuceClient } from '$lib/api-wordlettuce.js';
 
 import { getGameNum } from '$lib/words.js';
-import { error } from '@sveltejs/kit';
 
 export async function load(event) {
   const { profileUser } = event.params;

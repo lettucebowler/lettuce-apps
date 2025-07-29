@@ -1,9 +1,8 @@
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
-import { type RequestEvent } from '@sveltejs/kit';
 import type { GameResult } from './types';
 import ky from 'ky';
 
-export function createApiWordlettuceClient(event: RequestEvent) {
+export function createApiWordlettuceClient(event: { fetch: typeof fetch }) {
   const client = ky.create({
     prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
     fetch: event.fetch,

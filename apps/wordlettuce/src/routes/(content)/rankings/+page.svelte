@@ -16,16 +16,12 @@
   {:then rankings}
     {#if rankings.length}
       <div
-        class="bg-charade-700 border-box text-snow-200 grid w-full gap-x-2 gap-y-[1px] overflow-hidden sm:grid-cols-[1fr_max-content] sm:gap-x-4 sm:rounded-xl sm:text-xl sm:shadow-lg"
+        class="bg-charade-600 border-box text-snow-200 mx-auto grid w-full gap-x-2 gap-y-[1px] overflow-hidden sm:gap-x-4 sm:rounded-xl sm:text-xl"
       >
-        <div class="bg-charade-700 hidden grid-cols-subgrid p-4 sm:col-span-2 sm:grid">
-          <div class="font-bold capitalize">user</div>
-          <div class="hidden text-right font-bold capitalize sm:block">score</div>
-        </div>
         {#each rankings as ranking, i (i)}
           {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
           <a
-            class="bg-charade-900 sm:bg-charade-950 hover:bg-charade-800 grid grid-cols-subgrid px-4 py-2 sm:col-span-2"
+            class="bg-charade-900 hover:bg-charade-950 grid grid-cols-subgrid px-4 py-2"
             href={`/profile/${ranking.user}`}
           >
             <div class="flex items-center gap-4">
@@ -39,12 +35,9 @@
                   <FireIcon />
                 </div>
               {/if}
-              <span class="ml-auto text-right sm:hidden">
+              <span class="ml-auto text-right">
                 {ranking.score}pts
               </span>
-            </div>
-            <div class="hidden items-center justify-end text-right sm:flex">
-              {ranking.score}
             </div>
           </a>
         {/each}
