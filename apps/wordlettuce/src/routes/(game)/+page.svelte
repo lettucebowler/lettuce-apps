@@ -154,7 +154,6 @@
             class="grid w-full grid-cols-[repeat(5,1fr)] gap-2"
             animate:flip={{ duration: duration * 1000 }}
             data-index={item.index}
-            style="--tile-height:2px;"
           >
             {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
               {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}

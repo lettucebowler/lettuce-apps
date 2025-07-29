@@ -38,7 +38,7 @@
             {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
 
             <a
-              class="hover:bg-charade-800 sm:bg-charade-950 group table-row cursor-pointer hover:brightness-90"
+              class="hover:bg-charade-800 sm:bg-charade-950 group block table-row cursor-pointer hover:brightness-90"
               href={`/profile/${ranking.user}`}
             >
               <div
@@ -47,11 +47,11 @@
                 #{position}
               </div>
               <div class="border-box border-charade-700 table-cell border-t py-4 text-left sm:p-2">
-                <div class="flex gap-2 sm:gap-4">
-                  <span class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></span>
-                  <span class="grid items-center">
+                <div class="flex h-11 gap-2 sm:gap-4">
+                  <div class="box-border h-11 w-max overflow-hidden"><LettuceAvatar name={ranking.user} /></div>
+                  <div class="grid items-center">
                     {ranking.user}
-                  </span>
+                  </div>
                   {#if position === 1}
                     <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
                       <FireIcon />

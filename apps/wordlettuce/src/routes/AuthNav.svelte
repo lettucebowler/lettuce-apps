@@ -68,7 +68,7 @@
                   {/if}
                 </div>
                 <a
-                  class="border-snow-300 z-10 col-[1] row-[1] m-1 box-border grid aspect-square overflow-hidden rounded-xl transition transition-all duration-150 hover:m-0"
+                  class="border-snow-300 bg-charade-950 text-snow-300 z-10 col-[1] row-[1] m-1 box-border grid aspect-square overflow-hidden rounded-xl text-2xl font-medium shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)] transition transition-all duration-150 hover:m-0"
                   href="/profile/{user}"
                 >
                   <LettuceAvatar name={user} />
@@ -76,7 +76,7 @@
               </div>
             {:else}
               <a
-                class="text-snow-100 block grid h-full h-full items-center rounded-xl px-6 py-2 text-center text-3xl font-medium capitalize hover:underline"
+                class="text-snow-100 block grid h-full items-center rounded-xl px-6 py-2 text-center text-3xl font-medium capitalize hover:underline"
                 href="/signin">Sign in</a
               >
             {/if}

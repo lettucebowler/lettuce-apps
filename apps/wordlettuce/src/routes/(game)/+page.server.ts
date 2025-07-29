@@ -4,7 +4,6 @@ import { createApiWordlettuceServerClient } from '$lib/api-wordlettuce.server.js
 import * as v from 'valibot';
 import { GuessLetter } from '$lib/game-schemas.js';
 import type { WordlettuceGame } from '$lib/wordlettuce-game.svelte.js';
-// import { createWordLettuceDao } from "$lib/dao/wordlettuce.server.js";
 
 export const trailingSlash = 'never';
 
