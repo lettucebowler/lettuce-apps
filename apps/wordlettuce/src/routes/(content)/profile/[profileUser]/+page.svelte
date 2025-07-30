@@ -46,8 +46,8 @@
 <main class="grid w-full gap-8">
   <div>
     <figure class="flex flex-col gap-2">
-      <div class="text-snow-300 mx-auto h-40 w-40 overflow-hidden rounded-3xl text-3xl">
-        <LettuceAvatar name={data.profileUser} />
+      <div class="text-snow-300 bg-charade-700 mx-auto h-40 w-40 overflow-hidden rounded-3xl text-3xl shadow-lg">
+        <LettuceAvatar name={data.profileUser} loadingStatus="loaded" />
       </div>
       <figcaption class="text-snow-300 text-center text-xl font-medium">
         {data.profileUser}

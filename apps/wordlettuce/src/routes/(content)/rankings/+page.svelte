@@ -26,7 +26,7 @@
           >
             <div class="flex items-center gap-4">
               #{position}
-              <div class="size-8 overflow-hidden rounded sm:size-11">
+              <div class="bg-charade-700 size-8 overflow-hidden rounded shadow-md sm:size-11">
                 <LettuceAvatar name={ranking.user} />
               </div>
               {ranking.user}

@@ -68,10 +68,10 @@
                   {/if}
                 </div>
                 <a
-                  class="border-snow-300 bg-charade-950 text-snow-300 z-10 col-[1] row-[1] m-1 box-border grid aspect-square overflow-hidden rounded-xl text-2xl font-medium shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)] transition transition-all duration-150 hover:m-0"
+                  class="border-snow-300 bg-charade-950 text-snow-300 z-10 col-[1] row-[1] m-1 box-border grid aspect-square overflow-hidden rounded-xl text-2xl text-base font-medium shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)] transition transition-all duration-150 hover:m-0"
                   href="/profile/{user}"
                 >
-                  <LettuceAvatar name={user} />
+                  <LettuceAvatar name={user} loadingStatus="loaded" />
                 </a>
               </div>
             {:else}
@@ -104,8 +104,8 @@
           <div class="border-charade-800 flex flex-col gap-2 p-4">
             {#if user}
               <div class="mb-2 flex items-center justify-start gap-4">
-                <span class="box-border h-[44px] w-[44px] w-max overflow-hidden rounded-sm"
-                  ><LettuceAvatar name={user} /></span
+                <span class="box-border size-11 w-max overflow-hidden rounded-sm"
+                  ><LettuceAvatar name={user} loadingStatus="loaded" /></span
                 >
                 <span class="text-snow-300 text-xl font-medium">{user}</span>
               </div>
