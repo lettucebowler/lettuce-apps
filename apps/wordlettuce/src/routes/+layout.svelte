@@ -4,6 +4,7 @@
   import appleTouchIcon from '$lib/assets/apple-touch-icon.png';
   import safariPinnedTabIcon from '$lib/assets/safari-pinned-tab.svg';
   import { appName } from '$lib/app-constants';
+  import { PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import AuthNav from './AuthNav.svelte';
   import '../app.css';
   let { data, children } = $props();
@@ -18,12 +19,9 @@
   <title>{appName}</title>
 </svelte:head>
 
-<div
-  id="lettuce-wordle-root"
-  class="max-w-(--breakpoint-md) mx-auto flex w-full flex-auto flex-col gap-2 p-2 sm:gap-4 sm:p-1 sm:pb-4 sm:pt-4"
-  data-sveltekit-preload-data="hover"
-  style="--tile-height:2px;"
->
-  <AuthNav links={data.nav} user={data.authenticated ? data.user.username : undefined} />
-  {@render children()}
-</div>
+<PageContentContainer --tile-height="2px">
+  <div class="flex h-full min-h-[100dvh] flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
+    <AuthNav links={data.nav} user={data.authenticated ? data.user.username : undefined} />
+    {@render children()}
+  </div>
+</PageContentContainer>

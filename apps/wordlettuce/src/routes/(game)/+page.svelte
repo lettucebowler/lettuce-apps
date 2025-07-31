@@ -136,7 +136,7 @@
   });
 </script>
 
-<div class="max-h-min-content flex w-full flex-auto flex-col items-center gap-2">
+<div class="flex flex-auto flex-col gap-2">
   <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
     <form
       method="POST"
