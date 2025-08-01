@@ -23,9 +23,8 @@
   }
 </script>
 
-<Avatar.Root {delayMs} {...restProps} class="pointer-events-none aspect-square size-full overflow-hidden">
-  <Avatar.Image src={generateImageUrl(name)} alt="{name} avatar image"></Avatar.Image>
-  <Avatar.Fallback class="grid h-full w-full place-items-center text-center"
-    >{name.toUpperCase().slice(0, 2)}</Avatar.Fallback
-  >
-</Avatar.Root>
+<img
+  src={generateImageUrl(name)}
+  alt="{name} avatar"
+  class="pointer-events-none grid h-full w-full place-items-center"
+/>

@@ -3,8 +3,8 @@
   let { children }: SvelteHTMLElements['div'] = $props();
 </script>
 
-<div class="ml-[calc(100vw-100%)]">
-  <div class="max-w-(--breakpoint-md) mx-auto min-h-[100dvh] w-full">
+<div class="bg-charade-900 ml-[calc(100vw-100%)]">
+  <div class="max-w-(--breakpoint-md) mx-auto min-h-[100dvh] w-full p-2 sm:p-4">
     {@render children?.()}
   </div>
 </div>
