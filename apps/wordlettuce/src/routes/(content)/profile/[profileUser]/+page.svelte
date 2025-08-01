@@ -43,18 +43,18 @@
     disabled: !data.next || data.start !== gameNum || !query.hasNextPage,
   }}
 />
-<main class="grid w-full gap-8">
+<main class="flex w-full flex-col gap-8">
   <div>
     <figure class="flex flex-col gap-2">
       <div class="text-snow-300 bg-charade-700 mx-auto h-40 w-40 overflow-hidden rounded-3xl text-3xl shadow-lg">
-        <LettuceAvatar name={data.profileUser} loadingStatus="loaded" />
+        <LettuceAvatar name={data.profileUser} />
       </div>
       <figcaption class="text-snow-300 text-center text-xl font-medium">
         {data.profileUser}
       </figcaption>
     </figure>
 
-    {#if data.user === data.user}
+    {#if data.user?.username === data.profileUser}
       <div class="flex justify-center">
         <a
           class="text-snow-100 block grid h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"
@@ -73,9 +73,17 @@
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
     </p>
 
-    <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-4 sm:gap-3">
+    <div class="mx-auto grid w-full grid-cols-2 justify-center gap-2 px-1 sm:flex sm:flex-wrap sm:gap-3">
       {#each data.currentResults as gameResult (gameResult)}
-        <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
+        <div
+          class={[
+            'flex flex-col gap-2 sm:shrink-0',
+            [7, 4].includes(data.currentResults.length) && 'sm:basis-[calc((100%-36px)/4)]',
+            [6, 5, 3].includes(data.currentResults.length) && 'sm:basis-[calc((100%-24px)/4)]',
+            [2].includes(data.currentResults.length) && 'sm:basis-[calc((100%-12px)/4)]',
+            [1].includes(data.currentResults.length) && 'sm:basis-[25%]',
+          ]}
+        >
           <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
             <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
           </h2>

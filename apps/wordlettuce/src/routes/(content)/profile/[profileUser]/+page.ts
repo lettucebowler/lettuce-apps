@@ -1,5 +1,4 @@
 import { createApiWordlettuceClient } from '$lib/api-wordlettuce.js';
-
 import { getGameNum } from '$lib/words.js';
 
 export async function load(event) {

@@ -9,9 +9,12 @@
     scores with my coworkers.
   </p>
   <p class="text-snow-300 box-border px-4 text-left text-lg">
-    This app was created using <a class="text-swamp-green-500" href="https://kit.svelte.dev" target="_blank"
-      >svelte-kit</a
-    >. Code for this project can be found
-    <a class="text-swamp-green-500" target="_blank" href="https://github.com/lettucebowler/lettuce-wordle">here</a>.
+    This app was created using <a class="text-swamp-green-500" href="https://svelte.dev" target="_blank">svelte-kit</a>.
+    Code for this project can be found on
+    <a
+      class="text-swamp-green-500"
+      target="_blank"
+      href="https://github.com/lettucebowler/lettuce-apps/tree/main/apps/wordlettuce">Github</a
+    >.
   </p>
 </main>

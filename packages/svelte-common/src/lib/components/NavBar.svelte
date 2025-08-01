@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { SvelteHTMLElements } from 'svelte/elements';
+  import type { Snippet } from 'svelte';
 
-  let { children }: SvelteHTMLElements['nav'] = $props();
+  let { children }: { children: Snippet<[]> } = $props();
 </script>
 
-<nav class="flex w-full gap-4">
+<nav class="flex gap-2 sm:gap-4">
   {@render children?.()}
 </nav>

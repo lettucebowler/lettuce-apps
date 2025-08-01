@@ -1,14 +1,10 @@
 <script lang="ts">
-  import { Avatar, type WithoutChildrenOrChild } from 'bits-ui';
-
   const host = 'https://api.dicebear.com/9.x/bottts-neutral/svg';
   const bgs = ['BF616A', 'D08770', 'EBCB8B', 'A3BE8C', 'B48EAD', '88C0D0'];
 
   let {
     name,
-    delayMs = 0,
-    ...restProps
-  }: WithoutChildrenOrChild<Avatar.RootProps> & {
+  }: {
     name: string;
   } = $props();
 
@@ -26,5 +22,5 @@
 <img
   src={generateImageUrl(name)}
   alt="{name} avatar"
-  class="pointer-events-none grid h-full w-full place-items-center"
+  class="pointer-events-none grid h-full max-w-full place-items-center"
 />

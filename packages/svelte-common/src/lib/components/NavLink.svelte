@@ -12,42 +12,30 @@
   import { page } from '$app/state';
   import type { Snippet } from 'svelte';
 
-  interface Props {
-    to: string;
-    class?: string;
-    children: Snippet<[]>;
-  }
+  type Props =
+    | {
+        to: string;
+        class?: string;
+        label: string;
+        children?: undefined;
+      }
+    | {
+        to: string;
+        class?: string;
+        label?: undefined;
+        children: Snippet<[]>;
+      };
 
-  let { to, class: className, children }: Props = $props();
+  let { to, class: className, label, children }: Props = $props();
 
   let current = $derived(page.url.pathname === to);
 </script>
 
-<!-- <a
-  class={[
-    'text-snow-300 grid h-full cursor-pointer items-center rounded-xl border-transparent text-3xl font-medium hover:underline',
-    className && className,
-  ]}
-  class:text-snow-100={current}
-  class:after:bg-charade-800={current}
-  aria-current={current}
-  href={to}
->
-  <div class="col-start-1 row-start-1 box-border grid h-14 h-full w-full">
-    {#if current}
-      <div
-        in:recieve={{ key: 'current-link' }}
-        out:send={{ key: 'current-link' }}
-        class="bg-charade-800 border-charade-700 grid h-full rounded-xl border-t shadow-md"
-      ></div>
-    {/if}
-  </div>
-  <div class="z-10 col-start-1 row-start-1 h-full">
-    {@render children?.()}
-  </div>
-</a> -->
 <a
-  class={['text-snow-300 container grid w-max text-3xl font-medium hover:underline', className]}
+  class={[
+    'text-snow-300 container grid w-max text-base font-bold hover:underline sm:text-3xl sm:font-medium',
+    className,
+  ]}
   aria-current={current}
   href={to}
 >
@@ -58,7 +46,11 @@
       class="bg-charade-800 border-charade-700 col-start-1 row-start-1 box-border rounded-xl border-t shadow-md"
     ></div>
   {/if}
-  <div class="z-10 col-start-1 row-start-1 h-full p-2">
-    {@render children?.()}
+  <div class={['z-10 col-start-1 row-start-1', label && 'px-4 py-2.5 first-letter:capitalize']}>
+    {#if label}
+      {label}
+    {:else}
+      {@render children?.()}
+    {/if}
   </div>
 </a>
