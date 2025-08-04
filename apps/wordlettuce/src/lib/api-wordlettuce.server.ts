@@ -16,9 +16,14 @@ export function createApiWordlettuceServerClient({ fetch }: CreateApiWordLettuce
     },
   });
 
-  async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {
+  type SaveGameInput = {
+    userID: number;
+    gameNum: number;
+    answers: string;
+  }
+  async function saveGame({ userID, gameNum, answers }: SaveGameInput) {
     const { data, error } = await api
-      .post<{
+      .post<SaveGameInput, {
         gameNum: number;
         userID: string;
         answers: string;
