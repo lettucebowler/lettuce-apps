@@ -57,7 +57,7 @@
     {#if data.user?.username === data.profileUser}
       <div class="flex justify-center">
         <a
-          class="text-snow-100 block grid h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"
+          class="text-snow-100 grid h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"
           href="/signout">Sign out</a
         >
       </div>

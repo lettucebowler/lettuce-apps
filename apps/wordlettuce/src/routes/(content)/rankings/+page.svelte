@@ -15,13 +15,11 @@
     <Spinner />
   {:then rankings}
     {#if rankings.length}
-      <div
-        class="bg-charade-600 border-box text-snow-200 mx-auto grid w-full gap-x-2 gap-y-[1px] overflow-hidden sm:gap-x-4 sm:rounded-xl sm:text-xl"
-      >
+      <div class="text-snow-200 mx-auto w-full rounded-xl sm:text-xl">
         {#each rankings as ranking, i (i)}
           {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
           <a
-            class="bg-charade-900 hover:bg-charade-950 grid grid-cols-subgrid px-4 py-2"
+            class="bg-charade-900 hover:bg-charade-950 not-last:border-b not-last:border-charade-600 block px-4 py-2 first:rounded-t-xl last:rounded-b-xl"
             href={`/profile/${ranking.user}`}
           >
             <div class="flex items-center gap-4">
