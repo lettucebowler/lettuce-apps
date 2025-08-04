@@ -29,7 +29,7 @@
         <NavLink to="/profile/{data.user.username}" class="ml-auto">
           <div class="aspect-square size-11 h-full p-1 transition-all duration-150 hover:p-0 sm:size-14">
             <div class="overflow-hidden rounded-lg">
-              <LettuceAvatar name="lettucebowler" />
+              <LettuceAvatar name={data.user.username} />
             </div>
           </div>
         </NavLink>

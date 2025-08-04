@@ -20,15 +20,18 @@ export function createApiWordlettuceServerClient({ fetch }: CreateApiWordLettuce
     userID: number;
     gameNum: number;
     answers: string;
-  }
+  };
   async function saveGame({ userID, gameNum, answers }: SaveGameInput) {
     const { data, error } = await api
-      .post<SaveGameInput, {
-        gameNum: number;
-        userID: string;
-        answers: string;
-        attempts: number;
-      }>('/v1/game-results', { userID, gameNum, answers })
+      .post<
+        SaveGameInput,
+        {
+          gameNum: number;
+          userID: string;
+          answers: string;
+          attempts: number;
+        }
+      >('/v1/game-results', { userID, gameNum, answers })
       .then((data) => ({ data, error: undefined }))
       .catch((error) => ({ error, data: undefined }));
     if (error) {
