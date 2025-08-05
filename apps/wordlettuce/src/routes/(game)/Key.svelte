@@ -9,7 +9,7 @@
     children?: Snippet;
   } & HTMLButtonAttributes;
 
-  const { status, children, ...rest }: KeyProps = $props();
+  const { status, children, value, ...rest }: KeyProps = $props();
 
   let el: HTMLButtonElement;
 </script>
@@ -17,12 +17,13 @@
 <button
   bind:this={el}
   use:hotKey={{
-    key: rest.value?.toString() || '',
+    key: value?.toString() || '',
     onKeydown() {
       el.click();
     },
   }}
   data-status={status}
+  {value}
   {...rest}
   class={[
     'mt-(--keyboard-height) bg-(--bg-color) text-(--text-color) col-span-4 grid h-full w-full cursor-pointer place-items-center rounded-md text-center text-sm font-bold  active:shadow-none sm:py-2 md:text-xl',

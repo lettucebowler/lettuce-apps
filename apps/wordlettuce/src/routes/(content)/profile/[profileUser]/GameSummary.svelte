@@ -12,37 +12,16 @@
     <div
       data-answer={answer}
       class={[
-        'tile bg-(--bg-color) aspect-square w-full',
+        'aspect-square w-full',
         radius === 'lg' && 'rounded-lg',
         radius === 'md' && 'rounded',
-        answer !== '_' && 'border-(--highlight-color) border-t-[1px] shadow-[0_var(--depth)_4px_0_rgb(0_0_0_/_0.2)]',
+        answer === '_'
+          ? 'bg-charade-950'
+          : 'border-(--highlight-color) border-t-[1px] shadow-[0_1px_4px_0_rgb(0_0_0_/_0.2)]',
+        answer === 'c' && 'bg-putty-500 border-putty-200',
+        answer === 'x' && 'bg-swamp-green-500 border-swamp-green-200',
+        answer === 'i' && 'bg-charade-800 && border-charade-500',
       ]}
     ></div>
   {/each}
 </div>
-
-<style>
-  .tile {
-    --depth: 1px;
-    --bg-color: var(--color-charade-950);
-    --highlight-color: var(--color-charade-700);
-  }
-
-  [data-answer='c'] {
-    --bg-color: var(--color-putty-500);
-    --highlight-color: var(--color-putty-200);
-    --text-color: var(--colors-putty-800);
-  }
-
-  [data-answer='x'] {
-    --bg-color: var(--color-swamp-green-500);
-    --highlight-color: var(--color-swamp-green-200);
-    --text-color: var(--color-swamp-green-800);
-  }
-
-  [data-answer='i'] {
-    --bg-color: var(--color-charade-800);
-    --highlight-color: var(--color-charade-500);
-    --text-color: var(--color-charade-100);
-  }
-</style>

@@ -14,7 +14,7 @@
   {#await data.rankings}
     <Spinner />
   {:then rankings}
-    {#if rankings.length}
+    {#if rankings?.length}
       <div class="text-snow-200 mx-auto w-full rounded-xl sm:text-xl">
         {#each rankings as ranking, i (i)}
           {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}

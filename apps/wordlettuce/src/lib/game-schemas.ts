@@ -35,7 +35,7 @@ export const GuessLetter = v.picklist([
 
 export type GuessLetter = v.InferOutput<typeof GuessLetter>;
 
-export const GameKey = v.union([GuessLetter, GameHotKey]);
+export const GameKey = v.union([GuessLetter]);
 
 export type GuessKey = v.InferOutput<typeof GameKey>;
 

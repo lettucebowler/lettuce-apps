@@ -5,11 +5,12 @@
   import { browser } from '$app/environment';
   import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
-  import { getGameResults } from './game-results.remote.js';
+  import { createApiWordlettuceClient } from '$lib/api-wordlettuce';
 
   let { data } = $props();
   const gameNum = getGameNum();
 
+  const { getGameResults } = createApiWordlettuceClient({ fetch });
   async function getResults({ start }: { start: number }) {
     return getGameResults({ userID: data.profileUserID, start, limit: 60 });
   }

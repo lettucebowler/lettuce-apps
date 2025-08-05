@@ -13,7 +13,7 @@ export class WordlettuceGame {
   #guesses: Array<string> = $state([]);
   #currentGuess: string = $state('');
   #answers: Array<string> = $state([]);
-  // #success: boolean = $state(false);
+  #invalid: boolean = $state(false);
 
   constructor({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) {
     this.replaceState({ gameNum, guesses, currentGuess });
@@ -25,7 +25,6 @@ export class WordlettuceGame {
     if (guesses) {
       this.#guesses = guesses;
       this.#answers = this.#checkWords();
-      // this.#success = this.#answers.at(-1) === successAnswer;
     }
   };
 
@@ -63,7 +62,10 @@ export class WordlettuceGame {
 
   get success() {
     return this.#answers.at(-1) === successAnswer;
-    // return this.#success;
+  }
+
+  get invalid() {
+    return this.#invalid;
   }
 
   get letterStatuses() {
@@ -116,18 +118,15 @@ export class WordlettuceGame {
     if (this.success) {
       return {};
     }
-    if (!isAllowedGuess({ guess: this.#currentGuess })) {
-      return {
-        error: {
-          message: 'Invalid word',
-        },
-      };
+    const invalid = !isAllowedGuess({ guess: this.#currentGuess });
+    this.#invalid = invalid;
+    if (invalid) {
+      return;
     }
+
     this.#guesses.push(this.#currentGuess);
     this.#currentGuess = '';
     this.#answers = this.#checkWords();
-    // this.#success = this.#answers.at(-1) === successAnswer;
-    return {};
   };
 
   #checkWords = () => {

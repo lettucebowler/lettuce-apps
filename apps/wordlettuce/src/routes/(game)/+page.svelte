@@ -1,10 +1,8 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
-  import { applyAction, enhance } from '$app/forms';
   import Tile from './Tile.svelte';
   import Cookies from 'js-cookie';
   import { Toaster } from 'svelte-french-toast';
-  import type { SubmitFunction } from '@sveltejs/kit';
   import { createExpiringBoolean } from './spells.svelte';
   import { browser } from '$app/environment';
   import { toastError, toastLoading, toastSuccess } from './toast';
@@ -19,12 +17,12 @@
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
   import MegaModal from './MegaModal.svelte';
+  import { letter, undo, word } from '$lib/game.remote';
 
-  let { form, data = $bindable() }: PageProps = $props();
+  let { data = $bindable() }: PageProps = $props();
   let wordForm: HTMLFormElement | undefined;
 
   const wordIsInvalid = createExpiringBoolean();
-  const submittingWord = createExpiringBoolean();
   const duration = 0.15;
 
   function showModal() {
@@ -42,27 +40,7 @@
     });
   }
 
-  function handleKey(key: string) {
-    const parseResult = v.safeParse(GameKey, key);
-    if (!parseResult.success) {
-      return;
-    }
-    if (parseResult.output === 'enter') {
-      wordForm?.requestSubmit();
-      return;
-    }
-    if (parseResult.output === 'backspace') {
-      data.game.doUndo();
-      return;
-    }
-    data.game.doLetter(parseResult.output);
-  }
-
   function invalidForm(message = 'Invalid word') {
-    form = {
-      success: false,
-      invalid: true,
-    };
     wordIsInvalid.truthify();
     toastError(message);
   }
@@ -89,59 +67,36 @@
     const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses].filter(Boolean).slice(0, 6);
     return items;
   }
-
-  const enhanceForm: SubmitFunction = async ({ cancel }) => {
-    if (submittingWord.value || data.game.success) {
-      cancel();
-      return;
-    }
-    submittingWord.truthify();
-    const { error } = data.game.doSumbit();
-    if (error) {
-      cancel();
-      return invalidForm();
-    }
-    form = {
-      success: data.game.success,
-      invalid: false,
-    };
-    if (!data.game.success) {
-      cancel();
-      saveGameStateToCookie();
-      return;
-    }
-
-    let saveGameToastId: string;
-    if (data.user) {
-      saveGameToastId = toastLoading('Saving results...');
-    }
-    return async ({ result, update }) => {
-      applyAction(result);
-      if (saveGameToastId) {
-        if (result.type === 'success') {
-          toastSuccess('Game results saved', { id: saveGameToastId });
-        } else {
-          toastError('Failed to save game results', { id: saveGameToastId });
-        }
-      }
-      update();
-      setTimeout(() => showModal(), 500);
-    };
-  };
-
-  $effect(() => {
-    if (browser) {
-      document.title = `WordLettuce ${data.game.gameNum}`;
-    }
-  });
 </script>
 
 <div class="flex flex-auto flex-col gap-2">
   <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
     <form
-      method="POST"
-      action="?/word"
-      use:enhance={enhanceForm}
+      {...word.enhance(async ({ submit }) => {
+        let saveGameToastId: string | undefined = undefined;
+        data.game.doSumbit();
+        if (data.game.invalid) {
+          return invalidForm();
+        }
+        if (!data.game.success) {
+          return saveGameStateToCookie();
+        }
+
+        try {
+          if (data.user && data.game.success) {
+            saveGameToastId = toastLoading('Saving results...');
+          }
+          await submit();
+          if (saveGameToastId) {
+            toastSuccess('Game results saved', { id: saveGameToastId });
+            setTimeout(() => showModal(), 500);
+          }
+        } catch (error) {
+          if (saveGameToastId) {
+            toastError('Failed to save game results', { id: saveGameToastId });
+          }
+        }
+      })}
       id="game"
       bind:this={wordForm}
       class="my-auto flex w-full max-w-[min(700px,_55vh)]"
@@ -158,12 +113,13 @@
             {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
               {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
               {@const doWiggle = browser && wordIsInvalid.value && current}
-              {@const doWiggleOnce = !browser && form?.invalid && current}
+              {@const doWiggleOnce = !browser && word.result?.invalid && current}
               <div
                 class={[
                   'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl',
                   'shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                  !item.guess && current && wordIsInvalid.value && 'animate-wiggle-once',
+                  !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
+                  !item.guess && current && word.result?.invalid && !browser && 'animate-wiggle-once',
                 ]}
               >
                 <Tile
@@ -182,27 +138,22 @@
       </div>
     </form>
     <form
-      method="POST"
+      {...letter.enhance(async ({ data: formData }) => {
+        const key = formData.get('key')?.toString() ?? '';
+        const parseResult = v.safeParse(GameKey, key);
+        if (!parseResult.success) {
+          return;
+        }
+        data.game.doLetter(parseResult.output);
+      })}
       class="keyboard grid max-h-40 w-full flex-auto gap-1 sm:max-h-80"
       id="keyboard"
-      use:enhance={({ cancel, formData }) => {
-        const key = formData.get('key')?.toString() ?? '';
-        handleKey(key);
-        cancel();
-      }}
     >
       <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
         {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
           {@const status = data.game.letterStatuses[letter]}
           {#if letter}
-            <Key
-              status={status as LetterStatus}
-              aria-label={letter}
-              title={letter}
-              formaction="?/letter"
-              name="key"
-              value={letter}
-            >
+            <Key status={status as LetterStatus} aria-label={letter} title={letter} name="key" value={letter}>
               {letter}
             </Key>
           {:else}
@@ -231,12 +182,9 @@
     <form
       class="hidden"
       id="undo-form"
-      method="POST"
-      action="?/undo"
-      use:enhance={({ cancel }) => {
+      {...undo.enhance(async ({}) => {
         data.game.doUndo();
-        cancel();
-      }}
+      })}
     ></form>
   </main>
   <MegaModal
