@@ -70,7 +70,7 @@
 </script>
 
 <div class="flex flex-auto flex-col gap-2">
-  <main class="flex w-full flex-auto flex-col items-center justify-end justify-between gap-2 sm:gap-4">
+  <main class="flex w-full flex-auto flex-col items-center justify-between gap-2 sm:gap-4">
     <form
       {...word.enhance(async ({ submit }) => {
         let saveGameToastId: string | undefined = undefined;
