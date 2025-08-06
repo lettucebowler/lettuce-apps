@@ -17,14 +17,9 @@
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
   import MegaModal from './MegaModal.svelte';
-  import { getGameState, letter, undo, word } from '$lib/game.remote';
+  import { letter, undo, word } from '$lib/game.remote';
 
   let { data = $bindable() }: PageProps = $props();
-  let wordForm: HTMLFormElement | undefined;
-
-  // const game = await getGameState();
-
-  // console.log(game);
 
   const wordIsInvalid = createExpiringBoolean();
   const duration = 0.15;
@@ -74,43 +69,41 @@
 </script>
 
 <div class="flex flex-auto flex-col gap-2">
-  <main class="flex w-full flex-auto flex-col items-center justify-between gap-2 sm:gap-4">
-    <form bind:this={wordForm} class="my-auto flex w-full max-w-[min(700px,_55vh)]">
-      <div class="max-w-700 grid w-full grid-rows-[repeat(6,1fr)] gap-2">
-        {#each getItemsForGrid() as item (item.index)}
-          {@const current = item.index === data.game.answers.length}
-          <div
-            class="grid w-full grid-cols-[repeat(5,1fr)] gap-2"
-            animate:flip={{ duration: duration * 1000 }}
-            data-index={item.index}
-          >
-            {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-              {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
-              {@const doWiggle = browser && wordIsInvalid.value && current}
-              {@const doWiggleOnce = !browser && word.result?.invalid && current}
-              <div
-                class={[
-                  'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl',
-                  'shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                  !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
-                  !item.guess && current && word.result?.invalid && !browser && 'animate-wiggle-once',
-                ]}
-              >
-                <Tile
-                  letter={letter === ' ' ? '' : letter}
-                  answer={data.game.answers.at(item.index)?.charAt(j)}
-                  column={j}
-                  {doJump}
-                  {doWiggle}
-                  {doWiggleOnce}
-                  {current}
-                />
-              </div>
-            {/each}
-          </div>
-        {/each}
-      </div>
-    </form>
+  <main class="flex w-full flex-auto flex-col items-center justify-around gap-2 sm:gap-4">
+    <div class="max-w-176 m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2">
+      {#each getItemsForGrid() as item (item.index)}
+        {@const current = item.index === data.game.answers.length}
+        <div
+          class="grid w-full grid-cols-[repeat(5,1fr)] gap-2"
+          animate:flip={{ duration: duration * 1000 }}
+          data-index={item.index}
+        >
+          {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
+            {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
+            {@const doWiggle = browser && wordIsInvalid.value && current}
+            {@const doWiggleOnce = !browser && word.result?.invalid && current}
+            <div
+              class={[
+                'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl',
+                'shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
+                !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
+                !item.guess && current && word.result?.invalid && !browser && 'animate-wiggle-once',
+              ]}
+            >
+              <Tile
+                letter={letter === ' ' ? '' : letter}
+                answer={data.game.answers.at(item.index)?.charAt(j)}
+                column={j}
+                {doJump}
+                {doWiggle}
+                {doWiggleOnce}
+                {current}
+              />
+            </div>
+          {/each}
+        </div>
+      {/each}
+    </div>
     <form
       {...letter.enhance(async ({ data: formData }) => {
         const key = formData.get('key')?.toString() ?? '';
@@ -164,7 +157,7 @@
             }
           })}
         >
-          <span class="pointer-events-none"><EnterIcon class="mx-auto w-5 lg:w-7" /></span>
+          <span class="pointer-events-none"><EnterIcon class="mx-auto w-7" /></span>
         </Key>
         <Key
           value="Backspace"
@@ -174,11 +167,11 @@
             data.game.doUndo();
           })}
         >
-          <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-5 lg:w-7" /></span>
+          <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
         </Key>
         {#if data.game.success && browser}
           <Key aria-label="share" title="share" onclick={() => showModal()}>
-            <span class="pointer-events-none"><ShareIcon class="mx-auto w-5 lg:w-7" /></span>
+            <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
           </Key>
         {/if}
       </div>

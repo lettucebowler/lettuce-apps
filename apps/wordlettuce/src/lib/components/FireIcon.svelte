@@ -6,7 +6,7 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="currentColor"
-  class={['aspect-square h-full w-full transition-transform', className]}
+  class={['aspect-square transition-transform', className]}
 >
   <path
     fill-rule="evenodd"
