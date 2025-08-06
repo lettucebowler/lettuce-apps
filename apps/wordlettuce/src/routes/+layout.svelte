@@ -19,24 +19,27 @@
   <title>{appName}</title>
 </svelte:head>
 
-<PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-[100dvh] flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
-    <NavBar>
-      <NavLink to="/" label="home" />
-      <NavLink to="/rankings" label="rankings" />
-      <NavLink to="/about" label="about" />
-      {#if data.authenticated}
-        <NavLink to="/profile/{data.user.username}" class="ml-auto">
-          <div class="aspect-square size-11 h-full p-1 transition-all duration-150 hover:p-0 sm:size-14">
-            <div class="overflow-hidden rounded-lg">
-              <LettuceAvatar name={data.user.username} />
+<svelte:boundary>
+  <PageContentContainer --tile-height="2px">
+    <div class="flex h-full min-h-[100dvh] flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
+      <NavBar>
+        <NavLink to="/" label="home" />
+        <NavLink to="/rankings" label="rankings" />
+        <NavLink to="/about" label="about" />
+        {#if data.authenticated}
+          <NavLink to="/profile/{data.user.username}" class="ml-auto">
+            <div class="aspect-square size-11 h-full p-1 transition-all duration-150 hover:p-0 sm:size-14">
+              <div class="overflow-hidden rounded-lg">
+                <LettuceAvatar name={data.user.username} />
+              </div>
             </div>
-          </div>
-        </NavLink>
-      {:else}
-        <NavLink to="/signin" class="ml-auto" label="sign in" />
-      {/if}
-    </NavBar>
-    {@render children()}
-  </div>
-</PageContentContainer>
+          </NavLink>
+        {:else}
+          <NavLink to="/signin" class="ml-auto" label="sign in" />
+        {/if}
+      </NavBar>
+      {@render children()}
+    </div>
+  </PageContentContainer>
+  {#snippet pending()}{/snippet}
+</svelte:boundary>

@@ -49,21 +49,6 @@ export const word = form(async (data) => {
   const event = getRequestEvent();
   const game = getGameStateFromCookie();
 
-  if (!game.currentGuess) {
-    const guess = data.getAll('guess').join('').toLowerCase();
-    if (!isAllowedGuess({ guess })) {
-      return {
-        success: false,
-        invalid: true,
-      };
-    }
-    game.replaceState({
-      gameNum: game.gameNum,
-      currentGuess: guess,
-      guesses: game.guesses,
-    });
-  }
-
   if (game.success) {
     return {
       success: true,

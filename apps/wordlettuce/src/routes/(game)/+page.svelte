@@ -17,10 +17,14 @@
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
   import MegaModal from './MegaModal.svelte';
-  import { letter, undo, word } from '$lib/game.remote';
+  import { getGameState, letter, undo, word } from '$lib/game.remote';
 
   let { data = $bindable() }: PageProps = $props();
   let wordForm: HTMLFormElement | undefined;
+
+  // const game = await getGameState();
+
+  // console.log(game);
 
   const wordIsInvalid = createExpiringBoolean();
   const duration = 0.15;
@@ -71,37 +75,7 @@
 
 <div class="flex flex-auto flex-col gap-2">
   <main class="flex w-full flex-auto flex-col items-center justify-between gap-2 sm:gap-4">
-    <form
-      {...word.enhance(async ({ submit }) => {
-        let saveGameToastId: string | undefined = undefined;
-        data.game.doSumbit();
-        if (data.game.invalid) {
-          return invalidForm();
-        }
-        if (!data.game.success) {
-          return saveGameStateToCookie();
-        }
-
-        try {
-          if (data.user && data.game.success) {
-            saveGameToastId = toastLoading('Saving results...');
-          }
-          await submit();
-          if (saveGameToastId) {
-            toastSuccess('Game results saved', { id: saveGameToastId });
-            setTimeout(() => showModal(), 500);
-          }
-        } catch (error) {
-          if (saveGameToastId) {
-            toastError('Failed to save game results', { id: saveGameToastId });
-          }
-        }
-      })}
-      id="game"
-      bind:this={wordForm}
-      class="my-auto flex w-full max-w-[min(700px,_55vh)]"
-    >
-      <input type="hidden" value={data.game.gameNum} name="gameNum" />
+    <form bind:this={wordForm} class="my-auto flex w-full max-w-[min(700px,_55vh)]">
       <div class="max-w-700 grid w-full grid-rows-[repeat(6,1fr)] gap-2">
         {#each getItemsForGrid() as item (item.index)}
           {@const current = item.index === data.game.answers.length}
@@ -145,9 +119,9 @@
           return;
         }
         data.game.doLetter(parseResult.output);
+        saveGameStateToCookie();
       })}
       class="keyboard grid max-h-40 w-full flex-auto gap-1 sm:max-h-80"
-      id="keyboard"
     >
       <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
         {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
@@ -160,32 +134,55 @@
             <div></div>
           {/if}
         {/each}
-        <Key aria-label="enter" title="enter" form="game" value="Enter">
-          <div class="h-5 w-full lg:h-7">
-            <EnterIcon />
-          </div>
+        <Key
+          aria-label="enter"
+          title="enter"
+          value="Enter"
+          {...word.buttonProps.enhance(async ({ submit }) => {
+            let saveGameToastId: string | undefined = undefined;
+            data.game.doSumbit();
+            if (data.game.invalid) {
+              return invalidForm();
+            }
+            if (!data.game.success) {
+              return saveGameStateToCookie();
+            }
+
+            try {
+              if (data.user && data.game.success) {
+                saveGameToastId = toastLoading('Saving results...');
+              }
+              await submit();
+              if (saveGameToastId) {
+                toastSuccess('Game results saved', { id: saveGameToastId });
+                setTimeout(() => showModal(), 500);
+              }
+            } catch (error) {
+              if (saveGameToastId) {
+                toastError('Failed to save game results', { id: saveGameToastId });
+              }
+            }
+          })}
+        >
+          <span class="pointer-events-none"><EnterIcon class="mx-auto w-5 lg:w-7" /></span>
         </Key>
-        <Key aria-label="undo" title="undo" form="undo-form" value="Backspace">
-          <div class="h-5 w-full lg:h-7">
-            <BackSpaceIcon />
-          </div>
+        <Key
+          value="Backspace"
+          title="backspace"
+          aria-label="backspace"
+          {...undo.buttonProps.enhance(async ({}) => {
+            data.game.doUndo();
+          })}
+        >
+          <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-5 lg:w-7" /></span>
         </Key>
-        {#if data.game.success}
+        {#if data.game.success && browser}
           <Key aria-label="share" title="share" onclick={() => showModal()}>
-            <div class="h-5 w-full lg:h-7">
-              <ShareIcon />
-            </div>
+            <span class="pointer-events-none"><ShareIcon class="mx-auto w-5 lg:w-7" /></span>
           </Key>
         {/if}
       </div>
     </form>
-    <form
-      class="hidden"
-      id="undo-form"
-      {...undo.enhance(async ({}) => {
-        data.game.doUndo();
-      })}
-    ></form>
   </main>
   <MegaModal
     open={!!page.state.showModal}
