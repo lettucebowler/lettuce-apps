@@ -12,8 +12,8 @@ export class WordlettuceGame {
   #gameNum: number = $state(1);
   #guesses: Array<string> = $state([]);
   #currentGuess: string = $state('');
-  #answers: Array<string> = $state([]);
-  #invalid: boolean = $state(false);
+  // #answers: Array<string> = $state([]);
+  // #invalid: boolean = $state(false);
 
   constructor({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) {
     this.replaceState({ gameNum, guesses, currentGuess });
@@ -22,10 +22,7 @@ export class WordlettuceGame {
   replaceState = ({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) => {
     this.#gameNum = gameNum;
     this.#currentGuess = currentGuess;
-    if (guesses) {
-      this.#guesses = guesses;
-      this.#answers = this.#checkWords();
-    }
+    this.#guesses = guesses;
   };
 
   static fromStateString = ({ state, currentGameNum = getGameNum() }: { state: string; currentGameNum?: number }) => {
@@ -57,15 +54,11 @@ export class WordlettuceGame {
   }
 
   get answers() {
-    return this.#answers;
+    return checkWords({ gameNum: this.#gameNum, guesses: this.#guesses });
   }
 
   get success() {
-    return this.#answers.at(-1) === successAnswer;
-  }
-
-  get invalid() {
-    return this.#invalid;
+    return this.answers.at(-1) === successAnswer;
   }
 
   get letterStatuses() {
@@ -116,26 +109,34 @@ export class WordlettuceGame {
 
   doSumbit = () => {
     if (this.success) {
-      return {};
+      return {
+        success: true,
+        invalid: false,
+      };
     }
     const invalid = !isAllowedGuess({ guess: this.#currentGuess });
-    this.#invalid = invalid;
     if (invalid) {
-      return;
+      return {
+        success: false,
+        invalid: true,
+      };
     }
 
     this.#guesses.push(this.#currentGuess);
     this.#currentGuess = '';
-    this.#answers = this.#checkWords();
+    return {
+      success: true,
+      invalid: false,
+    };
   };
+}
 
-  #checkWords = () => {
-    const answer = getGameWord(this.#gameNum);
-    const answers = this.#guesses.map((guess: string) => {
-      return checkWord({ guess, answer });
-    });
-    return answers;
-  };
+function checkWords({ gameNum, guesses }: { gameNum: number; guesses: string[] }) {
+  const answer = getGameWord(gameNum);
+  const answers = guesses.map((guess: string) => {
+    return checkWord({ guess, answer });
+  });
+  return answers;
 }
 
 const getLetterLocations = (s: string, l: string) => {

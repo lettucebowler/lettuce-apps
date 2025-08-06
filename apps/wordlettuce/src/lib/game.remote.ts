@@ -6,10 +6,14 @@ import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from './app-constants';
 import { GuessLetter } from './game-schemas';
 import { createApiWordlettuceServerClient } from './api-wordlettuce.server';
 import { getGameStateFromCookie } from './game.server';
-import { isAllowedGuess } from './words';
 
 export const getGameState = query(async () => {
-  return getGameStateFromCookie();
+  const game = getGameStateFromCookie();
+  return {
+    gameNum: game.gameNum,
+    guesses: game.guesses,
+    currentGuess: game.currentGuess,
+  };
 });
 
 export const letter = form(async (formData) => {
@@ -45,7 +49,7 @@ export const undo = form(async () => {
     invalid: false,
   };
 });
-export const word = form(async (data) => {
+export const word = form(async () => {
   const event = getRequestEvent();
   const game = getGameStateFromCookie();
 
@@ -55,8 +59,8 @@ export const word = form(async (data) => {
       invalid: false,
     };
   }
-  game.doSumbit();
-  if (game.invalid) {
+  const { invalid } = game.doSumbit();
+  if (invalid) {
     return {
       success: false,
       invalid: true,

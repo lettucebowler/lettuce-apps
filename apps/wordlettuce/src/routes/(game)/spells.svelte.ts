@@ -49,6 +49,12 @@ export function createExpiringBoolean({ duration = 150 } = {}) {
         value = false;
       }, duration);
     },
+    falsify() {
+      value = false;
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    },
   };
 }
 
