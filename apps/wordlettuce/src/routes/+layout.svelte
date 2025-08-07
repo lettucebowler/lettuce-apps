@@ -27,8 +27,10 @@
       <NavLink to="/about" label="about" />
       {#if data.authenticated}
         <NavLink to="/profile/{data.user.username}" class="ml-auto">
-          <div class="aspect-square size-11 h-full p-1 transition-all duration-150 hover:p-0 sm:size-14">
-            <div class="overflow-hidden rounded-lg">
+          <div
+            class="grid aspect-square size-8 h-full place-items-center p-1 transition-all duration-150 hover:p-0 sm:size-14"
+          >
+            <div class="aspect-square w-full overflow-hidden rounded sm:rounded-lg">
               <LettuceAvatar name={data.user.username} />
             </div>
           </div>
@@ -37,6 +39,15 @@
         <NavLink to="/signin" class="ml-auto" label="sign in" />
       {/if}
     </NavBar>
-    {@render children()}
+    <div class="size-container flex h-full flex-auto flex-col">
+      {@render children()}
+    </div>
   </div>
 </PageContentContainer>
+
+<style>
+  .size-container {
+    container-type: size;
+    container-name: test;
+  }
+</style>

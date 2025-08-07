@@ -68,13 +68,13 @@
   }
 </script>
 
-<div class="flex flex-auto flex-col gap-2">
-  <main class="flex w-full flex-auto flex-col items-center justify-around gap-2 sm:gap-4">
-    <div class="max-w-176 m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2">
+<main class="game-grid grid flex-auto grid-rows-[1fr_160px] gap-2 sm:gap-4">
+  <div class="size-container grid w-full">
+    <div class="max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2">
       {#each getItemsForGrid() as item (item.index)}
         {@const current = item.index === data.game.answers.length}
         <div
-          class="grid w-full grid-cols-[repeat(5,1fr)] gap-2"
+          class="grid grid-cols-[repeat(5,1fr)] gap-2"
           animate:flip={{ duration: duration * 1000 }}
           data-index={item.index}
         >
@@ -84,8 +84,8 @@
             {@const doWiggleOnce = !browser && word.result?.invalid && current}
             <div
               class={[
-                'bg-charade-950 z-(--z-index) aspect-square min-h-0 w-full rounded-xl',
-                'shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
+                'bg-charade-950 z-(--z-index) rounded-xl',
+                'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
                 !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
                 !item.guess && current && word.result?.invalid && !browser && 'animate-wiggle-once',
               ]}
@@ -104,85 +104,97 @@
         </div>
       {/each}
     </div>
-    <form
-      {...letter.enhance(async ({ data: formData }) => {
-        const key = formData.get('key')?.toString() ?? '';
-        const parseResult = v.safeParse(GameKey, key);
-        if (!parseResult.success) {
-          return;
-        }
-        data.game.doLetter(parseResult.output);
-        saveGameStateToCookie();
-      })}
-      class="keyboard grid max-h-40 w-full flex-auto gap-1 sm:max-h-80"
-    >
-      <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
-        {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
-          {@const status = data.game.letterStatuses[letter]}
-          {#if letter}
-            <Key status={status as LetterStatus} aria-label={letter} title={letter} name="key" value={letter}>
-              {letter}
-            </Key>
-          {:else}
-            <div></div>
-          {/if}
-        {/each}
-        <Key
-          aria-label="enter"
-          title="enter"
-          value="Enter"
-          {...word.buttonProps.enhance(async ({ submit }) => {
-            let saveGameToastId: string | undefined = undefined;
-            data.game.doSumbit();
-            if (data.game.invalid) {
-              return invalidForm();
-            }
-            if (!data.game.success) {
-              return saveGameStateToCookie();
-            }
-
-            try {
-              if (data.user && data.game.success) {
-                saveGameToastId = toastLoading('Saving results...');
-              }
-              await submit();
-              if (saveGameToastId) {
-                toastSuccess('Game results saved', { id: saveGameToastId });
-                setTimeout(() => showModal(), 500);
-              }
-            } catch (error) {
-              if (saveGameToastId) {
-                toastError('Failed to save game results', { id: saveGameToastId });
-              }
-            }
-          })}
-        >
-          <span class="pointer-events-none"><EnterIcon class="mx-auto w-7" /></span>
-        </Key>
-        <Key
-          value="Backspace"
-          title="backspace"
-          aria-label="backspace"
-          {...undo.buttonProps.enhance(async ({}) => {
-            data.game.doUndo();
-          })}
-        >
-          <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
-        </Key>
-        {#if data.game.success && browser}
-          <Key aria-label="share" title="share" onclick={() => showModal()}>
-            <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
+  </div>
+  <form
+    {...letter.enhance(async ({ data: formData }) => {
+      const key = formData.get('key')?.toString() ?? '';
+      const parseResult = v.safeParse(GameKey, key);
+      if (!parseResult.success) {
+        return;
+      }
+      data.game.doLetter(parseResult.output);
+      saveGameStateToCookie();
+    })}
+    class="keyboard grid w-full flex-auto gap-1"
+  >
+    <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
+      {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
+        {@const status = data.game.letterStatuses[letter]}
+        {#if letter}
+          <Key status={status as LetterStatus} aria-label={letter} title={letter} name="key" value={letter}>
+            {letter}
           </Key>
+        {:else}
+          <div></div>
         {/if}
-      </div>
-    </form>
-  </main>
-  <MegaModal
-    open={!!page.state.showModal}
-    onclose={() => history.back()}
-    gameNum={data.game.gameNum}
-    answers={data.game.answers}
-    authenticated={data.authenticated}
-  />
-  <Toaster />
-</div>
+      {/each}
+      <Key
+        aria-label="enter"
+        title="enter"
+        value="Enter"
+        {...word.buttonProps.enhance(async ({ submit }) => {
+          let saveGameToastId: string | undefined = undefined;
+          data.game.doSumbit();
+          if (data.game.invalid) {
+            return invalidForm();
+          }
+          if (!data.game.success) {
+            return saveGameStateToCookie();
+          }
+
+          try {
+            if (data.user && data.game.success) {
+              saveGameToastId = toastLoading('Saving results...');
+            }
+            await submit();
+            if (saveGameToastId) {
+              toastSuccess('Game results saved', { id: saveGameToastId });
+              setTimeout(() => showModal(), 500);
+            }
+          } catch (error) {
+            if (saveGameToastId) {
+              toastError('Failed to save game results', { id: saveGameToastId });
+            }
+          }
+        })}
+      >
+        <span class="pointer-events-none"><EnterIcon class="mx-auto w-7" /></span>
+      </Key>
+      <Key
+        value="Backspace"
+        title="backspace"
+        aria-label="backspace"
+        {...undo.buttonProps.enhance(async ({}) => {
+          data.game.doUndo();
+        })}
+      >
+        <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
+      </Key>
+      {#if data.game.success && browser}
+        <Key aria-label="share" title="share" onclick={() => showModal()}>
+          <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
+        </Key>
+      {/if}
+    </div>
+  </form>
+</main>
+<MegaModal
+  open={!!page.state.showModal}
+  onclose={() => history.back()}
+  gameNum={data.game.gameNum}
+  answers={data.game.answers}
+  authenticated={data.authenticated}
+/>
+<Toaster />
+
+<style>
+  .size-container {
+    container-type: size;
+  }
+
+  @media (height > 1000px) {
+    .game-grid {
+      grid-template-rows: 1fr 240px;
+    }
+  }
+</style>
