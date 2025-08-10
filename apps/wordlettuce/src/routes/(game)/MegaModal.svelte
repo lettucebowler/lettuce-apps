@@ -3,8 +3,9 @@
 
 <script lang="ts">
   import Dialog from '$lib/components/base/Dialog.svelte';
-  import { fly } from 'svelte/transition';
   import { createExpiringString, createNewGameCountDownTimer } from './spells.svelte';
+  import { appName } from '$lib/app-constants';
+  import { getGameStatus } from '$lib/util';
 
   type ModalProps = {
     gameNum: number;
@@ -13,8 +14,6 @@
     open: boolean;
     onclose: () => void;
   };
-
-  import { appName } from '$lib/app-constants';
 
   const { gameNum, answers, authenticated, onclose, open }: ModalProps = $props();
   let attempts = $derived(answers.length);
@@ -36,39 +35,13 @@
     }
 
     navigator.clipboard
-      .writeText(getGameStatus())
+      .writeText(getGameStatus({ gameNum, answers, appName }))
       .then(() => {
         clipboardMessage.write('Copied to clipboard!');
       })
       .catch(() => {
         clipboardMessage.write('Oppsie :(');
       });
-  }
-
-  function getGameStatus() {
-    const today = `${appName} ${gameNum} ${answers.length}/6`;
-    const strings = answers.map((k) => {
-      return k
-        .split('')
-        .map((w) => {
-          return getStatusEmoji(w);
-        })
-        .join('');
-    });
-    return [today, ...strings].join('\n');
-  }
-
-  function getStatusEmoji(status: string) {
-    switch (status) {
-      case 'x':
-        return '🟩';
-      case 'c':
-        return '🟨';
-      case '_':
-      case 'i':
-      default:
-        return '⬛';
-    }
   }
 
   $effect(() => {

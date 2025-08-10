@@ -10,6 +10,8 @@
   let { data } = $props();
   const gameNum = getGameNum();
 
+  let isSelf = $derived(data.user?.username === data.profileUser);
+
   const { getGameResults } = createApiWordlettuceClient({ fetch });
   async function getResults({ start }: { start: number }) {
     return getGameResults({ userID: data.profileUserID, start, limit: 60 });
@@ -54,7 +56,7 @@
       </figcaption>
     </figure>
 
-    {#if data.user?.username === data.profileUser}
+    {#if isSelf}
       <div class="flex justify-center">
         <a
           class="text-snow-100 grid h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"
@@ -73,21 +75,17 @@
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
     </p>
 
-    <div class="mx-auto grid w-full grid-cols-2 justify-center gap-2 px-1 sm:flex sm:flex-wrap sm:gap-3">
+    <div class="mx-auto grid w-full grid-cols-2 gap-2 px-1 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
       {#each data.currentResults as gameResult (gameResult)}
         <div
           class={[
-            'flex flex-col gap-2 sm:shrink-0',
             [7, 4].includes(data.currentResults.length) && 'sm:basis-[calc((100%-36px)/4)]',
             [6, 5, 3].includes(data.currentResults.length) && 'sm:basis-[calc((100%-24px)/4)]',
             [2].includes(data.currentResults.length) && 'sm:basis-[calc((100%-12px)/4)]',
             [1].includes(data.currentResults.length) && 'sm:basis-[25%]',
           ]}
         >
-          <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
-            <span class="text-left">#{gameResult.gameNum}</span><span class="text-right">{gameResult.score} pts</span>
-          </h2>
-          <GameSummary radius="md" answers={gameResult.answers} />
+          <GameSummary {...gameResult} enableShare={isSelf} />
         </div>
       {/each}
     </div>
@@ -100,14 +98,7 @@
       {#if query.data}
         {#each query.data.pages ?? [] as page (page)}
           {#each page.results as gameResult (gameResult)}
-            <div class="flex w-full flex-[1_1_200px] flex-col gap-2 rounded-2xl">
-              <h2 class="text-snow-300 flex justify-between text-center text-xl font-medium">
-                <span class="text-left">#{gameResult.gameNum}</span><span class="text-right"
-                  >{gameResult.score} pts</span
-                >
-              </h2>
-              <GameSummary answers={gameResult.answers} />
-            </div>
+            <GameSummary {...gameResult} enableShare={isSelf} />
           {/each}
         {/each}
       {/if}

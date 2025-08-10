@@ -7,6 +7,7 @@
   import { LettuceAvatar, PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
+  import { Toaster } from 'svelte-french-toast';
   let { data, children } = $props();
 </script>
 
@@ -39,15 +40,7 @@
         <NavLink to="/signin" class="ml-auto" label="sign in" />
       {/if}
     </NavBar>
-    <div class="size-container flex h-full flex-auto flex-col">
-      {@render children()}
-    </div>
+    {@render children()}
   </div>
 </PageContentContainer>
-
-<style>
-  .size-container {
-    container-type: size;
-    container-name: test;
-  }
-</style>
+<Toaster />

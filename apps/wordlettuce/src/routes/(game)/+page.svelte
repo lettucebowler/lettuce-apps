@@ -2,7 +2,6 @@
   import { flip } from 'svelte/animate';
   import Tile from './Tile.svelte';
   import Cookies from 'js-cookie';
-  import { Toaster } from 'svelte-french-toast';
   import { createExpiringBoolean } from './spells.svelte';
   import { browser } from '$app/environment';
   import { toastError, toastLoading, toastSuccess } from './toast';
@@ -185,7 +184,6 @@
   answers={data.game.answers}
   authenticated={data.authenticated}
 />
-<Toaster />
 
 <style>
   .size-container {
