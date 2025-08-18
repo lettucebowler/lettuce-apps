@@ -165,6 +165,7 @@
         aria-label="backspace"
         {...undo.buttonProps.enhance(async ({}) => {
           data.game.doUndo();
+          saveGameStateToCookie();
         })}
       >
         <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>

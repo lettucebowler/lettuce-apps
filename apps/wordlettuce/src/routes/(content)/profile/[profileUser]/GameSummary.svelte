@@ -64,7 +64,7 @@
       class={[
         'hidden',
         shareEnabled &&
-          'absolute bottom-0 left-0 right-0 top-0 col-span-5 col-start-1 row-span-6 row-start-1 grid place-items-center group-hover:grid',
+          'absolute bottom-0 left-0 right-0 top-0 col-span-5 col-start-1 row-span-6 row-start-1 grid cursor-pointer place-items-center group-hover:grid',
       ]}
     >
       <ShareIcon class="text-snow-100 m-auto size-12" />
