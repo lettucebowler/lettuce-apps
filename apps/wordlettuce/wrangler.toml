@@ -13,7 +13,7 @@ binding = "lettuce_auth"
 service = "lettuce-auth"
 
 [placement]
-mode = "smart"
+mode = "off"
 
 [vars]
 NODE_VERSION = "22.14"
