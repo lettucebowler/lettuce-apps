@@ -8,6 +8,8 @@
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
   import { Toaster } from 'svelte-french-toast';
+  import { getGameNum } from '$lib/words';
+  import { browser } from '$app/environment';
   let { data, children } = $props();
 </script>
 
@@ -17,7 +19,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href={smallFavicon} />
   <link rel="mask-icon" href={safariPinnedTabIcon} color="#a3be8c" />
   <meta name="description" content="Lettuce Wordle`" />
-  <title>{appName}</title>
+  <title>{appName}{browser ? ` #${getGameNum()}` : ''}</title>
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
