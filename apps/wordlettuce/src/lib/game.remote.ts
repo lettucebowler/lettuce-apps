@@ -6,32 +6,29 @@ import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from './app-constants';
 import { GuessLetter } from './game-schemas';
 import { createApiWordlettuceServerClient } from './api-wordlettuce.server';
 import { getGameStateFromCookie } from './game.server';
-import { isAllowedGuess } from './words';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie();
 });
 
-export const letter = form(async (formData) => {
-  const game = getGameStateFromCookie();
-  const event = getRequestEvent();
-  const key = formData.get('key');
-  const parseResult = v.safeParse(GuessLetter, key);
+export const letter = form(
+  v.object({
+    key: GuessLetter,
+  }),
+  async ({ key }) => {
+    console.log('key', key);
+    const game = getGameStateFromCookie();
+    const event = getRequestEvent();
 
-  if (!parseResult.success) {
-    return error(400, {
-      message: 'Invalid letter',
-    });
-  }
+    game.doLetter(key);
+    event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
 
-  game.doLetter(parseResult.output);
-  event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
-
-  return {
-    success: false,
-    invalid: false,
-  };
-});
+    return {
+      success: false,
+      invalid: false,
+    };
+  },
+);
 
 export const undo = form(async () => {
   const game = getGameStateFromCookie();
@@ -45,7 +42,8 @@ export const undo = form(async () => {
     invalid: false,
   };
 });
-export const word = form(async (data) => {
+
+export const word = form(async () => {
   const event = getRequestEvent();
   const game = getGameStateFromCookie();
 

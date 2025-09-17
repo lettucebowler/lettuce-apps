@@ -9,5 +9,3 @@ export async function load() {
     game,
   };
 }
-
-// export const ssr = false;
