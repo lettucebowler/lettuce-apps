@@ -11,8 +11,7 @@
   import EnterIcon from '$lib/components/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
-  import * as v from 'valibot';
-  import { GameKey, LetterStatus } from '$lib/game-schemas';
+  import { LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import type { PageProps } from './$types';
   import MegaModal from './MegaModal.svelte';
@@ -80,13 +79,13 @@
           {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
             {@const doWiggle = browser && wordIsInvalid.value && current}
-            {@const doWiggleOnce = !browser && word.result?.invalid && current}
+            {@const doWiggleOnce = !browser && !!Object.keys(word.issues ?? {}).length && current}
             <div
               class={[
                 'bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
                 !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
-                !item.guess && current && word.result?.invalid && !browser && 'animate-wiggle-once',
+                !item.guess && current && !!Object.keys(word.issues ?? {}) && !browser && 'animate-wiggle-once',
               ]}
             >
               <Tile
@@ -104,24 +103,23 @@
       {/each}
     </div>
   </div>
-  <form
-    {...letter.enhance(async ({ data: formData }) => {
-      const key = formData.get('key')?.toString() ?? '';
-      const parseResult = v.safeParse(GameKey, key);
-      if (!parseResult.success) {
-        return;
-      }
-      data.game.doLetter(parseResult.output);
-      saveGameStateToCookie();
-    })}
-    class="keyboard grid w-full flex-auto gap-1"
-  >
+  <form class="keyboard grid w-full flex-auto gap-1" method="POST">
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
-      {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as letter}
-        {@const status = data.game.letterStatuses[letter]}
-        {#if letter}
-          <Key status={status as LetterStatus} aria-label={letter} title={letter} name="key" value={letter}>
-            {letter}
+      {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
+        {@const status = data.game.letterStatuses[l]}
+        {#if l}
+          <Key
+            status={status as LetterStatus}
+            aria-label={l}
+            title={l}
+            name={letter.field('key')}
+            value={l}
+            {...letter.buttonProps.enhance(async (event) => {
+              data.game.doLetter(event.data.key);
+              saveGameStateToCookie();
+            })}
+          >
+            {l}
           </Key>
         {:else}
           <div></div>

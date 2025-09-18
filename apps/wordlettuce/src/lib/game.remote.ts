@@ -16,7 +16,6 @@ export const letter = form(
     key: GuessLetter,
   }),
   async ({ key }) => {
-    console.log('key', key);
     const game = getGameStateFromCookie();
     const event = getRequestEvent();
 

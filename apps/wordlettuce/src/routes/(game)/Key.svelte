@@ -19,7 +19,6 @@
   use:hotKey={{
     key: value?.toString() || '',
     onKeydown() {
-      console.log('el', el);
       el.click();
     },
   }}
