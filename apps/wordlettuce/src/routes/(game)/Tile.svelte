@@ -5,19 +5,10 @@
     doJump?: boolean;
     doWiggle?: boolean;
     doWiggleOnce?: boolean;
-    current: boolean;
     column?: number;
   };
 
-  let {
-    letter = '',
-    answer,
-    doJump = false,
-    doWiggle = false,
-    doWiggleOnce = false,
-    current = false,
-    column = 0,
-  }: TileProps = $props();
+  let { letter = '', answer, doJump = false, doWiggle = false, doWiggleOnce = false, column = 0 }: TileProps = $props();
 
   const delayScale = 0.03;
   const duration = delayScale * 5;
@@ -46,7 +37,6 @@
       answer && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0_/_0.2)]',
     ]}
   >
-    <!-- <input type="hidden" readonly value={letter.toUpperCase()} name={current ? 'guess' : undefined} /> -->
     {letter.toUpperCase()}
   </div>
 </div>

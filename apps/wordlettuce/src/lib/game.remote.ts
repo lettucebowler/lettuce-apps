@@ -2,10 +2,9 @@ import { form, getRequestEvent, query } from '$app/server';
 import { error } from '@sveltejs/kit';
 import * as v from 'valibot';
 
-import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from './app-constants';
 import { GuessLetter } from './game-schemas';
 import { createApiWordlettuceServerClient } from './api-wordlettuce.server';
-import { getGameStateFromCookie } from './game.server';
+import { getGameStateFromCookie, saveGameStateToCookie } from './game.server';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie();
@@ -17,10 +16,10 @@ export const letter = form(
   }),
   async ({ key }) => {
     const game = getGameStateFromCookie();
-    const event = getRequestEvent();
-
     game.doLetter(key);
-    event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
+    saveGameStateToCookie(game);
+
+    await getGameState().refresh();
 
     return {
       success: false,
@@ -32,9 +31,9 @@ export const letter = form(
 export const undo = form(async () => {
   const game = getGameStateFromCookie();
   game.doUndo();
+  saveGameStateToCookie(game);
 
-  const event = getRequestEvent();
-  event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
+  await getGameState().refresh();
 
   return {
     success: false,
@@ -59,7 +58,8 @@ export const word = form(async () => {
       invalid: true,
     };
   }
-  event.cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), STATE_COOKIE_SETTINGS);
+  saveGameStateToCookie(game);
+  await getGameState().refresh();
   if (game.success && event.locals.session) {
     const apiWordlettuce = createApiWordlettuceServerClient(event);
     const inserts = await apiWordlettuce.saveGame({

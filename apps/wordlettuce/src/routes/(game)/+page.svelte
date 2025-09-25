@@ -85,7 +85,7 @@
                 'bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
                 !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
-                !item.guess && current && !!Object.keys(word.issues ?? {}) && !browser && 'animate-wiggle-once',
+                !item.guess && current && !!Object.keys(word.issues ?? {}).length && !browser && 'animate-wiggle-once',
               ]}
             >
               <Tile
@@ -95,7 +95,6 @@
                 {doJump}
                 {doWiggle}
                 {doWiggleOnce}
-                {current}
               />
             </div>
           {/each}
