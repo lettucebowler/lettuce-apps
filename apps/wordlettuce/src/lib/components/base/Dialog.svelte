@@ -5,7 +5,7 @@
 
 <script lang="ts">
   import { focusTrap } from '$lib/actions/focus-trap.svelte';
-  import { escapeKey } from '$lib/actions/escape-key.svelte';
+  import { escapeKey } from '$lib/attachments.svelte';
   import { outsideClick } from '$lib/actions/outside-click.svelte';
   import type { Snippet } from 'svelte';
   import { fade, scale } from 'svelte/transition';
@@ -35,12 +35,12 @@
   >
     <!-- DIALOG CONTAINER -->
     <div
-      use:focusTrap
-      use:escapeKey={() => {
+      {@attach escapeKey(() => {
         if (open) {
           onclose();
         }
-      }}
+      })}
+      use:focusTrap
       use:outsideClick={() => {
         if (open) {
           onclose();
