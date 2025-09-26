@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { LetterStatus } from '$lib/game-schemas';
   import type { HTMLButtonAttributes } from 'svelte/elements';
-  import { hotKey } from '$lib/actions/hot-key.svelte';
+  import { hotKey } from '$lib/attachments.svelte';
 
   type KeyProps = {
     status?: LetterStatus;
@@ -12,16 +12,18 @@
   let el: HTMLButtonElement;
 </script>
 
-<button
-  bind:this={el}
-  {value}
-  {...rest}
-  use:hotKey={{
+<svelte:body
+  {@attach hotKey({
     key: value?.toString() || '',
     onKeydown() {
       el.click();
     },
-  }}
+  })}
+/>
+<button
+  bind:this={el}
+  {value}
+  {...rest}
   style="--keyboard-height: 1px; --highlight-color: var({status === 'x'
     ? '--color-swamp-green-200'
     : status === 'c'

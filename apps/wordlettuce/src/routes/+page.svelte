@@ -129,6 +129,9 @@
         title="enter"
         value="Enter"
         {...word.buttonProps.enhance(async ({ submit }) => {
+          if (data.game.success) {
+            return;
+          }
           let saveGameToastId: string | undefined = undefined;
           data.game.doSumbit();
           if (data.game.invalid) {

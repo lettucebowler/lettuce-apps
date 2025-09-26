@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { infiniteScrollAction } from './actions.js';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import GameSummary from './GameSummary.svelte';
   import { browser } from '$app/environment';
   import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
   import { createApiWordlettuceClient } from '$lib/api-wordlettuce';
+  import { infiniteScroll } from './infinite-scroll.svelte.js';
 
   let { data } = $props();
   const gameNum = getGameNum();
@@ -34,7 +34,7 @@
 </script>
 
 <svelte:body
-  use:infiniteScrollAction={{
+  {@attach infiniteScroll({
     distance: 1000,
     cb: () => {
       if (!query.isFetchingNextPage) {
@@ -43,7 +43,7 @@
     },
     immediate: true,
     disabled: !data.next || data.start !== gameNum || !query.hasNextPage,
-  }}
+  })}
 />
 <main class="flex w-full flex-col gap-8">
   <div>
