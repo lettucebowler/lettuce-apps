@@ -168,7 +168,7 @@
         <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
       </Key>
       {#if data.game.success && browser}
-        <Key aria-label="share" title="share" onclick={() => showModal()}>
+        <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
           <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
         </Key>
       {/if}

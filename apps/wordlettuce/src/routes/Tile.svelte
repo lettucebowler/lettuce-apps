@@ -30,7 +30,7 @@
 >
   <div
     class={[
-      'text-charade-100 delay-(--transition-delay) grid h-full w-full items-center rounded-xl text-center text-2xl font-bold transition transition-all duration-0 sm:text-3xl',
+      'text-charade-100 delay-(--transition-delay) grid h-full w-full items-center rounded-xl text-center text-2xl font-bold transition-all duration-0 sm:text-3xl',
       answer === 'x' && 'bg-swamp-green-500 text-swamp-green-800',
       answer === 'c' && 'bg-putty-500 text-putty-800',
       answer === 'i' && 'bg-charade-700',

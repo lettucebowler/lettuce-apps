@@ -3,7 +3,7 @@
   import ShareIcon from '$lib/components/ShareIcon.svelte';
   import { getGameStatus } from '$lib/util';
   import { appName } from '$lib/app-constants';
-  import { toastError, toastSuccess } from '../../../(game)/toast';
+  import { toastError, toastSuccess } from '../../toast';
 
   type GameSummaryProps = {
     answers: string;
