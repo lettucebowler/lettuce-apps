@@ -12,8 +12,11 @@
       {page.params.profileUser}
     </figcaption>
   </figure>
-
+  <h1 class="text-snow-300 text-center text-3xl font-bold">Oh no!</h1>
   <p class="text-snow-300 text-center text-xl">
-    This user was not found, but if we did find them, they'd have a pretty cool auto-generated avatar!
+    If you were trying to look at someone's profile, you have found the wrong place. <a
+      class="text-swamp-green-500"
+      href="/signin">Sign in</a
+    > to view your own profile.
   </p>
 </main>

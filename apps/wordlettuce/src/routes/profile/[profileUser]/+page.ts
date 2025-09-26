@@ -6,6 +6,7 @@ export async function load(event) {
   const searchParams = event.url.searchParams;
   const gameNum = getGameNum();
   const startParam = Number(searchParams.get('start')) || gameNum;
+  const prevStart = Number(searchParams.get('prevStart')) || null;
   const { getGameResults } = createApiWordlettuceClient(event);
   const { results, limit } = await getGameResults({ username: profileUser, start: startParam, limit: 37 });
   const currentResults = startParam === gameNum ? results.filter((result) => result.gameNum > getGameNum() - 7) : [];
@@ -15,6 +16,7 @@ export async function load(event) {
     profileUserID: results.at(0)?.userID!,
     currentResults,
     pastResults,
+    prevStart,
     next: pastResults.length ? pastResults.at(-1)!.gameNum - 1 : null,
     limit,
     start: startParam,
