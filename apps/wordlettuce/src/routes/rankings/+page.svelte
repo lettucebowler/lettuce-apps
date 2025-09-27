@@ -2,7 +2,12 @@
   import FireIcon from '$lib/components/FireIcon.svelte';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import Spinner from '../Spinner.svelte';
-  let { data } = $props();
+  import { getRankings } from '$lib/game.remote';
+  import { delay } from '$lib/util';
+
+  const rankingsPromise = getRankings();
+  const result = await Promise.race([delay(150), rankingsPromise]);
+  const rankings = result ? result : rankingsPromise;
 </script>
 
 <main class="grid gap-8">
@@ -11,7 +16,7 @@
     Each successful game earns 1 point, plus a bonus point for the number of guesses under 6 it took to guess the word.
     6 guesses is 1 point. 5 guesses is 2 points, etc. Score below is total of last 7 days.
   </p>
-  {#await data.rankings}
+  {#await rankings}
     <Spinner />
   {:then rankings}
     {#if rankings?.length}

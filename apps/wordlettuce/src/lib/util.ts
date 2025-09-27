@@ -30,3 +30,7 @@ export function getStatusEmoji(status: string) {
       return '⬛';
   }
 }
+
+export function delay(ms: number): Promise<undefined> {
+  return new Promise((res) => setTimeout(res, ms));
+}

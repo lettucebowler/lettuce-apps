@@ -3,11 +3,15 @@ import { error } from '@sveltejs/kit';
 import * as v from 'valibot';
 
 import { GuessLetter } from './game-schemas';
-import { createApiWordlettuceServerClient } from './api-wordlettuce.server';
+import * as apiWordlettuce from './api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from './game.server';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie();
+});
+
+export const getRankings = query(async () => {
+  return apiWordlettuce.getRankings();
 });
 
 export const letter = form(
@@ -61,7 +65,6 @@ export const word = form(async () => {
   saveGameStateToCookie(game);
   await getGameState().refresh();
   if (game.success && event.locals.session) {
-    const apiWordlettuce = createApiWordlettuceServerClient(event);
     const inserts = await apiWordlettuce.saveGame({
       answers: game.answers.join(''),
       userID: event.locals.session.userID,
