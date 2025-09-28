@@ -3,7 +3,7 @@
 </script>
 
 <main class="grid gap-8">
-  <h1 class="text-snow-300 text-center text-3xl font-bold">About {appName}</h1>
+  <h1 class="text-snow-300 mt-4 text-center text-3xl font-bold">About {appName}</h1>
   <p class="text-snow-300 box-border px-4 text-left text-lg">
     I wrote this app because the real wordle got blocked on my work network and I wanted to keep playing and sharing
     scores with my coworkers.

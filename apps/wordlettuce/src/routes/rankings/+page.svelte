@@ -1,54 +1,46 @@
 <script lang="ts">
   import FireIcon from '$lib/components/FireIcon.svelte';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
-  import Spinner from '../Spinner.svelte';
   import { getRankings } from '$lib/game.remote';
-  import { delay } from '$lib/util';
 
-  const rankingsPromise = getRankings();
-  const result = await Promise.race([delay(150), rankingsPromise]);
-  const rankings = result ? result : rankingsPromise;
+  const rankings = $state(await getRankings());
 </script>
 
 <main class="grid gap-8">
-  <h1 class="text-snow-300 text-center text-3xl font-bold">LeaderBoard</h1>
+  <h1 class="text-snow-300 mt-4 text-center text-3xl font-bold">LeaderBoard</h1>
   <p class="text-snow-300 box-border px-4 text-left text-lg">
     Each successful game earns 1 point, plus a bonus point for the number of guesses under 6 it took to guess the word.
     6 guesses is 1 point. 5 guesses is 2 points, etc. Score below is total of last 7 days.
   </p>
-  {#await rankings}
-    <Spinner />
-  {:then rankings}
-    {#if rankings?.length}
-      <div class="text-snow-200 mx-auto w-full rounded-xl sm:text-xl">
-        {#each rankings as ranking, i (i)}
-          {@const position = rankings.filter((s) => s.score > ranking.score).length + 1}
-          <a
-            class="bg-charade-900 hover:bg-charade-950 not-last:border-b not-last:border-charade-600 block px-4 py-2 first:rounded-t-xl last:rounded-b-xl"
-            href={`/profile/${ranking.user}`}
-          >
-            <div class="flex items-center gap-4">
-              #{position}
-              <div class="bg-charade-700 size-8 overflow-hidden rounded shadow-md sm:size-11">
-                <LettuceAvatar name={ranking.user} />
-              </div>
-              {ranking.user}
-              {#if position === 1}
-                <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
-                  <FireIcon />
-                </div>
-              {/if}
-              <span class="ml-auto text-right">
-                {ranking.score}pts
-              </span>
+  {#if rankings?.length}
+    <div class="text-snow-200 mx-auto w-full rounded-xl sm:text-xl">
+      {#each rankings as ranking, i (i)}
+        {@const position = i + 1}
+        <a
+          class="bg-charade-900 hover:bg-charade-950 not-last:border-b not-last:border-charade-600 block px-4 py-2 first:rounded-t-xl last:rounded-b-xl"
+          href={`/profile/${ranking.user}`}
+        >
+          <div class="flex items-center gap-4">
+            #{position}
+            <div class="bg-charade-700 size-8 overflow-hidden rounded shadow-md sm:size-11">
+              <LettuceAvatar name={ranking.user} />
             </div>
-          </a>
-        {/each}
-      </div>
-    {:else}
-      <p class="text-snow-300 box-border px-4 text-left text-lg">
-        No game results from the last 7 days. Play now and take the #1 spot!
-      </p>
-    {/if}
-  {/await}
+            {ranking.user}
+            {#if position === 1}
+              <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
+                <FireIcon />
+              </div>
+            {/if}
+            <span class="ml-auto text-right">
+              {ranking.score}pts
+            </span>
+          </div>
+        </a>
+      {/each}
+    </div>
+  {:else}
+    <p class="text-snow-300 box-border px-4 text-left text-lg">
+      No game results from the last 7 days. Play now and take the #1 spot!
+    </p>
+  {/if}
 </main>
