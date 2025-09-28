@@ -2,16 +2,12 @@ import { form, getRequestEvent, query } from '$app/server';
 import { error } from '@sveltejs/kit';
 import * as v from 'valibot';
 
-import { GuessLetter } from './game-schemas';
-import * as apiWordlettuce from './api-wordlettuce.server';
-import { getGameStateFromCookie, saveGameStateToCookie } from './game.server';
+import { GuessLetter } from '$lib/game-schemas';
+import * as apiWordlettuce from '$lib/api-wordlettuce.server';
+import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 
-export const getGameState = query(async () => {
+export const getGameState = query(v.object({}), async () => {
   return getGameStateFromCookie();
-});
-
-export const getRankings = query(async () => {
-  return apiWordlettuce.getRankings();
 });
 
 export const letter = form(
@@ -23,7 +19,7 @@ export const letter = form(
     game.doLetter(key);
     saveGameStateToCookie(game);
 
-    await getGameState().refresh();
+    await getGameState({}).refresh();
 
     return {
       success: false,
@@ -37,7 +33,7 @@ export const undo = form(async () => {
   game.doUndo();
   saveGameStateToCookie(game);
 
-  await getGameState().refresh();
+  await getGameState({}).refresh();
 
   return {
     success: false,
@@ -63,24 +59,26 @@ export const word = form(async () => {
     };
   }
   saveGameStateToCookie(game);
-  await getGameState().refresh();
-  if (game.success && event.locals.session) {
+  await getGameState({}).refresh();
+  if (!game.success) {
+    return {
+      invalid: false,
+      success: false,
+    };
+  }
+  if (event.locals.session) {
     const inserts = await apiWordlettuce.saveGame({
       answers: game.answers.join(''),
       userID: event.locals.session.userID,
       gameNum: game.gameNum,
     });
+    console.log(inserts);
     if (!inserts.length) {
       error(500, { message: 'Error saving to database' });
     }
-    return {
-      success: true,
-      invalid: false,
-    };
-  } else {
-    return {
-      success: false,
-      invalid: false,
-    };
   }
+  return {
+    success: true,
+    invalid: false,
+  };
 });

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
+  import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
   import smallFavicon from '$lib/assets/favicon-16x16.png';
   import bigFavicon from '$lib/assets/favicon-32x32.png';
   import appleTouchIcon from '$lib/assets/apple-touch-icon.png';
@@ -9,8 +11,20 @@
   import '../app.css';
   import { Toaster } from 'svelte-french-toast';
   import { getGameNum } from '$lib/words';
-  import { browser } from '$app/environment';
+  import { getSession } from './auth.remote';
+
   let { data, children } = $props();
+  const session = await getSession({});
+
+  let queryClient = $state(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          enabled: browser,
+        },
+      },
+    }),
+  );
 </script>
 
 <svelte:head>
@@ -28,13 +42,13 @@
       <NavLink to="/" label="home" />
       <NavLink to="/rankings" label="rankings" />
       <NavLink to="/about" label="about" />
-      {#if data.authenticated}
-        <NavLink to="/profile/{data.user.username}" class="ml-auto">
+      {#if session.authenticated}
+        <NavLink to="/profile/{session.user.username}" class="ml-auto">
           <div
             class="grid aspect-square size-8 h-full place-items-center p-1 transition-all duration-150 hover:p-0 sm:size-14"
           >
             <div class="aspect-square w-full overflow-hidden rounded sm:rounded-lg">
-              <LettuceAvatar name={data.user.username} />
+              <LettuceAvatar name={session.user.username} />
             </div>
           </div>
         </NavLink>
@@ -42,7 +56,9 @@
         <NavLink to="/signin" class="ml-auto" label="sign in" />
       {/if}
     </NavBar>
-    {@render children()}
+    <QueryClientProvider client={queryClient}>
+      {@render children()}
+    </QueryClientProvider>
   </div>
 </PageContentContainer>
 <Toaster />

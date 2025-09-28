@@ -13,11 +13,12 @@
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import { LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
-  import type { PageProps } from './$types';
   import MegaModal from './MegaModal.svelte';
-  import { letter, undo, word } from '$lib/game.remote';
+  import { getGameState, letter, undo, word } from './game.remote';
+  import { getSession } from './auth.remote';
 
-  let { data = $bindable() }: PageProps = $props();
+  const game = await getGameState({});
+  const session = await getSession({});
 
   const wordIsInvalid = createExpiringBoolean();
   const duration = 0.15;
@@ -29,7 +30,7 @@
   }
 
   function saveGameStateToCookie() {
-    Cookies.set(STATE_COOKIE_NAME_V2, data.game.toStateString(), {
+    Cookies.set(STATE_COOKIE_NAME_V2, game.toStateString(), {
       path: '/',
       httpOnly: false,
       expires: 1,
@@ -43,22 +44,22 @@
   }
 
   function getItemsForGrid() {
-    const maxPreviousGuesses = data.game.success ? 6 : 5;
+    const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
 
-    const previousGuesses = data.game.guesses.map((guess, index) => ({ index, guess })).slice(-1 * maxPreviousGuesses);
-    const currentGuesses = data.game.success
+    const previousGuesses = game.guesses.map((guess, index) => ({ index, guess })).slice(-1 * maxPreviousGuesses);
+    const currentGuesses = game.success
       ? []
       : [
           {
-            index: data.game.guesses.length,
-            guess: data.game.currentGuess,
+            index: game.guesses.length,
+            guess: game.currentGuess,
           },
         ];
     const fillerGuesses = Array(maxFillerGuesses)
       .fill(null)
       .map((_, index) => ({
-        index: data.game.guesses.length + (data.game.success ? 0 : 1) + index,
+        index: game.guesses.length + (game.success ? 0 : 1) + index,
         guess: '',
       }));
     const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses].filter(Boolean).slice(0, 6);
@@ -70,14 +71,14 @@
   <div class="size-container grid w-full">
     <div class="max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2">
       {#each getItemsForGrid() as item (item.index)}
-        {@const current = item.index === data.game.answers.length}
+        {@const current = item.index === game.answers.length}
         <div
           class="grid grid-cols-[repeat(5,1fr)] gap-2"
           animate:flip={{ duration: duration * 1000 }}
           data-index={item.index}
         >
           {#each item.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-            {@const doJump = browser && data.game.answers.at(item.index)?.length === 5}
+            {@const doJump = browser && game.answers.at(item.index)?.length === 5}
             {@const doWiggle = browser && wordIsInvalid.value && current}
             {@const doWiggleOnce = !browser && !!Object.keys(word.issues ?? {}).length && current}
             <div
@@ -90,7 +91,7 @@
             >
               <Tile
                 letter={letter === ' ' ? '' : letter}
-                answer={data.game.answers.at(item.index)?.charAt(j)}
+                answer={game.answers.at(item.index)?.charAt(j)}
                 column={j}
                 {doJump}
                 {doWiggle}
@@ -105,7 +106,7 @@
   <form class="keyboard grid w-full flex-auto gap-1" method="POST">
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
       {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
-        {@const status = data.game.letterStatuses[l]}
+        {@const status = game.letterStatuses[l]}
         {#if l}
           <Key
             status={status as LetterStatus}
@@ -114,7 +115,7 @@
             name={letter.field('key')}
             value={l}
             {...letter.buttonProps.enhance(async (event) => {
-              data.game.doLetter(event.data.key);
+              game.doLetter(event.data.key);
               saveGameStateToCookie();
             })}
           >
@@ -129,20 +130,20 @@
         title="enter"
         value="Enter"
         {...word.buttonProps.enhance(async ({ submit }) => {
-          if (data.game.success) {
+          if (game.success) {
             return;
           }
           let saveGameToastId: string | undefined = undefined;
-          data.game.doSumbit();
-          if (data.game.invalid) {
+          game.doSumbit();
+          if (game.invalid) {
             return invalidForm();
           }
-          if (!data.game.success) {
+          if (!game.success) {
             return saveGameStateToCookie();
           }
 
           try {
-            if (data.user && data.game.success) {
+            if (session.authenticated && game.success) {
               saveGameToastId = toastLoading('Saving results...');
             }
             await submit();
@@ -164,13 +165,13 @@
         title="backspace"
         aria-label="backspace"
         {...undo.buttonProps.enhance(async ({}) => {
-          data.game.doUndo();
+          game.doUndo();
           saveGameStateToCookie();
         })}
       >
         <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
       </Key>
-      {#if data.game.success && browser}
+      {#if game.success && browser}
         <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
           <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
         </Key>
@@ -181,9 +182,9 @@
 <MegaModal
   open={!!page.state.showModal}
   onclose={() => history.back()}
-  gameNum={data.game.gameNum}
-  answers={data.game.answers}
-  authenticated={data.authenticated}
+  gameNum={game.gameNum}
+  answers={game.answers}
+  authenticated={session.authenticated}
 />
 
 <style>
