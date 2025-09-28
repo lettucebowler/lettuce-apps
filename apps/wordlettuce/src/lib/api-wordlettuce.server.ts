@@ -3,6 +3,7 @@ import { API_WORDLETTUCE_TOKEN } from '$env/static/private';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 import { getRequestEvent } from '$app/server';
+import ky from 'ky';
 
 function createClient() {
   const event = getRequestEvent();
@@ -12,6 +13,14 @@ function createClient() {
     headers: {
       Authorization: `Bearer ${API_WORDLETTUCE_TOKEN}`,
     },
+  });
+}
+
+function createKYClient() {
+  const event = getRequestEvent();
+  return ky.create({
+    prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
+    fetch: event.fetch,
   });
 }
 
@@ -41,9 +50,10 @@ export async function saveGame({ userID, gameNum, answers }: SaveGameInput) {
 }
 
 export async function getRankings() {
-  const api = createClient();
-  const rankingsResponse = await api.get<{ rankings: Array<{ user: string; games: number; score: number }> }>(
+  const client = createKYClient();
+  const rankingsResponse = await client.get<{ rankings: Array<{ user: string; games: number; score: number }> }>(
     'v2/rankings',
   );
-  return rankingsResponse.rankings;
+  const rankingsJson = await rankingsResponse.json();
+  return rankingsJson.rankings;
 }
