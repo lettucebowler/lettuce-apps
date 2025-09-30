@@ -13,8 +13,8 @@
   import { getGameNum } from '$lib/words';
   import { getSession } from './auth.remote';
 
-  let { data, children } = $props();
-  const session = await getSession({});
+  let { children } = $props();
+  const session = $derived(await getSession());
 
   let queryClient = $state(
     new QueryClient({

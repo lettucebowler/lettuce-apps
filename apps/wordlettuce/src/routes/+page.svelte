@@ -16,9 +16,15 @@
   import MegaModal from './MegaModal.svelte';
   import { getGameState, letter, undo, word } from './game.remote';
   import { getSession } from './auth.remote';
+  import FireIcon from '$lib/components/FireIcon.svelte';
+  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
 
-  const game = await getGameState({});
-  const session = await getSession({});
+  const [game, session] = $derived(
+    await Promise.all([getGameState(), getSession()]).then(([gameState, session]) => [
+      new WordlettuceGame(gameState),
+      session,
+    ]),
+  );
 
   const wordIsInvalid = createExpiringBoolean();
   const duration = 0.15;
@@ -158,7 +164,7 @@
           }
         })}
       >
-        <span class="pointer-events-none"><EnterIcon class="mx-auto w-7" /></span>
+        <EnterIcon class="mx-auto w-7" />
       </Key>
       <Key
         value="Backspace"
@@ -169,11 +175,23 @@
           saveGameStateToCookie();
         })}
       >
-        <span class="pointer-events-none"><BackSpaceIcon class="mx-auto w-7" /></span>
+        <BackSpaceIcon class="mx-auto w-7" />
       </Key>
       {#if game.success && browser}
         <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
-          <span class="pointer-events-none"><ShareIcon class="mx-auto w-7" /></span>
+          <ShareIcon class="mx-auto w-7" />
+        </Key>
+      {:else}
+        <Key
+          aria-label="test"
+          title="test"
+          onclick={() => {
+            getSession().set({ authenticated: false, user: undefined });
+            getGameState().set(new WordlettuceGame().toState());
+          }}
+          type="button"
+        >
+          <FireIcon class="mx-auto w-7" />
         </Key>
       {/if}
     </div>

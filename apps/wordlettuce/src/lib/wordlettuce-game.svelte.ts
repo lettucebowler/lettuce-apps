@@ -2,8 +2,8 @@ import { successAnswer } from '$lib/app-constants';
 import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
 import { GuessLetter } from '$lib/game-schemas';
 
-type WordlettuceGameConstructorArgs = {
-  gameNum: number;
+export type WordlettuceGameConstructorArgs = {
+  gameNum?: number;
   currentGuess?: string;
   guesses?: Array<string>;
 };
@@ -15,12 +15,12 @@ export class WordlettuceGame {
   #answers: Array<string> = $state([]);
   #invalid: boolean = $state(false);
 
-  constructor({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) {
+  constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs = {}) {
     this.replaceState({ gameNum, guesses, currentGuess });
   }
 
   replaceState = ({ gameNum, guesses = [], currentGuess = '' }: WordlettuceGameConstructorArgs) => {
-    this.#gameNum = gameNum;
+    this.#gameNum = gameNum ?? getGameNum();
     this.#currentGuess = currentGuess;
     if (guesses) {
       this.#guesses = guesses;
@@ -94,10 +94,18 @@ export class WordlettuceGame {
     return { ...incorrect, ...contains, ...correct };
   }
 
-  toStateString = () => {
+  toStateString() {
     const state = `${this.#gameNum};${this.#guesses.join(',')};${this.#currentGuess}`;
     return btoa(state);
-  };
+  }
+
+  toState(): WordlettuceGameConstructorArgs {
+    return {
+      gameNum: this.#gameNum,
+      guesses: this.#guesses,
+      currentGuess: this.#currentGuess,
+    };
+  }
 
   doLetter = (letter: GuessLetter) => {
     if (this.success || this.#currentGuess.length >= 5) {

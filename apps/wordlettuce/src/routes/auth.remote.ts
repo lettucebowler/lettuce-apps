@@ -1,7 +1,6 @@
 import { getRequestEvent, query } from '$app/server';
-import * as v from 'valibot';
 
-export const getSession = query(v.object({}), async () => {
+export const getSession = query(async () => {
   const event = getRequestEvent();
   if (!event.locals.session) {
     return {

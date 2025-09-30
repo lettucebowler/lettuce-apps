@@ -13,7 +13,7 @@
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
   const profileData = await getProfileData({ profileUser: params.profileUser, start });
-  const session = await getSession({});
+  const session = await getSession();
 
   let isSelf = $derived(session.user?.username === profileData.profileUser);
 

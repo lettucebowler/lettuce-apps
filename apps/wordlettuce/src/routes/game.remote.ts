@@ -6,8 +6,8 @@ import { GuessLetter } from '$lib/game-schemas';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 
-export const getGameState = query(v.object({}), async () => {
-  return getGameStateFromCookie();
+export const getGameState = query(async () => {
+  return getGameStateFromCookie().toState();
 });
 
 export const letter = form(
@@ -19,7 +19,7 @@ export const letter = form(
     game.doLetter(key);
     saveGameStateToCookie(game);
 
-    await getGameState({}).refresh();
+    await getGameState().refresh();
 
     return {
       success: false,
@@ -33,7 +33,7 @@ export const undo = form(async () => {
   game.doUndo();
   saveGameStateToCookie(game);
 
-  await getGameState({}).refresh();
+  await getGameState().refresh();
 
   return {
     success: false,
@@ -59,7 +59,7 @@ export const word = form(async () => {
     };
   }
   saveGameStateToCookie(game);
-  await getGameState({}).refresh();
+  await getGameState().refresh();
   if (!game.success) {
     return {
       invalid: false,

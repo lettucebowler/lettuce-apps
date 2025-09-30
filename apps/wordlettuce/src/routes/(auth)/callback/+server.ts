@@ -33,5 +33,7 @@ export async function GET(event) {
     console.error(e);
     // do nothing
   }
-  return redirect(302, `${event.url.origin}/`);
+  const referrer = event.cookies.get('signin-referrer');
+  event.cookies.delete('signin-referrer', { path: '/' });
+  return redirect(302, `${event.url.origin}${referrer ?? ''}`);
 }
