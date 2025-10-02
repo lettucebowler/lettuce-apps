@@ -3,7 +3,7 @@
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import { getRankings } from './rankings.remote';
 
-  const rankings = await getRankings({});
+  const rankings = await getRankings();
 </script>
 
 <main class="grid gap-8">

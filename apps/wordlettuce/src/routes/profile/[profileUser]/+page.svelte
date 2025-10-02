@@ -12,8 +12,10 @@
   const { params } = $props();
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
-  const profileData = await getProfileData({ profileUser: params.profileUser, start });
-  const session = await getSession();
+  const [profileData, session] = await Promise.all([
+    getProfileData({ profileUser: params.profileUser, start }),
+    getSession(),
+  ]);
 
   let isSelf = $derived(session.user?.username === profileData.profileUser);
 

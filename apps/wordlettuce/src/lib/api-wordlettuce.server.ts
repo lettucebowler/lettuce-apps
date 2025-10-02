@@ -6,7 +6,7 @@ import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
 
-function createKYClient() {
+function createAPIWordlettuceClient() {
   const event = getRequestEvent();
   return ky.create({
     prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
@@ -19,7 +19,7 @@ function createKYClient() {
 
 export async function saveGame({ userID, gameNum, answers }: SaveGameInput): Promise<SaveGameOutput> {
   try {
-    const client = createKYClient();
+    const client = createAPIWordlettuceClient();
     const saveGameResponse = await client
       .post<SaveGameOutput[number]>('v1/game-results', { json: { userID, gameNum, answers } })
       .json();
@@ -33,7 +33,7 @@ export async function saveGame({ userID, gameNum, answers }: SaveGameInput): Pro
 }
 
 export async function getRankings(_: GetRankingsInput): Promise<GetRankingsOutput> {
-  const client = createKYClient();
+  const client = createAPIWordlettuceClient();
   const rankingsResponse = await client.get<{ rankings: GetRankingsOutput }>('v2/rankings').json();
   return rankingsResponse.rankings;
 }
@@ -44,7 +44,7 @@ export async function getGameResults({
   limit = 30,
   start,
 }: GetGameResultsInput): Promise<GetGameResultsOutput> {
-  const client = createKYClient();
+  const client = createAPIWordlettuceClient();
   return client
     .get<GetGameResultsOutput>('v1/game-results', {
       searchParams: userID ? { userID, start, limit } : { username: username!, start, limit },
