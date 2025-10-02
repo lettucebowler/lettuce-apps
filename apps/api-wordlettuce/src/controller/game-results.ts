@@ -38,7 +38,7 @@ gameResultsController.get(
   '/',
   sValidator('query', GetGameResultsQuerySchema),
   async (c, next) => {
-    const { username, start } = c.req.valid('query');
+    const { start } = c.req.valid('query');
     const gameNum = getGameNum();
     const gameNumMatch = start === gameNum;
     if (gameNumMatch) {
@@ -59,11 +59,11 @@ gameResultsController.get(
       const client = createLettuceAuthClient(c);
       const { user, error } = await client.getUser(username);
       if (error) {
-        if (error.status === 404) {
+        if (error.response.status === 404) {
           throw new HTTPException(404, { message: `User ${username} not found` });
         }
         throw new HTTPException(
-          (error?.status as ContentfulStatusCode) ?? 500,
+          (error?.response.status as ContentfulStatusCode) ?? 500,
           error?.message ? { message: error.message } : undefined,
         );
       }

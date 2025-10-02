@@ -2,6 +2,7 @@ import { query } from '$app/server';
 import * as v from 'valibot';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameNum } from '$lib/words';
+import type { HTTPError } from 'ky';
 
 export const getProfileData = query(
   v.object({
@@ -10,7 +11,9 @@ export const getProfileData = query(
   }),
   async ({ profileUser, start }) => {
     const gameNum = getGameNum();
-    const { results, limit } = await apiWordlettuce.getGameResults({ username: profileUser, start: start, limit: 37 });
+    const { results, limit } = await apiWordlettuce
+      .getGameResults({ username: profileUser, start: start, limit: 37 })
+      .catch(() => ({ results: [], limit: 30 }));
     const currentResults = start === gameNum ? results.filter((result) => result.gameNum > getGameNum() - 7) : [];
     const pastResults = results.slice(currentResults.length).slice(0, 30);
     return {

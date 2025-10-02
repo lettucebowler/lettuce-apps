@@ -141,7 +141,11 @@
     </div>
   {/if}
 
-  {#if !profileData.currentResults.length && !profileData.pastResults.length}
+  {#if !profileData.profileUserID}
+    <p class="text-snow-300 text-center text-xl">
+      This user was not found, but if we did find them, they'd have a pretty cool auto-generated avatar!
+    </p>
+  {:else if !profileData.currentResults.length && !profileData.pastResults.length}
     <div class="text-snow-300 col-span-3 text-center text-lg font-medium">This user has no play history</div>
   {/if}
 </main>

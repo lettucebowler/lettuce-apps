@@ -1,20 +1,12 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
-  import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
-
+  import Error from './+error.svelte';
   let { children } = $props();
-
-  let queryClient = $state(
-    new QueryClient({
-      defaultOptions: {
-        queries: {
-          enabled: browser,
-        },
-      },
-    }),
-  );
 </script>
 
-<QueryClientProvider client={queryClient}>
+<svelte:boundary>
   {@render children()}
-</QueryClientProvider>
+
+  {#snippet failed()}
+    <Error />
+  {/snippet}
+</svelte:boundary>
