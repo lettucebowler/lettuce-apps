@@ -5,6 +5,8 @@ import * as v from 'valibot';
 import { GuessLetter } from '$lib/game-schemas';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
+import { isAllowedGuess } from '$lib/words';
+import { WordFormInput } from './game.schemas';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie().toState();
@@ -41,7 +43,7 @@ export const undo = form(async () => {
   };
 });
 
-export const word = form(async () => {
+export const word = form(WordFormInput, async ({ word }) => {
   const event = getRequestEvent();
   const game = getGameStateFromCookie();
 
@@ -51,8 +53,8 @@ export const word = form(async () => {
       invalid: false,
     };
   }
-  game.doSumbit();
-  if (game.invalid) {
+  const { success, invalid } = game.doWord(word);
+  if (invalid) {
     return {
       success: false,
       invalid: true,
@@ -60,7 +62,7 @@ export const word = form(async () => {
   }
   saveGameStateToCookie(game);
   await getGameState().refresh();
-  if (!game.success) {
+  if (!success) {
     return {
       invalid: false,
       success: false,
@@ -72,7 +74,6 @@ export const word = form(async () => {
       userID: event.locals.session.userID,
       gameNum: game.gameNum,
     });
-    console.log(inserts);
     if (!inserts.length) {
       error(500, { message: 'Error saving to database' });
     }

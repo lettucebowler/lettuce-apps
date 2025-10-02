@@ -16,15 +16,12 @@
   import MegaModal from './MegaModal.svelte';
   import { getGameState, letter, undo, word } from './game.remote';
   import { getSession } from './auth.remote';
-  import FireIcon from '$lib/components/FireIcon.svelte';
   import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
+  import { WordFormInput } from './game.schemas';
+  import * as v from 'valibot';
 
-  const [game, session] = $derived(
-    await Promise.all([getGameState(), getSession()]).then(([gameState, session]) => [
-      new WordlettuceGame(gameState),
-      session,
-    ]),
-  );
+  const [gameState, session] = $derived(await Promise.all([getGameState(), getSession()]));
+  let game = $derived.by(() => new WordlettuceGame(gameState));
 
   const wordIsInvalid = createExpiringBoolean();
   const duration = 0.15;
@@ -49,7 +46,7 @@
     toastError(message);
   }
 
-  function getItemsForGrid() {
+  function getItemsForGrid(game: WordlettuceGame) {
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
 
@@ -76,7 +73,7 @@
 <main class="game-grid grid flex-auto grid-rows-[1fr_160px] gap-2 sm:gap-4">
   <div class="size-container grid w-full">
     <div class="max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2">
-      {#each getItemsForGrid() as item (item.index)}
+      {#each getItemsForGrid(game) as item (item.index)}
         {@const current = item.index === game.answers.length}
         <div
           class="grid grid-cols-[repeat(5,1fr)] gap-2"
@@ -88,21 +85,17 @@
             {@const doWiggle = browser && wordIsInvalid.value && current}
             {@const doWiggleOnce = !browser && !!Object.keys(word.issues ?? {}).length && current}
             <div
+              style="--animation-delay:{j * 0.03}s;"
               class={[
                 'bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                !item.guess && current && wordIsInvalid.value && browser && 'animate-wiggle',
                 !item.guess && current && !!Object.keys(word.issues ?? {}).length && !browser && 'animate-wiggle-once',
+                doWiggleOnce && 'animate-wiggle-once',
+                doWiggle && 'animate-wiggle',
+                doJump && 'animate-jump [animation-delay:var(--animation-delay)]',
               ]}
             >
-              <Tile
-                letter={letter === ' ' ? '' : letter}
-                answer={game.answers.at(item.index)?.charAt(j)}
-                column={j}
-                {doJump}
-                {doWiggle}
-                {doWiggleOnce}
-              />
+              <Tile letter={letter === ' ' ? '' : letter} answer={game.answers.at(item.index)?.charAt(j)} column={j} />
             </div>
           {/each}
         </div>
@@ -110,6 +103,7 @@
     </div>
   </div>
   <form class="keyboard grid w-full flex-auto gap-1" method="POST">
+    <input type="hidden" value={game.currentGuess} name="word" />
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
       {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
         {@const status = game.letterStatuses[l]}
@@ -135,19 +129,20 @@
         aria-label="enter"
         title="enter"
         value="Enter"
-        {...word.buttonProps.enhance(async ({ submit }) => {
+        {...word.buttonProps.enhance(async ({ submit, data }) => {
           if (game.success) {
             return;
           }
-          let saveGameToastId: string | undefined = undefined;
-          game.doSumbit();
-          if (game.invalid) {
+          try {
+            const { word } = v.parse(WordFormInput, data);
+            const { success } = game.doWord(word);
+            if (!success) {
+              return saveGameStateToCookie();
+            }
+          } catch (e) {
             return invalidForm();
           }
-          if (!game.success) {
-            return saveGameStateToCookie();
-          }
-
+          let saveGameToastId: string | undefined = undefined;
           try {
             if (session.authenticated && game.success) {
               saveGameToastId = toastLoading('Saving results...');
@@ -180,18 +175,6 @@
       {#if game.success && browser}
         <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
           <ShareIcon class="mx-auto w-7" />
-        </Key>
-      {:else}
-        <Key
-          aria-label="test"
-          title="test"
-          onclick={() => {
-            getSession().set({ authenticated: false, user: undefined });
-            getGameState().set(new WordlettuceGame().toState());
-          }}
-          type="button"
-        >
-          <FireIcon class="mx-auto w-7" />
         </Key>
       {/if}
     </div>

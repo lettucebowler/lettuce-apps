@@ -49,7 +49,7 @@
       <div
         data-answer={answer}
         class={[
-          '@min-[170px]:rounded-sm @min-[200px]:rounded @min-[230px]:rounded-lg aspect-square w-full',
+          'rounded-xs @min-[170px]:rounded-sm @min-[200px]:rounded @min-[230px]:rounded-lg aspect-square w-full',
           answer === '_'
             ? 'bg-charade-950'
             : 'border-(--highlight-color) border-t-[1px] shadow-[0_1px_4px_0_rgb(0_0_0_/_0.2)]',
