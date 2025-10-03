@@ -18,7 +18,7 @@ export function getGameStatus({ appName, gameNum, answers }: { appName: string; 
   return [today, ...strings].join('\n');
 }
 
-export function getStatusEmoji(status: string) {
+function getStatusEmoji(status: string) {
   switch (status) {
     case 'x':
       return '🟩';
