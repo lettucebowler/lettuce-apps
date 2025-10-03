@@ -16,15 +16,13 @@
   let { children } = $props();
   const session = $derived(await getSession());
 
-  let queryClient = $state(
-    new QueryClient({
-      defaultOptions: {
-        queries: {
-          enabled: browser,
-        },
+  let queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        enabled: browser,
       },
-    }),
-  );
+    },
+  });
 </script>
 
 <svelte:head>
