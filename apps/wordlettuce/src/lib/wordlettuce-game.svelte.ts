@@ -1,12 +1,45 @@
 import { successAnswer } from '$lib/app-constants';
 import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
 import { GuessLetter } from '$lib/game-schemas';
+import * as v from 'valibot';
 
-export type WordlettuceGameState = {
+export type WordlettuceGameInit = {
   gameNum?: number;
   currentGuess?: string;
   guesses?: Array<string>;
 };
+
+const WordlettuceGameStateFromString = v.pipe(
+  v.pipe(
+    v.string(),
+    v.base64(),
+    v.transform((value) => {
+      const decoded = atob(value);
+      const [gameNum, guesses, currentGuess] = decoded.split(';');
+      return {
+        gameNum,
+        guesses,
+        currentGuess,
+      };
+    }),
+    v.object({
+      gameNum: v.pipe(v.string(), v.transform(Number), v.integer(), v.minValue(1)),
+      guesses: v.pipe(
+        v.string(),
+        v.transform((value) => value.split(',')),
+        v.array(
+          v.pipe(
+            v.string(),
+            v.check((value) => isAllowedGuess({ guess: value })),
+          ),
+        ),
+      ),
+      currentGuess: v.pipe(v.string(), v.maxLength(5)),
+    }),
+  ),
+);
+
+export type WordlettuceGameState = v.InferOutput<typeof WordlettuceGameStateFromString>;
 
 export class WordlettuceGame {
   #gameNum: number = $state(1);
@@ -15,39 +48,57 @@ export class WordlettuceGame {
   #answers: Array<string> = $state([]);
   #invalid: boolean = $state(false);
 
-  constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceGameState = {}) {
-    this.replaceState({ gameNum, guesses, currentGuess });
+  constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceGameInit = {}) {
+    this.#currentGuess = currentGuess;
+    this.#gameNum = gameNum;
+    this.#guesses = guesses;
+    this.#answers = checkWords({ answer: getGameWord(gameNum), guesses });
   }
 
-  replaceState = ({ gameNum, guesses, currentGuess }: WordlettuceGameState) => {
-    // this.#gameNum = gameNum ?? getGameNum();
-    if (gameNum) {
-      this.#gameNum = gameNum;
-    }
-    if (currentGuess) {
-      this.#currentGuess = currentGuess;
-    }
-    if (guesses) {
-      this.#guesses = guesses;
-      this.#answers = this.#checkWords();
-    }
-  };
+  static decode(state: string) {
+    const gameState = v.parse(WordlettuceGameStateFromString, state);
+    return new WordlettuceGame(gameState);
+  }
 
-  static fromStateString = ({ state, currentGameNum = getGameNum() }: { state: string; currentGameNum?: number }) => {
-    if (!state) {
-      return new WordlettuceGame({ gameNum: currentGameNum });
+  doLetter(letter: GuessLetter) {
+    if (this.success || this.#currentGuess.length >= 5) {
+      return;
     }
-    const decoded = atob(state);
-    const [gameNum, guesses, currentGuess] = decoded.split(';');
-    if (!gameNum || Number(gameNum) !== currentGameNum) {
-      return new WordlettuceGame({ gameNum: currentGameNum });
+    this.#currentGuess += letter;
+  }
+
+  doUndo() {
+    if (!this.#currentGuess.length) {
+      return;
     }
-    return new WordlettuceGame({
-      gameNum: currentGameNum,
-      guesses: guesses.length ? guesses.split(',') : [],
-      currentGuess,
-    });
-  };
+    this.#currentGuess = this.#currentGuess.slice(0, -1);
+  }
+
+  doWord(word: string): WordlettuceGameSubmitResult {
+    if (this.success) {
+      return {
+        success: true,
+        invalid: false,
+      };
+    }
+    this.#currentGuess = word;
+    const invalid = !isAllowedGuess({ guess: this.#currentGuess });
+    if (invalid) {
+      return {
+        invalid: true,
+        success: false,
+      };
+    }
+    this.#invalid = invalid;
+    this.#guesses.push(this.#currentGuess);
+    this.#currentGuess = '';
+    this.#answers = checkWords({ guesses: this.#guesses, answer: getGameWord(this.gameNum) });
+    const success = this.#answers.at(-1) === successAnswer;
+    return {
+      invalid: false,
+      success,
+    };
+  }
 
   get gameNum() {
     return this.#gameNum;
@@ -95,16 +146,10 @@ export class WordlettuceGame {
     const contains: { [x: string]: string } = Object.assign({}, ...containsList);
     const incorrectList = letters.filter((letter) => letter.status === 'i').map((l) => ({ [l.letter]: l.status }));
     const incorrect: { [x: string]: string } = Object.assign({}, ...incorrectList);
-
     return { ...incorrect, ...contains, ...correct };
   }
 
-  toStateString() {
-    const state = `${this.#gameNum};${this.#guesses.join(',')};${this.#currentGuess}`;
-    return btoa(state);
-  }
-
-  toState(): WordlettuceGameState {
+  get gameState(): WordlettuceGameState {
     return {
       gameNum: this.#gameNum,
       guesses: $state.snapshot(this.#guesses),
@@ -112,57 +157,9 @@ export class WordlettuceGame {
     };
   }
 
-  doLetter = (letter: GuessLetter) => {
-    if (this.success || this.#currentGuess.length >= 5) {
-      return {};
-    }
-    this.#currentGuess += letter;
-    return {};
-  };
-
-  doUndo = () => {
-    if (!this.#currentGuess.length) {
-      return;
-    }
-    this.#currentGuess = this.#currentGuess.slice(0, -1);
-  };
-
-  doWord(word: string): WordlettuceGameSubmitResult {
-    if (this.success) {
-      return {
-        success: true,
-        invalid: false,
-      };
-    }
-    this.#currentGuess = word;
-    const invalid = !isAllowedGuess({ guess: this.#currentGuess });
-    if (invalid) {
-      return {
-        invalid: true,
-        success: false,
-      };
-    }
-    this.#invalid = invalid;
-    this.#guesses.push(this.#currentGuess);
-    this.#currentGuess = '';
-    this.#answers = this.#checkWords();
-    const success = this.#answers.at(-1) === successAnswer;
-    return {
-      invalid: false,
-      success,
-    };
-  }
-
-  doSumbit(): WordlettuceGameSubmitResult {
-    return this.doWord(this.#currentGuess);
-  }
-
-  #checkWords() {
-    const answer = getGameWord(this.#gameNum);
-    const answers = this.#guesses.map((guess: string) => {
-      return checkWord({ guess, answer });
-    });
-    return answers;
+  get encoded() {
+    const state = `${this.#gameNum};${this.#guesses.join(',')};${this.#currentGuess}`;
+    return btoa(state);
   }
 }
 
@@ -183,6 +180,13 @@ function containsLetter({ index, guess, answer }: { index: number; guess: string
     (index) => !answerLocations.includes(index),
   ).length;
   return correctCount + previousContainsCount < answerLocations.length;
+}
+
+function checkWords({ answer, guesses }: { answer: string; guesses: string[] }) {
+  const answers = guesses.map((guess: string) => {
+    return checkWord({ guess, answer });
+  });
+  return answers;
 }
 
 function checkWord({ guess, answer }: { guess: string; answer: string }) {

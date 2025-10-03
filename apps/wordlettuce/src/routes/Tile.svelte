@@ -2,22 +2,19 @@
   type TileProps = {
     letter: string;
     answer: string | undefined;
-    column?: number;
+    class?: string;
   };
 
-  let { letter = '', answer, column = 0 }: TileProps = $props();
-
-  const delayScale = 0.03;
-  const duration = delayScale * 5;
+  let { letter = '', answer, class: className }: TileProps = $props();
 </script>
 
 <div
-  style="--animation-delay:{column * 0.03}s; --transition-delay:{column * delayScale + duration}s"
   class={[
     'pt-(--tile-height) delay-(--transition-delay) h-full rounded-xl transition',
     answer === 'c' && 'bg-putty-300',
     answer === 'x' && 'bg-swamp-green-300',
     answer === 'i' && 'bg-charade-500',
+    className,
   ]}
 >
   <div

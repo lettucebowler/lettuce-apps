@@ -12990,6 +12990,5 @@ export function getGameWord(gameNum: number) {
 
 export function isAllowedGuess({ guess }: { guess: string }) {
   const allowed = answerList.includes(guess) || allowedGuesses.includes(guess);
-  console.log('guess', guess, 'allowed', allowed);
   return allowed;
 }

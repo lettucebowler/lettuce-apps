@@ -5,11 +5,10 @@ import * as v from 'valibot';
 import { GuessLetter } from '$lib/game-schemas';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
-import { isAllowedGuess } from '$lib/words';
 import { WordFormInput } from './game.schemas';
 
 export const getGameState = query(async () => {
-  return getGameStateFromCookie().toState();
+  return getGameStateFromCookie();
 });
 
 export const letter = form(

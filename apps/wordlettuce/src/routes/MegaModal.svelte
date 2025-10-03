@@ -3,7 +3,7 @@
 
 <script lang="ts">
   import Dialog from '$lib/components/base/Dialog.svelte';
-  import { createExpiringString, createNewGameCountDownTimer } from './spells.svelte';
+  import { ExpiringString, NewGameCountdownTimer } from './spells.svelte';
   import { appName } from '$lib/app-constants';
   import { getGameStatus } from '$lib/util';
 
@@ -17,8 +17,8 @@
 
   const { gameNum, answers, authenticated, onclose, open }: ModalProps = $props();
   let attempts = $derived(answers.length);
-  const clipboardMessage = createExpiringString({ duration: 2000 });
-  const timeUntilNextGame = createNewGameCountDownTimer();
+  const clipboardMessage = new ExpiringString({ duration: 2000 });
+  const timeUntilNextGame = new NewGameCountdownTimer();
 
   function formatTime(secondsUntil: number) {
     const hours = Math.floor(secondsUntil / 3600);

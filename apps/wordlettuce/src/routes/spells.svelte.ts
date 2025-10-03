@@ -1,72 +1,58 @@
-export function timeUntilNextGame() {
-  const tomorrow = new Date();
-  tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-  tomorrow.setUTCHours(0, 0, 0, 0);
-  return Math.round((tomorrow.getTime() - new Date().getTime()) / 1000);
-}
-
-export function createNewGameCountDownTimer() {
-  let value = $state(timeUntilNextGame());
-  let countdownInterval: NodeJS.Timeout | undefined = $state(
+export class NewGameCountdownTimer {
+  #value = $state(0);
+  #countdownInterval: NodeJS.Timeout | undefined = $state(
     setInterval(() => {
-      value = timeUntilNextGame();
+      this.#updateValue();
     }, 1000),
   );
 
-  return {
-    get value() {
-      return value;
-    },
-    pause() {
-      clearInterval(countdownInterval);
-      countdownInterval = undefined;
-    },
-    start() {
-      value = timeUntilNextGame();
-      if (!countdownInterval) {
-        countdownInterval = setInterval(() => {
-          value = timeUntilNextGame();
-        }, 1000);
-      }
-    },
-  };
+  #updateValue() {
+    const tomorrow = new Date();
+    tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+    tomorrow.setUTCHours(0, 0, 0, 0);
+    this.#value = Math.round((tomorrow.getTime() - new Date().getTime()) / 1000);
+  }
+
+  get value() {
+    return this.#value;
+  }
+  pause() {
+    clearInterval(this.#countdownInterval);
+    this.#countdownInterval = undefined;
+  }
+  start() {
+    this.#updateValue();
+    if (!this.#countdownInterval) {
+      this.#countdownInterval = setInterval(() => {
+        this.#updateValue();
+      }, 1000);
+    }
+  }
 }
 
-export function createExpiringBoolean({ duration = 150 } = {}) {
-  let value = $state(false);
-  let timeout: NodeJS.Timeout | undefined = $state();
+type ExpiringStringInit = {
+  duration?: number;
+};
+export class ExpiringString {
+  #value = $state('');
+  #timeout: NodeJS.Timeout | undefined = $state();
+  #duration = 4000;
 
-  return {
-    get value() {
-      return value;
-    },
-    truthify() {
-      value = true;
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      timeout = setTimeout(() => {
-        value = false;
-      }, duration);
-    },
-  };
-}
+  constructor({ duration = 4000 }: ExpiringStringInit = {}) {
+    this.#duration = duration;
+  }
 
-export function createExpiringString({ duration = 4000 } = {}) {
-  let value = $state('');
-  let timeout: NodeJS.Timeout | undefined = $state();
-  return {
-    get value() {
-      return value;
-    },
-    write(input = '') {
-      value = input;
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      timeout = setTimeout(() => {
-        value = '';
-      }, duration);
-    },
-  };
+  get value() {
+    return this.#value;
+  }
+
+  write(input = '') {
+    this.#value = input;
+    if (this.#timeout) {
+      clearTimeout(this.#timeout);
+    }
+    this.#timeout = setTimeout(() => {
+      this.#value = '';
+    }, this.#duration);
+  }
 }
