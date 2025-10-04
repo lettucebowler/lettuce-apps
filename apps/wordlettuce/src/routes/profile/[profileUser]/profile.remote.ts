@@ -2,7 +2,6 @@ import { query } from '$app/server';
 import * as v from 'valibot';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameNum } from '$lib/words';
-import type { HTTPError } from 'ky';
 
 export const getProfileData = query(
   v.object({
@@ -25,12 +24,5 @@ export const getProfileData = query(
       limit,
       start: start,
     };
-  },
-);
-
-export const getGameResults = query(
-  apiWordlettuce.GetGameResultsInput,
-  async (input: apiWordlettuce.GetGameResultsInput) => {
-    return apiWordlettuce.getGameResults(input);
   },
 );

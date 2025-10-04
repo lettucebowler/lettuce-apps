@@ -38,7 +38,6 @@ export default {
     );
     app.use(
       '/.well-known/oauth-authorization-server',
-
       cache({
         cacheName: 'lettuce-auth-oauth-authorization-server',
         cacheControl: 'max-age=604800',

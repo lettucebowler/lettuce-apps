@@ -5,7 +5,8 @@
   import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
   import { infiniteScroll } from './infinite-scroll.svelte.js';
-  import { getProfileData, getGameResults } from './profile.remote';
+  import { getProfileData } from './profile.remote';
+  import { getGameResults } from '$lib/api-wordlettuce';
   import { page } from '$app/state';
   import { getSession } from '../../auth.remote';
 
