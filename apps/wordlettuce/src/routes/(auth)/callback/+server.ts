@@ -9,10 +9,8 @@ export async function GET(event) {
   const authClient = createAuthClient();
   const tokens = await authClient.exchange(code!, event.url.origin + '/callback');
   if (!tokens.err) {
-    console.log('happy tokens');
     setTokens(event, tokens.tokens.access, tokens.tokens.refresh);
   } else {
-    console.log('tokens err', tokens);
     throw tokens.err;
   }
   try {
@@ -20,7 +18,6 @@ export async function GET(event) {
       refresh: tokens.tokens.refresh || undefined,
     });
     if (verified.err) {
-      console.log('verified', verified);
       clearTokens();
       return redirect(302, `${event.url.origin}/`);
     }

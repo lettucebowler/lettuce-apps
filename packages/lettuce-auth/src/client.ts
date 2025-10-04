@@ -57,11 +57,14 @@ export function createAuthClient(input: AuthClientInput) {
       return createLocalJWKSet(input.keyset);
     }
     let keyset: JSONWebKeySet | undefined = undefined;
+    const cacheKey = getJWKSKey(input.issuer);
+    console.log('jwks-cache-key', cacheKey);
     if (input.storage) {
       const cachedKeyset = await input.storage
-        .get(getJWKSKey(input.issuer), { type: 'json', cacheTtl: 3600 })
+        .get(cacheKey, { type: 'json', cacheTtl: 3600 })
         .then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
+        console.log(JSON.stringify(cachedKeyset));
         keyset = cachedKeyset;
         return createLocalJWKSet(keyset);
       }
@@ -71,7 +74,7 @@ export function createAuthClient(input: AuthClientInput) {
       keyset = (await (f || fetch)(wk.jwks_uri).then((r) => r.json())) as JSONWebKeySet;
     }
     if (input.storage) {
-      input.storage.put(getJWKSKey(input.issuer), JSON.stringify(keyset));
+      input.storage.put(cacheKey, JSON.stringify(keyset));
     }
     return createLocalJWKSet(keyset);
   }

@@ -54,7 +54,6 @@ export async function getSession() {
 }
 
 export function setTokens(event: RequestEvent, access: string, refresh: string) {
-  console.log('access', access, 'refresh', refresh);
   event.cookies.set('refresh_token', refresh, {
     domain: dev ? undefined : '.lettucebowler.net',
     httpOnly: true,
