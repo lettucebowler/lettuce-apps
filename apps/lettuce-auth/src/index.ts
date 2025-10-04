@@ -6,35 +6,31 @@ import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
 import type { LettuceAuthBindings, ProviderUser } from './types';
 
-import { fetcher } from 'itty-fetcher';
 import { Hono } from 'hono';
 import { cache } from 'hono/cache';
 import { createLettuceAuthDao } from './dao';
 import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
 import * as githubClient from './clients/github';
-import { PerformanceNodeTiming } from 'perf_hooks';
+import { CloudflareD1Storage } from './storage/d1';
 
 export default {
-  fetch(request: Request, env: LettuceAuthBindings, ctx: ExecutionContext) {
+  async fetch(request: Request, env: LettuceAuthBindings, ctx: ExecutionContext) {
     const app = new Hono<{ Bindings: LettuceAuthBindings }>();
     app.use(
       '/.well-known/jwks.json',
-      cache({
-        cacheName: 'lettuce-auth-jwks',
-        cacheControl: 'max-age=604800',
-      }),
+      // cache({
+      //   cacheName: 'lettuce-auth-jwks',
+      //   cacheControl: 'max-age=604800',
+      // }),
       async (c, next) => {
-        const cachedJwks = await c.env.lettuce_auth_sessions.get('jwks-cache', 'json');
-        console.log('cached jwks', cachedJwks);
-        if (cachedJwks) {
-          console.log('jwks cached in kv');
-          return c.json(cachedJwks);
-        }
+        // const cachedJwks = await c.env.lettuce_auth_sessions.get('jwks-cache', 'json');
+        // if (cachedJwks) {
+        //   return c.json(cachedJwks);
+        // }
         await next();
         const json = await c.res.clone().json();
         if (json) {
-          console.log('caching jwks in kv');
           c.executionCtx.waitUntil(
             c.env.lettuce_auth_sessions.put('jwks-cache', JSON.stringify(json), { expirationTtl: 60 * 60 * 24 * 7 }),
           );
@@ -108,9 +104,10 @@ export default {
         }),
       },
       subjects,
-      storage: CloudflareStorage({
-        namespace: env.lettuce_auth_sessions,
-      }),
+      // storage: CloudflareStorage({
+      //   namespace: env.lettuce_auth_sessions,
+      // }),
+      storage: await CloudflareD1Storage(env.lettuce_auth_db),
       ttl: {
         access: 604800,
       },

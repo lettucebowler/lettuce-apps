@@ -1,17 +1,17 @@
-import { fetcher } from 'itty-fetcher';
 import type { ProviderUser } from '../types';
+import ky from 'ky';
 
 export async function getUser({ accessToken }: { accessToken: string }): Promise<ProviderUser> {
-  const github = fetcher({
-    base: 'https://api.github.com',
+  const githubKY = ky.create({
+    prefixUrl: 'https://api.github.com',
     headers: {
       'user-agent': 'lettuce-auth',
       ['Authorization']: `token ${accessToken}`,
     },
   });
   const [userResult, emailsResult] = await Promise.allSettled([
-    github.get<{ email?: string; id: number; login: string }>('/user'),
-    github.get<Array<{ email: string; primary: boolean; verified: boolean }>>('/user/emails'),
+    githubKY.get<{ email?: string; id: number; login: string }>('user').json(),
+    githubKY.get<Array<{ email: string; primary: boolean; verified: boolean }>>('user/emails').json(),
   ]);
   if (userResult.status !== 'fulfilled' || emailsResult.status !== 'fulfilled') {
     throw new Error('Error fetching provider user');

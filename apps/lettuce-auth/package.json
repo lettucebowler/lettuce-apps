@@ -10,18 +10,19 @@
     "wrangler": "wrangler"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250224.0",
-    "@hono/standard-validator": "^0.1.2",
+    "@cloudflare/workers-types": "^4.20251004.0",
+    "@hono/standard-validator": "^0.1.5",
     "@lettuce-apps-packages/auth": "workspace:*",
-    "@openauthjs/openauth": "0.4.1",
-    "@types/node": "^22.13.5",
-    "dotenv": "^16.4.7",
-    "drizzle-kit": "^0.30.5",
-    "drizzle-orm": "^0.40.0",
-    "hono": "^4.7.2",
-    "itty-fetcher": "^0.9.4",
-    "uuid": "^11.1.0",
-    "valibot": "1.0.0-rc.2",
-    "wrangler": "^3.111.0"
+    "@openauthjs/openauth": "0.4.3",
+    "@types/node": "^24.6.2",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.5",
+    "drizzle-orm": "^0.44.6",
+    "hono": "^4.9.9",
+    "itty-fetcher": "^1.0.10",
+    "ky": "^1.11.0",
+    "uuid": "^13.0.0",
+    "valibot": "1.1.0",
+    "wrangler": "^4.42.0"
   }
 }

@@ -11,7 +11,6 @@ import { getSession } from '$lib/auth.server';
 
 const authHandler: Handle = async ({ event, resolve }) => {
   event.locals.session = await getSession();
-
   return await resolve(event);
 };
 

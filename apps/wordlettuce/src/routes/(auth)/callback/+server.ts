@@ -9,15 +9,18 @@ export async function GET(event) {
   const authClient = createAuthClient();
   const tokens = await authClient.exchange(code!, event.url.origin + '/callback');
   if (!tokens.err) {
+    console.log('happy tokens');
     setTokens(event, tokens.tokens.access, tokens.tokens.refresh);
   } else {
+    console.log('tokens err', tokens);
     throw tokens.err;
   }
   try {
-    const verified = await authClient.verify(subjects, event.cookies.get('access_token')!, {
-      refresh: event.cookies.get('refresh_token') || undefined,
+    const verified = await authClient.verify(subjects, tokens.tokens.access, {
+      refresh: tokens.tokens.refresh || undefined,
     });
     if (verified.err) {
+      console.log('verified', verified);
       clearTokens();
       return redirect(302, `${event.url.origin}/`);
     }

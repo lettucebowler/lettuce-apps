@@ -174,44 +174,47 @@ importers:
   apps/lettuce-auth:
     devDependencies:
       '@cloudflare/workers-types':
-        specifier: ^4.20250224.0
-        version: 4.20250726.0
+        specifier: ^4.20251004.0
+        version: 4.20251004.0
       '@hono/standard-validator':
-        specifier: ^0.1.2
-        version: 0.1.4(@standard-schema/spec@1.0.0)(hono@4.8.10)
+        specifier: ^0.1.5
+        version: 0.1.5(@standard-schema/spec@1.0.0)(hono@4.9.9)
       '@lettuce-apps-packages/auth':
         specifier: workspace:*
         version: link:../../packages/lettuce-auth
       '@openauthjs/openauth':
-        specifier: 0.4.1
-        version: 0.4.1(arctic@2.3.4)(hono@4.8.10)
+        specifier: 0.4.3
+        version: 0.4.3(arctic@2.3.4)(hono@4.9.9)
       '@types/node':
-        specifier: ^22.13.5
-        version: 22.17.0
+        specifier: ^24.6.2
+        version: 24.6.2
       dotenv:
-        specifier: ^16.4.7
-        version: 16.6.1
+        specifier: ^17.2.3
+        version: 17.2.3
       drizzle-kit:
-        specifier: ^0.30.5
-        version: 0.30.6
+        specifier: ^0.31.5
+        version: 0.31.5
       drizzle-orm:
-        specifier: ^0.40.0
-        version: 0.40.1(@cloudflare/workers-types@4.20250726.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0)
+        specifier: ^0.44.6
+        version: 0.44.6(@cloudflare/workers-types@4.20251004.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0)
       hono:
-        specifier: ^4.7.2
-        version: 4.8.10
+        specifier: ^4.9.9
+        version: 4.9.9
       itty-fetcher:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^1.0.10
+        version: 1.0.10
+      ky:
+        specifier: ^1.11.0
+        version: 1.11.0
       uuid:
-        specifier: ^11.1.0
-        version: 11.1.0
+        specifier: ^13.0.0
+        version: 13.0.0
       valibot:
-        specifier: 1.0.0-rc.2
-        version: 1.0.0-rc.2(typescript@5.9.3)
+        specifier: 1.1.0
+        version: 1.1.0(typescript@5.9.3)
       wrangler:
-        specifier: ^3.111.0
-        version: 3.114.12(@cloudflare/workers-types@4.20250726.0)
+        specifier: ^4.42.0
+        version: 4.42.0(@cloudflare/workers-types@4.20251004.0)
 
   apps/lettuce-auth-test:
     devDependencies:
@@ -663,6 +666,9 @@ packages:
 
   '@cloudflare/workers-types@4.20251003.0':
     resolution: {integrity: sha512-rtg7FqYVNHsltn1GOV+P3hQpVf1WDI3wH8Mj4IjK99fidJ4ttzUPuCX/uYE/PIF/HBPK66TqVwToO+GN4Lmx0Q==}
+
+  '@cloudflare/workers-types@4.20251004.0':
+    resolution: {integrity: sha512-FkTBHEyOBwphbW4SLQ2XLCgNntD2wz0v1Si7NwJeN0JAPW/39/w6zhsKy3rsh+203tuSfBgsoP34+Os4RaySOw==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1661,12 +1667,6 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@hono/standard-validator@0.1.4':
-    resolution: {integrity: sha512-NPxSO9/Z1FFaJ34/0WJA0JoFRrVrJOG5P/i+PBJu7jCw9v0u8WmGiJu0zv+bTk1pjplBjjczAd59x2X50spRmQ==}
-    peerDependencies:
-      '@standard-schema/spec': 1.0.0
-      hono: '>=3.9.0'
-
   '@hono/standard-validator@0.1.5':
     resolution: {integrity: sha512-EIyZPPwkyLn6XKwFj5NBEWHXhXbgmnVh2ceIFo5GO7gKI9WmzTjPDKnppQB0KrqKeAkq3kpoW4SIbu5X1dgx3w==}
     peerDependencies:
@@ -1965,6 +1965,12 @@ packages:
 
   '@openauthjs/openauth@0.4.1':
     resolution: {integrity: sha512-w2vJ2xXDJiNlJYr2tq529hwKFZa82ErgBm01DbhGBY0N0NDwzCJMDPH2YncxNDzFQJaGZNIW3ET0geJggONfHg==}
+    peerDependencies:
+      arctic: ^2.2.2
+      hono: ^4.0.0
+
+  '@openauthjs/openauth@0.4.3':
+    resolution: {integrity: sha512-RlnjqvHzqcbFVymEwhlUEuac4utA5h4nhSK/i2szZuQmxTIqbGUxZ+nM+avM+VV4Ing+/ZaNLKILoXS3yrkOOw==}
     peerDependencies:
       arctic: ^2.2.2
       hono: ^4.0.0
@@ -3138,95 +3144,6 @@ packages:
       bun-types:
         optional: true
       expo-sqlite:
-        optional: true
-      knex:
-        optional: true
-      kysely:
-        optional: true
-      mysql2:
-        optional: true
-      pg:
-        optional: true
-      postgres:
-        optional: true
-      prisma:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-
-  drizzle-orm@0.40.1:
-    resolution: {integrity: sha512-aPNhtiJiPfm3qxz1czrnIDkfvkSdKGXYeZkpG55NPTVI186LmK2fBLMi4dsHpPHlJrZeQ92D322YFPHADBALew==}
-    peerDependencies:
-      '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=4'
-      '@electric-sql/pglite': '>=0.2.0'
-      '@libsql/client': '>=0.10.0'
-      '@libsql/client-wasm': '>=0.10.0'
-      '@neondatabase/serverless': '>=0.10.0'
-      '@op-engineering/op-sqlite': '>=2'
-      '@opentelemetry/api': ^1.4.1
-      '@planetscale/database': '>=1'
-      '@prisma/client': '*'
-      '@tidbcloud/serverless': '*'
-      '@types/better-sqlite3': '*'
-      '@types/pg': '*'
-      '@types/sql.js': '*'
-      '@vercel/postgres': '>=0.8.0'
-      '@xata.io/client': '*'
-      better-sqlite3: '>=7'
-      bun-types: '*'
-      expo-sqlite: '>=14.0.0'
-      gel: '>=2'
-      knex: '*'
-      kysely: '*'
-      mysql2: '>=2'
-      pg: '>=8'
-      postgres: '>=3'
-      prisma: '*'
-      sql.js: '>=1'
-      sqlite3: '>=5'
-    peerDependenciesMeta:
-      '@aws-sdk/client-rds-data':
-        optional: true
-      '@cloudflare/workers-types':
-        optional: true
-      '@electric-sql/pglite':
-        optional: true
-      '@libsql/client':
-        optional: true
-      '@libsql/client-wasm':
-        optional: true
-      '@neondatabase/serverless':
-        optional: true
-      '@op-engineering/op-sqlite':
-        optional: true
-      '@opentelemetry/api':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@prisma/client':
-        optional: true
-      '@tidbcloud/serverless':
-        optional: true
-      '@types/better-sqlite3':
-        optional: true
-      '@types/pg':
-        optional: true
-      '@types/sql.js':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      '@xata.io/client':
-        optional: true
-      better-sqlite3:
-        optional: true
-      bun-types:
-        optional: true
-      expo-sqlite:
-        optional: true
-      gel:
         optional: true
       knex:
         optional: true
@@ -4753,8 +4670,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  uuid@11.1.0:
-    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+  uuid@13.0.0:
+    resolution: {integrity: sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==}
     hasBin: true
 
   valibot@1.0.0-rc.2:
@@ -5138,6 +5055,8 @@ snapshots:
   '@cloudflare/workers-types@4.20251001.0': {}
 
   '@cloudflare/workers-types@4.20251003.0': {}
+
+  '@cloudflare/workers-types@4.20251004.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -5714,11 +5633,6 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@hono/standard-validator@0.1.4(@standard-schema/spec@1.0.0)(hono@4.8.10)':
-    dependencies:
-      '@standard-schema/spec': 1.0.0
-      hono: 4.8.10
-
   '@hono/standard-validator@0.1.5(@standard-schema/spec@1.0.0)(hono@4.9.9)':
     dependencies:
       '@standard-schema/spec': 1.0.0
@@ -5998,15 +5912,15 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@openauthjs/openauth@0.4.1(arctic@2.3.4)(hono@4.8.10)':
+  '@openauthjs/openauth@0.4.1(arctic@2.3.4)(hono@4.9.9)':
     dependencies:
       '@standard-schema/spec': 1.0.0-beta.3
       arctic: 2.3.4
       aws4fetch: 1.0.20
-      hono: 4.8.10
+      hono: 4.9.9
       jose: 5.9.6
 
-  '@openauthjs/openauth@0.4.1(arctic@2.3.4)(hono@4.9.9)':
+  '@openauthjs/openauth@0.4.3(arctic@2.3.4)(hono@4.9.9)':
     dependencies:
       '@standard-schema/spec': 1.0.0-beta.3
       arctic: 2.3.4
@@ -6173,7 +6087,7 @@ snapshots:
 
   '@sveltejs/adapter-cloudflare@5.1.0(@sveltejs/kit@2.22.0(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.34.7)(vite@6.3.5(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(svelte@5.34.7)(vite@6.3.5(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(wrangler@3.114.12(@cloudflare/workers-types@4.20250726.0))':
     dependencies:
-      '@cloudflare/workers-types': 4.20251003.0
+      '@cloudflare/workers-types': 4.20251004.0
       '@sveltejs/kit': 2.22.0(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.34.7)(vite@6.3.5(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(svelte@5.34.7)(vite@6.3.5(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0))
       esbuild: 0.24.2
       worktop: 0.8.0-next.18
@@ -6181,7 +6095,7 @@ snapshots:
 
   '@sveltejs/adapter-cloudflare@7.2.4(@sveltejs/kit@2.43.8(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.8)(vite@7.1.9(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(svelte@5.39.8)(vite@7.1.9(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(wrangler@4.42.0(@cloudflare/workers-types@4.20251003.0))':
     dependencies:
-      '@cloudflare/workers-types': 4.20251003.0
+      '@cloudflare/workers-types': 4.20251004.0
       '@sveltejs/kit': 2.43.8(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.8)(vite@7.1.9(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0)))(svelte@5.39.8)(vite@7.1.9(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.7.0))
       worktop: 0.8.0-next.18
       wrangler: 4.42.0(@cloudflare/workers-types@4.20251003.0)
@@ -6567,7 +6481,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 22.17.0
+      '@types/node': 24.6.2
 
   '@typescript-eslint/eslint-plugin@8.38.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.6.1))(typescript@5.7.3))(eslint@9.32.0(jiti@2.6.1))(typescript@5.7.3)':
     dependencies:
@@ -7308,13 +7222,6 @@ snapshots:
       '@libsql/client': 0.14.0
       better-sqlite3: 11.10.0
 
-  drizzle-orm@0.40.1(@cloudflare/workers-types@4.20250726.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0):
-    optionalDependencies:
-      '@cloudflare/workers-types': 4.20250726.0
-      '@libsql/client': 0.15.15
-      better-sqlite3: 12.4.1
-      gel: 2.0.0
-
   drizzle-orm@0.44.5(@cloudflare/workers-types@4.20251001.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0):
     optionalDependencies:
       '@cloudflare/workers-types': 4.20251001.0
@@ -7325,6 +7232,13 @@ snapshots:
   drizzle-orm@0.44.6(@cloudflare/workers-types@4.20251003.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0):
     optionalDependencies:
       '@cloudflare/workers-types': 4.20251003.0
+      '@libsql/client': 0.15.15
+      better-sqlite3: 12.4.1
+      gel: 2.0.0
+
+  drizzle-orm@0.44.6(@cloudflare/workers-types@4.20251004.0)(@libsql/client@0.15.15)(better-sqlite3@12.4.1)(gel@2.0.0):
+    optionalDependencies:
+      '@cloudflare/workers-types': 4.20251004.0
       '@libsql/client': 0.15.15
       better-sqlite3: 12.4.1
       gel: 2.0.0
@@ -8991,15 +8905,11 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  uuid@11.1.0: {}
+  uuid@13.0.0: {}
 
   valibot@1.0.0-rc.2(typescript@5.7.3):
     optionalDependencies:
       typescript: 5.7.3
-
-  valibot@1.0.0-rc.2(typescript@5.9.3):
-    optionalDependencies:
-      typescript: 5.9.3
 
   valibot@1.1.0(typescript@5.8.3):
     optionalDependencies:
@@ -9180,6 +9090,23 @@ snapshots:
       workerd: 1.20251001.0
     optionalDependencies:
       '@cloudflare/workers-types': 4.20251003.0
+      fsevents: 2.3.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  wrangler@4.42.0(@cloudflare/workers-types@4.20251004.0):
+    dependencies:
+      '@cloudflare/kv-asset-handler': 0.4.0
+      '@cloudflare/unenv-preset': 2.7.6(unenv@2.0.0-rc.21)(workerd@1.20251001.0)
+      blake3-wasm: 2.1.5
+      esbuild: 0.25.4
+      miniflare: 4.20251001.0
+      path-to-regexp: 6.3.0
+      unenv: 2.0.0-rc.21
+      workerd: 1.20251001.0
+    optionalDependencies:
+      '@cloudflare/workers-types': 4.20251004.0
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil
