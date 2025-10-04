@@ -58,13 +58,11 @@ export function createAuthClient(input: AuthClientInput) {
     }
     let keyset: JSONWebKeySet | undefined = undefined;
     const cacheKey = getJWKSKey(input.issuer);
-    console.log('jwks-cache-key', cacheKey);
     if (input.storage) {
       const cachedKeyset = await input.storage
         .get(cacheKey, { type: 'json', cacheTtl: 3600 })
         .then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
-        console.log(JSON.stringify(cachedKeyset));
         keyset = cachedKeyset;
         return createLocalJWKSet(keyset);
       }
