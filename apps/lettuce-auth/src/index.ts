@@ -2,7 +2,6 @@ import { issuer } from '@openauthjs/openauth';
 import { Account, subjects } from '@lettuce-apps-packages/auth';
 
 import { GithubProvider } from '@openauthjs/openauth/provider/github';
-import { CloudflareStorage } from '@openauthjs/openauth/storage/cloudflare';
 
 import type { LettuceAuthBindings, ProviderUser } from './types';
 
