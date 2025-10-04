@@ -49,7 +49,7 @@ export function createAuthClient(input: AuthClientInput) {
   }
 
   function getJWKSKey(issuer: string) {
-    return `oauth:jwks:${issuer}`;
+    return `oauth:jwks:v2:${issuer}`;
   }
 
   async function getJWKS() {
