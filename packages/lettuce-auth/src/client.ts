@@ -25,7 +25,7 @@ export function createAuthClient(input: AuthClientInput) {
   const f = input.fetch ?? fetch;
 
   function getIssuerKey(issuer: string) {
-    const key = `oauth:issuer:${issuer}`;
+    const key = `oauth:issuer:v2:${issuer}`;
     return key;
   }
 
