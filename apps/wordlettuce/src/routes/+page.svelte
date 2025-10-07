@@ -36,14 +36,23 @@
     }
   });
 
-  $effect(() => {
+  // $effect(() => {
+  //   Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
+  //     path: '/',
+  //     httpOnly: false,
+  //     expires: 1,
+  //     secure: false,
+  //   });
+  // });
+
+  function saveGameStateToCookie() {
     Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
       path: '/',
       httpOnly: false,
       expires: 1,
       secure: false,
     });
-  });
+  }
 
   const duration = 0.15;
 
@@ -135,6 +144,7 @@
             value={l}
             {...letter.buttonProps.enhance(async (event) => {
               game.doLetter(event.data.key);
+              saveGameStateToCookie();
             })}
           >
             {l}
@@ -153,7 +163,7 @@
           }
           const { success } = game.doWord(data.word);
           if (!success) {
-            return;
+            return saveGameStateToCookie();
           }
           let saveGameToastId: string | undefined = undefined;
           try {
@@ -180,6 +190,7 @@
         aria-label="backspace"
         {...undo.buttonProps.enhance(async ({}) => {
           game.doUndo();
+          saveGameStateToCookie();
         })}
       >
         <BackSpaceIcon class="mx-auto w-7" />
