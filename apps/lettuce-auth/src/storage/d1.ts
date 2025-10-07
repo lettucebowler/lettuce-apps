@@ -1,5 +1,3 @@
-//d1storage.ts
-
 import { joinKey, splitKey, type StorageAdapter } from '@openauthjs/openauth/storage/storage';
 
 export async function CloudflareD1Storage(d1: D1Database): Promise<StorageAdapter> {
@@ -9,7 +7,7 @@ export async function CloudflareD1Storage(d1: D1Database): Promise<StorageAdapte
   await d1.exec(setupSql);
 
   async function get(key: string[]) {
-    console.log('get', key.join('.'));
+    // console.log('get', key.join('.'));
     const row = await d1
       .prepare(`SELECT value, expiry FROM ${tableName} WHERE key = ?`)
       .bind(joinKey(key))
@@ -24,21 +22,23 @@ export async function CloudflareD1Storage(d1: D1Database): Promise<StorageAdapte
   }
 
   async function set(key: string[], value: any, expiry?: Date) {
-    console.log('set', key.join('.'), value, expiry);
+    // console.log('set', key.join('.'), value, expiry);
     const text = JSON.stringify(value);
     await d1
-      .prepare(`INSERT INTO ${tableName} (key, value, expiry) VALUES (?, ?, ?)`)
+      .prepare(
+        `INSERT INTO ${tableName} (key, value, expiry) VALUES (?, ?, ?) ON CONFLICT (KEY) DO UPDATE SET value=excluded.value, expiry=excluded.expiry`,
+      )
       .bind(joinKey(key), text, expiry?.toISOString() ?? null)
       .run();
   }
 
   async function remove(key: string[]) {
-    console.log('remove', key.join('.'));
+    // console.log('remove', key.join('.'));
     await d1.prepare(`DELETE FROM ${tableName} WHERE key = ?`).bind(joinKey(key)).run();
   }
 
   async function* scan(prefix: string[]): AsyncIterable<[string[], any]> {
-    console.log('scan', prefix.join('.'));
+    // console.log('scan', prefix.join('.'));
     const prefixString = joinKey([...prefix, '']);
     let offset = 0;
     let batchSize = 100;
