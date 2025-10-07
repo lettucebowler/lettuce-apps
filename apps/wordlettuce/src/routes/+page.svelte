@@ -68,7 +68,7 @@
   let timeout: NodeJS.Timeout;
 
   $effect(() => {
-    if (word.issues && Object.keys(word.issues).length) {
+    if (word.fields.word.issues()) {
       toastError('Invalid word');
       if (timeout) {
         clearTimeout(timeout);
@@ -98,17 +98,13 @@
         >
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = browser && game.answers.at(row.index)?.length === 5}
-            {@const doWiggleOnce = !browser && !!Object.keys(word.issues ?? {}).length && row.current}
+            {@const doWiggleOnce = !browser && word.fields.word.issues() && row.current}
             <div
               style="--animation-delay:{j * 0.03}s;"
               class={[
                 'wiggler bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                !row.guess &&
-                  row.current &&
-                  !!Object.keys(word.issues ?? {}).length &&
-                  !browser &&
-                  'animate-wiggle-once',
+                !row.guess && row.current && word.fields.word.issues() && !browser && 'animate-wiggle-once',
                 doWiggleOnce && 'animate-wiggle-once',
                 row.current && 'current',
               ]}
@@ -135,8 +131,7 @@
             status={status as LetterStatus}
             aria-label={l}
             title={l}
-            name={letter.field('key')}
-            value={l}
+            {...letter.fields.key.as('text')}
             {...letter.buttonProps.enhance(async (event) => {
               game.doLetter(event.data.key);
               saveGameStateToCookie();
