@@ -1,5 +1,4 @@
 import type { Attachment } from 'svelte/attachments';
-import { useThrottle } from 'runed';
 
 const DEFAULT_DELAY = 200;
 const DEFAULT_DISTANCE = 0;
@@ -15,17 +14,49 @@ const defaultOptions = {
 export function infiniteScroll(options: InfiniteScrollOptions = defaultOptions): Attachment {
   return (element) => {
     const scrollEventTarget = getScrollEventTarget(element);
-    const throttledListener = useThrottle(
+    const scrollEventListener = throttle(
       check.bind(null, { ...options, scrollEventTarget, element }),
       options.delay ?? DEFAULT_DELAY,
     );
-    const scrollEventListener = () => throttledListener();
     scrollEventTarget.addEventListener('scroll', scrollEventListener);
     if (options.immediate) {
       check({ ...options, scrollEventTarget, element });
     }
 
     return () => scrollEventTarget.removeEventListener('scroll', scrollEventListener);
+  };
+}
+
+function throttle(fn: VoidFunction, delay: number) {
+  let now: number;
+  let lastExec: number;
+  let timer: ReturnType<typeof setTimeout> | null;
+
+  const execute = () => {
+    fn();
+    lastExec = now;
+  };
+
+  return function () {
+    now = Date.now();
+
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    if (lastExec) {
+      const diff = delay - (now - lastExec);
+      if (diff < 0) {
+        execute();
+      } else {
+        timer = setTimeout(() => {
+          execute();
+        }, diff);
+      }
+    } else {
+      execute();
+    }
   };
 }
 

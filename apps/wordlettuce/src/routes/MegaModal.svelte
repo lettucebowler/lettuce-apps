@@ -3,10 +3,9 @@
 
 <script lang="ts">
   import Dialog from '$lib/components/base/Dialog.svelte';
-  import { ExpiringString } from './spells.svelte';
+  import { ExpiringString, NewGameCountdownTimer } from './spells.svelte';
   import { appName } from '$lib/app-constants';
   import { getGameStatus } from '$lib/util';
-  import { useInterval } from 'runed';
 
   type ModalProps = {
     gameNum: number;
@@ -18,16 +17,8 @@
 
   const { gameNum, answers, authenticated, onclose, open }: ModalProps = $props();
   let attempts = $derived(answers.length);
-  let timeUntilNextGame = $state(getTimeUntilNextGame());
-
   const clipboardMessage = new ExpiringString({ duration: 2000 });
-  const gameCountdown = useInterval(
-    () => {
-      timeUntilNextGame = getTimeUntilNextGame();
-    },
-    1000,
-    { immediate: false, immediateCallback: true },
-  );
+  const timeUntilNextGame = new NewGameCountdownTimer();
 
   function formatTime(secondsUntil: number) {
     const hours = Math.floor(secondsUntil / 3600);
@@ -36,13 +27,6 @@
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds
       .toString()
       .padStart(2, '0')}`;
-  }
-
-  function getTimeUntilNextGame() {
-    const tomorrow = new Date();
-    tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-    tomorrow.setUTCHours(0, 0, 0, 0);
-    return Math.round((tomorrow.getTime() - new Date().getTime()) / 1000);
   }
 
   function shareGame() {
@@ -62,9 +46,9 @@
 
   $effect(() => {
     if (open) {
-      gameCountdown.resume();
+      timeUntilNextGame.start();
     } else {
-      gameCountdown.pause();
+      timeUntilNextGame.pause();
     }
   });
 </script>
@@ -73,7 +57,7 @@
   {open}
   title="Success!"
   onclose={() => {
-    gameCountdown.pause();
+    timeUntilNextGame.pause();
     onclose();
   }}
   class="border-charade-700 space-y-2 border-t-2"
@@ -82,7 +66,7 @@
     You solved today's WordLettuce in {attempts} guess{attempts > 1 ? 'es' : ''}. Come back tomorrow and play again!
   </p>
   <p class="text-snow-300 grid place-items-center text-center font-bold">
-    Next word in {formatTime(timeUntilNextGame)}
+    Next word in {formatTime(timeUntilNextGame.value)}
   </p>
   <div class="-mx-2 -mb-2 grid gap-2">
     {#if !authenticated}
