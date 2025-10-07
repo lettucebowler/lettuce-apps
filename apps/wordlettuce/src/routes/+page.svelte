@@ -20,20 +20,36 @@
 
   const [game, session] = $derived(await Promise.all([getGameState(), getSession()]));
 
-  const duration = 0.15;
+  $effect(() => {
+    if (word.fields.word.issues()) {
+      toastError('Invalid word');
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      if (tileGridEl) {
+        const rows = tileGridEl.querySelectorAll('.wiggler.current');
+        rows.forEach((row) => row.classList.add('animate-wiggle'));
+        timeout = setTimeout(() => {
+          rows.forEach((row) => row.classList.remove('animate-wiggle'));
+        }, 150);
+      }
+    }
+  });
 
-  function showModal() {
-    pushState('', {
-      showModal: true,
-    });
-  }
-
-  function saveGameStateToCookie() {
+  $effect(() => {
     Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
       path: '/',
       httpOnly: false,
       expires: 1,
       secure: false,
+    });
+  });
+
+  const duration = 0.15;
+
+  function showModal() {
+    pushState('', {
+      showModal: true,
     });
   }
 
@@ -66,22 +82,6 @@
 
   let tileGridEl: HTMLDivElement | null = $state(null);
   let timeout: NodeJS.Timeout;
-
-  $effect(() => {
-    if (word.fields.word.issues()) {
-      toastError('Invalid word');
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      if (tileGridEl) {
-        const rows = tileGridEl.querySelectorAll('.wiggler.current');
-        rows.forEach((row) => row.classList.add('animate-wiggle'));
-        timeout = setTimeout(() => {
-          rows.forEach((row) => row.classList.remove('animate-wiggle'));
-        }, 150);
-      }
-    }
-  });
 </script>
 
 <main class="game-grid grid flex-auto grid-rows-[1fr_160px] gap-2 sm:gap-4">
@@ -131,10 +131,10 @@
             status={status as LetterStatus}
             aria-label={l}
             title={l}
-            {...letter.fields.key.as('text')}
+            name="key"
+            value={l}
             {...letter.buttonProps.enhance(async (event) => {
               game.doLetter(event.data.key);
-              saveGameStateToCookie();
             })}
           >
             {l}
@@ -153,7 +153,7 @@
           }
           const { success } = game.doWord(data.word);
           if (!success) {
-            return saveGameStateToCookie();
+            return;
           }
           let saveGameToastId: string | undefined = undefined;
           try {
@@ -180,7 +180,6 @@
         aria-label="backspace"
         {...undo.buttonProps.enhance(async ({}) => {
           game.doUndo();
-          saveGameStateToCookie();
         })}
       >
         <BackSpaceIcon class="mx-auto w-7" />
@@ -189,6 +188,13 @@
         <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
           <ShareIcon class="mx-auto w-7" />
         </Key>
+        <!-- {:else}
+        <button
+          type="button"
+          onclick={() => {
+            getGameState().set(new WordlettuceGame());
+          }}>click me!</button
+        > -->
       {/if}
     </div>
   </form>

@@ -24,7 +24,7 @@
   }
 
   let query = createInfiniteQuery(() => ({
-    queryKey: ['game-results', session.user, profileData.start],
+    queryKey: ['game-results', profileData.profileUser, profileData.start],
     initialPageParam: profileData.start,
     getNextPageParam(lastPage) {
       return lastPage.next ? lastPage.next : undefined;

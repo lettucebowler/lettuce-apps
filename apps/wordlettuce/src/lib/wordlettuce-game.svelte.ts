@@ -9,7 +9,7 @@ export type WordlettuceGameInit = {
   guesses?: Array<string>;
 };
 
-const WordlettuceGameStateFromString = v.pipe(
+export const WordlettuceGameStateFromString = v.pipe(
   v.pipe(
     v.string(),
     v.base64(),
@@ -30,9 +30,10 @@ const WordlettuceGameStateFromString = v.pipe(
         v.array(
           v.pipe(
             v.string(),
-            v.check((value) => isAllowedGuess({ guess: value })),
+            v.check((value) => !value || isAllowedGuess({ guess: value })),
           ),
         ),
+        v.transform((v) => v.filter(Boolean)),
       ),
       currentGuess: v.pipe(v.string(), v.maxLength(5)),
     }),
@@ -58,6 +59,11 @@ export class WordlettuceGame {
   static decode(state: string) {
     const gameState = v.parse(WordlettuceGameStateFromString, state);
     return new WordlettuceGame(gameState);
+  }
+
+  static encode(state: WordlettuceGameState) {
+    const stateString = `${state.gameNum};${state.guesses.join(',')};${state.currentGuess}`;
+    return btoa(stateString);
   }
 
   doLetter(letter: GuessLetter) {
@@ -158,8 +164,7 @@ export class WordlettuceGame {
   }
 
   get encoded() {
-    const state = `${this.#gameNum};${this.#guesses.join(',')};${this.#currentGuess}`;
-    return btoa(state);
+    return WordlettuceGame.encode(this.gameState);
   }
 }
 
