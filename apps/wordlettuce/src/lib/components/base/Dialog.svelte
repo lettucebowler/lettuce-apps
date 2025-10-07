@@ -4,9 +4,10 @@
 </script>
 
 <script lang="ts">
-  import { focusTrap, escapeKey, outsideClick } from '$lib/attachments.svelte';
+  import { focusTrap } from '$lib/attachments.svelte';
   import type { Snippet } from 'svelte';
   import { fade, scale } from 'svelte/transition';
+  import { onClickOutside, PressedKeys } from 'runed';
 
   type Props = {
     children?: Snippet;
@@ -17,6 +18,23 @@
   };
 
   let { children, class: className, open = $bindable(false), title = '', onclose = () => {} }: Props = $props();
+
+  let container = $state<HTMLElement>()!;
+
+  function maybeClose() {
+    if (open) {
+      onclose();
+    }
+  }
+
+  onClickOutside(
+    () => container,
+    () => maybeClose(),
+  );
+
+  let keys = new PressedKeys();
+
+  keys.onKeys(['escape'], () => maybeClose());
 </script>
 
 {#if open}
@@ -31,17 +49,8 @@
     ]}
   >
     <div
-      {@attach escapeKey(() => {
-        if (open) {
-          onclose();
-        }
-      })}
       {@attach focusTrap()}
-      {@attach outsideClick(() => {
-        if (open) {
-          onclose();
-        }
-      })}
+      bind:this={container}
       in:scale={{ duration: dialogScaleDuration, delay: backdropFadeDuration, start: 0.9 }}
       out:scale={{ duration: dialogScaleDuration, start: 0.9 }}
       class={[
