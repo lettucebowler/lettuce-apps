@@ -1,7 +1,7 @@
 import { getRequestEvent } from '$app/server';
-import type { ValiError } from 'valibot';
 import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from './app-constants';
-import { WordlettuceGame, WordlettuceGameStateFromString } from './wordlettuce-game.svelte';
+import { WordlettuceGame } from './wordlettuce-game.svelte';
+import { getGameNum } from './words';
 
 export function getGameStateFromCookie() {
   try {
@@ -10,10 +10,12 @@ export function getGameStateFromCookie() {
     if (!stateString) {
       return new WordlettuceGame();
     }
-    return WordlettuceGame.decode(stateString);
+    const decoded = WordlettuceGame.decode(stateString);
+    if (decoded.gameNum !== getGameNum()) {
+      return new WordlettuceGame();
+    }
+    return decoded;
   } catch (e: unknown) {
-    const error = e as ValiError<typeof WordlettuceGameStateFromString>;
-    console.error(JSON.stringify(error.issues, null, 2));
     return new WordlettuceGame();
   }
 }
