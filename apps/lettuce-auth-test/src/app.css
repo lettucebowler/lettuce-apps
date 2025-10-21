@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@source "../../app.html";
-@source "../node_modules/@lettuce-apps-packages/svelte-common";
+@source '../../app.html';
+@source '../node_modules/@lettuce-apps-packages/svelte-common';
 
 @theme {
   --color-transparent: transparent;

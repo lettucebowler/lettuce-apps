@@ -6,6 +6,7 @@
   import { ExpiringString, NewGameCountdownTimer } from './spells.svelte';
   import { appName } from '$lib/app-constants';
   import { getGameStatus } from '$lib/util';
+  import ArrowRightEndOnBoxIcon from '$lib/components/icons/ArrowRightEndOnRectangleIcon.svelte';
 
   type ModalProps = {
     gameNum: number;
@@ -71,13 +72,13 @@
   <div class="-mx-2 -mb-2 grid gap-2">
     {#if !authenticated}
       <a
-        class="bg-antique-brass-500 text-snow-300 border-t-1 border-antique-brass-400 box-border block w-full cursor-pointer rounded-lg p-2 text-center font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
-        href="/signin">Login to save your results</a
+        class="bg-antique-brass-500 text-snow-300 border-antique-brass-400 box-border block w-full rounded-lg border-t-1 p-2 text-center font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
+        href="/signin">Login to save your results <ArrowRightEndOnBoxIcon class="inline w-6" /></a
       >
     {/if}
     <button
       onclick={() => shareGame()}
-      class="bg-frost-400 text-snow-300 border-t-1 border-frost-300 box-border block w-full cursor-pointer rounded-lg p-2 font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
+      class="bg-frost-400 text-snow-300 border-frost-300 box-border block w-full rounded-lg border-t-1 p-2 font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
       >{#if clipboardMessage.value}
         <span class="text-snow-300 -z-10 p-2 text-center">{clipboardMessage.value}</span>
       {:else}

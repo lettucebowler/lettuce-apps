@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FireIcon from '$lib/components/FireIcon.svelte';
+  import FireIcon from '$lib/components/icons/FireIcon.svelte';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import { getRankings } from './rankings.remote';
 
@@ -16,7 +16,7 @@
     {#each rankings as ranking, i (i)}
       {@const position = i + 1}
       <a
-        class="bg-charade-900 hover:bg-charade-950 not-last:border-b not-last:border-charade-600 block px-4 py-2 first:rounded-t-xl last:rounded-b-xl"
+        class="bg-charade-900 hover:bg-charade-950 not-last:border-charade-600 block px-4 py-2 not-last:border-b first:rounded-t-xl last:rounded-b-xl"
         href={`/profile/${ranking.user}`}
       >
         <div class="flex items-center gap-4">

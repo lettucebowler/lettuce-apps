@@ -30,7 +30,7 @@
       ? '--color-putty-200'
       : '--color-charade-400'})"
   class={[
-    'mt-(--keyboard-height) text-(--text-color) col-span-4 grid cursor-pointer place-items-center rounded-md text-center text-sm font-bold capitalize active:shadow-none sm:text-xl md:text-2xl',
+    'col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize hover:brightness-90 active:shadow-none sm:text-xl md:text-2xl',
     status && 'bg-(--bg-color) text-(--text-color)',
     ['x', 'c', undefined].includes(status) &&
       'shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] active:mt-0',

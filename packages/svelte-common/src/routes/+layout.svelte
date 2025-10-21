@@ -8,7 +8,7 @@
 </script>
 
 <PageContentContainer>
-  <div class="p-2 sm:p-4 min-[800px]:px-0">
+  <div class="p-2 min-[800px]:px-0 sm:p-4">
     <NavBar>
       <NavLink to="/" label="home" />
       <!-- <NavLink to="/rankings" label="rankings" />

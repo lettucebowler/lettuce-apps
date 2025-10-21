@@ -6,9 +6,9 @@
   import { toastError, toastLoading, toastSuccess } from './toast';
   import { pushState } from '$app/navigation';
   import { page } from '$app/state';
-  import ShareIcon from '$lib/components/ShareIcon.svelte';
-  import EnterIcon from '$lib/components/EnterIcon.svelte';
-  import BackSpaceIcon from '$lib/components/BackSpaceIcon.svelte';
+  import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
+  import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
+  import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import { LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
@@ -35,15 +35,6 @@
       }
     }
   });
-
-  // $effect(() => {
-  //   Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
-  //     path: '/',
-  //     httpOnly: false,
-  //     expires: 1,
-  //     secure: false,
-  //   });
-  // });
 
   function saveGameStateToCookie() {
     Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
@@ -97,7 +88,7 @@
   <div class="size-container grid w-full">
     <div
       bind:this={tileGridEl}
-      class="max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] m-auto grid w-full grid-rows-[repeat(6,1fr)] gap-2"
+      class="m-auto grid w-full max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] grid-rows-[repeat(6,1fr)] gap-2"
     >
       {#each getItemsForGrid(game) as row (row.index)}
         <div

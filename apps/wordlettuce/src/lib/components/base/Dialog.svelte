@@ -25,7 +25,7 @@
     out:fade={{ duration: backdropFadeDuration }}
     class={[
       'grid place-content-center',
-      'fixed bottom-0 left-0 right-0 top-0 z-[999999999]',
+      'fixed top-0 right-0 bottom-0 left-0 z-[999999999]',
       'backdrop-blur-xs',
       'bg-[radial-gradient(#D4D4D8_1px,transparent_1px)]',
     ]}
@@ -55,7 +55,7 @@
       ]}
     >
       <button
-        class="text-snow-300 absolute right-3 top-3 h-8 rounded-sm p-1 hover:outline focus:outline active:outline-2"
+        class="text-snow-300 absolute top-3 right-3 h-8 rounded-sm p-1 hover:outline focus:outline active:outline-2"
         onclick={() => onclose()}
       >
         {@render IconClose()}

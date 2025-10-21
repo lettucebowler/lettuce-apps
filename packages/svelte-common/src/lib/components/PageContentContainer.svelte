@@ -4,7 +4,7 @@
 </script>
 
 <div class="bg-charade-900 ml-[calc(100vw-100%)]">
-  <div class="max-w-(--breakpoint-md) mx-auto min-h-[100dvh] w-full">
+  <div class="mx-auto min-h-[100dvh] w-full max-w-(--breakpoint-md)">
     {@render children?.()}
   </div>
 </div>
