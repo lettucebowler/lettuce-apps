@@ -84,10 +84,10 @@
       {#each profileData.currentResults as gameResult (gameResult)}
         <div
           class={[
-            [7, 4].includes(profileData.currentResults.length) && 'sm:basis-[calc((100%-36px)/4)]',
-            [6, 5, 3].includes(profileData.currentResults.length) && 'sm:basis-[calc((100%-24px)/4)]',
-            [2].includes(profileData.currentResults.length) && 'sm:basis-[calc((100%-12px)/4)]',
-            [1].includes(profileData.currentResults.length) && 'sm:basis-[25%]',
+            [7, 4].includes(profileData.currentResults.length) && 'sm:w-[calc((100%-36px)/4)]',
+            [6, 5, 3].includes(profileData.currentResults.length) && 'sm:w-[calc((100%-24px)/4)]',
+            [2].includes(profileData.currentResults.length) && 'sm:w-[calc((100%-12px)/4)]',
+            [1].includes(profileData.currentResults.length) && 'sm:w-[25%]',
           ]}
         >
           <GameSummary {...gameResult} enableShare={isSelf} />
