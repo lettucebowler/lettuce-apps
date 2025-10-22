@@ -1,31 +1,35 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   type TileProps = {
-    letter: string;
-    answer: string | undefined;
     class?: string;
+    status: 'EXACT' | 'CONTAINS' | 'INCORRECT' | 'NONE';
+    children?: Snippet;
   };
 
-  let { letter = '', answer, class: className }: TileProps = $props();
+  let { status, class: className, children }: TileProps = $props();
 </script>
 
 <div
   class={[
-    'h-full rounded-xl pt-(--tile-height) transition delay-(--transition-delay)',
-    answer === 'c' && 'bg-putty-300',
-    answer === 'x' && 'bg-swamp-green-300',
-    answer === 'i' && 'bg-charade-500',
+    'h-full rounded-xl pt-(--tile-height) capitalize transition delay-(--transition-delay)',
+    status === 'CONTAINS' && 'bg-putty-300',
+    status === 'EXACT' && 'bg-swamp-green-300',
+    status === 'INCORRECT' && 'bg-charade-500',
     className,
   ]}
 >
   <div
     class={[
-      'text-charade-100 grid h-full w-full items-center rounded-xl text-center text-2xl font-bold transition-all delay-(--transition-delay) duration-0 sm:text-3xl',
-      answer === 'x' && 'bg-swamp-green-500 text-swamp-green-800',
-      answer === 'c' && 'bg-putty-500 text-putty-800',
-      answer === 'i' && 'bg-charade-700',
-      answer && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0_/_0.2)]',
+      'grid h-full w-full items-center rounded-xl text-center text-2xl font-bold transition-all delay-(--transition-delay) duration-0 sm:text-3xl',
+      status === 'EXACT' && 'bg-swamp-green-500 text-swamp-green-800',
+      status === 'CONTAINS' && 'bg-putty-500 text-putty-800',
+      status === 'INCORRECT' && 'bg-charade-700',
+      'bg-(--tile-color)',
+      status === 'NONE' || (status === 'INCORRECT' && 'text-charade-100'),
+      status !== 'NONE' && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0_/_0.2)]',
     ]}
   >
-    {letter.toUpperCase()}
+    {@render children?.()}
   </div>
 </div>

@@ -99,6 +99,7 @@
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = browser && game.answers.at(row.index)?.length === 5}
             {@const doWiggleOnce = !browser && word.fields.word.issues() && row.current}
+            {@const answer = game.answers.at(row.index)?.charAt(j)}
             <div
               style="--animation-delay:{j * 0.03}s;"
               class={[
@@ -110,11 +111,11 @@
               ]}
             >
               <Tile
-                --transition-delay="{j * 0.03 + duration}s"
-                letter={letter === ' ' ? '' : letter}
-                answer={game.answers.at(row.index)?.charAt(j)}
+                status={answer === 'x' ? 'EXACT' : answer === 'c' ? 'CONTAINS' : answer === 'i' ? 'INCORRECT' : 'NONE'}
                 class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}
-              />
+              >
+                {letter}
+              </Tile>
             </div>
           {/each}
         </div>

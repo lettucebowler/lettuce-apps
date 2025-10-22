@@ -45,12 +45,7 @@
       in:scale={{ duration: dialogScaleDuration, delay: backdropFadeDuration, start: 0.9 }}
       out:scale={{ duration: dialogScaleDuration, start: 0.9 }}
       class={[
-        'relative z-10',
-        'w-full max-w-xs sm:w-max sm:min-w-80',
-        'text-snow-300 text-left',
-        'shadow-md dark:shadow-none',
-        'rounded-2xl p-4',
-        'bg-charade-900',
+        'text-snow-300 bg-charade-900 relative z-10 w-full max-w-xs min-w-8 rounded-2xl p-4 text-left shadow-md',
         className,
       ]}
     >
