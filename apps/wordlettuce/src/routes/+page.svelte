@@ -111,7 +111,7 @@
               ]}
             >
               <Tile
-                --transition-delay="{j * 0.03}s"
+                --transition-delay="{j * 0.03 + 0.15}s"
                 status={answer === 'x' ? 'EXACT' : answer === 'c' ? 'CONTAINS' : answer === 'i' ? 'INCORRECT' : 'NONE'}
                 class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}
               >
