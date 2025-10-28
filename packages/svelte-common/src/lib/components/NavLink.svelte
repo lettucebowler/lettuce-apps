@@ -39,7 +39,7 @@
   aria-current={current}
   href={to}
 >
-  {#if current}
+  {#if $state.eager(current)}
     <div
       in:recieve={{ key: 'current-link' }}
       out:send={{ key: 'current-link' }}
