@@ -57,8 +57,7 @@ export class WordlettuceGame {
   }
 
   static decode(state: string) {
-    const gameState = v.parse(WordlettuceGameStateFromString, state);
-    return new WordlettuceGame(gameState);
+    return v.parse(WordlettuceGameStateFromString, state);
   }
 
   static encode(state: WordlettuceGameState) {

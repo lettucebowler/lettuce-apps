@@ -18,7 +18,9 @@
   import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
   import { WordFormInput } from './game.schemas';
 
-  const [game, session] = $derived(await Promise.all([getGameState(), getSession()]));
+  const session = await getSession();
+  const gameState = await getGameState();
+  let game = $derived(new WordlettuceGame(gameState));
 
   $effect(() => {
     if (word.fields.word.issues()) {
