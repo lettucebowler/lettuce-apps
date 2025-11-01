@@ -14,7 +14,6 @@
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
   const session = await getSession();
-  $inspect(params.profileUser, start);
   const profileData = await getProfileData({ profileUser: params.profileUser, start });
   let isSelf = $derived(session.user?.username === profileData.profileUser);
 

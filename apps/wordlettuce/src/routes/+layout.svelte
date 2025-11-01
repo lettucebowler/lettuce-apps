@@ -12,7 +12,6 @@
   import { Toaster } from 'svelte-french-toast';
   import { getGameNum } from '$lib/words';
   import { getSession } from './auth.remote';
-  import { page } from '$app/state';
 
   let { children } = $props();
   const session = $derived(await getSession());
@@ -24,8 +23,6 @@
       },
     },
   });
-
-  $inspect(page);
 </script>
 
 <svelte:head>
@@ -38,7 +35,7 @@
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-[100dvh] flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-code="hover">
+  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-code="hover">
     <NavBar>
       <NavLink to="/" label="home" />
       <NavLink to="/rankings" label="rankings" />

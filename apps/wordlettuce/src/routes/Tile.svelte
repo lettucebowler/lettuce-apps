@@ -18,7 +18,7 @@
     status === 'CONTAINS' && 'bg-putty-500 text-putty-800 border-putty-300 border-t-(length:--tile-height)',
     status === 'INCORRECT' && 'bg-charade-700 text-charade-100 border-charade-500 border-t-(length:--tile-height)',
     status === 'NONE' && 'text-charade-100',
-    status !== 'NONE' && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0_/_0.2)]',
+    status !== 'NONE' && 'shadow-[0_var(--tile-height)_4px_0_rgb(0_0_0/0.2)]',
     className,
   ]}
 >
