@@ -26,7 +26,7 @@
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
+  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-code="hover">
     <NavBar>
       <NavLink to="/" label="home" />
       <NavLink to="/rankings" label="rankings" />
