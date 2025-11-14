@@ -1,6 +1,6 @@
 import { successAnswer } from '$lib/app-constants';
 import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
-import { GuessLetter } from '$lib/game-schemas';
+import { GuessLetter, LetterStatus } from '$lib/game-schemas';
 import * as v from 'valibot';
 
 export type WordlettuceGameInit = {
@@ -129,7 +129,7 @@ export class WordlettuceGame {
     return this.#invalid;
   }
 
-  get letterStatuses() {
+  get letterStatuses(): Partial<Record<GuessLetter, LetterStatus>> {
     if (!this.#guesses.length) {
       return {};
     }

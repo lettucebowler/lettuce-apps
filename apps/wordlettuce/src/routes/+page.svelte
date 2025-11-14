@@ -10,7 +10,7 @@
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
-  import { LetterStatus } from '$lib/game-schemas';
+  import { GuessLetter, LetterStatus } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import MegaModal from './MegaModal.svelte';
   import { getGameState, letter, undo, word } from './game.remote';
@@ -129,10 +129,9 @@
     <input type="hidden" value={game.currentGuess} name="word" />
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
       {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
-        {@const status = game.letterStatuses[l]}
         {#if l}
           <Key
-            status={status as LetterStatus}
+            status={game?.letterStatuses?.[l as GuessLetter]}
             aria-label={l}
             title={l}
             name="key"
