@@ -1,6 +1,8 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
+
+  $inspect(page.error);
 </script>
 
 <main class="space-y-8">
@@ -14,6 +16,6 @@
   </figure>
 
   <p class="text-snow-300 text-center text-xl">
-    This user was not found, but if we did find them, they'd have a pretty cool auto-generated avatar!
+    This user was not found, but if we did find them, they'd have a pretty cool auto-generated avatar! error
   </p>
 </main>

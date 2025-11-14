@@ -16,37 +16,26 @@
   const session = await getSession();
   const profileData = await getProfileData({ profileUser: params.profileUser, start });
   let isSelf = $derived(session.user?.username === profileData.profileUser);
+  let pages = $state([{ results: profileData.pastResults, start: profileData.start, next: profileData.next }]);
 
-  async function getResults({ start }: { start: number }) {
-    return getGameResults({ userID: profileData.profileUserID, start, limit: 60 });
+  async function getResults() {
+    const next = pages.at(-1)?.next;
+    if (!next) {
+      return;
+    }
+    const nextPage = await getGameResults({ userID: profileData.profileUserID, start: next, limit: 60 });
+    pages.push({ start: nextPage.start, next: nextPage.next, results: nextPage.results });
   }
-
-  let query = createInfiniteQuery(() => ({
-    queryKey: ['game-results', profileData.profileUser, profileData.start],
-    initialPageParam: profileData.start,
-    getNextPageParam(lastPage) {
-      return lastPage.next ? lastPage.next : undefined;
-    },
-    queryFn: ({ pageParam }) => getResults({ start: pageParam }),
-    initialData: {
-      pageParams: [profileData.start],
-      pages: [{ results: profileData.pastResults, start: profileData.start, next: profileData.next }],
-    },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  }));
 </script>
 
 <svelte:body
   {@attach infiniteScroll({
     distance: 1000,
     cb: () => {
-      if (!query.isFetchingNextPage) {
-        query?.fetchNextPage();
-      }
+      getResults();
     },
     immediate: true,
-    disabled: !profileData.next || profileData.start !== gameNum || !query.hasNextPage,
+    disabled: false,
   })}
 />
 <main class="flex w-full flex-col gap-8">
@@ -97,14 +86,14 @@
   {#if profileData.pastResults.length}
     <h2 class="text-snow-300 text-center text-3xl font-bold">Play History</h2>
     <div class="grid w-full grid-cols-2 gap-2 px-1 sm:grid-cols-3 sm:gap-3">
-      {#if query.data}
-        {#each query.data.pages ?? [] as page (page)}
+      {#if pages.length}
+        {#each pages ?? [] as page (page)}
           {#each page.results as gameResult (gameResult)}
             <GameSummary {...gameResult} enableShare={isSelf} />
           {/each}
         {/each}
       {/if}
-      {#if browser && query.hasNextPage && profileData.start === gameNum}
+      {#if browser && pages?.at(-1)?.next && profileData.start === gameNum}
         <div class="col-span-2 flex flex-col items-center gap-2 sm:col-span-3">
           <svg
             class="text-snow-100 h-8 animate-spin"

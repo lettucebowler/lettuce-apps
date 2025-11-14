@@ -1,6 +1,5 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
   import smallFavicon from '$lib/assets/favicon-16x16.png';
   import bigFavicon from '$lib/assets/favicon-32x32.png';
   import appleTouchIcon from '$lib/assets/apple-touch-icon.png';
@@ -15,14 +14,6 @@
 
   let { children } = $props();
   const session = $derived(await getSession());
-
-  let queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        enabled: browser,
-      },
-    },
-  });
 </script>
 
 <svelte:head>
@@ -35,7 +26,7 @@
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-code="hover">
+  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
     <NavBar>
       <NavLink to="/" label="home" />
       <NavLink to="/rankings" label="rankings" />
@@ -54,9 +45,7 @@
         <NavLink to="/signin" class="ml-auto" label="sign in" />
       {/if}
     </NavBar>
-    <QueryClientProvider client={queryClient}>
-      {@render children()}
-    </QueryClientProvider>
+    {@render children()}
   </div>
 </PageContentContainer>
 <Toaster />
