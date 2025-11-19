@@ -93,15 +93,28 @@ const CreateGameResultJsonSchema = v.object({
 gameResultsController.post('/', requireToken, sValidator('json', CreateGameResultJsonSchema), async (c) => {
   const { gameNum, userID, answers } = c.req.valid('json');
   const dao = createGameResultsDao(c);
-  const inserts = await dao.saveGame({ gameNum, userID, answers });
-  if (!inserts.length) {
-    return c.json(
-      {
-        success: false,
-      },
-      500,
-    );
+  try {
+    const inserts = await dao.saveGame({ gameNum, userID, answers });
+    if (!inserts.length) {
+      return c.json(
+        {
+          success: false,
+        },
+        500,
+      );
+    }
+    return c.json(inserts.at(0));
+  } catch (e) {
+    if (!(e instanceof Error)) {
+      c.status(500);
+      return c.json({
+        message: 'unexpected error occurred during db insert operation',
+      });
+    }
+    c.status(500);
+    return c.json({
+      message: e.message ?? 'Failed to save game result',
+    });
   }
-  return c.json(inserts.at(0));
 });
 export default gameResultsController;

@@ -2,7 +2,7 @@ import { API_WORDLETTUCE_TOKEN } from '$env/static/private';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { error as svelteError } from '@sveltejs/kit';
 import { getRequestEvent } from '$app/server';
-import ky from 'ky';
+import ky, { HTTPError } from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
 
@@ -17,19 +17,27 @@ function createAPIWordlettuceClient() {
   });
 }
 
-export async function saveGame({ userID, gameNum, answers }: SaveGameInput): Promise<SaveGameOutput> {
+export async function saveGame({
+  userID,
+  gameNum,
+  answers,
+}: SaveGameInput): Promise<[SaveGameOutput, null] | [null, { message: string }]> {
   try {
     const client = createAPIWordlettuceClient();
     const saveGameResponse = await client
-      .post<SaveGameOutput[number]>('v1/game-results', { json: { userID, gameNum, answers } })
+      .post<SaveGameOutput>('v1/game-results', { json: { userID, gameNum, answers } })
       .json();
-    return [saveGameResponse];
+    return [saveGameResponse, null];
   } catch (error) {
-    if (error instanceof Error) {
-      throw svelteError(500, error);
+    if (error instanceof HTTPError) {
+      const json = await error.response.json();
+      return [null, { message: json.message }];
     }
+    if (error instanceof Error) {
+      return [null, { message: error.message }];
+    }
+    return [null, { message: 'Unexpected error' }];
   }
-  return [];
 }
 
 export async function getRankings(_: GetRankingsInput): Promise<GetRankingsOutput> {
@@ -60,12 +68,12 @@ export type SaveGameInput = {
   gameNum: number;
   answers: string;
 };
-export type SaveGameOutput = Array<{
+export type SaveGameOutput = {
   gameNum: number;
-  userID: string;
+  userID: number;
   answers: string;
   attempts: number;
-}>;
+};
 
 export type GetGameResultsOutput = {
   limit: number;

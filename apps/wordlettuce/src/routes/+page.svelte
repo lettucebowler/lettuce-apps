@@ -10,14 +10,14 @@
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
-  import { GuessLetter, LetterStatus } from '$lib/game-schemas';
+  import { GuessLetter } from '$lib/game-schemas';
   import Key from './Key.svelte';
   import MegaModal from './MegaModal.svelte';
   import { getGameState, letter, undo, word } from './game.remote';
   import { getSession } from './auth.remote';
   import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
   import { WordFormInput } from './game.schemas';
-
+  import { isHttpError } from '@sveltejs/kit';
   const session = await getSession();
   const gameState = await getGameState();
   let game = $derived(new WordlettuceGame(gameState));
@@ -171,7 +171,10 @@
             }
           } catch (error) {
             if (saveGameToastId) {
-              toastError('Failed to save game results', { id: saveGameToastId });
+              if (!isHttpError(error)) {
+                return toastError('Failed to save game results', { id: saveGameToastId });
+              }
+              toastError(error.body.message, { id: saveGameToastId });
             }
           }
         })}

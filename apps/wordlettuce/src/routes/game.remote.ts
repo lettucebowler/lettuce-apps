@@ -1,5 +1,5 @@
 import { form, getRequestEvent, query } from '$app/server';
-import { error } from '@sveltejs/kit';
+import { error as svelteError } from '@sveltejs/kit';
 import * as v from 'valibot';
 
 import { GuessLetter } from '$lib/game-schemas';
@@ -7,6 +7,7 @@ import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 import { WordFormInput } from './game.schemas';
 import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
+import { HTTPError } from 'ky';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie();
@@ -69,17 +70,25 @@ export const word = form(WordFormInput, async ({ word }) => {
     };
   }
   if (event.locals.session) {
-    const inserts = await apiWordlettuce.saveGame({
+    const [inserts, error] = await apiWordlettuce.saveGame({
       answers: game.answers.join(''),
       userID: event.locals.session.userID,
       gameNum: game.gameNum,
     });
-    if (!inserts.length) {
-      error(500, { message: 'Error saving to database' });
+    if (error) {
+      svelteError(500, error.message);
     }
+    if (
+      inserts.gameNum !== game.gameNum ||
+      inserts.answers !== game.answers.join('') ||
+      inserts.attempts !== game.answers.length ||
+      inserts.userID !== event.locals.session.userID
+    ) {
+      svelteError(500, 'Insertion mismatch');
+    }
+    return {
+      success: true,
+      invalid: false,
+    };
   }
-  return {
-    success: true,
-    invalid: false,
-  };
 });
