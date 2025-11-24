@@ -8,9 +8,9 @@
   import { LettuceAvatar, PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
-  import { Toaster } from 'svelte-french-toast';
   import { getGameNum } from '$lib/words';
   import { getSession } from './auth.remote';
+  import { Toasts } from 'svoast';
 
   let { children } = $props();
   const session = $derived(await getSession());
@@ -48,4 +48,17 @@
     {@render children()}
   </div>
 </PageContentContainer>
-<Toaster />
+<Toasts position="top-center" />
+
+<style>
+  :root {
+    --svoast-bg: var(--color-charade-800);
+    --svoast-text: var(--color-snow-300);
+    --svoast-padding: 1rem;
+    --svoast-font-size: 16px;
+    --svoast-radius: 0.5rem;
+    --svoast-bar-width: 0.5rem;
+    --svoast-error-colour: var(--color-contessa-500);
+    --svoast-success-colour: var(--color-swamp-green-500);
+  }
+</style>

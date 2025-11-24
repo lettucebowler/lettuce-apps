@@ -3,7 +3,7 @@
   import Tile from './Tile.svelte';
   import Cookies from 'js-cookie';
   import { browser } from '$app/environment';
-  import { toastError, toastLoading, toastSuccess } from './toast';
+  import { toastError, toastLoading, toastPromise, toastSuccess } from './toast';
   import { pushState } from '$app/navigation';
   import { page } from '$app/state';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
@@ -11,32 +11,30 @@
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import { GuessLetter } from '$lib/game-schemas';
-  import Key from './Key.svelte';
   import MegaModal from './MegaModal.svelte';
-  import { getGameState, letter, undo, word } from './game.remote';
+  import { getGameState, action } from './game.remote';
   import { getSession } from './auth.remote';
   import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
-  import { WordFormInput } from './game.schemas';
+  import { ActionFormInput, WordFormInput, AllowedGuess } from './game.schemas';
   import { isHttpError } from '@sveltejs/kit';
   const session = await getSession();
-  const gameState = await getGameState();
+  const gameState = $derived(await getGameState());
   let game = $derived(new WordlettuceGame(gameState));
+  import * as v from 'valibot';
 
-  $effect(() => {
-    if (word.fields.word.issues()) {
-      toastError('Invalid word');
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      if (tileGridEl) {
-        const rows = tileGridEl.querySelectorAll('.wiggler.current');
-        rows.forEach((row) => row.classList.add('animate-wiggle'));
-        timeout = setTimeout(() => {
-          rows.forEach((row) => row.classList.remove('animate-wiggle'));
-        }, 150);
-      }
+  function badWord() {
+    toastError('Invalid word');
+    if (timeout) {
+      clearTimeout(timeout);
     }
-  });
+    if (tileGridEl) {
+      const rows = tileGridEl.querySelectorAll('.wiggler.current');
+      rows.forEach((row) => row.classList.add('animate-wiggle'));
+      timeout = setTimeout(() => {
+        rows.forEach((row) => row.classList.remove('animate-wiggle'));
+      }, 150);
+    }
+  }
 
   function saveGameStateToCookie() {
     Cookies.set(STATE_COOKIE_NAME_V2, game.encoded, {
@@ -84,8 +82,53 @@
 
   let tileGridEl: HTMLDivElement | null = $state(null);
   let timeout: NodeJS.Timeout;
+
+  let wordButton: HTMLButtonElement;
+  let undoButton: HTMLButtonElement;
+  let letterButtons: { [x: string]: HTMLButtonElement | undefined } = $state({
+    a: undefined,
+    b: undefined,
+    c: undefined,
+    d: undefined,
+    e: undefined,
+    f: undefined,
+    g: undefined,
+    h: undefined,
+    i: undefined,
+    j: undefined,
+    k: undefined,
+    l: undefined,
+    m: undefined,
+    n: undefined,
+    o: undefined,
+    p: undefined,
+    q: undefined,
+    r: undefined,
+    s: undefined,
+    t: undefined,
+    u: undefined,
+    v: undefined,
+    w: undefined,
+    x: undefined,
+    y: undefined,
+    z: undefined,
+  });
 </script>
 
+<svelte:body
+  onkeydown={(e) => {
+    if (e.key.toLowerCase() === 'enter') {
+      console.log('enter');
+      wordButton.click();
+    }
+    if (e.key.toLowerCase() === 'backspace') {
+      undoButton.click();
+    }
+    if (v.safeParse(GuessLetter, e.key).success) {
+      letterButtons[e.key]?.click();
+    }
+  }}
+/>
 <main class="game-grid grid flex-auto grid-rows-[1fr_160px] gap-2 sm:gap-4">
   <div class="size-container grid w-full">
     <div
@@ -100,14 +143,14 @@
         >
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = browser && game.answers.at(row.index)?.length === 5}
-            {@const doWiggleOnce = !browser && word.fields.word.issues() && row.current}
+            {@const doWiggleOnce = !browser && action.fields.word.issues() && row.current}
             {@const answer = game.answers.at(row.index)?.charAt(j)}
             <div
               style="--animation-delay:{j * 0.03}s;"
               class={[
                 'wiggler bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                !row.guess && row.current && word.fields.word.issues() && !browser && 'animate-wiggle-once',
+                !row.guess && row.current && action.fields.word.issues() && !browser && 'animate-wiggle-once',
                 doWiggleOnce && 'animate-wiggle-once',
                 row.current && 'current',
               ]}
@@ -125,88 +168,114 @@
       {/each}
     </div>
   </div>
-  <form class="keyboard grid w-full flex-auto gap-1" method="POST">
-    <input type="hidden" value={game.currentGuess} name="word" />
+  <form
+    class="keyboard grid w-full flex-auto gap-1"
+    {...action.enhance(async ({ data, submit }) => {
+      if (data.letter) {
+        game.doLetter(data.letter);
+        return saveGameStateToCookie();
+      } else if (data.undo) {
+        game.doUndo();
+        return saveGameStateToCookie();
+      } else if (data.word) {
+        if (game.success) {
+          return;
+        }
+        const parseResult = v.safeParse(AllowedGuess, data.word);
+        if (!parseResult.success) {
+          return badWord();
+        }
+        const { success } = game.doWord(data.word);
+        if (!success) {
+          return saveGameStateToCookie();
+        }
+        let saveGameToastId: string | undefined = undefined;
+        try {
+          const promise = submit();
+          toastPromise({
+            promise,
+            loadingText: 'Saving results...',
+            successText: 'Results saved!',
+            errorText: 'Error saving results',
+          });
+          await promise;
+          if (saveGameToastId) {
+            toastSuccess('Game results saved', { id: saveGameToastId });
+            setTimeout(() => showModal(), 500);
+          }
+        } catch (error) {
+          if (saveGameToastId) {
+            if (!isHttpError(error)) {
+              return toastError('Failed to save game results', { id: saveGameToastId });
+            }
+            toastError(error.body.message, { id: saveGameToastId });
+          }
+        }
+      }
+    })}
+  >
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
       {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
         {#if l}
-          <Key
-            status={game?.letterStatuses?.[l as GuessLetter]}
-            aria-label={l}
-            title={l}
-            name="key"
-            value={l}
-            {...letter.buttonProps.enhance(async (event) => {
-              game.doLetter(event.data.key);
-              saveGameStateToCookie();
-            })}
+          <button
+            bind:this={letterButtons[l]}
+            {...action.fields.letter.as('submit', l)}
+            style="--keyboard-height: 1px; --highlight-color: var({game?.letterStatuses?.[l as GuessLetter] === 'x'
+              ? '--color-swamp-green-200'
+              : game?.letterStatuses?.[l as GuessLetter] === 'c'
+                ? '--color-putty-200'
+                : '--color-charade-400'})"
+            class={[
+              'col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize hover:brightness-90 active:shadow-none sm:text-xl md:text-2xl',
+              game?.letterStatuses?.[l as GuessLetter] && 'bg-(--bg-color) text-(--text-color)',
+              ['x', 'c', undefined].includes(game?.letterStatuses?.[l as GuessLetter]) &&
+                'shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] active:mt-0',
+              game?.letterStatuses?.[l as GuessLetter] === 'x' && 'bg-swamp-green-500 text-swamp-green-900',
+              game?.letterStatuses?.[l as GuessLetter] === 'c' && 'bg-putty-500 text-putty-900',
+              game?.letterStatuses?.[l as GuessLetter] === 'i' && 'bg-charade-800 text-charade-300 shadow-none',
+              game?.letterStatuses?.[l as GuessLetter] === undefined && 'bg-charade-600 text-charade-100',
+            ]}>{l}</button
           >
-            {l}
-          </Key>
         {:else}
           <div></div>
         {/if}
       {/each}
-      <Key
+      <button
+        bind:this={wordButton}
         aria-label="enter"
         title="enter"
-        value="Enter"
-        {...word.preflight(WordFormInput).buttonProps.enhance(async ({ submit, data }) => {
-          if (game.success) {
-            return;
-          }
-          const { success } = game.doWord(data.word);
-          if (!success) {
-            return saveGameStateToCookie();
-          }
-          let saveGameToastId: string | undefined = undefined;
-          try {
-            if (session.authenticated && game.success) {
-              saveGameToastId = toastLoading('Saving results...');
-            }
-            await submit();
-            if (saveGameToastId) {
-              toastSuccess('Game results saved', { id: saveGameToastId });
-              setTimeout(() => showModal(), 500);
-            }
-          } catch (error) {
-            if (saveGameToastId) {
-              if (!isHttpError(error)) {
-                return toastError('Failed to save game results', { id: saveGameToastId });
-              }
-              toastError(error.body.message, { id: saveGameToastId });
-            }
-          }
-        })}
+        style="--keyboard-height: 1px; --highlight-color: var(--color-charade-400)"
+        class="bg-charade-600 text-charade-100 col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] hover:brightness-90 active:mt-0 active:shadow-none sm:text-xl md:text-2xl"
+        {...action.fields.word.as('submit', game.currentGuess ? game.currentGuess : 'asdfg')}
       >
         <EnterIcon class="mx-auto w-7" />
-      </Key>
-      <Key
-        value="Backspace"
+      </button>
+      <button
+        bind:this={undoButton}
         title="backspace"
         aria-label="backspace"
-        {...undo.buttonProps.enhance(async ({}) => {
-          game.doUndo();
-          saveGameStateToCookie();
-        })}
+        style="--keyboard-height: 1px; --highlight-color: var(--color-charade-400)"
+        class="bg-charade-600 text-charade-100 col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] hover:brightness-90 active:mt-0 active:shadow-none sm:text-xl md:text-2xl"
+        {...action.fields.undo.as('submit', 'undo')}
       >
         <BackSpaceIcon class="mx-auto w-7" />
-      </Key>
-      {#if game.success && browser}
-        <Key aria-label="share" title="share" onclick={() => showModal()} type="button">
-          <ShareIcon class="mx-auto w-7" />
-        </Key>
-        <!-- {:else}
+      </button>
+      {#if game.success}
         <button
+          title="share"
+          aria-label="share"
           type="button"
-          onclick={() => {
-            getGameState().set(new WordlettuceGame());
-          }}>click me!</button
-        > -->
+          onclick={() => showModal()}
+          style="--keyboard-height: 1px; --highlight-color: var(--color-charade-400)"
+          class="bg-charade-600 text-charade-100 col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] hover:brightness-90 active:mt-0 active:shadow-none sm:text-xl md:text-2xl"
+        >
+          <ShareIcon class="mx-auto w-7" />
+        </button>
       {/if}
     </div>
   </form>
 </main>
+
 <MegaModal
   open={!!page.state.showModal}
   onclose={() => history.back()}
