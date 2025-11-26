@@ -7,13 +7,6 @@ export const AllowedGuess = v.pipe(
   v.check((s) => isAllowedGuess({ guess: s }), `Invalid word`),
 );
 
-export const WordFormInput = v.object({
-  word: v.pipe(
-    v.string(),
-    v.check((s) => isAllowedGuess({ guess: s }), `Invalid word`),
-  ),
-});
-
 export const ActionFormInput = v.union([
   v.object({
     letter: GuessLetter,

@@ -1,6 +1,13 @@
 import { successAnswer } from '$lib/app-constants';
 import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
-import { GuessLetter, LetterStatus } from '$lib/game-schemas';
+import {
+  GuessLetter,
+  LETTER_STATUS_CONTAINS,
+  LETTER_STATUS_EXACT,
+  LETTER_STATUS_INCORRECT,
+  LETTER_STATUS_NONE,
+  LetterStatus,
+} from '$lib/game-schemas';
 import * as v from 'valibot';
 
 export type WordlettuceGameInit = {
@@ -47,7 +54,6 @@ export class WordlettuceGame {
   #guesses: Array<string> = $state([]);
   #currentGuess: string = $state('');
   #answers: Array<string> = $state([]);
-  #invalid: boolean = $state(false);
 
   constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceGameInit = {}) {
     this.#currentGuess = currentGuess;
@@ -94,7 +100,6 @@ export class WordlettuceGame {
         success: false,
       };
     }
-    this.#invalid = invalid;
     this.#guesses.push(this.#currentGuess);
     this.#currentGuess = '';
     this.#answers = checkWords({ guesses: this.#guesses, answer: getGameWord(this.gameNum) });
@@ -103,6 +108,10 @@ export class WordlettuceGame {
       invalid: false,
       success,
     };
+  }
+
+  letterStatus(l: GuessLetter) {
+    return this.letterStatusMap.get(l) ?? LETTER_STATUS_NONE;
   }
 
   get gameNum() {
@@ -125,33 +134,32 @@ export class WordlettuceGame {
     return this.#answers.at(-1) === successAnswer;
   }
 
-  get invalid() {
-    return this.#invalid;
-  }
-
-  get letterStatuses(): Partial<Record<GuessLetter, LetterStatus>> {
-    if (!this.#guesses.length) {
-      return {};
-    }
-    const letters = Array.from(
+  get letterStatusMap(): Map<GuessLetter, LetterStatus> {
+    type LetterStatusTuple = [GuessLetter, LetterStatus];
+    const statusOrder = [LETTER_STATUS_NONE, LETTER_STATUS_INCORRECT, LETTER_STATUS_CONTAINS, LETTER_STATUS_EXACT];
+    const letters: Array<LetterStatusTuple> = Array.from(
       new Set(
         this.#guesses
           .map((w, i) =>
             w.split('').map((l, j) => ({
-              letter: l,
-              status: this.answers[i]?.[j] || '_',
+              letter: l as GuessLetter,
+              status: this.answers[i]?.[j] || LETTER_STATUS_NONE,
             })),
           )
           .flat(),
       ),
-    );
-    const correctList = letters.filter((letter) => letter.status === 'x').map((l) => ({ [l.letter]: l.status }));
-    const correct: { [x: string]: string } = Object.assign({}, ...correctList);
-    const containsList = letters.filter((letter) => letter.status === 'c').map((l) => ({ [l.letter]: l.status }));
-    const contains: { [x: string]: string } = Object.assign({}, ...containsList);
-    const incorrectList = letters.filter((letter) => letter.status === 'i').map((l) => ({ [l.letter]: l.status }));
-    const incorrect: { [x: string]: string } = Object.assign({}, ...incorrectList);
-    return { ...incorrect, ...contains, ...correct };
+    )
+      .sort((a, b) => {
+        if (a.status !== b.status) {
+          return statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+        }
+        if (a.letter === b.letter) {
+          return 0;
+        }
+        return a.letter < b.letter ? -1 : 1;
+      })
+      .map((el) => [el.letter, el.status as LetterStatus]);
+    return new Map(letters);
   }
 
   get gameState(): WordlettuceGameState {
@@ -197,8 +205,10 @@ function checkWord({ guess, answer }: { guess: string; answer: string }) {
   if (!guess.length) {
     return '_____';
   }
-  const contains = guess.split('').map((_, i) => (containsLetter({ index: i, guess, answer }) ? 'c' : 'i'));
-  const correct = guess.split('').map((char, i) => (answer[i] === char ? 'x' : ''));
+  const contains = guess
+    .split('')
+    .map((_, i) => (containsLetter({ index: i, guess, answer }) ? LETTER_STATUS_CONTAINS : LETTER_STATUS_INCORRECT));
+  const correct = guess.split('').map((char, i) => (answer[i] === char ? LETTER_STATUS_EXACT : ''));
 
   const statuses = correct.map((status, i) => (status ? status : contains[i]));
   return statuses.join('');

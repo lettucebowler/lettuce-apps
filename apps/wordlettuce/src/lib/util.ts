@@ -1,3 +1,5 @@
+import { LETTER_STATUS_CONTAINS, LETTER_STATUS_EXACT, LETTER_STATUS_INCORRECT } from './game-schemas';
+
 export function mulberry(a: number) {
   let t = (a += 0x6d2b79f5);
   t = Math.imul(t ^ (t >>> 15), t | 1);
@@ -20,12 +22,11 @@ export function getGameStatus({ appName, gameNum, answers }: { appName: string; 
 
 function getStatusEmoji(status: string) {
   switch (status) {
-    case 'x':
+    case LETTER_STATUS_EXACT:
       return '🟩';
-    case 'c':
+    case LETTER_STATUS_CONTAINS:
       return '🟨';
-    case '_':
-    case 'i':
+    case LETTER_STATUS_INCORRECT:
     default:
       return '⬛';
   }

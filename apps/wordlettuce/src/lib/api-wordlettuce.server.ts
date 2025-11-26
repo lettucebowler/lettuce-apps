@@ -40,29 +40,6 @@ export async function saveGame({
   }
 }
 
-export async function getRankings(_: GetRankingsInput): Promise<GetRankingsOutput> {
-  const client = createAPIWordlettuceClient();
-  const rankingsResponse = await client.get<{ rankings: GetRankingsOutput }>('v2/rankings').json();
-  return rankingsResponse.rankings;
-}
-
-export async function getGameResults({
-  username,
-  userID,
-  limit = 30,
-  start,
-}: GetGameResultsInput): Promise<GetGameResultsOutput> {
-  const client = createAPIWordlettuceClient();
-  return client
-    .get<GetGameResultsOutput>('v1/game-results', {
-      searchParams: userID ? { userID, start, limit } : { username: username!, start, limit },
-    })
-    .json();
-}
-
-export type GetRankingsInput = void;
-export type GetRankingsOutput = Array<{ user: string; games: number; score: number }>;
-
 export type SaveGameInput = {
   userID: number;
   gameNum: number;

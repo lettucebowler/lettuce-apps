@@ -2,6 +2,7 @@ import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
+import { getGameNum } from './words';
 
 function createAPIWordlettuceClient() {
   return ky.create({
@@ -27,6 +28,26 @@ export async function getGameResults({
       searchParams: userID ? { userID, start, limit } : { username: username!, start, limit },
     })
     .json();
+}
+
+export async function getProfileData({ user, start }: { user: string; start: number }) {
+  const gameNum = getGameNum();
+  const { results, limit } = await getGameResults({ username: user, limit: 37, start }).catch(() => ({
+    results: [],
+    limit: 30,
+  }));
+  const currentResults = start === gameNum ? results.filter((result) => result.gameNum > getGameNum() - 7) : [];
+  const pastResults = results.slice(currentResults.length).slice(0, 30);
+  const profileData = {
+    profileUser: user,
+    profileUserID: results.at(0)?.userID!,
+    currentResults,
+    pastResults,
+    next: pastResults.length ? pastResults.at(-1)!.gameNum - 1 : null,
+    limit,
+    start: start,
+  };
+  return profileData;
 }
 
 export type GetRankingsInput = void;

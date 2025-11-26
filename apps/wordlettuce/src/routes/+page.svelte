@@ -3,24 +3,34 @@
   import Tile from './Tile.svelte';
   import Cookies from 'js-cookie';
   import { browser } from '$app/environment';
-  import { toastError, toastLoading, toastPromise, toastSuccess } from './toast';
+  import { toastError, toastPromise, toastSuccess } from './toast';
   import { pushState } from '$app/navigation';
   import { page } from '$app/state';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
-  import { GuessLetter } from '$lib/game-schemas';
+  import {
+    GuessLetter,
+    LETTER_STATUS_CONTAINS,
+    LETTER_STATUS_EXACT,
+    LETTER_STATUS_INCORRECT,
+    LETTER_STATUS_NONE,
+  } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
   import { getGameState, action } from './game.remote';
   import { getSession } from './auth.remote';
   import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
-  import { ActionFormInput, WordFormInput, AllowedGuess } from './game.schemas';
+  import { AllowedGuess } from './game.schemas';
   import { isHttpError } from '@sveltejs/kit';
   const session = await getSession();
   const gameState = $derived(await getGameState());
   let game = $derived(new WordlettuceGame(gameState));
   import * as v from 'valibot';
+
+  function createGameActionKeyID(l: string) {
+    return `wordlettuce-game-action-key-${l}`;
+  }
 
   function badWord() {
     toastError('Invalid word');
@@ -56,7 +66,6 @@
   function getItemsForGrid(game: WordlettuceGame) {
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
-
     const previousGuesses = game.guesses
       .map((guess, index) => ({ index, guess, current: false }))
       .slice(-1 * maxPreviousGuesses);
@@ -82,50 +91,19 @@
 
   let tileGridEl: HTMLDivElement | null = $state(null);
   let timeout: NodeJS.Timeout;
-
-  let wordButton: HTMLButtonElement;
-  let undoButton: HTMLButtonElement;
-  let letterButtons: { [x: string]: HTMLButtonElement | undefined } = $state({
-    a: undefined,
-    b: undefined,
-    c: undefined,
-    d: undefined,
-    e: undefined,
-    f: undefined,
-    g: undefined,
-    h: undefined,
-    i: undefined,
-    j: undefined,
-    k: undefined,
-    l: undefined,
-    m: undefined,
-    n: undefined,
-    o: undefined,
-    p: undefined,
-    q: undefined,
-    r: undefined,
-    s: undefined,
-    t: undefined,
-    u: undefined,
-    v: undefined,
-    w: undefined,
-    x: undefined,
-    y: undefined,
-    z: undefined,
-  });
 </script>
 
 <svelte:body
   onkeydown={(e) => {
-    if (e.key.toLowerCase() === 'enter') {
-      console.log('enter');
-      wordButton.click();
-    }
-    if (e.key.toLowerCase() === 'backspace') {
-      undoButton.click();
-    }
-    if (v.safeParse(GuessLetter, e.key).success) {
-      letterButtons[e.key]?.click();
+    const key = e.key.toLowerCase();
+    if (key === 'backspace' || key === 'enter' || v.safeParse(GuessLetter, key).success) {
+      const el = document.querySelector(`#${createGameActionKeyID(key)}`);
+      if (!el) {
+        return;
+      }
+      if (el instanceof HTMLButtonElement) {
+        el.click();
+      }
     }
   }}
 />
@@ -157,7 +135,13 @@
             >
               <Tile
                 --transition-delay="{j * 0.03 + 0.15}s"
-                status={answer === 'x' ? 'EXACT' : answer === 'c' ? 'CONTAINS' : answer === 'i' ? 'INCORRECT' : 'NONE'}
+                status={answer === LETTER_STATUS_EXACT
+                  ? 'EXACT'
+                  : answer === LETTER_STATUS_CONTAINS
+                    ? 'CONTAINS'
+                    : answer === LETTER_STATUS_INCORRECT
+                      ? 'INCORRECT'
+                      : 'NONE'}
                 class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}
               >
                 {letter}
@@ -189,51 +173,38 @@
         if (!success) {
           return saveGameStateToCookie();
         }
-        let saveGameToastId: string | undefined = undefined;
-        try {
-          const promise = submit();
-          toastPromise({
-            promise,
-            loadingText: 'Saving results...',
-            successText: 'Results saved!',
-            errorText: 'Error saving results',
-          });
-          await promise;
-          if (saveGameToastId) {
-            toastSuccess('Game results saved', { id: saveGameToastId });
-            setTimeout(() => showModal(), 500);
-          }
-        } catch (error) {
-          if (saveGameToastId) {
-            if (!isHttpError(error)) {
-              return toastError('Failed to save game results', { id: saveGameToastId });
-            }
-            toastError(error.body.message, { id: saveGameToastId });
-          }
-        }
+        const promise = submit();
+        toastPromise({
+          promise,
+          loadingText: 'Saving results...',
+          successText: 'Results saved!',
+          errorText: 'Error saving results',
+        });
+        await promise;
+        setTimeout(() => showModal(), 500);
       }
     })}
   >
     <div class="grid flex-auto grid-cols-[repeat(40,0.25fr)] grid-rows-3 gap-1" style="--keyboard-height: 1px;">
-      {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as l}
+      {#each 'q,w,e,r,t,y,u,i,o,p,,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m'.split(',') as GuessLetter[] as l}
         {#if l}
           <button
-            bind:this={letterButtons[l]}
+            id={createGameActionKeyID(l)}
             {...action.fields.letter.as('submit', l)}
-            style="--keyboard-height: 1px; --highlight-color: var({game?.letterStatuses?.[l as GuessLetter] === 'x'
+            style="--keyboard-height: 1px; --highlight-color: var({game.letterStatus(l) === LETTER_STATUS_EXACT
               ? '--color-swamp-green-200'
-              : game?.letterStatuses?.[l as GuessLetter] === 'c'
+              : game.letterStatus(l) === LETTER_STATUS_CONTAINS
                 ? '--color-putty-200'
                 : '--color-charade-400'})"
             class={[
               'col-span-4 mt-(--keyboard-height) grid place-items-center rounded-md text-center text-sm font-bold text-(--text-color) capitalize hover:brightness-90 active:shadow-none sm:text-xl md:text-2xl',
-              game?.letterStatuses?.[l as GuessLetter] && 'bg-(--bg-color) text-(--text-color)',
-              ['x', 'c', undefined].includes(game?.letterStatuses?.[l as GuessLetter]) &&
+              game.letterStatus(l) && 'bg-(--bg-color) text-(--text-color)',
+              [LETTER_STATUS_EXACT, LETTER_STATUS_CONTAINS, LETTER_STATUS_NONE].includes(game.letterStatus(l)) &&
                 'shadow-[0_var(--keyboard-height)_4px_0_rgb(0_0_0_/_0.2),0_calc(-1*var(--keyboard-height))_0_0_var(--highlight-color)] active:mt-0',
-              game?.letterStatuses?.[l as GuessLetter] === 'x' && 'bg-swamp-green-500 text-swamp-green-900',
-              game?.letterStatuses?.[l as GuessLetter] === 'c' && 'bg-putty-500 text-putty-900',
-              game?.letterStatuses?.[l as GuessLetter] === 'i' && 'bg-charade-800 text-charade-300 shadow-none',
-              game?.letterStatuses?.[l as GuessLetter] === undefined && 'bg-charade-600 text-charade-100',
+              game.letterStatus(l) === LETTER_STATUS_EXACT && 'bg-swamp-green-500 text-swamp-green-900',
+              game.letterStatus(l) === LETTER_STATUS_CONTAINS && 'bg-putty-500 text-putty-900',
+              game.letterStatus(l) === LETTER_STATUS_INCORRECT && 'bg-charade-800 text-charade-300 shadow-none',
+              game.letterStatus(l) === LETTER_STATUS_NONE && 'bg-charade-600 text-charade-100',
             ]}>{l}</button
           >
         {:else}
@@ -241,7 +212,7 @@
         {/if}
       {/each}
       <button
-        bind:this={wordButton}
+        id={createGameActionKeyID('enter')}
         aria-label="enter"
         title="enter"
         style="--keyboard-height: 1px; --highlight-color: var(--color-charade-400)"
@@ -251,7 +222,7 @@
         <EnterIcon class="mx-auto w-7" />
       </button>
       <button
-        bind:this={undoButton}
+        id={createGameActionKeyID('backspace')}
         title="backspace"
         aria-label="backspace"
         style="--keyboard-height: 1px; --highlight-color: var(--color-charade-400)"

@@ -4,6 +4,12 @@
   import { getGameStatus } from '$lib/util';
   import { appName } from '$lib/app-constants';
   import { toastError, toastSuccess } from '../../toast';
+  import {
+    LETTER_STATUS_CONTAINS,
+    LETTER_STATUS_EXACT,
+    LETTER_STATUS_INCORRECT,
+    LETTER_STATUS_NONE,
+  } from '$lib/game-schemas';
 
   type GameSummaryProps = {
     answers: string;
@@ -45,17 +51,17 @@
   </h2>
   <div class="group @container relative grid grid-cols-5 gap-1">
     {#each [...Array(30).keys()] as i}
-      {@const answer = answers.charAt(i) || '_'}
+      {@const answer = answers.charAt(i) || LETTER_STATUS_NONE}
       <div
         data-answer={answer}
         class={[
           'aspect-square w-full rounded-xs @min-[170px]:rounded-sm @min-[200px]:rounded @min-[230px]:rounded-lg',
-          answer === '_'
+          answer === LETTER_STATUS_NONE
             ? 'bg-charade-950'
             : 'border-t-[1px] border-(--highlight-color) shadow-[0_1px_4px_0_rgb(0_0_0_/_0.2)]',
-          answer === 'c' && 'bg-putty-500 border-putty-200',
-          answer === 'x' && 'bg-swamp-green-500 border-swamp-green-200',
-          answer === 'i' && 'bg-charade-800 && border-charade-500',
+          answer === LETTER_STATUS_CONTAINS && 'bg-putty-500 border-putty-200',
+          answer === LETTER_STATUS_EXACT && 'bg-swamp-green-500 border-swamp-green-200',
+          answer === LETTER_STATUS_INCORRECT && 'bg-charade-800 && border-charade-500',
           shareEnabled && 'group-hover:brightness-80',
         ]}
       ></div>

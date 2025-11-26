@@ -39,6 +39,18 @@ export const GameKey = v.union([GuessLetter]);
 
 export type GuessKey = v.InferOutput<typeof GameKey>;
 
-export const LetterStatus = v.undefinedable(v.picklist(['x', 'c', 'i']));
+export const LETTER_STATUS_EXACT = 'x';
+export const LETTER_STATUS_CONTAINS = 'c';
+export const LETTER_STATUS_INCORRECT = 'i';
+export const LETTER_STATUS_NONE = 'n';
+
+const LETTER_STATUSES = [
+  LETTER_STATUS_EXACT,
+  LETTER_STATUS_CONTAINS,
+  LETTER_STATUS_INCORRECT,
+  LETTER_STATUS_NONE,
+] as const;
+
+export const LetterStatus = v.picklist(LETTER_STATUSES);
 
 export type LetterStatus = v.InferOutput<typeof LetterStatus>;

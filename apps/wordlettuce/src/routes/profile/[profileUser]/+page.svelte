@@ -2,19 +2,20 @@
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import GameSummary from './GameSummary.svelte';
   import { browser } from '$app/environment';
-  import { createInfiniteQuery } from '@tanstack/svelte-query';
   import { getGameNum } from '$lib/words.js';
   import { infiniteScroll } from './infinite-scroll.svelte.js';
-  import { getProfileData } from './profile.remote';
-  import { getGameResults } from '$lib/api-wordlettuce';
+  import { getGameResults, getProfileData } from '$lib/api-wordlettuce';
   import { page } from '$app/state';
   import { getSession } from '../../auth.remote';
+  import { hydratable } from 'svelte';
 
   const { params } = $props();
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
-  const session = await getSession();
-  const profileData = await getProfileData({ profileUser: params.profileUser, start });
+  let [session, profileData] = await Promise.all([
+    getSession(),
+    hydratable('profileData', () => getProfileData({ user: params.profileUser, start })),
+  ]);
   let isSelf = $derived(session.user?.username === profileData.profileUser);
   let pages = $state([{ results: profileData.pastResults, start: profileData.start, next: profileData.next }]);
 

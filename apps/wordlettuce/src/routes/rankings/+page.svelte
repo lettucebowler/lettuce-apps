@@ -1,9 +1,10 @@
 <script lang="ts">
   import FireIcon from '$lib/components/icons/FireIcon.svelte';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
-  import { getRankings } from './rankings.remote';
+  import { getRankings } from '$lib/api-wordlettuce';
+  import { hydratable } from 'svelte';
 
-  const rankings = await getRankings();
+  const rankings = await hydratable('rankings', () => getRankings());
 </script>
 
 <main class="grid gap-8">
