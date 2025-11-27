@@ -37,19 +37,19 @@ const GetGameResultsQuerySchema = v.pipe(
 gameResultsController.get(
   '/',
   sValidator('query', GetGameResultsQuerySchema),
-  async (c, next) => {
-    const { start } = c.req.valid('query');
-    const gameNum = getGameNum();
-    const gameNumMatch = start === gameNum;
-    if (gameNumMatch) {
-      return await next();
-    } else {
-      return cache({
-        cacheName: 'wordlettuce-game-results',
-        cacheControl: `max-age=${60 * 60 * 24}`,
-      })(c, next);
-    }
-  },
+  // async (c, next) => {
+  //   const { start } = c.req.valid('query');
+  //   const gameNum = getGameNum();
+  //   const gameNumMatch = start === gameNum;
+  //   if (gameNumMatch) {
+  //     return await next();
+  //   } else {
+  //     return cache({
+  //       cacheName: 'wordlettuce-game-results',
+  //       cacheControl: `max-age=${60 * 60 * 24}`,
+  //     })(c, next);
+  //   }
+  // },
   async (c) => {
     const { username, limit, start, userID } = c.req.valid('query');
     const { getUserGameResults } = createGameResultsDao(c);
