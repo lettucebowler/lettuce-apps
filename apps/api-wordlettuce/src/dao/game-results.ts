@@ -6,7 +6,7 @@ import { Context } from 'hono';
 import { ApiWordlettuceHono } from '../util/env';
 
 export function createGameResultsDao(c: Context<ApiWordlettuceHono>) {
-  const db = drizzle(c.env.wordlettuce_db);
+  const db = drizzle(c.env.wordlettuce_db.withSession() as unknown as D1Database);
 
   async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
