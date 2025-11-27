@@ -45,7 +45,7 @@ export default {
     );
     app.get(
       '/users/:user',
-      cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=60' }),
+      // cache({ cacheName: 'lettuce-auth-users', cacheControl: 'public max-age=60' }),
       sValidator(
         'param',
         v.object({
@@ -84,7 +84,7 @@ export default {
     });
     app.get(
       '/users',
-      cache({ cacheName: 'lettuce-auth-users-multi', cacheControl: 'public max-age=60' }),
+      // cache({ cacheName: 'lettuce-auth-users-multi', cacheControl: 'public max-age=60' }),
       sValidator('query', UsersQuery),
       async (c) => {
         const query = c.req.valid('query');
