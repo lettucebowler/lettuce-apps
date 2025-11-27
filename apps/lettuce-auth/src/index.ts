@@ -53,7 +53,7 @@ export default {
         }),
       ),
       async (c) => {
-        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const dao = createLettuceAuthDao(c.env.lettuce_auth_db.withSession() as unknown as D1Database);
         const { user: userParam } = c.req.valid('param');
         const user =
           typeof userParam === 'string'
