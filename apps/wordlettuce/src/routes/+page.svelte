@@ -16,6 +16,7 @@
     LETTER_STATUS_EXACT,
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
+    LetterStatus,
   } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
   import { getGameState, action } from './game.remote';
@@ -120,11 +121,11 @@
           data-index={row.index}
         >
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-            {@const doJump = browser && game.answers.at(row.index)?.length === 5}
+            {@const doJump = game.answers.at(row.index)?.length === 5}
             {@const doWiggleOnce = !browser && action.fields.word.issues() && row.current}
             {@const answer = game.answers.at(row.index)?.charAt(j)}
             <div
-              style="--animation-delay:{j * 0.03}s;"
+              style="--animation-delay:{j * 0.03}s; --transition-delay: {j * 0.03 + 0.15}s"
               class={[
                 'wiggler bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
@@ -132,16 +133,10 @@
                 doWiggleOnce && 'animate-wiggle-once',
                 row.current && 'current',
               ]}
+              data-do-jump={doJump}
             >
               <Tile
-                --transition-delay="{j * 0.03 + 0.15}s"
-                status={answer === LETTER_STATUS_EXACT
-                  ? 'EXACT'
-                  : answer === LETTER_STATUS_CONTAINS
-                    ? 'CONTAINS'
-                    : answer === LETTER_STATUS_INCORRECT
-                      ? 'INCORRECT'
-                      : 'NONE'}
+                status={(answer as LetterStatus) ?? LETTER_STATUS_NONE}
                 class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}
               >
                 {letter}
