@@ -19,14 +19,11 @@
     LetterStatus,
   } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
-  import { getGameState, action } from './game.remote';
+  import { action, getGame } from './game.remote';
   import { getSession } from './auth.remote';
-  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
   import { AllowedGuess } from './game.schemas';
-  import { isHttpError } from '@sveltejs/kit';
-  const session = await getSession();
-  const gameState = $derived(await getGameState());
-  let game = $derived(new WordlettuceGame(gameState));
+  let game = $derived(await getGame());
+
   import * as v from 'valibot';
 
   function createGameActionKeyID(l: string) {
@@ -64,7 +61,7 @@
     });
   }
 
-  function getItemsForGrid(game: WordlettuceGame) {
+  function getItemsForGrid() {
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
     const previousGuesses = game.guesses
@@ -114,12 +111,8 @@
       bind:this={tileGridEl}
       class="m-auto grid w-full max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] grid-rows-[repeat(6,1fr)] gap-2"
     >
-      {#each getItemsForGrid(game) as row (row.index)}
-        <div
-          class="grid grid-cols-[repeat(5,1fr)] gap-2"
-          animate:flip={{ duration: duration * 1000 }}
-          data-index={row.index}
-        >
+      {#each getItemsForGrid() as row}
+        <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index}>
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = game.answers.at(row.index)?.length === 5}
             {@const doWiggleOnce = !browser && action.fields.word.issues() && row.current}
@@ -247,7 +240,7 @@
   onclose={() => history.back()}
   gameNum={game.gameNum}
   answers={game.answers}
-  authenticated={session.authenticated}
+  authenticated={(await getSession()).authenticated}
 />
 
 <style>

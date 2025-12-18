@@ -10,6 +10,10 @@ export const getGameState = query(async () => {
   return getGameStateFromCookie();
 });
 
+export const getGame = query(async () => {
+  return new WordlettuceGame(getGameStateFromCookie());
+});
+
 export const action = form(ActionFormInput, async (input) => {
   const game = new WordlettuceGame(getGameStateFromCookie());
   if (input.letter) {
