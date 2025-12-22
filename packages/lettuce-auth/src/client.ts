@@ -12,7 +12,7 @@ import {
 } from '@openauthjs/openauth/client';
 import { SubjectSchema } from '@openauthjs/openauth/subject';
 import { InvalidAccessTokenError, InvalidSubjectError } from '@openauthjs/openauth/error';
-import { fetcher } from 'itty-fetcher';
+import ky from 'ky';
 import { User } from './schemas';
 
 type AuthClientInput = Omit<ClientInput, 'fetch'> & {
@@ -77,13 +77,13 @@ export function createAuthClient(input: AuthClientInput) {
     return createLocalJWKSet(keyset);
   }
 
-  const api = fetcher({
-    base: input.issuer,
+  const api = ky.create({
+    prefixUrl: input.issuer,
     fetch: f,
   });
 
   async function getUser({ userID }: { userID: number }): Promise<User> {
-    return api.get<User>('/users/' + userID);
+    return api.get<User>('users/' + userID).json();
   }
 
   const result = {

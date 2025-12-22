@@ -51,7 +51,7 @@ export async function getProfileData({ user, start }: { user: string; start: num
 }
 
 export type GetRankingsInput = void;
-export type GetRankingsOutput = Array<{ user: string; games: number; score: number }>;
+export type GetRankingsOutput = Array<{ user: string; games: number; score: number; position: number }>;
 
 export type GetGameResultsOutput = {
   limit: number;

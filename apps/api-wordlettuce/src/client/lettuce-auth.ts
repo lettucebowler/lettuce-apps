@@ -1,4 +1,3 @@
-import { fetcher } from 'itty-fetcher';
 import { User } from '@lettuce-apps-packages/auth';
 import { ApiWordlettuceHono } from '../util/env';
 import { Context } from 'hono';
@@ -6,11 +5,6 @@ import ky, { HTTPError } from 'ky';
 const DEFAULT_HOST = 'https://auth.lettucebowler.net';
 
 export function createLettuceAuthClient(c: Context<ApiWordlettuceHono>) {
-  const lettuceAuth = fetcher({
-    base: c.env.AUTH_HOST ?? DEFAULT_HOST,
-    fetch: (a, b) => c.env.lettuce_auth.fetch(a, b),
-  });
-
   const lettuceAuthKY = ky.create({
     prefixUrl: c.env.AUTH_HOST ?? DEFAULT_HOST,
     fetch: (a, b) => c.env.lettuce_auth.fetch(a, b),

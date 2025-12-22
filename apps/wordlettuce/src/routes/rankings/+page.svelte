@@ -15,22 +15,23 @@
   </p>
   <div class="text-snow-200 mx-auto w-full rounded-xl sm:text-xl">
     {#each rankings as ranking, i (i)}
-      {@const position = i + 1}
       <a
         class="bg-charade-900 hover:bg-charade-950 not-last:border-charade-600 block px-4 py-2 not-last:border-b first:rounded-t-xl last:rounded-b-xl"
         href={`/profile/${ranking.user}`}
       >
         <div class="flex items-center gap-4">
-          #{position}
+          {#if ranking.position === 1}
+            <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
+              <FireIcon />
+            </div>
+          {:else}
+            #{ranking.position}
+          {/if}
           <div class="bg-charade-700 size-8 overflow-hidden rounded shadow-md sm:size-11">
             <LettuceAvatar name={ranking.user} />
           </div>
           {ranking.user}
-          {#if position === 1}
-            <div class="text-antique-brass-500 my-auto size-6 animate-pulse">
-              <FireIcon />
-            </div>
-          {/if}
+
           <span class="ml-auto text-right">
             {ranking.score}pts
           </span>

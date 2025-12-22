@@ -33,7 +33,16 @@ rankingsControllerV2.get(
     });
 
     return c.json({
-      rankings: results.map((result) => ({ ...result, user: group[result.userID]?.at(0)?.username })),
+      rankings: results.map((result) => {
+        const user = group[result.userID]?.at(0)?.username;
+        const firstInstanceOfScore = results.find((instance) => instance.score === result.score);
+        const position = firstInstanceOfScore ? results.indexOf(firstInstanceOfScore) + 1 : 10;
+        return {
+          ...result,
+          user,
+          position,
+        };
+      }),
     });
   },
 );

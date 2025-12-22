@@ -111,8 +111,8 @@
       bind:this={tileGridEl}
       class="m-auto grid w-full max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] grid-rows-[repeat(6,1fr)] gap-2"
     >
-      {#each getItemsForGrid() as row}
-        <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index}>
+      {#each getItemsForGrid() as row (row.index)}
+        <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index} animate:flip={{ duration: 150 }}>
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = game.answers.at(row.index)?.length === 5}
             {@const doWiggleOnce = !browser && action.fields.word.issues() && row.current}
