@@ -12,8 +12,8 @@
 			{@const yearBooks = bookData.filter((b) => b.log_date.startsWith(year))}
 			<div class="grid gap-3">
 				<span>
-					<h2 class="inline text-2xl font-bold">{year}</h2>
-					<span>{yearBooks.length} books</span>
+					<h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
+					<span>{yearBooks.length} {yearBooks.length > 1 ? 'books' : 'book'}</span>
 				</span>
 				<div class="grid grid-cols-[repeat(auto-fill,_minmax(12rem,_1fr))] gap-x-12 gap-y-8">
 					{#each yearBooks as book (book.isbn)}
