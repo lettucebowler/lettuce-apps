@@ -65,12 +65,12 @@ books:
   - isbn: 9781975335335
     log_date: 2025-04
   - isbn: 9781635575606
-    log_date: 2025-01
+    log_date: 2024-01
   - isbn: 9781526634252
-    log_date: 2025-12
-  - isbn: 9781250773012
     log_date: 2024-06
   - isbn: 9781635575569
     log_date: 2024-03
+  - isbn: 9781250773012
+    log_date: 2024-010
   - isbn: 9781421539645
     log_date: 2023-08
