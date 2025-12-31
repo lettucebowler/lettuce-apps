@@ -15,7 +15,8 @@
     "lettuce-auth-test": "pnpm --filter 'lettuce-auth-test'",
     "wordlettuce": "pnpm --filter 'wordlettuce'",
     "api-wordlettuce": "pnpm --filter 'api-wordlettuce'",
-    "svelte-common": "pnpm --filter @lettuce-apps-packages/svelte-common"
+    "svelte-common": "pnpm --filter @lettuce-apps-packages/svelte-common",
+    "bookshelf": "pnpm --filter 'lettuce-bookshelf'"
   },
   "keywords": [
     "lettuce-apps"
