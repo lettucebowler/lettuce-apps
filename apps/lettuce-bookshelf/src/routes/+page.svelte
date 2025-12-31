@@ -10,10 +10,8 @@
 	<div class="flex flex-col gap-8">
 		{#each [...new Set(bookData.map((book) => book.log_date.substring(0, 4)))] as year (year)}
 			<div>
-				<h2 class="mb-2 text-2xl font-bold">{year}</h2>
-				<div
-					class="grid grid-cols-2 gap-8 max-[400px]:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
-				>
+				<h2 class="mb-3 text-2xl font-bold">{year}</h2>
+				<div class="grid grid-cols-[repeat(auto-fill,_minmax(12rem,_1fr))] gap-x-12 gap-y-8">
 					{#each bookData.filter((b) => b.log_date.startsWith(year)) as book (book.isbn)}
 						<Book
 							title={book.title}

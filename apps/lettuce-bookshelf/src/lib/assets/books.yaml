@@ -47,6 +47,7 @@ books:
     subtitle_override: ''
     author_name_override: 長月達平
     first_publish_year_override: 2022
+    cover_image_override: /covers/9784046812865.webp
   - isbn: 9781975378486
     log_date: 2025-05
   - isbn: 9781975378462
