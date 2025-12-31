@@ -11,18 +11,20 @@
 	let { title, subtitle, author, cover_image, link, year } = $props();
 </script>
 
-{#if link}
-	<a href={link} class="block w-full">
+<div class="@container">
+	{#if link}
+		<a href={link} class="block w-full">
+			{@render bookFigure({ title, subtitle, author, cover_image })}
+		</a>
+	{:else}
 		{@render bookFigure({ title, subtitle, author, cover_image })}
-	</a>
-{:else}
-	{@render bookFigure({ title, subtitle, author, cover_image })}
-{/if}
+	{/if}
+</div>
 
 {#snippet bookFigure({ title, subtitle, author, cover_image }: Omit<BookProps, 'link'>)}
-	<figure class="flex flex-col gap-2">
+	<figure class="grid grid-cols-1 gap-2 @2xs:grid-cols-[5rem_1fr] @2xs:gap-6">
 		<img
-			class="aspect-2/3 w-full rounded shadow-sm"
+			class="aspect-2/3 w-full rounded shadow-sm @2xs:w-20"
 			alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
 			src={cover_image}
 		/>
@@ -31,7 +33,7 @@
 			{#if subtitle}
 				<p class="">{subtitle}</p>
 			{/if}
-			<div class="flex justify-between text-sm">
+			<div class="flex justify-between text-sm @2xs:mt-auto @2xs:flex-col @2xs:justify-start">
 				<p>{author}</p>
 				{#if year}
 					<p>{year}</p>
