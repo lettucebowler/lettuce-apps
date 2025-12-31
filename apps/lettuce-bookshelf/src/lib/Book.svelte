@@ -22,7 +22,7 @@
 </div>
 
 {#snippet bookFigure({ title, subtitle, author, cover_image }: Omit<BookProps, 'link'>)}
-	<figure class="grid grid-cols-1 gap-2 @2xs:grid-cols-[5rem_1fr] @2xs:gap-6">
+	<figure class="grid grid-cols-1 gap-2 @2xs:grid-cols-[5rem_1fr] @2xs:gap-4">
 		<img
 			class="aspect-2/3 w-full rounded shadow-sm @2xs:w-20"
 			alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
