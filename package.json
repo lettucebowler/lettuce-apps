@@ -16,7 +16,8 @@
     "wordlettuce": "pnpm --filter 'wordlettuce'",
     "api-wordlettuce": "pnpm --filter 'api-wordlettuce'",
     "svelte-common": "pnpm --filter @lettuce-apps-packages/svelte-common",
-    "bookshelf": "pnpm --filter 'lettuce-bookshelf'"
+    "bookshelf": "pnpm --filter 'lettuce-bookshelf'",
+    "lettuce-home": "pnpm --filter 'lettuce-home'"
   },
   "keywords": [
     "lettuce-apps"

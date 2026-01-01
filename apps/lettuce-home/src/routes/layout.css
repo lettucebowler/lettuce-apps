@@ -1,3 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+@import '@lettuce-apps-packages/svelte-common/theme';
+@source '../node_modules/@lettuce-apps-packages/svelte-common';
+
