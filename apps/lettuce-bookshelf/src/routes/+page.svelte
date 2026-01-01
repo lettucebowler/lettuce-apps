@@ -1,19 +1,33 @@
 <script lang="ts">
-	import { getBooks } from '$lib/remote/book.remote';
+	import * as v from 'valibot';
 	import Book from '$lib/Book.svelte';
 
-	const bookData = await getBooks();
+	import readingLog from '$lib/assets/reading-log.yaml';
+
+	const ReadingLog = v.record(
+		v.pipe(v.string(), v.digits()),
+		v.array(
+			v.object({
+				isbn: v.pipe(v.number(), v.integer()),
+				title: v.string(),
+				subtitle: v.optional(v.string()),
+				author: v.string()
+			})
+		)
+	);
+
+	const bookData = v.parse(ReadingLog, readingLog);
 </script>
 
 <main class="container mx-auto flex flex-col">
 	<h1 class="mb-4 text-3xl font-bold first-letter:capitalize">bookshelf</h1>
 	<div class="flex flex-col gap-8">
-		{#each [...new Set(bookData.map((book) => book.log_date.substring(0, 4)))] as year (year)}
-			{@const yearBooks = bookData.filter((b) => b.log_date.startsWith(year))}
+		{#each Object.keys(bookData).sort().reverse() as year (year)}
+			{@const yearBooks = bookData[year]}
 			<div class="grid gap-3">
 				<span>
 					<h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
-					<span>{yearBooks.length} {yearBooks.length > 1 ? 'books' : 'book'}</span>
+					<span>{yearBooks!.length} {yearBooks!.length > 1 ? 'books' : 'book'}</span>
 				</span>
 				<div
 					class="grid grid-cols-[repeat(auto-fill,_minmax(12rem,_1fr))] gap-x-12 gap-y-4 sm:gap-y-8"
@@ -21,11 +35,9 @@
 					{#each yearBooks as book (book.isbn)}
 						<Book
 							title={book.title}
-							author={book.author_name}
-							link={book.link}
-							cover_image={book.cover_image}
+							author={book.author}
+							cover_image="/covers/book-{book.isbn}.webp"
 							subtitle={book.subtitle}
-							year={book.first_publish_year}
 						/>
 					{/each}
 				</div>
