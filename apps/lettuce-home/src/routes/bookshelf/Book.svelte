@@ -10,9 +10,9 @@
 </script>
 
 <div class="@container">
-	<figure class="grid grid-cols-1 gap-2 max-[464px]:grid-cols-[5rem_1fr] max-[464px]:gap-4">
+	<figure class="grid grid-cols-1 gap-2 @xs:grid-cols-[2fr_3fr]">
 		<img
-			class="aspect-2/3 w-full rounded shadow-sm max-[464px]:w-20"
+			class="aspect-2/3 w-full max-w-60 rounded shadow-sm"
 			alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
 			src={cover_image}
 		/>

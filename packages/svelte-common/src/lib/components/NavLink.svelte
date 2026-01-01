@@ -32,10 +32,7 @@
 </script>
 
 <a
-  class={[
-    'text-snow-300 container grid w-max text-base font-bold hover:underline sm:text-3xl sm:font-medium',
-    className,
-  ]}
+  class={['text-snow-300 grid w-max text-base font-bold hover:underline sm:text-3xl sm:font-medium', className]}
   aria-current={current}
   href={to}
 >
