@@ -4,18 +4,13 @@ import { error as svelteError } from '@sveltejs/kit';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 import { ActionFormInput } from './game.schemas';
-import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
 
 export const getGameState = query(async () => {
   return getGameStateFromCookie();
 });
 
-export const getGame = query(async () => {
-  return new WordlettuceGame(getGameStateFromCookie());
-});
-
 export const action = form(ActionFormInput, async (input) => {
-  const game = new WordlettuceGame(getGameStateFromCookie());
+  const game = getGameStateFromCookie();
   if (input.letter) {
     game.doLetter(input.letter);
     saveGameStateToCookie(game);
@@ -66,10 +61,12 @@ export const action = form(ActionFormInput, async (input) => {
       }
       if (
         inserts.gameNum !== game.gameNum ||
-        inserts.answers !== game.answers.join('') ||
+        game.answers.join('').endsWith(inserts.answers) ||
         inserts.attempts !== game.answers.length ||
         inserts.userID !== event.locals.session.userID
       ) {
+        console.log(game.gameNum, game.answers.join(''), game.answers.length, event.locals.session.userID);
+        console.log(inserts.gameNum, inserts.answers, inserts.attempts, inserts.userID);
         svelteError(500, 'Insertion mismatch');
       }
       return {

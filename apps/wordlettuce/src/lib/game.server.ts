@@ -8,15 +8,15 @@ export function getGameStateFromCookie() {
     const event = getRequestEvent();
     const stateString = event.cookies.get(STATE_COOKIE_NAME_V2);
     if (!stateString) {
-      return new WordlettuceGame().gameState;
+      return new WordlettuceGame();
     }
     const decoded = WordlettuceGame.decode(stateString);
     if (decoded.gameNum !== getGameNum()) {
-      return new WordlettuceGame().gameState;
+      return new WordlettuceGame();
     }
     return decoded;
   } catch (e: unknown) {
-    return new WordlettuceGame().gameState;
+    return new WordlettuceGame();
   }
 }
 

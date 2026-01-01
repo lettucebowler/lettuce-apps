@@ -19,10 +19,10 @@
     LetterStatus,
   } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
-  import { action, getGame } from './game.remote';
+  import { action, getGameState } from './game.remote';
   import { getSession } from './auth.remote';
   import { AllowedGuess } from './game.schemas';
-  let game = $derived(await getGame());
+  let game = $derived(await getGameState());
 
   import * as v from 'valibot';
 

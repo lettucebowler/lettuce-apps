@@ -15,7 +15,7 @@ export function createGameResultsDao(c: Context<ApiWordlettuceHono>) {
       .values({
         gameNum,
         userID,
-        answers,
+        answers: answers.slice(0, 30),
         attempts,
       })
       .onConflictDoUpdate({
