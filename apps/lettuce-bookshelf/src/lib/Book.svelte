@@ -6,7 +6,7 @@
 		cover_image: string;
 	};
 
-	let { title, subtitle, author, cover_image } = $props();
+	let { title, subtitle, author, cover_image }: BookProps = $props();
 </script>
 
 <div class="@container">
