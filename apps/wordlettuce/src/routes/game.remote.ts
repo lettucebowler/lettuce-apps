@@ -59,14 +59,11 @@ export const action = form(ActionFormInput, async (input) => {
       if (error) {
         svelteError(500, error.message);
       }
-      if (
-        inserts.gameNum !== game.gameNum ||
-        game.answers.join('').endsWith(inserts.answers) ||
-        inserts.attempts !== game.answers.length ||
-        inserts.userID !== event.locals.session.userID
-      ) {
-        console.log(game.gameNum, game.answers.join(''), game.answers.length, event.locals.session.userID);
-        console.log(inserts.gameNum, inserts.answers, inserts.attempts, inserts.userID);
+      const gameNumMatch = inserts.gameNum == game.gameNum;
+      const answersMatch = game.answers.join('').endsWith(inserts.answers);
+      const attemptsMatch = inserts.attempts == game.answers.length;
+      const userIDMatch = inserts.userID == event.locals.session.userID;
+      if (!gameNumMatch || !answersMatch || !attemptsMatch || !userIDMatch) {
         svelteError(500, 'Insertion mismatch');
       }
       return {
