@@ -8,7 +8,7 @@
 <a href="https://imdb.com/title/{imdb}">
   <MediaCard>
     {#snippet media()}
-      <img class="rounded" alt={title} src="/posters/movie-{imdb}.webp" />{/snippet}
+      <img loading="lazy" class="rounded" alt={title} src="/posters/movie-{imdb}.webp" />{/snippet}
     {#snippet info()}
       <h3><span class="font-medium">{title}</span> ({released})</h3>
       {#each directors as director}
