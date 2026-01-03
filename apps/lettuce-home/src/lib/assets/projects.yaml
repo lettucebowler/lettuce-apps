@@ -1,0 +1,33 @@
+# title: string
+# status: active | inactive | offline
+# url: optional string
+# summary: string
+# description: optional string
+
+projects:
+  - title: Lettuce Wedding
+    status: inactive
+    url: https://wedding.lettucebowler.net
+    summary: Asto site to show off photos from our beautiful elopement in the summary of 2025.
+    description:
+      - I needed an easy way to share my wedding photos with people, so I used it as an opportunity to try out Astro.
+        Found a cool library that helped with creating a masonry layout so I decided to make a website I could easily
+        share around.
+  - title: Wordlettuce
+    status: active
+    url: https://word.lettucebowler.net
+    summary: a wordle clone with additional features built with svelte
+    description:
+      - My coworkers and I were having fun sharing our wordle results with each other, so I thought it would be fun to
+        make a clone of it but add on a leaderboard so we can track our scores against each other over time.
+  - title: Docker compose files
+    status: active
+    url: https://github.com/lettucebowler/docker-images
+    summary: my docker-compose files
+  - title: Lettuce Sudoku
+    status: inactive
+    url: https://sudoku.lettucebowler.net
+    summary: a sudoku game built with svelte
+  - title: Lettuce Pokedex
+    status: offline
+    summary: a pokedex app built with svelte

@@ -1,0 +1,26 @@
+<script lang="ts">
+  import type { ReadingLogEntry } from '$lib/schemas';
+  import MediaCard from './MediaCard.svelte';
+
+  let { title, subtitle, authors, isbn }: ReadingLogEntry = $props();
+</script>
+
+<a href="https://openlibrary.org/isbn/{isbn}">
+  <MediaCard>
+    {#snippet media()}
+      <img
+        alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
+        src="/covers/book-{isbn}.webp"
+        class="rounded"
+      />{/snippet}
+    {#snippet info()}
+      <h3 class="font-medium">{title}</h3>
+      {#if subtitle}
+        <p class="">{subtitle}</p>
+      {/if}
+      {#each authors as author}
+        <p>{author}</p>
+      {/each}
+    {/snippet}
+  </MediaCard>
+</a>

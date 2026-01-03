@@ -1,0 +1,22 @@
+2026:
+  - imdb: tt19847976
+    title: 'Wicked: For Good'
+    directors:
+      - Jon M. Chu
+    released: 2025
+    month: january
+  - imdb: tt14205554
+    title: KPop Demon Hunters
+    directors:
+      - Chris Applehans
+      - Maggie Kang
+    released: 2025
+    month: january
+    liked: true
+  - imdb: tt5950044
+    title: Superman
+    directors:
+      - James Gunn
+    released: 2025
+    month: january
+    liked: true
