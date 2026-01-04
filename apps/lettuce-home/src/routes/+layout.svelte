@@ -8,14 +8,17 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<div style="--scrollbar-width: 100vw-100%">
+<div class="container mx-auto flex h-full flex-col gap-6 xl:max-w-screen-xl">
   <nav class="flex flex-wrap gap-x-4 gap-y-1">
     <NavLink to="/"><span class="text-lg font-bold first-letter:capitalize">Home</span></NavLink>
     <NavLink to="/projects"
       ><span class="text-lg font-bold first-letter:capitalize">Projects</span></NavLink
     >
-    <NavLink to="/bookshelf"
-      ><span class="text-lg font-bold first-letter:capitalize">Bookshelf</span></NavLink
+    <NavLink to="/books"
+      ><span class="text-lg font-bold first-letter:capitalize">Books</span></NavLink
+    >
+    <NavLink to="/movies"
+      ><span class="text-lg font-bold first-letter:capitalize">Movies</span></NavLink
     >
     <a
       href="https://github.com/lettucebowler"
@@ -28,7 +31,5 @@
       <ResumeIcon class="size-6 text-antique-brass-500" />
     </a>
   </nav>
-  <div class="container mx-auto max-w-screen-lg pt-6">
-    {@render children()}
-  </div>
+  {@render children()}
 </div>

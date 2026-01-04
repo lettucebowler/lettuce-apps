@@ -6,18 +6,24 @@
 #   reread: optional boolean, default to false
 #   subtitle: optional string
 
-# 2026:
-#   - isbn: 9781933633862
-#     title: Debt
-#     subtitle: The First 5,000 Years
-#     authors:
-#       - David Graeber
-#     month: january
-#   - isbn: 9784046831569
-#     title: Re:Zero -Starting Life in Another World-, Volume 36
-#     authors:
-#       - Tappei Nagatsuki
-#     month: january
+2026:
+  # - isbn: 9781933633862
+  #   title: Debt
+  #   subtitle: The First 5,000 Years
+  #   authors:
+  #     - David Graeber
+  #   month: january
+  # - isbn: 9784046831569
+  #   title: Re:Zero -Starting Life in Another World-, Volume 36
+  #   authors:
+  #     - Tappei Nagatsuki
+  #   month: january
+  - isbn: 9781506726076
+    title: Birdking, Volume 1
+    authors:
+      - Daniel Freedman
+      - CROM
+    month: january
 
 2025:
   - isbn: 9780525533337

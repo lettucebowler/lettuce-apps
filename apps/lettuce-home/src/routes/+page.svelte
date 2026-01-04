@@ -2,7 +2,7 @@
   import Book from '$lib/components/Book.svelte';
   import Movie from '$lib/components/Movie.svelte';
   import { getLatestMovie } from '$lib/remote/movie-log.remote';
-  import { getActiveProjects } from '$lib/remote/projects.remote';
+  import { getActiveProjects, getProjects } from '$lib/remote/projects.remote';
   import { getLatestBook } from '$lib/remote/reading-log.remote';
   import GithubIcon from './GithubIcon.svelte';
   import ResumeIcon from './ResumeIcon.svelte';
@@ -13,16 +13,16 @@
   const latestMovie = $derived(await getLatestMovie());
 </script>
 
-<main class="bg:green-500 mx-auto flex flex-wrap gap-6">
-  <div class="flex w-full min-w-full justify-between gap-6">
+<main class="bg:green-500 mx-auto flex w-full flex-wrap gap-6">
+  <div class="flex w-full justify-start gap-6">
     <h1 class="text-3xl font-bold">Grant Montgomery</h1>
     <img
       alt="Lettucebowler"
-      class="my-auto inline size-9 rounded-lg"
+      class="my-auto inline size-9 rounded-md"
       src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed=lettucebowler"
     />
   </div>
-  <div class="grid max-w-[300px] min-w-[270px] flex-1 content-start gap-4">
+  <div class="grid min-w-[270px] flex-1 content-start gap-4">
     <h2 class="text-2xl font-bold">Active projects</h2>
     {#each activeProjects as project (project.title)}
       {#if project.url}
@@ -34,7 +34,9 @@
     {/each}
   </div>
   <div class="@container grid min-w-[270px] flex-1 content-start gap-4">
-    <h2 class="text-2xl font-bold">About</h2>
+    <div class="flex w-full gap-3">
+      <h2 class="text-2xl font-bold">About</h2>
+    </div>
     <p>
       Grant works as a full-stack web developer in the healthcare industry, working primarily with
       React and Stencil on the frontend, and Node or Springboot on the backend.
@@ -54,13 +56,13 @@
       </a>
     </div>
     <div class="flex flex-wrap gap-4">
-      <div class="grid flex-1 content-start gap-2">
+      <div class="grid flex-1 gap-2">
         <h2 class="text-xl font-bold">Last read</h2>
-        <Book {...latestBook} />
+        <Book {...latestBook} loading="eager" />
       </div>
-      <div class="flex flex-1 flex-col content-start gap-2">
+      <div class="flex flex-1 flex-col gap-2">
         <h2 class="text-xl font-bold">Last watched</h2>
-        <Movie {...latestMovie} />
+        <Movie {...latestMovie} loading="eager" />
       </div>
     </div>
   </div>

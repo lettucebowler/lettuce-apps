@@ -44,7 +44,7 @@ export const ProjectLog = v.object({
 export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
 export const MovieLogEntry = v.object({
-  imdb: v.string(),
+  tmdb: v.pipe(v.number(), v.integer()),
   title: v.string(),
   directors: v.array(v.string()),
   released: v.pipe(v.number(), v.integer()),

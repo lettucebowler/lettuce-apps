@@ -5,8 +5,8 @@
   const projects = $derived(await getProjects());
 </script>
 
-<main class="container mx-auto flex max-w-screen-md flex-col gap-6">
-  <h1 class="mb-4 text-3xl font-bold">Projects</h1>
+<main class="container mx-auto flex flex-col gap-6">
+  <h1 class="text-3xl font-bold">Projects</h1>
   {#each projects as project}
     <div class="space-y-1">
       {#if project.url}
