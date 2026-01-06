@@ -2,20 +2,14 @@
   import type { ReadingLogEntry } from '$lib/schemas';
   import MediaCard from './MediaCard.svelte';
 
-  let {
-    title,
-    subtitle,
-    authors,
-    isbn,
-    loading = 'lazy'
-  }: ReadingLogEntry & { loading?: 'lazy' | 'eager' } = $props();
+  let { title, subtitle, authors, isbn, published }: ReadingLogEntry = $props();
 </script>
 
 <a href="https://openlibrary.org/isbn/{isbn}">
   <MediaCard>
     {#snippet media()}
       <img
-        {loading}
+        loading="lazy"
         alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
         src="/covers/book-{isbn}.webp"
         class="rounded"
@@ -25,9 +19,10 @@
       {#if subtitle}
         <p class="text-sm">{subtitle}</p>
       {/if}
-      {#each authors as author}
+      <!-- {#each authors as author}
         <p class="text-sm">{author}</p>
-      {/each}
+      {/each} -->
+      <p class="text-sm">By {authors.join(', ')} ({published})</p>
     {/snippet}
   </MediaCard>
 </a>

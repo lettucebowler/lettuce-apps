@@ -3,14 +3,15 @@
   import Movie from '$lib/components/Movie.svelte';
   import { getLatestMovie } from '$lib/remote/movie-log.remote';
   import { getActiveProjects, getProjects } from '$lib/remote/projects.remote';
-  import { getLatestBook } from '$lib/remote/reading-log.remote';
+  import { getCurrentBooks, getLastReadBook } from '$lib/remote/reading-log.remote';
   import GithubIcon from './GithubIcon.svelte';
   import ResumeIcon from './ResumeIcon.svelte';
   import TwitterIcon from './TwitterIcon.svelte';
 
-  const latestBook = $derived(await getLatestBook());
+  const latestBook = $derived(await getLastReadBook());
   const activeProjects = $derived(await getActiveProjects());
   const latestMovie = $derived(await getLatestMovie());
+  const currentBooks = $derived(await getCurrentBooks());
 </script>
 
 <main class="bg:green-500 mx-auto flex w-full flex-wrap gap-6">
@@ -34,13 +35,13 @@
     {/each}
   </div>
   <div class="@container grid min-w-[270px] flex-1 content-start gap-4">
-    <div class="flex w-full gap-3">
+    <div class="space-y-2">
       <h2 class="text-2xl font-bold">About</h2>
+      <p>
+        Grant works as a full-stack web developer in the healthcare industry, working primarily with
+        React and Stencil on the frontend, and Node or Springboot on the backend.
+      </p>
     </div>
-    <p>
-      Grant works as a full-stack web developer in the healthcare industry, working primarily with
-      React and Stencil on the frontend, and Node or Springboot on the backend.
-    </p>
     <div class="flex flex-row flex-wrap justify-center gap-6 text-center">
       <a href="https://twitter.com/lettucebowler" class="group">
         <TwitterIcon class="mx-auto size-10 fill-frost-300" />
@@ -55,14 +56,22 @@
         <span class="group-hover:underline">Resume </span>
       </a>
     </div>
-    <div class="flex flex-wrap gap-4">
-      <div class="grid flex-1 gap-2">
-        <h2 class="text-xl font-bold">Last read</h2>
-        <Book {...latestBook} loading="eager" />
+    <div class="space-y-2">
+      <h2 class="text-xl font-bold">Currently reading</h2>
+      <div class="grid grid-cols-1 gap-4 @md:grid-cols-2">
+        {#each currentBooks as book (book.isbn)}
+          <Book {...book} />
+        {/each}
       </div>
-      <div class="flex flex-1 flex-col gap-2">
+    </div>
+    <div class="grid gap-4 @md:grid-cols-2">
+      <div class="space-y-2">
+        <h2 class="text-xl font-bold">Last read</h2>
+        <Book {...latestBook} />
+      </div>
+      <div class="space-y-2">
         <h2 class="text-xl font-bold">Last watched</h2>
-        <Movie {...latestMovie} loading="eager" />
+        <Movie {...latestMovie} />
       </div>
     </div>
   </div>

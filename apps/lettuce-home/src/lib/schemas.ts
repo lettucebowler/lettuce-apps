@@ -21,12 +21,14 @@ export const ReadingLogEntry = v.object({
   title: v.string(),
   subtitle: v.optional(v.string()),
   authors: v.array(v.string()),
-  month: Month,
-  liked: v.optional(v.boolean(), false)
+  published: v.pipe(v.number(), v.integer()),
+  completed: v.optional(v.string()),
+  rating: v.optional(v.pipe(v.number(), v.integer())),
+  comment: v.optional(v.string())
 });
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
-export const ReadingLog = v.record(v.pipe(v.string(), v.digits()), v.array(ReadingLogEntry));
+export const ReadingLog = v.array(ReadingLogEntry);
 export type ReadingLog = v.InferOutput<typeof ReadingLog>;
 
 export const Project = v.object({
@@ -48,10 +50,11 @@ export const MovieLogEntry = v.object({
   title: v.string(),
   directors: v.array(v.string()),
   released: v.pipe(v.number(), v.integer()),
-  month: Month,
-  liked: v.optional(v.boolean(), false)
+  watched: v.string(),
+  rating: v.optional(v.pipe(v.number(), v.integer())),
+  comment: v.optional(v.string())
 });
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
-export const MovieLog = v.record(v.pipe(v.string(), v.digits()), v.array(MovieLogEntry));
+export const MovieLog = v.array(MovieLogEntry);
 export type MovieLog = v.InferOutput<typeof MovieLog>;

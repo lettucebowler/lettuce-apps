@@ -34,7 +34,7 @@
   <div class="h-1">
     {#if current}
       <div
-        class="border-box h-1 bg-charade-700"
+        class="border-box mx-1 h-1 bg-charade-700"
         in:recieve={{ key: 'current-link' }}
         out:send={{ key: 'current-link' }}
       ></div>

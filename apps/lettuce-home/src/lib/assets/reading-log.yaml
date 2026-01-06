@@ -1,175 +1,204 @@
-# [year]
-#   isbn: number
-#   title: string
-#   authors: string
-#   month: string
-#   reread: optional boolean, default to false
-#   subtitle: optional string
-
-2026:
-  # - isbn: 9781933633862
-  #   title: Debt
-  #   subtitle: The First 5,000 Years
-  #   authors:
-  #     - David Graeber
-  #   month: january
-
-  - isbn: 9781506726076
-    title: Birdking, Volume 1
-    authors:
-      - Daniel Freedman
-      - CROM
-    month: january
-  - isbn: 9784046831569
-    title: Re:Zero -Starting Life in Another World-, Volume 36
-    authors:
-      - Tappei Nagatsuki
-    month: january
-
-2025:
-  - isbn: 9780525533337
-    title: The Bullet Journal Method
-    authors:
-      - Ryder Carrol
-    month: december
-  - isbn: 9784046828637
-    title: Re:Zero -Starting Life in Another World-, Volume 35
-    authors:
-      - Tappei Nagatsuki
-    month: august
-  - isbn: 9784046825674
-    title: Re:Zero -Starting Life in Another World-, Volume 34
-    authors:
-      - Tappei Nagatsuki
-    month: july
-  - isbn: 9784046823311
-    title: Re:Zero -Starting Life in Another World-, Volume 33
-    authors:
-      - Tappei Nagatsuki
-    month: july
-  - isbn: 9784046820419
-    title: Re:Zero -Starting Life in Another World-, Volume 32
-    authors:
-      - Tappei Nagatsuki
-    month: june
-  - isbn: 9784046817488
-    title: Re:Zero -Starting Life in Another World-, Volume 31
-    authors:
-      - Tappei Nagatsuki
-    month: june
-  - isbn: 9784046814760
-    title: Re:Zero -Starting Life in Another World-, Volume 30
-    authors:
-      - Tappei Nagatsuki
-    month: june
-  - isbn: 9784046812865
-    title: Re:Zero -Starting Life in Another World-, Volume 29
-    authors:
-      - Tappei Nagatsuki
-    month: june
-  - isbn: 9780316462419
-    title: The Joy of Pizza
-    subtitle: Everything You Need to Know
-    authors:
-      - Dan Richer
-      - Katie Parla
-    month: may
-  - isbn: 9781975378486
-    title: Re:Zero -Starting Life in Another World-, Volume 28
-    authors:
-      - Tappei Nagatsuki
-    month: may
-  - isbn: 9781975378462
-    title: Re:Zero -Starting Life in Another World-, Volume 27
-    authors:
-      - Tappei Nagatsuki
-    month: may
-  - isbn: 9781975378448
-    title: Re:Zero -Starting Life in Another World-, Volume 26
-    authors:
-      - Tappei Nagatsuki
-    month: may
-  - isbn: 9781975378424
-    title: Re:Zero -Starting Life in Another World-, Volume 25
-    authors:
-      - Tappei Nagatsuki
-    month: may
-  - isbn: 9781975335397
-    title: Re:Zero -Starting Life in Another World-, Volume 24
-    authors:
-      - Tappei Nagatsuki
-    month: april
-  - isbn: 9781975335373
-    title: Re:Zero -Starting Life in Another World-, Volume 23
-    authors:
-      - Tappei Nagatsuki
-    month: april
-  - isbn: 9781975335359
-    title: Re:Zero -Starting Life in Another World-, Volume 22
-    authors:
-      - Tappei Nagatsuki
-    month: april
-  - isbn: 9781975335335
-    title: Re:Zero -Starting Life in Another World-, Volume 21
-    authors:
-      - Tappei Nagatsuki
-    month: april
-
-2024:
-  - isbn: 9781635575606
-    title: A Court of Wings and Ruin
-    authors:
-      - Sarah J. Maas
-    month: december
-  - isbn: 9781635575583
-    title: A Court of Mist and Fury
-    authors:
-      - Sarah J. Maas
-    month: june
-  - isbn: 9781635575569
-    title: A Court of Thorns and Roses
-    authors:
-      - Sarah J. Maas
-    month: march
-
-2023:
-  - isbn: 9781250773012
-    title: Ender's Game
-    authors:
-      - Orson Scott Card
-    month: october
-  - isbn: 9781421539645
-    title: Death Note
-    subtitle: Black Edition, Vol. 1
-    authors:
-      - Tsugumi Ohba
-    month: august
-
-2016:
-  - isbn: 9781473211575
-    title: The Tower of Swallows
-    authors:
-      - Andrzej Sapkowski
-    month: august
-  - isbn: 9780575090972
-    title: Baptism of Fire
-    authors:
-      - Andrzej Sapkowski
-    month: august
-  - isbn: 9780316452762
-    title: Time of Contempt
-    authors:
-      - Andrzej Sapkowski
-    month: july
-  - isbn: 9780316073714
-    title: Blood of Elves
-    authors:
-      - Andrzej Sapkowski
-    month: july
-
-2015:
-  - isbn: 9780316029186
-    title: The Last Wish
-    authors:
-      - Andrzej Sapkowski
-    month: october
+--- # Reading Log
+- isbn: 9781933633862
+  title: Debt
+  subtitle: The First 5,000 Years
+  authors:
+    - David Graeber
+  published: 2011
+- isbn: 9780593820247
+  title: Dungeon Crawler Carl
+  authors:
+    - Matt Dinniman
+  published: 2020
+- isbn: 9781506726076
+  title: Birdking, Volume 1
+  authors:
+    - Daniel Freedman
+    - CROM
+  published: 2022
+  completed: 2026-01
+- isbn: 9784046831569
+  title: Re:Zero -Starting Life in Another World-, Volume 36
+  authors:
+    - Tappei Nagatsuki
+  published: 2023
+  completed: 2026-01
+  rating: 4
+  comment: Arc 8 is starting to feel a bit long but I am still enjoying it a lot.
+- isbn: 9780525533337
+  title: The Bullet Journal Method
+  authors:
+    - Ryder Carrol
+  published: 2018
+  completed: 2025-12
+  rating: 3
+  comment: I like the bullet journal method but I don't think this book is necessary to understand it.
+- isbn: 9784046828637
+  title: Re:Zero -Starting Life in Another World-, Volume 35
+  authors:
+    - Tappei Nagatsuki
+  published: 2023
+  completed: 2025-08
+- isbn: 9784046825674
+  title: Re:Zero -Starting Life in Another World-, Volume 34
+  authors:
+    - Tappei Nagatsuki
+  published: 2023
+  completed: 2025-07
+- isbn: 9784046823311
+  title: Re:Zero -Starting Life in Another World-, Volume 33
+  authors:
+    - Tappei Nagatsuki
+  published: 2023
+  completed: 2025-07
+  rating: 4
+  comment: A full-of-hype ending to arc 7.
+- isbn: 9784046820419
+  title: Re:Zero -Starting Life in Another World-, Volume 32
+  authors:
+    - Tappei Nagatsuki
+  published: 2022
+  completed: 2025-06
+  rating: 4
+- isbn: 9784046817488
+  title: Re:Zero -Starting Life in Another World-, Volume 31
+  authors:
+    - Tappei Nagatsuki
+  published: 2022
+  completed: 2025-06
+  rating: 4
+  comment: I love the new characters introduced in this volume.
+- isbn: 9784046814760
+  title: Re:Zero -Starting Life in Another World-, Volume 30
+  authors:
+    - Tappei Nagatsuki
+  published: 2022
+  completed: 2025-06
+  rating: 4
+- isbn: 9784046812865
+  title: Re:Zero -Starting Life in Another World-, Volume 29
+  authors:
+    - Tappei Nagatsuki
+  published: 2022
+  rating: 4
+  completed: 2025-06
+- isbn: 9780316462419
+  title: The Joy of Pizza
+  subtitle: Everything You Need to Know
+  authors:
+    - Dan Richer
+    - Katie Parla
+  published: 2021
+  completed: 2025-05
+  rating: 3
+  comment: I like pizza
+- isbn: 9781975378486
+  title: Re:Zero -Starting Life in Another World-, Volume 28
+  authors:
+    - Tappei Nagatsuki
+  published: 2021
+  completed: 2025-05
+  rating: 4
+- isbn: 9781975378462
+  title: Re:Zero -Starting Life in Another World-, Volume 27
+  authors:
+    - Tappei Nagatsuki
+  published: 2021
+  completed: 2025-05
+- isbn: 9781975378448
+  title: Re:Zero -Starting Life in Another World-, Volume 26
+  authors:
+    - Tappei Nagatsuki
+  published: 2021
+  completed: 2025-05
+- isbn: 9781975378424
+  title: Re:Zero -Starting Life in Another World-, Volume 25
+  authors:
+    - Tappei Nagatsuki
+  published: 2020
+  completed: 2025-05
+- isbn: 9781975335397
+  title: Re:Zero -Starting Life in Another World-, Volume 24
+  authors:
+    - Tappei Nagatsuki
+  published: 2020
+  completed: 2025-04
+- isbn: 9781975335373
+  title: Re:Zero -Starting Life in Another World-, Volume 23
+  authors:
+    - Tappei Nagatsuki
+  published: 2020
+  completed: 2025-04
+- isbn: 9781975335359
+  title: Re:Zero -Starting Life in Another World-, Volume 22
+  authors:
+    - Tappei Nagatsuki
+  published: 2020
+  completed: 2025-04
+- isbn: 9781975335335
+  title: Re:Zero -Starting Life in Another World-, Volume 21
+  authors:
+    - Tappei Nagatsuki
+  published: 2019
+  completed: 2025-04
+- isbn: 9781635575606
+  title: A Court of Wings and Ruin
+  authors:
+    - Sarah J. Maas
+  published: 2017
+  completed: 2024-12
+- isbn: 9781635575583
+  title: A Court of Mist and Fury
+  authors:
+    - Sarah J. Maas
+  published: 2016
+  completed: 2024-06
+- isbn: 9781635575569
+  title: A Court of Thorns and Roses
+  authors:
+    - Sarah J. Maas
+  published: 2014
+  completed: 2024-03
+- isbn: 9781250773012
+  title: Ender's Game
+  authors:
+    - Orson Scott Card
+  published: 1985
+  completed: 2023-10
+- isbn: 9781421539645
+  title: Death Note
+  subtitle: Black Edition, Vol. 1
+  authors:
+    - Tsugumi Ohba
+  published: 2010
+  completed: 2023-08
+- isbn: 9781473211575
+  title: The Tower of Swallows
+  authors:
+    - Andrzej Sapkowski
+  published: 1997
+  completed: 2016-08
+- isbn: 9780575090972
+  title: Baptism of Fire
+  authors:
+    - Andrzej Sapkowski
+  published: 1996
+  completed: 2016-08
+- isbn: 9780316452762
+  title: Time of Contempt
+  authors:
+    - Andrzej Sapkowski
+  published: 1995
+  completed: 2016-07
+- isbn: 9780316073714
+  title: Blood of Elves
+  authors:
+    - Andrzej Sapkowski
+  published: 1994
+  completed: 2016-07
+- isbn: 9780316029186
+  title: The Last Wish
+  authors:
+    - Andrzej Sapkowski
+  published: 1993
+  completed: 2015-12

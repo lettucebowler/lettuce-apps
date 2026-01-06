@@ -7,8 +7,11 @@
 <main class="flex w-full flex-1 flex-col gap-6">
   <h1 class="text-3xl font-bold">Movies</h1>
   <div class="flex flex-col gap-8">
-    {#each Object.keys(movieLog).sort().reverse() as year (year)}
-      {@const yearMovies = movieLog[year]}
+    {#each [...movieLog.keys()]
+      .filter((key) => key !== 'current')
+      .toSorted()
+      .reverse() as year (year)}
+      {@const yearMovies = movieLog.get(year)}
       <div class="grid gap-3">
         <span>
           <h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
