@@ -1,4 +1,5 @@
 ---
+# January 2026
 - tmdb: 83533
   title: 'Avatar: Fire and Ash'
   released: 2025
@@ -19,7 +20,8 @@
   directors:
     - James Cameron
   watched: 2026-01
-  rating: 3
+  rating: 4
+  rewatch: true
 - tmdb: 38357
   title: Morning Glory
   released: 2025
@@ -27,6 +29,7 @@
     - Roger Michell
   watched: 2026-01
   rating: 3
+  rewatch: true
 - tmdb: 967941
   title: 'Wicked: For Good'
   directors:
@@ -49,6 +52,8 @@
   released: 2025
   watched: 2026-01
   rating: 4
+  rewatch: true
+# December 2025
 - tmdb: 528491
   title: 'What Did Jack Do?'
   released: 2017
@@ -70,6 +75,15 @@
     - Joel Schumacher
   watched: 2025-12
   rating: 3
+- tmdb: 5255
+  title: The Polar Express
+  released: 2004
+  directors:
+    - Robert Zemeckis
+  watched: 2025-12
+  rating: 5
+  comment: Hot hot we got it
+  rewatch: true
 - tmdb: 12193
   title: Four Christmases
   released: 2008
@@ -77,20 +91,21 @@
     - Seth Gordon
   watched: 2025-12
   rating: 3
+- tmdb: 360920
+  title: The Grinch
+  released: 2018
+  directors:
+    - Scott Mosier
+  watched: 2025-12
+  rating: 3
+  rewatch: true
 - tmdb: 701387
   title: Bugonia
   released: 2025
   directors:
     - Yorgos Lanthimos
-  watched: 2025-12r
-  rating: 3
-- tmdb: 1228246
-  title: "Five Nights at Freddy's 2"
-  released: 2025
-  directors:
-    - Emma Tammi
   watched: 2025-12
-  rating: 2
+  rating: 3
 - tmdb: 504253
   title: I Want to Eat Your Pancrease
   released: 2018
@@ -98,6 +113,22 @@
     - Shinichiro Ushijima
   watched: 2025-12
   rating: 5
+  rewatch: true
+- tmdb: 10719
+  title: Elf
+  released: 2003
+  directors:
+    - Jon Favreau
+  watched: 2025-12
+  rating: 4
+  rewatch: true
+- tmdb: 1228246
+  title: "Five Nights at Freddy's 2"
+  released: 2025
+  directors:
+    - Emma Tammi
+  watched: 2025-12
+  rating: 2
 - tmdb: 14536
   title: New in Town
   released: 2009
@@ -105,6 +136,91 @@
     - Jonas Elmer
   watched: 2025-12
   rating: 3
+  rewatch: true
+# November 2025
+- tmdb: 1097870
+  title: Dear Santa
+  released: 2024
+  directors:
+    - Bobby Farrelly
+  watched: 2025-11
+  rating: 3
+- tmdb: 604079
+  title: The Long Walk
+  released: 2025
+  directors:
+    - Francis Lawrence
+  watched: 2025-11
+  rating: 3
+- tmdb: 840430
+  title: The Holdovers
+  released: 2023
+  directors:
+    - Alexander Payne
+  watched: 2025-11
+  rating: 4
+- tmdb: 9021
+  title: The Santa Clause 2
+  released: 2002
+  directors:
+    - Michael Lembeck
+  watched: 2025-11
+  rating: 3
+  rewatch: true
+- tmdb: 11395
+  title: The Santa Clause
+  released: 1994
+  directors:
+    - John Pasquin
+  watched: 2025-11
+  rating: 3
+  rewatch: true
+- tmdb: 803796
+  title: KPop Demon Hunters
+  directors:
+    - Chris Applehans
+    - Maggie Kang
+  released: 2025
+  watched: 2025-11
+  rating: 4
+- tmdb: 632856
+  title: Spirited
+  released: 2022
+  directors:
+    - Sean Anders
+  watched: 2025-11
+  rating: 4
+- tmdb: 1235746
+  title: Dead of Winter
+  released: 2025
+  directors:
+    - Brian Kirk
+  watched: 2025-11
+  rating: 4
+- tmdb: 1234821
+  title: Jurassic Worls Rebirth
+  released: 2025
+  directors:
+    - Gareth Edwards
+  watched: 2025-11
+  rating: 2
+- tmdb: 1153714
+  title: Death of a Unicorn
+  released: 2025
+  directors:
+    - Alex Scharfman
+  watched: 2025-11
+  rating: 3
+
+# October 2025
+- tmdb: 440472
+  title: The Upside
+  released: 2019
+  directors:
+    - Niel Burger
+  watched: 2025-10
+  rating: 4
+  comment: Lots of cute moments and it made me laugh.
 - tmdb: 1218925
   title: 'Chainsaw Man - The Movie: Reze Arc'
   released: 2025
@@ -113,10 +229,316 @@
   watched: 2025-10
   liked: true
   rating: 5
+  comment: Peak fiction.
+- tmdb: 330459
+  title: 'Rogue One: A Star Wars Story'
+  released: 2016
+  directors:
+    - Gareth Edwards
+  watched: 2025-10
+  rewatch: true
+  rating: 4
+  comment:
+    It's hard to get fully invested when you already know the ending going into it. Very well-executed and was a great
+    watch after recently finishing Andor.
+- tmdb: 9293
+  title: John Tucker Must die
+  released: 2006
+  directors:
+    - Betty Thomas
+  watched: 2025-10
+  rating: 3
+- tmdb: 937941
+  title: Shelby Oaks
+  released: 2025
+  directors:
+    - Chris Stuckmann
+  watched: 2025-10
+  rating: 3
+
+# September 2025
 - tmdb: 1311031
   title: 'Demon Slayer: Kimetsu no Yaiba Infinity Castle'
   released: 2025
   directors:
     - Haruo Sotozaki
   watched: 2025-09
+  rating: 4
+  comment: Tanjiro discovers the power of flashback breathing.
+- tmdb: 1084199
+  title: Companion
+  released: 2025
+  directors:
+    - Drew Hancock
+  watched: 2025-09
+  rating: 3
+  comment: I don't like that the poster sorta spoils the twist.
+- tmdb: 2925
+  title: The First Wives Club
+  released: 1996
+  directors:
+    - Hugh Wilson
+  watched: 2025-09
+  rating: 3
+
+# August 2025
+- tmdb: 1078605
+  title: Weapons
+  released: 2025
+  directors:
+    - Zach Cregger
+  watched: 2025-08
+  rating: 4
+  comment:
+    The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
+    second time.
+
+# July 2025
+- tmdb: 1233413
+  title: Sinners
+  released: 2025
+  directors:
+    - Ryan Coogler
+  watched: 2025-07
   rating: 5
+- tmdb: 950387
+  title: A Minecraft Movie
+  released: 2025
+  directors:
+    - Jared Hess
+  watched: 2025-07
+  rating: 3
+  comment: An objectively bad movie but it made me laugh.
+- tmdb: 9408
+  title: Surfs Up
+  released: 2025
+  directors:
+    - Ash Brannon
+    - Christ Buck
+  watched: 2025-07
+  rewatch: true
+  rating: 4
+
+# June 2025
+- tmdb: 703451
+  title: Your Place or Mine
+  released: 2023
+  directors:
+    - Aline Brosh McKenna
+  watched: 2025-06
+  rating: 3
+- tmdb: 239573
+  title: Unfinished Business
+  released: 2015
+  directors:
+    - Ken Scott
+  watched: 2025-06
+  rewatch: true
+  rating: 4
+  comment: Makes me laugh.
+- tmdb: 11236
+  title: The Secret Garden
+  released: 1993
+  directors:
+    - Agnieszka Holland
+  watched: 2025-06
+  rating: 3
+  rewatch: true
+- tmdb: 996821
+  title: "You're Cordially Invited"
+  released: 2025
+  directors:
+    - Nicholas Stoller
+  watched: 2025-06
+  rating: 3
+- tmdb: 6557
+  title: 27 Dresses
+  released: 2008
+  directors:
+    - Anne Fletcher
+  watched: 2025-06
+  rating: 3
+- tmdb: 10521
+  title: Bride Wars
+  released: 2009
+  directors:
+    - Gary Winick
+  watched: 2025-06
+  rating: 3
+- tmdb: 455207
+  title: Crazy Rich Asians
+  released: 2018
+  directors:
+    - Jon M. Chu
+  watched: 2025-06
+  rating: 4
+  rewatch: true
+- tmdb: 4951
+  title: 10 Things I Hate About you
+  released: 1999
+  directors:
+    - Gil Junger
+  watched: 2025-06
+  rating: 3
+  rewatch: true
+- tmdb: 505600
+  title: Booksmart
+  released: 2019
+  directors:
+    - Olivia Wilde
+  watched: 2025-06
+  rating: 4
+# May 2025
+- tmdb: 17335
+  title: Obsessed
+  released: 2009
+  directors:
+    - Steve Shill
+  watched: 2025-05
+  rating: 3
+- tmdb: 239563
+  title: St. Vincent
+  released: 2014
+  rating: 4
+  watched: 2025-05
+  rewatch: true
+  directors:
+    - Theodore Melfi
+# April 2025
+- tmdb: 50359
+  title: Hop
+  released: 2011
+  directors:
+    - Tim Hill
+  watched: 2025-04
+  rating: 2
+  rewatch: true
+- tmdb: 746036
+  title: Fall Guy
+  released: 2024
+  directors:
+    - David Leitch
+  watched: 2025-04
+  rating: 4
+  comment: I'm seeing unicorns.
+- tmdb: 696506
+  released: 2025
+  title: Mickey 17
+  directors:
+    - Bong Joon Ho
+  watched: 2025-04
+  rating: 4
+- tmdb: 38317
+  title: Zookeeper
+  released: 2011
+  directors:
+    - Frank Coraci
+  watched: 2025-04
+  rating: 3
+  # Match 2025
+- tmdb: 146216
+  title: Red 2
+  released: 2013
+  directors:
+    - Dean Parisot
+  watched: 2025-03
+  rating: 3
+  rewatch: true
+- tmdb: 933260
+  title: The Substance
+  released: 2024
+  directors:
+    - Coralie Fargeat
+  watched: 2025-03
+  rating: 3
+- tmdb: 550988
+  title: Free Guy
+  released: 2021
+  directors:
+    - Shawn Levy
+  watched: 2025-03
+  rating: 5
+  rewatch: true
+- tmdb: 12178
+  title: Miss Pettigrew Lives for a Day
+  released: 2008
+  directors:
+    - Bharat Nalluri
+  watched: 2025-03
+  rating: 3
+# February 2025
+- tmdb: 286217
+  title: The Martian
+  released: 2015
+  directors:
+    - Ridley Scott
+  watched: 2025-02
+  rating: 4
+- tmdb: 1084199
+  title: Companion
+  released: 2025
+  directors:
+    - Drew Hancock
+  watched: 2025-02
+  rating: 3
+- tmdb: 116741
+  title: The Internship
+  released: 2013
+  directors:
+    - Shawn Levy
+  watched: 2025-02
+  rating: 3
+  rewatch: true
+- tmdb: 502682
+  title: Book Club
+  released: 2018
+  directors:
+    - Bill Holderman
+  watched: 2025-02
+  rating: 3
+- tmdb: 939243
+  title: Sonic the Hedgehog 3
+  released: 2024
+  directors:
+    - Jeff Fowler
+  watched: 2025-02
+  rating: 2
+- tmdb: 50646
+  title: Crazy, Stupid, Love
+  released: 2011
+  directors:
+    - John Raqua
+  watched: 2025-02
+  rating: 4
+  rewatch: true
+- tmdb: 499932
+  title: The Devil All the Time
+  released: 2020
+  directors:
+    - Antonio Campos
+  watched: 2025-02
+  rating: 4
+# January 2025
+- tmdb: 402431
+  title: Wicked
+  released: 2024
+  directors:
+    - Jon M. Chu
+  watched: 2025-01
+  rating: 3
+- tmdb: 116745
+  title: The Secret Life of Walter Mitty
+  released: 2013
+  directors:
+    - Ben Stiller
+  watched: 2025-01
+  rewatch: true
+  rating: 4
+- tmdb: 350
+  title: The Devil Wears Prada
+  released: 2006
+  directors:
+    - David Frankel
+  watched: 2025-01
+  rewatch: true
+  rating: 4

@@ -8,9 +8,18 @@ import movieLogYaml from '$lib/assets/movie-log.yaml';
 const movieLog = v.parse(MovieLog, movieLogYaml);
 
 export const getMovieLog = prerender(() => {
-  const yearBooks = Object.groupBy(movieLog, (movie) => {
-    return movie.watched.substring(0, 4);
-  });
+  const yearBooks = Object.groupBy(
+    movieLog.map((movie, i) => {
+      const count = movieLog.slice(i + 1).filter((m) => m.tmdb === movie.tmdb);
+      return {
+        ...movie,
+        rewatch: !!count.length || movie.rewatch
+      };
+    }),
+    (movie) => {
+      return movie.watched.substring(0, 4);
+    }
+  );
   return new Map(Object.entries(yearBooks));
 });
 

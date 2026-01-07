@@ -52,7 +52,8 @@ export const MovieLogEntry = v.object({
   released: v.pipe(v.number(), v.integer()),
   watched: v.string(),
   rating: v.optional(v.pipe(v.number(), v.integer())),
-  comment: v.optional(v.string())
+  comment: v.optional(v.string()),
+  rewatch: v.optional(v.boolean(), false)
 });
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
