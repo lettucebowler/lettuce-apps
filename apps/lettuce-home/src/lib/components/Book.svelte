@@ -15,14 +15,13 @@
         class="rounded"
       />{/snippet}
     {#snippet info()}
-      <h3 class="text-md font-bold">{title}</h3>
+      <h3 class="">
+        <span class="font-bold">{title}</span> <span class="text-snow-100">({published})</span>
+      </h3>
       {#if subtitle}
         <p class="text-sm">{subtitle}</p>
       {/if}
-      <!-- {#each authors as author}
-        <p class="text-sm">{author}</p>
-      {/each} -->
-      <p class="text-sm">By {authors.join(', ')} ({published})</p>
+      <p class="text-sm">By {authors.join(', ')}</p>
     {/snippet}
   </MediaCard>
 </a>

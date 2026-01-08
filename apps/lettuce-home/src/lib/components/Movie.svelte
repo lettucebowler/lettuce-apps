@@ -10,36 +10,32 @@
   }
 </script>
 
-<div class="space-y-1">
-  <a href="https://www.themoviedb.org/movie/{tmdb}" class="block">
-    <MediaCard>
-      {#snippet media()}
-        <div class="relative aspect-2/3 w-full overflow-hidden">
-          <img loading="lazy" class="rounded" alt={title} src="/posters/movie-{tmdb}.webp" />
-        </div>
-      {/snippet}
-      {#snippet info()}
-        <div class="space-y-1">
-          <h3>
-            <span class="text-md font-medium">{title} </span>
-            <span class="text-snow-100">({released})</span>
-          </h3>
-        </div>
-      {/snippet}
-    </MediaCard>
-  </a>
-  <ul>
-    {#each directors as director}
-      <li class="text-sm">{director}</li>
-    {/each}
-  </ul>
-  {#if rating}
-    {@render stars(rating)}
-  {/if}
-  {#if rewatch}
-    <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
-  {/if}
-</div>
+<MediaCard>
+  {#snippet media()}
+    <a href="https://www.themoviedb.org/movie/{tmdb}" class="block">
+      <div class="relative aspect-2/3 w-full overflow-hidden">
+        <img loading="lazy" class="rounded" alt={title} src="/posters/movie-{tmdb}.webp" />
+      </div>
+    </a>
+  {/snippet}
+  {#snippet info()}
+    <h3>
+      <span class="text-md font-medium">{title} </span>
+      <span class="text-snow-100">({released})</span>
+    </h3>
+    <ul class="mb-1">
+      {#each directors as director}
+        <li class="text-sm">{director}</li>
+      {/each}
+    </ul>
+    {#if rating}
+      {@render stars(rating)}
+    {/if}
+    {#if rewatch}
+      <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
+    {/if}
+  {/snippet}
+</MediaCard>
 
 {#snippet stars(rating: number)}
   <div class="flex gap-0.5 text-putty-500">

@@ -17,7 +17,9 @@
           <h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
           <span>{yearMovies!.length} {yearMovies!.length > 1 ? 'movies' : 'movie'}</span>
         </span>
-        <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-6">
+        <div
+          class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-x-2 gap-y-4 sm:gap-x-4 sm:gap-y-6"
+        >
           {#each yearMovies as movie (movie.tmdb)}
             <Movie {...movie} />
           {/each}

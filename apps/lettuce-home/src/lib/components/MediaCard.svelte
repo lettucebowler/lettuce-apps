@@ -13,7 +13,7 @@
     <div class="mx-auto aspect-2/3 w-full min-w-20 flex-2 basis-20 shadow-sm">
       {@render media()}
     </div>
-    <figcaption class="flex-3 basis-20 @min-[160px]:min-w-36">
+    <figcaption class="min-w-40 flex-3 basis-40">
       {@render info()}
     </figcaption>
   </figure>
