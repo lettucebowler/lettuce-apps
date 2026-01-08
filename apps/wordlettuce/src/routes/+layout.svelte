@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
-  import { appName } from '$lib/app-constants';
   import { LettuceAvatar, PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
-  import { getGameNum } from '$lib/words';
   import { getSession } from './auth.remote';
   import { Toasts } from 'svoast';
   import favicon from '$lib/assets/favicon.svg';
+  import { page } from '$app/state';
+  import { getGameNum } from '$lib/words';
+  import { appName } from '$lib/app-constants';
 
   let { children } = $props();
   const session = $derived(await getSession());
@@ -15,7 +15,8 @@
 
 <svelte:head>
   <link rel="icon" href={favicon} />
-  <title>{appName}{browser ? ` #${getGameNum()}` : ''}</title>
+  <title>{page.data['title'] ?? `${appName}`}</title>
+  <meta name="title" content={page.data['metaTitle'] ?? page.data['title'] ?? appName} />
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">

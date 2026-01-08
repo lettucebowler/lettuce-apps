@@ -9,7 +9,7 @@
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
-  import { STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
+  import { appName, STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import {
     GuessLetter,
     LETTER_STATUS_CONTAINS,
@@ -53,8 +53,6 @@
     });
   }
 
-  const duration = 0.15;
-
   function showModal() {
     pushState('', {
       showModal: true,
@@ -91,6 +89,9 @@
   let timeout: NodeJS.Timeout;
 </script>
 
+<svelte:head>
+  <title>{appName} #{game.gameNum}</title>
+</svelte:head>
 <svelte:body
   onkeydown={(e) => {
     const key = e.key.toLowerCase();
