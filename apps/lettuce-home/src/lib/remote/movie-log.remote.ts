@@ -8,7 +8,7 @@ import movieLogYaml from '$lib/assets/movie-log.yaml';
 const movieLog = v.parse(MovieLog, movieLogYaml);
 
 export const getMovieLog = prerender(() => {
-  const yearBooks = Object.groupBy(
+  const yearMovies = Object.groupBy(
     movieLog.map((movie, i) => {
       const count = movieLog.slice(i + 1).filter((m) => m.tmdb === movie.tmdb);
       return {
@@ -20,7 +20,14 @@ export const getMovieLog = prerender(() => {
       return movie.watched.substring(0, 4);
     }
   );
-  return new Map(Object.entries(yearBooks));
+  return Object.entries(yearMovies)
+    .sort((a, b) => Number(b[0]) - Number(a[0]))
+    .map((year) => {
+      return {
+        year: year[0],
+        movies: year[1]
+      };
+    });
 });
 
 export const getLatestMovie = prerender(() => {

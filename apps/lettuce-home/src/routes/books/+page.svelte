@@ -19,18 +19,14 @@
         {/each}
       </div>
     </div>
-    {#each [...bookData.keys()]
-      .filter((key) => key !== 'current')
-      .toSorted()
-      .reverse() as year (year)}
-      {@const yearBooks = bookData.get(year)}
+    {#each bookData as { year, books } (year)}
       <div class="grid gap-3">
         <span>
           <h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
-          <span>{yearBooks!.length} {yearBooks!.length > 1 ? 'books' : 'book'}</span>
+          <span>{books!.length} {books!.length > 1 ? 'books' : 'book'}</span>
         </span>
         <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-4 sm:gap-6">
-          {#each yearBooks as book (book.isbn)}
+          {#each books as book (book.isbn)}
             <Book {...book} />
           {/each}
         </div>

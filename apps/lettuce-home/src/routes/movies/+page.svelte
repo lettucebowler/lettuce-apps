@@ -7,20 +7,17 @@
 <main class="flex w-full flex-1 flex-col gap-6">
   <h1 class="text-3xl font-bold">Movies</h1>
   <div class="flex flex-col gap-8">
-    {#each [...movieLog.keys()]
-      .filter((key) => key !== 'current')
-      .toSorted()
-      .reverse() as year (year)}
-      {@const yearMovies = movieLog.get(year)}
+    {#each movieLog as { year, movies } (year)}
       <div class="grid gap-3">
         <span>
-          <h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
-          <span>{yearMovies!.length} {yearMovies!.length > 1 ? 'movies' : 'movie'}</span>
+          <h2 class=" inline-block text-2xl font-bold">{year}</h2>
+          &nbsp;
+          <span>{movies!.length} {movies!.length > 1 ? 'movies' : 'movie'}</span>
         </span>
         <div
           class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-x-2 gap-y-4 sm:gap-x-4 sm:gap-y-6"
         >
-          {#each yearMovies as movie (movie.tmdb)}
+          {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
             <Movie {...movie} />
           {/each}
         </div>
