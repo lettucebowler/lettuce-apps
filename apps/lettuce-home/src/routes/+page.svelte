@@ -14,6 +14,9 @@
   const currentBooks = $derived(await getCurrentBooks());
 </script>
 
+<svelte:head>
+  <title>Grant Montgomery</title>
+</svelte:head>
 <main class="bg:green-500 mx-auto flex w-full flex-wrap gap-x-4 gap-y-6">
   <div class="flex w-full justify-start gap-6">
     <h1 class="text-3xl font-bold">Grant Montgomery</h1>

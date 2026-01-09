@@ -4,6 +4,9 @@
   const movieLog = await getMovieLog();
 </script>
 
+<svelte:head>
+  <title>Movies | Grant Montgomery</title>
+</svelte:head>
 <main class="flex w-full flex-1 flex-col gap-6">
   <h1 class="text-3xl font-bold">Movies</h1>
   <div class="flex flex-col gap-8">

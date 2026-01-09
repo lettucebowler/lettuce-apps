@@ -5,6 +5,9 @@
   const currentBooks = await getCurrentBooks();
 </script>
 
+<svelte:head>
+  <title>Books | Grant Montgomery</title>
+</svelte:head>
 <main class="space-y-6">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
   <div class="flex flex-col gap-8">

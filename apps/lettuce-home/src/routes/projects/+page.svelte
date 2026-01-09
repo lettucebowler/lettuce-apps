@@ -5,6 +5,9 @@
   const projects = $derived(await getProjects());
 </script>
 
+<svelte:head>
+  <title>Projects | Grant Montgomery</title>
+</svelte:head>
 <main class="container mx-auto flex flex-col gap-6">
   <h1 class="text-3xl font-bold">Projects</h1>
   {#each projects as project}
