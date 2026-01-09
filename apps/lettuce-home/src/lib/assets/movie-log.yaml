@@ -144,6 +144,7 @@
   watched: 2025-12
   rating: 3
   rewatch: true
+  comment: Infinitely quotable.
 # November 2025
 - tmdb: 1097870
   title: Dear Santa
@@ -166,6 +167,7 @@
     - Alexander Payne
   watched: 2025-11
   rating: 4
+  comment: This is going into the yearly Christmas movie rotation going forward.
 - tmdb: 9021
   title: The Santa Clause 2
   released: 2002
@@ -197,6 +199,7 @@
     - Sean Anders
   watched: 2025-11
   rating: 4
+  comment: One song added +1 to this score.
 - tmdb: 1235746
   title: Dead of Winter
   released: 2025
@@ -220,8 +223,7 @@
   directors:
     - Alex Scharfman
   watched: 2025-11
-  rating: 3
-
+  rating: 2
 # October 2025
 - tmdb: 440472
   title: The Upside
@@ -291,14 +293,6 @@
   watched: 2025-09
   rating: 2
   comment: I was really excited for this movie but I feel like the jokes all fell flat.
-- tmdb: 1084199
-  title: Companion
-  released: 2025
-  directors:
-    - Drew Hancock
-  watched: 2025-09
-  rating: 3
-  comment: I don't like that the poster sorta spoils the twist.
 - tmdb: 2925
   title: The First Wives Club
   released: 1996
@@ -306,7 +300,6 @@
     - Hugh Wilson
   watched: 2025-09
   rating: 3
-
 # August 2025
 - tmdb: 1078605
   title: Weapons
@@ -317,8 +310,7 @@
   rating: 4
   comment:
     The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
-    second time.
-
+    second time. I left in shock.
 # July 2025
 - tmdb: 1233413
   title: Sinners
@@ -351,7 +343,6 @@
   watched: 2025-07
   rewatch: true
   rating: 4
-
 # June 2025
 - tmdb: 703451
   title: Your Place or Mine
@@ -367,7 +358,7 @@
     - Ken Scott
   watched: 2025-06
   rewatch: true
-  rating: 4
+  rating: 3
   comment: Makes me laugh.
 - tmdb: 11236
   title: The Secret Garden
@@ -421,6 +412,7 @@
     - Olivia Wilde
   watched: 2025-06
   rating: 4
+  rewatch: true
 # May 2025
 - tmdb: 822119
   title: 'Captain America: Brave New World'
@@ -476,6 +468,7 @@
     - Bong Joon Ho
   watched: 2025-04
   rating: 4
+  comment: This makes me think about how we discovered that humans are 70% water.
 - tmdb: 38317
   title: Zookeeper
   released: 2011
@@ -521,7 +514,8 @@
   directors:
     - Ridley Scott
   watched: 2025-02
-  rating: 4
+  rating: 3
+  rewatch: true
 - tmdb: 1084199
   title: Companion
   released: 2025
@@ -529,6 +523,7 @@
     - Drew Hancock
   watched: 2025-02
   rating: 3
+  comment: I don't like that the poster sorta spoils the twist.
 - tmdb: 116741
   title: The Internship
   released: 2013
