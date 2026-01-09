@@ -1,5 +1,7 @@
+import { appName } from '$lib/app-constants';
+
 export function load() {
   return {
-    title: 'Rankings',
+    title: `Rankings | ${appName}`,
   };
 }
