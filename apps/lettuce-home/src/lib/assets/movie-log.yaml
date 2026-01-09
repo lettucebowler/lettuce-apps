@@ -204,6 +204,9 @@
     - Brian Kirk
   watched: 2025-11
   rating: 4
+  comment:
+    I don't know if I like this movie or not but there is a scene that triggered a powerful emotional response from me
+    so I'm giving it a 4 for that.
 - tmdb: 1234821
   title: Jurassic Worls Rebirth
   released: 2025
@@ -237,6 +240,14 @@
   liked: true
   rating: 5
   comment: Peak fiction.
+- tmdb: 1114967
+  title: Good Fortune
+  released: 2025
+  directors:
+    - Aziz Ansari
+  watched: 2025-10
+  rating: 3
+  comment: I liked Keanu
 - tmdb: 330459
   title: 'Rogue One: A Star Wars Story'
   released: 2016
@@ -272,6 +283,14 @@
   watched: 2025-09
   rating: 4
   comment: Tanjiro discovers the power of flashback breathing.
+- tmdb: 1035259
+  title: The Naked Gun
+  released: 2025
+  directors:
+    - Akiva Schaffer
+  watched: 2025-09
+  rating: 2
+  comment: I was really excited for this movie but I feel like the jokes all fell flat.
 - tmdb: 1084199
   title: Companion
   released: 2025
@@ -308,6 +327,13 @@
     - Ryan Coogler
   watched: 2025-07
   rating: 5
+- tmdb: 617126
+  title: 'The Fantastic Four: First Steps'
+  released: 2025
+  directors:
+    - Matt Shakman
+  watched: 2025-07
+  rating: 3
 - tmdb: 950387
   title: A Minecraft Movie
   released: 2025
@@ -396,6 +422,13 @@
   watched: 2025-06
   rating: 4
 # May 2025
+- tmdb: 822119
+  title: 'Captain America: Brave New World'
+  directors:
+    - Julius Onah
+  released: 2025
+  watched: 2025-05
+  rating: 2
 - tmdb: 17335
   title: Obsessed
   released: 2009
@@ -411,6 +444,14 @@
   rewatch: true
   directors:
     - Theodore Melfi
+- tmdb: 986056
+  title: Thunderbolts*
+  released: 2025
+  directors:
+    - Jake Schreier
+  watched: 2025-05
+  rating: 4
+  comment: I'm probably over-rating this because of my shock to finally watch a decent marvel movie for the first time in like 5 years.
 # April 2025
 - tmdb: 50359
   title: Hop
