@@ -1,30 +1,22 @@
 <script lang="ts">
   import { getMovieLog } from '$lib/remote/movie-log.remote';
   import Movie from '$lib/components/Movie.svelte';
-  const movieLog = await getMovieLog();
+  import MediaCollection from '$lib/components/MediaCollection.svelte';
+  let movieLog = await getMovieLog();
 </script>
 
 <svelte:head>
   <title>Movies | Grant Montgomery</title>
 </svelte:head>
-<main class="flex w-full flex-1 flex-col gap-6">
+<main class="space-y-6">
   <h1 class="text-3xl font-bold">Movies</h1>
-  <div class="flex flex-col gap-8">
+  <div class="space-y-4">
     {#each movieLog as { year, movies } (year)}
-      <div class="grid gap-3">
-        <span>
-          <h2 class=" inline-block text-2xl font-bold">{year}</h2>
-          &nbsp;
-          <span>{movies!.length} {movies!.length > 1 ? 'movies' : 'movie'}</span>
-        </span>
-        <div
-          class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-x-2 gap-y-4 sm:gap-x-4 sm:gap-y-6"
-        >
-          {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
-            <Movie {...movie} />
-          {/each}
-        </div>
-      </div>
+      <MediaCollection title={year} count={movies.length} type="movie">
+        {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
+          <Movie {...movie} />
+        {/each}
+      </MediaCollection>
     {/each}
   </div>
   <p class="mx-auto mt-auto text-center">

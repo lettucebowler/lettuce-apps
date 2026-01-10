@@ -1,8 +1,9 @@
 <script lang="ts">
   import Book from '../../lib/components/Book.svelte';
   import { getCurrentBooks, getReadingLog } from '$lib/remote/reading-log.remote';
-  const bookData = await getReadingLog();
-  const currentBooks = await getCurrentBooks();
+  import MediaCollection from '$lib/components/MediaCollection.svelte';
+  let bookData = await getReadingLog();
+  let currentBooks = await getCurrentBooks();
 </script>
 
 <svelte:head>
@@ -10,30 +11,18 @@
 </svelte:head>
 <main class="space-y-6">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <div class="flex flex-col gap-8">
-    <div class="grid gap-3">
-      <span>
-        <h2 class="mr-3 inline-block text-2xl font-bold">Currently reading</h2>
-        <span>{currentBooks!.length} {currentBooks!.length > 1 ? 'books' : 'book'}</span>
-      </span>
-      <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-4 sm:gap-6">
-        {#each currentBooks as book (book.isbn)}
+  <div class="space-y-4">
+    <MediaCollection title="Currently reading" count={currentBooks.length} type="book">
+      {#each currentBooks as book (book.isbn)}
+        <Book {...book} />
+      {/each}
+    </MediaCollection>
+    {#each bookData as { title, items } (title)}
+      <MediaCollection {title} count={items.length} type="book">
+        {#each items as book (book.isbn)}
           <Book {...book} />
         {/each}
-      </div>
-    </div>
-    {#each bookData as { year, books } (year)}
-      <div class="grid gap-3">
-        <span>
-          <h2 class="mr-3 inline-block text-2xl font-bold">{year}</h2>
-          <span>{books!.length} {books!.length > 1 ? 'books' : 'book'}</span>
-        </span>
-        <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-4 sm:gap-6">
-          {#each books as book (book.isbn)}
-            <Book {...book} />
-          {/each}
-        </div>
-      </div>
+      </MediaCollection>
     {/each}
   </div>
   <p class="mx-auto text-center text-sm">

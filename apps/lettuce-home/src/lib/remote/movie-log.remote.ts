@@ -25,7 +25,7 @@ export const getMovieLog = prerender(() => {
     .map((year) => {
       return {
         year: year[0],
-        movies: year[1]
+        movies: year[1]!
       };
     });
 });

@@ -10,18 +10,15 @@ export const getReadingLog = prerender(() => {
   const yearBooks = Object.groupBy(
     readingLog.filter((book) => book.completed),
     (book) => {
-      if (!book.completed) {
-        throw new Error('Incomplete book');
-      }
-      return book.completed.substring(0, 4);
+      return book.completed!.substring(0, 4);
     }
   );
   return Object.entries(yearBooks)
     .sort((a, b) => Number(b[0]) - Number(a[0]))
     .map((year) => {
       return {
-        year: year[0],
-        books: year[1]
+        title: year[0],
+        items: year[1]!
       };
     });
 });

@@ -10,16 +10,11 @@
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 <div class="container mx-auto flex h-full flex-col gap-6 xl:max-w-screen-xl">
   <nav class="flex flex-wrap gap-x-4 gap-y-1">
-    <NavLink to="/"><span class="text-lg font-bold first-letter:capitalize">Home</span></NavLink>
-    <NavLink to="/projects"
-      ><span class="text-lg font-bold first-letter:capitalize">Projects</span></NavLink
+    <NavLink to="/"><span class="text-lg font-bold hover:underline">Home</span></NavLink>
+    <NavLink to="/projects"><span class="text-lg font-bold hover:underline">Projects</span></NavLink
     >
-    <NavLink to="/books"
-      ><span class="text-lg font-bold first-letter:capitalize">Books</span></NavLink
-    >
-    <NavLink to="/movies"
-      ><span class="text-lg font-bold first-letter:capitalize">Movies</span></NavLink
-    >
+    <NavLink to="/books"><span class="text-lg font-bold hover:underline">Books</span></NavLink>
+    <NavLink to="/movies"><span class="text-lg font-bold hover:underline">Movies</span></NavLink>
     <a
       href="https://github.com/lettucebowler"
       class="hidden sm:ml-auto sm:inline"
