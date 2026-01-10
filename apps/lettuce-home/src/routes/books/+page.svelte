@@ -11,7 +11,7 @@
 </svelte:head>
 <main class="space-y-6">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <div class="space-y-4">
+  <div class="space-y-8">
     <MediaCollection title="Currently reading" count={currentBooks.length} type="book">
       {#each currentBooks as book (book.isbn)}
         <Book {...book} />

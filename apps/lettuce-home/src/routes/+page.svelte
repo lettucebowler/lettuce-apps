@@ -17,7 +17,7 @@
 <svelte:head>
   <title>Grant Montgomery</title>
 </svelte:head>
-<main class="bg:green-500 mx-auto flex w-full flex-wrap gap-x-4 gap-y-6">
+<main class="bg:green-500 mx-auto flex w-full flex-col flex-wrap gap-x-4 gap-y-6 sm:flex-row">
   <div class="flex w-full justify-start gap-6">
     <h1 class="text-3xl font-bold">Grant Montgomery</h1>
     <img
@@ -26,7 +26,7 @@
       src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed=lettucebowler"
     />
   </div>
-  <div class="grid min-w-75 flex-1 content-start gap-4">
+  <div class="grid flex-1 content-start gap-4">
     <h2 class="text-2xl font-bold">Active projects</h2>
     {#each activeProjects as project (project.title)}
       {#if project.url}
@@ -37,7 +37,7 @@
         {@render ProjectSummary(project)}{/if}
     {/each}
   </div>
-  <div class="@container min-w-100 flex-1 space-y-6">
+  <div class="@container flex-1 space-y-6">
     <div class="space-y-4">
       <h2 class="text-2xl font-bold">About</h2>
       <p>

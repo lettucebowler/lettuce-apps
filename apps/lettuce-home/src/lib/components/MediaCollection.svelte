@@ -11,7 +11,7 @@
   let { title, count, children, type }: Props = $props();
 </script>
 
-<div class="space-y-2">
+<div class="space-y-4">
   <div>
     <h2 class="inline-block text-2xl font-bold">{title}</h2>
     &nbsp;

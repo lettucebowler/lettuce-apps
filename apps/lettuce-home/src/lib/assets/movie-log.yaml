@@ -307,7 +307,7 @@
   directors:
     - Zach Cregger
   watched: 2025-08
-  rating: 4
+  rating: 5
   comment:
     The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
     second time. I left in shock.
@@ -514,7 +514,7 @@
   directors:
     - Ridley Scott
   watched: 2025-02
-  rating: 3
+  rating: 4
   rewatch: true
 - tmdb: 1084199
   title: Companion
@@ -545,7 +545,7 @@
   directors:
     - Jeff Fowler
   watched: 2025-02
-  rating: 2
+  rating: 3
 - tmdb: 50646
   title: Crazy, Stupid, Love
   released: 2011
@@ -560,7 +560,7 @@
   directors:
     - Antonio Campos
   watched: 2025-02
-  rating: 4
+  rating: 3
 # January 2025
 - tmdb: 402431
   title: Wicked
@@ -576,7 +576,7 @@
     - Ben Stiller
   watched: 2025-01
   rewatch: true
-  rating: 4
+  rating: 5
 - tmdb: 350
   title: The Devil Wears Prada
   released: 2006

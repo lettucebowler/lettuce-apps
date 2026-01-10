@@ -10,7 +10,7 @@
 </svelte:head>
 <main class="space-y-6">
   <h1 class="text-3xl font-bold">Movies</h1>
-  <div class="space-y-4">
+  <div class="space-y-8">
     {#each movieLog as { year, movies } (year)}
       <MediaCollection title={year} count={movies.length} type="movie">
         {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
