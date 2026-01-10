@@ -51,7 +51,7 @@
   </h2>
   <div class="group @container relative grid grid-cols-5 gap-1">
     {#each [...Array(30).keys()] as i}
-      {@const answer = answers.charAt(i) || LETTER_STATUS_NONE}
+      {@const answer = answers.slice(-30).charAt(i) || LETTER_STATUS_NONE}
       <div
         data-answer={answer}
         class={[

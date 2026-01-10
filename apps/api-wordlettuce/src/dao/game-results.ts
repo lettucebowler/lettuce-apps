@@ -10,17 +10,18 @@ export function createGameResultsDao(c: Context<ApiWordlettuceHono>) {
 
   async function saveGame({ userID, gameNum, answers }: { userID: number; gameNum: number; answers: string }) {
     const attempts = Math.floor(answers.length / 5);
+    const answers_concat = answers.slice(-90);
     return db
       .insert(gameResults)
       .values({
         gameNum,
         userID,
-        answers: answers.slice(0, 30),
+        answers: answers.slice(-30),
         attempts,
       })
       .onConflictDoUpdate({
         target: [gameResults.userID, gameResults.gameNum],
-        set: { answers, attempts },
+        set: { answers: answers_concat, attempts },
       })
       .returning();
   }
