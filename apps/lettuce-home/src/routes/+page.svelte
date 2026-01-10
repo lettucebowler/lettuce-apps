@@ -19,8 +19,8 @@
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
   <h1 class="text-3xl font-bold">Grant Montgomery</h1>
-  <div class="flex flex-wrap gap-y-8">
-    <section id="activity-section" class="max-w-140 flex-3 space-y-4">
+  <div class="max-lg:space-y-8 lg:flex lg:gap-x-4">
+    <section id="activity-section" class="max-w-140 min-w-70 flex-3 space-y-4">
       <h2 class="text-2xl font-bold">Active projects</h2>
       {#each activeProjects as project (project.title)}
         {#if project.url}
@@ -31,7 +31,7 @@
           {@render ProjectSummary(project)}{/if}
       {/each}
     </section>
-    <section id="about-section" class="flex-2 space-y-4">
+    <section id="about-section" class="@container min-w-70 flex-2 space-y-4">
       <h2 class="text-2xl font-bold">About</h2>
       <div>
         <p>
@@ -55,14 +55,14 @@
       </div>
       <section class="space-y-2">
         <h3 class="text-xl font-bold">Currently reading</h3>
-        <div class="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-4">
+        <div class="grid gap-4 @min-[400px]:grid-cols-2">
           {#each currentBooks as book (book.isbn)}
             <Book {...book} />
           {/each}
         </div>
       </section>
       <section class="space-y-2">
-        <div class="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-4">
+        <div class="grid gap-4 @min-[400px]:grid-cols-2">
           <section class="space-y-2">
             <h3 class="text-xl font-bold">Last read</h3>
             <Book {...latestBook} />

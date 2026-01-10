@@ -9,8 +9,8 @@
 </script>
 
 <div class="@container">
-  <figure class="grid gap-2 @min-[240px]:grid-cols-[2fr_3fr] @min-[600px]:grid-cols-[240px_1fr]">
-    <div class="mx-auto aspect-2/3 flex-2 basis-2 shadow-sm">
+  <figure class="grid gap-2 @min-[240px]:grid-cols-[2fr_3fr] @min-[540px]:grid-cols-[160px_1fr]">
+    <div class="aspect-2/3 shadow-sm">
       {@render media()}
     </div>
     <figcaption class="flex-3 flex-auto">
