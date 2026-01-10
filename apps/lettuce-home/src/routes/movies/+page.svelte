@@ -8,17 +8,15 @@
 <svelte:head>
   <title>Movies | Grant Montgomery</title>
 </svelte:head>
-<main class="space-y-6">
+<main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>
-  <div class="space-y-8">
-    {#each movieLog as { year, movies } (year)}
-      <MediaCollection title={year} count={movies.length} type="movie">
-        {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
-          <Movie {...movie} />
-        {/each}
-      </MediaCollection>
-    {/each}
-  </div>
+  {#each movieLog as { year, movies } (year)}
+    <MediaCollection title={year} count={movies.length} type="movie">
+      {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
+        <Movie {...movie} />
+      {/each}
+    </MediaCollection>
+  {/each}
   <p class="mx-auto mt-auto text-center">
     Images and data sourced from&nbsp;
     <a class="text-swamp-green-500 hover:underline" href="https://openlibrary.org">

@@ -9,22 +9,20 @@
 <svelte:head>
   <title>Books | Grant Montgomery</title>
 </svelte:head>
-<main class="space-y-6">
+<main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <div class="space-y-8">
-    <MediaCollection title="Currently reading" count={currentBooks.length} type="book">
-      {#each currentBooks as book (book.isbn)}
+  <MediaCollection title="Currently reading" count={currentBooks.length} type="book">
+    {#each currentBooks as book (book.isbn)}
+      <Book {...book} />
+    {/each}
+  </MediaCollection>
+  {#each bookData as { title, items } (title)}
+    <MediaCollection {title} count={items.length} type="book">
+      {#each items as book (book.isbn)}
         <Book {...book} />
       {/each}
     </MediaCollection>
-    {#each bookData as { title, items } (title)}
-      <MediaCollection {title} count={items.length} type="book">
-        {#each items as book (book.isbn)}
-          <Book {...book} />
-        {/each}
-      </MediaCollection>
-    {/each}
-  </div>
+  {/each}
   <p class="mx-auto text-center text-sm">
     Images and data sourced from&nbsp;<a
       class="text-swamp-green-500 hover:underline"

@@ -17,67 +17,63 @@
 <svelte:head>
   <title>Grant Montgomery</title>
 </svelte:head>
-<main class="bg:green-500 mx-auto flex w-full flex-col flex-wrap gap-x-4 gap-y-6 sm:flex-row">
-  <div class="flex w-full justify-start gap-6">
-    <h1 class="text-3xl font-bold">Grant Montgomery</h1>
-    <img
-      alt="Lettucebowler"
-      class="my-auto inline size-9 rounded-md"
-      src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed=lettucebowler"
-    />
-  </div>
-  <div class="grid flex-1 content-start gap-4">
-    <h2 class="text-2xl font-bold">Active projects</h2>
-    {#each activeProjects as project (project.title)}
-      {#if project.url}
-        <a href={project.url} class="group">
-          {@render ProjectSummary(project)}
-        </a>
-      {:else}
-        {@render ProjectSummary(project)}{/if}
-    {/each}
-  </div>
-  <div class="@container flex-1 space-y-6">
-    <div class="space-y-4">
+<main class="mx-auto w-full space-y-8">
+  <h1 class="text-3xl font-bold">Grant Montgomery</h1>
+  <div class="flex flex-wrap gap-y-8">
+    <section id="activity-section" class="max-w-140 flex-3 space-y-4">
+      <h2 class="text-2xl font-bold">Active projects</h2>
+      {#each activeProjects as project (project.title)}
+        {#if project.url}
+          <a href={project.url} class="group block">
+            {@render ProjectSummary(project)}
+          </a>
+        {:else}
+          {@render ProjectSummary(project)}{/if}
+      {/each}
+    </section>
+    <section id="about-section" class="flex-2 space-y-4">
       <h2 class="text-2xl font-bold">About</h2>
-      <p>
-        Grant works as a full-stack web developer in the healthcare industry, working primarily with
-        React and Stencil on the frontend, and Node or Springboot on the backend.
-      </p>
-      <div class="flex flex-row flex-wrap justify-center gap-6 text-center">
-        <a href="https://twitter.com/lettucebowler" class="group">
-          <TwitterIcon class="mx-auto size-10 fill-frost-300" />
-          <span class="group-hover:underline">@Lettucebowler</span>
-        </a>
-        <a href="https://github.com/lettucebowler" class="group">
-          <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
-          <span class="group-hover:underline">@Lettucebowler</span>
-        </a>
-        <a href="/Resume.pdf" target="_blank" class="group">
-          <ResumeIcon class="mx-auto size-10 text-antique-brass-500" />
-          <span class="group-hover:underline">Resume </span>
-        </a>
+      <div>
+        <p>
+          Grant works as a full-stack web developer in the healthcare industry, working primarily
+          with React and Stencil on the frontend, and Node or Springboot on the backend.
+        </p>
+        <div class="mx-auto flex max-w-md flex-row flex-wrap justify-around gap-6 text-center">
+          <a href="https://twitter.com/lettucebowler" class="group p-4">
+            <TwitterIcon class="mx-auto size-10 fill-frost-300" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="https://github.com/lettucebowler" class="group p-4">
+            <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="/Resume.pdf" target="_blank" class="group p-4">
+            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" />
+            <span class="group-hover:underline">Resume </span>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div class="space-y-2">
-      <h2 class="text-xl font-bold">Currently reading</h2>
-      <div class="grid grid-cols-1 gap-4 @md:grid-cols-[160px_160px] @lg:grid-cols-2">
-        {#each currentBooks as book (book.isbn)}
-          <Book {...book} />
-        {/each}
-      </div>
-    </div>
-    <div class="grid gap-4 @md:grid-cols-[160px_160px] @lg:grid-cols-2">
-      <div class="space-y-2">
-        <h2 class="text-xl font-bold">Last read</h2>
-        <Book {...latestBook} />
-      </div>
-      <div class="space-y-2">
-        <h2 class="text-xl font-bold">Last watched</h2>
-        <Movie {...latestMovie} />
-      </div>
-    </div>
+      <section class="space-y-2">
+        <h3 class="text-xl font-bold">Currently reading</h3>
+        <div class="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-4">
+          {#each currentBooks as book (book.isbn)}
+            <Book {...book} />
+          {/each}
+        </div>
+      </section>
+      <section class="space-y-2">
+        <div class="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-4">
+          <section class="space-y-2">
+            <h3 class="text-xl font-bold">Last read</h3>
+            <Book {...latestBook} />
+          </section>
+          <section class="space-y-2">
+            <h3 class="text-xl font-bold">Last watched</h3>
+            <Movie {...latestMovie} />
+          </section>
+        </div>
+      </section>
+    </section>
   </div>
 </main>
 

@@ -8,12 +8,12 @@
   let { media, info }: MediaCardProps = $props();
 </script>
 
-<div class="@container min-w-40">
-  <figure class="flex flex-wrap gap-x-4 gap-y-2">
-    <div class="mx-auto aspect-2/3 w-full min-w-20 flex-2 basis-20 shadow-sm">
+<div class="@container">
+  <figure class="grid gap-2 @min-[240px]:grid-cols-[2fr_3fr] @min-[600px]:grid-cols-[240px_1fr]">
+    <div class="mx-auto aspect-2/3 flex-2 basis-2 shadow-sm">
       {@render media()}
     </div>
-    <figcaption class="min-w-40 flex-3 basis-40">
+    <figcaption class="flex-3 flex-auto">
       {@render info()}
     </figcaption>
   </figure>

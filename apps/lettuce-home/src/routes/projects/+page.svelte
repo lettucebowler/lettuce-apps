@@ -8,7 +8,7 @@
 <svelte:head>
   <title>Projects | Grant Montgomery</title>
 </svelte:head>
-<main class="container mx-auto flex flex-col gap-6">
+<main class="container mx-auto space-y-8">
   <h1 class="text-3xl font-bold">Projects</h1>
   {#each projects as project}
     <div class="space-y-1">
