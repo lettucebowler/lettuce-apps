@@ -1,4 +1,19 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 @import '@lettuce-apps-packages/svelte-common/theme';
 @source '../../node_modules/@lettuce-apps-packages/svelte-common';
+
+@utility prose-brand {
+  --tw-prose-body: var(--color-snow-300);
+  --tw-prose-headings: var(--color-snow-300);
+  --tw-prose-lead: var(--color-snow-300);
+  --tw-prose-links: var(--color-snow-300); /* Links will use your brand color */
+  --tw-prose-bold: var(--color-snow-300);
+  /* ... add other prose variables as needed for complete control ... */
+  --tw-prose-quote-borders: var(--color-snow-300);
+  /* Define invert colors for dark mode if necessary */
+  --tw-prose-invert-body: var(--color-brand-100);
+  --tw-prose-invert-headings: var(--color-white);
+  --tw-prose-invert-links: var(--color-brand-300);
+  /* ... */
+}

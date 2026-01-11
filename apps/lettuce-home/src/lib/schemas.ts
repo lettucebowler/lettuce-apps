@@ -59,3 +59,12 @@ export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
 export const MovieLog = v.array(MovieLogEntry);
 export type MovieLog = v.InferOutput<typeof MovieLog>;
+
+export const Post = v.object({
+  title: v.string(),
+  summary: v.optional(v.string()),
+  date: v.string(),
+  tags: v.optional(v.array(v.string())),
+  published: v.boolean()
+});
+export type Post = v.InferOutput<typeof Post>;

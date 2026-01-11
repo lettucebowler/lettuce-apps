@@ -2,8 +2,8 @@
   import type { Snippet } from 'svelte';
 
   type Props = {
-    title: string;
-    count: number;
+    title?: string;
+    count?: number;
     type: 'book' | 'movie';
     children?: Snippet;
   };
@@ -12,11 +12,15 @@
 </script>
 
 <div class="space-y-4">
-  <header>
-    <h2 class="inline-block text-2xl font-bold">{title}</h2>
-    &nbsp;
-    <span>{count} {count > 1 ? type + 's' : type}</span>
-  </header>
+  {#if title}
+    <header>
+      <h2 class="inline-block text-2xl font-bold">{title}</h2>
+      {#if count}
+        &nbsp;
+        <span>{count} {count > 1 ? type + 's' : type}</span>
+      {/if}
+    </header>
+  {/if}
   <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-4">
     {@render children?.()}
   </div>

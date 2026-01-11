@@ -16,6 +16,9 @@ const config = {
     adapter: adapter(),
     experimental: {
       remoteFunctions: true
+    },
+    alias: {
+      'content-collections': './.content-collections/generated'
     }
   },
   extensions: ['.svelte', '.svx', '.md']
