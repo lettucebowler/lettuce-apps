@@ -21,7 +21,6 @@
     "@eslint/compat": "^2.0.0",
     "@eslint/js": "^9.39.2",
     "@lettuce-apps-packages/svelte-common": "workspace:*",
-    "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@sveltejs/adapter-cloudflare": "^7.2.4",
     "@sveltejs/kit": "^2.49.3",
     "@sveltejs/vite-plugin-svelte": "^6.2.3",

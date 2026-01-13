@@ -28,7 +28,10 @@ export const ReadingLogEntry = v.object({
 });
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
-export const ReadingLog = v.array(ReadingLogEntry);
+export const ReadingLog = v.object({
+  year: v.union([v.number(), v.literal('current')]),
+  books: v.array(ReadingLogEntry)
+});
 export type ReadingLog = v.InferOutput<typeof ReadingLog>;
 
 export const Project = v.object({
@@ -57,9 +60,6 @@ export const MovieLogEntry = v.object({
 });
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
-export const MovieLog = v.array(MovieLogEntry);
-export type MovieLog = v.InferOutput<typeof MovieLog>;
-
 export const Post = v.object({
   title: v.string(),
   summary: v.optional(v.string()),
@@ -68,3 +68,9 @@ export const Post = v.object({
   published: v.boolean()
 });
 export type Post = v.InferOutput<typeof Post>;
+
+export const MovieLog = v.object({
+  year: v.number(),
+  movies: v.array(MovieLogEntry)
+});
+export type MovieLog = v.InferOutput<typeof MovieLog>;

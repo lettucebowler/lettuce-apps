@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { getProjects } from '$lib/remote/projects.remote';
+  import { getProjectsDesc } from '$lib/collections';
   import ExternalLinkIcon from './ExternalLinkIcon.svelte';
 
-  const projects = $derived(await getProjects());
+  const projects = getProjectsDesc();
 </script>
 
 <svelte:head>

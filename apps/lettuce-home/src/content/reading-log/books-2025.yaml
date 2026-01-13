@@ -1,0 +1,118 @@
+year: 2025
+books:
+  - isbn: 9780525533337
+    title: The Bullet Journal Method
+    authors:
+      - Ryder Carrol
+    published: 2018
+    completed: 2025-12
+    rating: 3
+    comment: I like the bullet journal method but I don't think this book is necessary to understand it.
+  - isbn: 9784046828637
+    title: Re:Zero -Starting Life in Another World-, Volume 35
+    authors:
+      - Tappei Nagatsuki
+    published: 2023
+    completed: 2025-08
+  - isbn: 9784046825674
+    title: Re:Zero -Starting Life in Another World-, Volume 34
+    authors:
+      - Tappei Nagatsuki
+    published: 2023
+    completed: 2025-07
+  - isbn: 9784046823311
+    title: Re:Zero -Starting Life in Another World-, Volume 33
+    authors:
+      - Tappei Nagatsuki
+    published: 2023
+    completed: 2025-07
+    rating: 4
+    comment: A full-of-hype ending to arc 7.
+  - isbn: 9784046820419
+    title: Re:Zero -Starting Life in Another World-, Volume 32
+    authors:
+      - Tappei Nagatsuki
+    published: 2022
+    completed: 2025-06
+    rating: 4
+  - isbn: 9784046817488
+    title: Re:Zero -Starting Life in Another World-, Volume 31
+    authors:
+      - Tappei Nagatsuki
+    published: 2022
+    completed: 2025-06
+    rating: 4
+    comment: I love the new characters introduced in this volume.
+  - isbn: 9784046814760
+    title: Re:Zero -Starting Life in Another World-, Volume 30
+    authors:
+      - Tappei Nagatsuki
+    published: 2022
+    completed: 2025-06
+    rating: 4
+  - isbn: 9784046812865
+    title: Re:Zero -Starting Life in Another World-, Volume 29
+    authors:
+      - Tappei Nagatsuki
+    published: 2022
+    rating: 4
+    completed: 2025-06
+  - isbn: 9780316462419
+    title: The Joy of Pizza
+    subtitle: Everything You Need to Know
+    authors:
+      - Dan Richer
+      - Katie Parla
+    published: 2021
+    completed: 2025-05
+    rating: 3
+    comment: I like pizza
+  - isbn: 9781975378486
+    title: Re:Zero -Starting Life in Another World-, Volume 28
+    authors:
+      - Tappei Nagatsuki
+    published: 2021
+    completed: 2025-05
+    rating: 4
+  - isbn: 9781975378462
+    title: Re:Zero -Starting Life in Another World-, Volume 27
+    authors:
+      - Tappei Nagatsuki
+    published: 2021
+    completed: 2025-05
+  - isbn: 9781975378448
+    title: Re:Zero -Starting Life in Another World-, Volume 26
+    authors:
+      - Tappei Nagatsuki
+    published: 2021
+    completed: 2025-05
+  - isbn: 9781975378424
+    title: Re:Zero -Starting Life in Another World-, Volume 25
+    authors:
+      - Tappei Nagatsuki
+    published: 2020
+    completed: 2025-05
+  - isbn: 9781975335397
+    title: Re:Zero -Starting Life in Another World-, Volume 24
+    authors:
+      - Tappei Nagatsuki
+    published: 2020
+    completed: 2025-04
+  - isbn: 9781975335373
+    title: Re:Zero -Starting Life in Another World-, Volume 23
+    authors:
+      - Tappei Nagatsuki
+    published: 2020
+    completed: 2025-04
+  - isbn: 9781975335359
+    title: Re:Zero -Starting Life in Another World-, Volume 22
+    authors:
+      - Tappei Nagatsuki
+    published: 2020
+    completed: 2025-04
+  - isbn: 9781975335335
+    title: Re:Zero -Starting Life in Another World-, Volume 21
+    authors:
+      - Tappei Nagatsuki
+    published: 2019
+    completed: 2025-04

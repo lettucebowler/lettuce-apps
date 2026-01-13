@@ -9,11 +9,10 @@ published: false
     import MediaCollection from '../../lib/components/MediaCollection.svelte';
     import Book from '../../lib/components/Book.svelte';
     import Movie from '../../lib/components/Movie.svelte';
-    import { getReadingLog } from '../../lib/remote/reading-log.remote.ts';
-    import { getMovieLog } from '../../lib/remote/movie-log.remote.ts';
+    import { getReadingLogsDesc, getMovieLogsDesc } from '../../lib/collections.ts';
 
-    let bookData = await getReadingLog();
-    let movieData = await getMovieLog();
+    let bookData = getReadingLogsDesc();
+    let movieData = getMovieLogsDesc();
 </script>
 
 # { title }
@@ -40,6 +39,7 @@ instead of doing what I intended to do. That's one thing I'd like to change goin
       .items.filter((book) => book.completed && book.completed >= '2025-10') as book (book.isbn)}
         <img
             src="{`/covers/book-${book.isbn}.webp`}" class="m-0!"
+            alt="{book.title}"
         />
       {/each}
   </div>    
@@ -51,11 +51,12 @@ instead of doing what I intended to do. That's one thing I'd like to change goin
     <div class="grid grid-cols-[repeat(auto-fill,_minmax(6rem,_1fr))] gap-4">
         {#each movieData
             .find((year) => {
-                return year.year === '2025';
+                return year.year === 2025;
             })!
-            .movies.filter((book) => book.watched && book.watched >= '2025-10') as book (book.tmdb)}
+            .movies.filter((item) => item.watched && item.watched >= '2025-10') as item (item.tmdb)}
         <img
-            src="{`/posters/movie-${book.tmdb}.webp`}" class="m-0!"
+            src="{`/posters/movie-${item.tmdb}.webp`}" class="m-0!"
+            alt={item.title}
         />
       {/each}
   </div>    

@@ -1,0 +1,9 @@
+title: Wordlettuce
+status: active
+year: 2022
+url: https://word.lettucebowler.net
+summary: a wordle clone with additional features built with svelte
+description:
+  - My coworkers and I were having fun sharing our wordle results with each other, so I thought it would be fun to
+    make a clone of it but add on a leaderboard so we can track our scores against each other over time.
+featured: true

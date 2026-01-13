@@ -1,0 +1,9 @@
+title: Lettuce Wedding
+status: inactive
+year: 2025
+url: https://wedding.lettucebowler.net
+summary: Asto site to show off photos from our beautiful elopement in the summary of 2025.
+description:
+  - I needed an easy way to share my wedding photos with people, so I used it as an opportunity to try out Astro.
+    Found a cool library that helped with creating a masonry layout so I decided to make a website I could easily
+    share around.

@@ -1,9 +1,9 @@
 <script lang="ts">
   import Book from '../../lib/components/Book.svelte';
-  import { getCurrentBooks, getReadingLog } from '$lib/remote/reading-log.remote';
   import MediaCollection from '$lib/components/MediaCollection.svelte';
-  let bookData = await getReadingLog();
-  let currentBooks = await getCurrentBooks();
+  import { getCurrentlyReading, getReadingLogsDesc } from '$lib/collections';
+  const bookData = getReadingLogsDesc();
+  const currentBooks = getCurrentlyReading();
 </script>
 
 <svelte:head>

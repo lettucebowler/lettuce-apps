@@ -1,17 +1,20 @@
 <script lang="ts">
+  import {
+    getActiveProjects,
+    getCurrentlyReading,
+    getLastReadBook,
+    getLastWatchedMovie
+  } from '$lib/collections';
   import Book from '$lib/components/Book.svelte';
   import Movie from '$lib/components/Movie.svelte';
-  import { getLatestMovie } from '$lib/remote/movie-log.remote';
-  import { getActiveProjects } from '$lib/remote/projects.remote';
-  import { getCurrentBooks, getLastReadBook } from '$lib/remote/reading-log.remote';
   import GithubIcon from './GithubIcon.svelte';
   import ResumeIcon from './ResumeIcon.svelte';
   import TwitterIcon from './TwitterIcon.svelte';
 
-  const latestBook = $derived(await getLastReadBook());
-  const activeProjects = $derived(await getActiveProjects());
-  const latestMovie = $derived(await getLatestMovie());
-  const currentBooks = $derived(await getCurrentBooks());
+  const latestBook = getLastReadBook();
+  const activeProjects = getActiveProjects();
+  const latestMovie = getLastWatchedMovie();
+  const currentBooks = getCurrentlyReading();
   // import { allPosts } from 'content-collections';
 </script>
 

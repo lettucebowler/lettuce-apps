@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { getMovieLog } from '$lib/remote/movie-log.remote';
   import Movie from '$lib/components/Movie.svelte';
   import MediaCollection from '$lib/components/MediaCollection.svelte';
-  let movieLog = await getMovieLog();
+  import { getMovieLogsDesc } from '$lib/collections';
+  let movieLog = getMovieLogsDesc();
 </script>
 
 <svelte:head>
@@ -11,7 +11,7 @@
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>
   {#each movieLog as { year, movies } (year)}
-    <MediaCollection title={year} count={movies.length} type="movie">
+    <MediaCollection title={year.toString()} count={movies.length} type="movie">
       {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
         <Movie {...movie} />
       {/each}

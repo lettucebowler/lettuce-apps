@@ -1,0 +1,15 @@
+year: 2023
+books:
+  - isbn: 9781250773012
+    title: Ender's Game
+    authors:
+      - Orson Scott Card
+    published: 1985
+    completed: 2023-10
+  - isbn: 9781421539645
+    title: Death Note
+    subtitle: Black Edition, Vol. 1
+    authors:
+      - Tsugumi Ohba
+    published: 2010
+    completed: 2023-08

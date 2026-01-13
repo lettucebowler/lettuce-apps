@@ -1,0 +1,71 @@
+year: 2026
+movies:
+  - tmdb: 493529
+    title: 'Dungeons & Dragons: Honor Among Thieves'
+    released: 2023
+    directors:
+      - Jonathan Goldstein
+      - John Francis Daley
+    watched: 2026-01
+    rating: 4
+    rewatch: true
+  - tmdb: 425274
+    title: "Now You See Me: Now You Don't"
+    released: 2025
+    directors:
+      - Ruben Fleischer
+    watched: 2026-01
+    rating: 3
+  - tmdb: 83533
+    title: 'Avatar: Fire and Ash'
+    released: 2025
+    directors:
+      - James Cameron
+    watched: 2026-01
+    rating: 3
+  - tmdb: 76600
+    title: 'Avatar: The Way of Water'
+    released: 2022
+    directors:
+      - James Cameron
+    watched: 2026-01
+    rating: 3
+  - tmdb: 19995
+    title: Avatar
+    released: 2009
+    directors:
+      - James Cameron
+    watched: 2026-01
+    rating: 4
+    rewatch: true
+  - tmdb: 38357
+    title: Morning Glory
+    released: 2025
+    directors:
+      - Roger Michell
+    watched: 2026-01
+    rating: 3
+    rewatch: true
+  - tmdb: 967941
+    title: 'Wicked: For Good'
+    directors:
+      - Jon M. Chu
+    released: 2025
+    watched: 2026-01
+    rating: 2
+  - tmdb: 803796
+    title: KPop Demon Hunters
+    directors:
+      - Chris Applehans
+      - Maggie Kang
+    released: 2025
+    watched: 2026-01
+    rating: 4
+  - tmdb: 1061474
+    title: Superman
+    directors:
+      - James Gunn
+    released: 2025
+    watched: 2026-01
+    rating: 4
+    rewatch: true

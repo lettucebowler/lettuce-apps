@@ -23,6 +23,10 @@
     {#if subtitle}
       <p class="text-sm">{subtitle}</p>
     {/if}
-    <p class="text-sm">By {authors.join(', ')}</p>
+    <ul class="mb-1">
+      {#each authors as author}
+        <li class="text-sm">{author}</li>
+      {/each}
+    </ul>
   {/snippet}
 </MediaCard>
