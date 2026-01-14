@@ -11,13 +11,16 @@
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <MediaCollection title="Currently reading" count={currentBooks.length} type="book">
+  <MediaCollection
+    title="Currently reading"
+    subtitle={`${currentBooks.length} book${currentBooks.length === 1 ? '' : 's'}`}
+  >
     {#each currentBooks as book (book.isbn)}
       <Book {...book} />
     {/each}
   </MediaCollection>
   {#each bookData as { title, items } (title)}
-    <MediaCollection {title} count={items.length} type="book">
+    <MediaCollection {title} subtitle={`${items.length} book${items.length === 1 ? '' : 's'}`}>
       {#each items as book (book.isbn)}
         <Book {...book} />
       {/each}

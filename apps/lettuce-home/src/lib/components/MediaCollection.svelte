@@ -3,25 +3,28 @@
 
   type Props = {
     title?: string;
-    count?: number;
-    type: 'book' | 'movie';
+    subtitle?: string;
     children?: Snippet;
+    heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   };
 
-  let { title, count, children, type }: Props = $props();
+  let { title, children, heading = 'h2', subtitle }: Props = $props();
 </script>
 
-<div class="space-y-4">
+<div class="@container space-y-4">
   {#if title}
     <header>
-      <h2 class="inline-block text-2xl font-bold">{title}</h2>
-      {#if count}
+      <svelte:element this={heading} class="inline-block text-2xl font-bold">{title}</svelte:element
+      >
+      {#if subtitle}
         &nbsp;
-        <span>{count} {count > 1 ? type + 's' : type}</span>
+        <span>{subtitle}</span>
       {/if}
     </header>
   {/if}
-  <div class="grid grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))] gap-4">
+  <div
+    class="grid gap-4 @min-[24rem]:grid-cols-2 @min-[37rem]:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]"
+  >
     {@render children?.()}
   </div>
 </div>

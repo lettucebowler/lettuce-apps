@@ -15,7 +15,6 @@
   const activeProjects = getActiveProjects();
   const latestMovie = getLastWatchedMovie();
   const currentBooks = getCurrentlyReading();
-  // import { allPosts } from 'content-collections';
 </script>
 
 <svelte:head>
