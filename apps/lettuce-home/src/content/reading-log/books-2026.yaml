@@ -1,5 +1,11 @@
 year: 2026
 books:
+  - isbn: 9798232168469
+    title: Carl's Doomsday Scenario
+    authors:
+      - Matt Dinniman
+    published: 2021
+    completed: 2026-01
   - isbn: 9780593820247
     title: Dungeon Crawler Carl
     authors:
