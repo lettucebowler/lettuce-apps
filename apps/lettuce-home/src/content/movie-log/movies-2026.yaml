@@ -7,8 +7,9 @@ movies:
       - Jonathan Goldstein
       - John Francis Daley
     watched: 2026-01
-    rating: 4
+    rating: 5
     rewatch: true
+    comment: They found the exact tone I was hoping for from a D&D movie.
   - tmdb: 425274
     title: "Now You See Me: Now You Don't"
     released: 2025
