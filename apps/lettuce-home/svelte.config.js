@@ -15,7 +15,8 @@ const config = {
   kit: {
     adapter: adapter(),
     experimental: {
-      remoteFunctions: true
+      remoteFunctions: true,
+      forkPreloads: true
     },
     alias: {
       'content-collections': './.content-collections/generated'

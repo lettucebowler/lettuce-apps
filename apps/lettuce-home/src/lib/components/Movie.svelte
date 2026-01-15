@@ -29,7 +29,13 @@
       {/each}
     </ul>
     {#if rating}
-      {@render stars(rating)}
+      <div class="mb-1">
+        {#if comment}
+          {@render RatingWithComment({ rating, comment })}
+        {:else}
+          {@render stars(rating)}
+        {/if}
+      </div>
     {/if}
     {#if rewatch}
       <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
@@ -44,7 +50,7 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        class="size-3"
+        class="size-4 group-hover:scale-110"
       >
         <path
           fill-rule="evenodd"
@@ -53,5 +59,39 @@
         />
       </svg>
     {/each}
+  </div>
+{/snippet}
+
+{#snippet RatingWithComment({ rating, comment }: { rating: number; comment: string })}
+  <button
+    popovertarget={createAnchorName(tmdb, watched)}
+    class="group flex w-full cursor-pointer items-center justify-between"
+    style="anchor-name: --{createAnchorName(tmdb, watched)}"
+  >
+    {@render stars(rating)}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="size-4 text-snow-300 group-hover:text-swamp-green-500"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </button>
+  <div
+    id={createAnchorName(tmdb, watched)}
+    popover
+    style="position-anchor: --{createAnchorName(
+      tmdb,
+      watched
+    )};  position-area: block-end span-inline-end; position-try-fallbacks:flip-inline;
+"
+    class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 text-snow-300 shadow-sm"
+  >
+    <p class="text mt-2">{comment}</p>
   </div>
 {/snippet}

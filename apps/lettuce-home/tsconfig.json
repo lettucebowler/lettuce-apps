@@ -11,6 +11,6 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "types": ["./worker-configuration.d.ts", "@modyfi/vite-plugin-yaml/modules"]
+    "types": ["./worker-configuration.d.ts"]
   }
 }

@@ -24,13 +24,14 @@ movies:
       - James Cameron
     watched: 2026-01
     rating: 3
+    comment: I think parts 2 and 3 could have probably been condensed back into a single movie, but overall I enjoyed the continued worldbuilding and characters, like the wind traders.
   - tmdb: 76600
     title: 'Avatar: The Way of Water'
     released: 2022
     directors:
       - James Cameron
     watched: 2026-01
-    rating: 3
+    rating: 4
   - tmdb: 19995
     title: Avatar
     released: 2009
