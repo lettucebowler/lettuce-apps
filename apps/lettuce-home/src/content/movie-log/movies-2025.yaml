@@ -163,6 +163,24 @@ movies:
       - Alex Scharfman
     watched: 2025-11
     rating: 2
+  - tmdb: 330459
+    title: 'Rogue One: A Star Wars Story'
+    released: 2016
+    directors:
+      - Gareth Edwards
+    watched: 2025-11
+    rewatch: true
+    rating: 4
+    comment:
+      It's hard to get fully invested when you already know the ending going into it. Very well-executed and was a great
+      watch after recently finishing Andor.
+  - tmdb: 9293
+    title: John Tucker Must die
+    released: 2006
+    directors:
+      - Betty Thomas
+    watched: 2025-11
+    rating: 3
   # October 2025
   - tmdb: 440472
     title: The Upside
@@ -189,24 +207,14 @@ movies:
     watched: 2025-10
     rating: 3
     comment: I liked Keanu
-  - tmdb: 330459
-    title: 'Rogue One: A Star Wars Story'
-    released: 2016
+  - tmdb: 685274
+    title: Mobile Suit Gundam Hathaway
+    released: 2021
     directors:
-      - Gareth Edwards
+      - Shukou Murase
     watched: 2025-10
-    rewatch: true
     rating: 4
-    comment:
-      It's hard to get fully invested when you already know the ending going into it. Very well-executed and was a great
-      watch after recently finishing Andor.
-  - tmdb: 9293
-    title: John Tucker Must die
-    released: 2006
-    directors:
-      - Betty Thomas
-    watched: 2025-10
-    rating: 3
+    comment: My favorite Gundam movie.
   - tmdb: 937941
     title: Shelby Oaks
     released: 2025
@@ -214,7 +222,6 @@ movies:
       - Chris Stuckmann
     watched: 2025-10
     rating: 3
-
   # September 2025
   - tmdb: 1311031
     title: 'Demon Slayer: Kimetsu no Yaiba Infinity Castle'
@@ -501,6 +508,15 @@ movies:
     watched: 2025-02
     rating: 3
   # January 2025
+  - tmdb: 1397163
+    title: 'Mobile Suit Gundam GQuuuuuuX -Beginning-'
+    released: 2025
+    directors:
+      - Daizen Komatsuda
+      - Toko Yatabe
+      - Kazuya Tsurumaki
+    rating: 3
+    watched: 2025-01
   - tmdb: 402431
     title: Wicked
     released: 2024
