@@ -28,54 +28,44 @@
         <li class="text-sm">{director}</li>
       {/each}
     </ul>
-    <div class="max-w-44">
+    <div class="flex flex-wrap gap-x-2 @min-[18rem]:flex-col">
       {#if rating}
         {#if comment}
-          {@render RatingWithComment({ rating, comment, rewatch })}
+          {@render Comment({ rating, comment })}
         {:else}
-          {@render Rating({ rating, rewatch })}
+          {@render Stars(rating)}
         {/if}
+      {/if}
+      {#if rewatch}
+        <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
       {/if}
     </div>
   {/snippet}
 </MediaCard>
 
-{#snippet Rating({ rating, rewatch = false }: { rating: number; rewatch?: boolean })}
-  <div class="flex gap-2">
-    <div class="flex items-center gap-0.5 text-putty-500">
-      {#each { length: rating }, i (i)}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="size-3 group-hover:scale-110"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      {/each}
-    </div>
-    {#if rewatch}
-      <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
-    {/if}
+{#snippet Stars(count: number)}
+  <div class="flex items-center gap-0.5 text-putty-500">
+    {#each { length: count }, i (i)}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-3 group-hover:scale-110"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    {/each}
   </div>
 {/snippet}
 
-{#snippet RatingWithComment({
-  rating,
-  comment,
-  rewatch
-}: {
-  rating: number;
-  comment: string;
-  rewatch?: boolean;
-})}
+{#snippet Comment({ rating, comment }: { rating: number; comment: string })}
   <button
     popovertarget={createAnchorName(tmdb, watched)}
-    class="group flex w-full cursor-pointer items-center gap-2"
+    class="group flex cursor-pointer items-center gap-2"
     style="anchor-name: --{createAnchorName(tmdb, watched)}"
   >
     <svg
@@ -90,7 +80,7 @@
         clip-rule="evenodd"
       />
     </svg>
-    {@render Rating({ rating, rewatch })}
+    {@render Stars(rating)}
   </button>
   <div
     id={createAnchorName(tmdb, watched)}
