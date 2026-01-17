@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 1432547
+    title: All You Need is Kill
+    released: 2026
+    directors:
+      - Kenichiro Akimoto
+    watched: 2026-01
+    rating: 4
+    comment: I don't love the art style for the characters but I loved how colorful and vibrant the world was.
   - tmdb: 493529
     title: 'Dungeons & Dragons: Honor Among Thieves'
     released: 2023
