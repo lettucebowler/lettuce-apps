@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 27205
+    title: Inception
+    released: 2010
+    directors:
+      - Christopher Nolan
+    watched: 2026-01
+    rating: 4
+    rewatch: true
   - tmdb: 1432547
     title: All You Need is Kill
     released: 2026
