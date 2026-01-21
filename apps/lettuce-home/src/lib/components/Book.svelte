@@ -18,15 +18,16 @@
   {/snippet}
   {#snippet info()}
     <h3 class="">
-      <span class="font-bold">{title}</span> <span class="text-snow-100">({published})</span>
+      <span class="font-bold">{title}</span>
     </h3>
     {#if subtitle}
       <p class="text-sm">{subtitle}</p>
     {/if}
-    <ul class="mb-1">
+    <ul class="">
       {#each authors as author}
         <li class="text-sm">{author}</li>
       {/each}
     </ul>
+    <span class="text-sm text-snow-100">{published}</span>
   {/snippet}
 </MediaCard>

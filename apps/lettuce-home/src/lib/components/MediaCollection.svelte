@@ -22,9 +22,7 @@
       {/if}
     </header>
   {/if}
-  <div
-    class="grid gap-4 @min-[24rem]:grid-cols-2 @min-[37rem]:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]"
-  >
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4">
     {@render children?.()}
   </div>
 </div>

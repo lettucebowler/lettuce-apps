@@ -9,13 +9,11 @@
 </script>
 
 <div class="@container flex flex-col">
-  <figure
-    class="flex flex-auto flex-col gap-2 @min-[18rem]:grid @min-[18rem]:grid-cols-[minmax(120px,2fr)_3fr] @min-[18rem]:gap-4"
-  >
-    <div class="aspect-2/3 max-w-44 shadow-sm">
+  <figure class="flex flex-auto flex-wrap gap-2 sm:gap-x-4 @min-[19rem]:flex-row">
+    <div class="aspect-2/3 max-w-44 min-w-30 flex-2 shadow-sm">
       {@render media()}
     </div>
-    <figcaption class="flex-auto">
+    <figcaption class="min-w-40 flex-3">
       {@render info()}
     </figcaption>
   </figure>
