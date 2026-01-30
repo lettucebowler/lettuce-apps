@@ -11,3 +11,8 @@ books:
     authors:
       - Matt Dinniman
     published: 2022
+  - isbn: 9780440418320
+    title: The Golden Compass
+    authors:
+      - Philip Pullman
+    published: 1995
