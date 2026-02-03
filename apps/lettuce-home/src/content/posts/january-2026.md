@@ -14,7 +14,7 @@ published: true
 ## Books completed
 
 I set myself a goal of reading 24 books this year. One month in and I'm already a quarter of the way there! I started
-reading Matt Dinniman's <a class="text-putty-500 italic" href="google.com" target="_blank">Dungeon Crawler Carl</a>
+reading Matt Dinniman's <a class="text-putty-500 italic" href="https://openlibrary.org/search?q=subject_key%3A%22seriesdungeon_crawler_carl%22" target="_blank">Dungeon Crawler Carl</a>
 series and got hooked pretty quickly. I expect I'll be caught up with the series before the end of next month. I would
 definitely recommend it based on what I've read so far, and I hear it only gets better as you go.
 
