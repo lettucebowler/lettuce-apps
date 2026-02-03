@@ -1,5 +1,11 @@
 year: 2026
 books:
+  - isbn: 9780593955994
+    title: The Butcher's Masquerade
+    authors:
+      - Matt Dinniman
+    published: 2022
+    completed: 2026-02
   - isbn: 9798520410171
     title: The Gate of the Feral Gods
     authors:

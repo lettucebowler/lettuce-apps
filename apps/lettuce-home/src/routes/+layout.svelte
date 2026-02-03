@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/state';
   import './layout.css';
   import NavLink from './NavLink.svelte';
   import GithubIcon from './GithubIcon.svelte';
@@ -15,7 +16,9 @@
 <div class="container mx-auto h-full space-y-10 xl:max-w-screen-xl">
   <nav class="flex flex-wrap gap-x-4 gap-y-1">
     <NavLink to="/"><span class="text-lg font-bold hover:underline">Home</span></NavLink>
-    <!-- <NavLink to="/posts"><span class="text-lg font-bold hover:underline">Posts</span></NavLink> -->
+    <NavLink to="/posts" current={page.url.pathname.startsWith('/posts')}
+      ><span class="text-lg font-bold hover:underline">Posts</span></NavLink
+    >
     <NavLink to="/projects"><span class="text-lg font-bold hover:underline">Projects</span></NavLink
     >
     <NavLink to="/books"><span class="text-lg font-bold hover:underline">Books</span></NavLink>

@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 1084242
+    title: Zootopia 2
+    released: 2025
+    directors:
+      - Byron Howard
+      - Jared Bush
+    watched: 2026-01
+    rating: 3
   - tmdb: 1198994
     title: Send Help
     released: 2026

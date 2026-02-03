@@ -12,21 +12,16 @@
   import { page } from '$app/state';
   import type { Snippet } from 'svelte';
 
-  type Props =
-    | {
-        to: string;
-        class?: string;
-        children?: undefined;
-      }
-    | {
-        to: string;
-        class?: string;
-        children: Snippet<[]>;
-      };
+  type Props = {
+    to: string;
+    class?: string;
+    children: Snippet<[]>;
+    current?: boolean;
+  };
 
-  let { to, class: className, children }: Props = $props();
+  let { to, class: className, children, current: currentProp }: Props = $props();
 
-  let current = $derived(page.url.pathname === to);
+  let current = $derived(currentProp ?? page.url.pathname === to);
 </script>
 
 <a class={[className]} aria-current={current} href={to}>

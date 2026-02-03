@@ -26,6 +26,43 @@ export function getReadingLogsDesc() {
     });
 }
 
+export function getFilteredBooks({
+  years,
+  months
+}: {
+  years: Array<number | 'current'>;
+  months: string[];
+}) {
+  return allReadingLogs
+    .filter((log) => years.includes(log.year))
+    .map((log) => log.books)
+    .flat()
+    .filter((book) => {
+      if (!months.length) {
+        return true;
+      }
+      if (!book.completed) {
+        return false;
+      }
+      const [, bookMonth] = book.completed.split('-');
+      return months.includes(bookMonth);
+    });
+}
+
+export function getFilteredMovies({ years, months }: { years: number[]; months: string[] }) {
+  return allMovieLogs
+    .filter((log) => years.includes(log.year))
+    .map((log) => log.movies)
+    .flat()
+    .filter((book) => {
+      if (!months.length) {
+        return true;
+      }
+      const [, movieMonth] = book.watched.split('-');
+      return months.includes(movieMonth);
+    });
+}
+
 export function getLastReadBook() {
   return getReadingLogsDesc()[0].items.at(0)!;
 }
