@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getProjectsDesc } from '$lib/collections';
   import Project from '$lib/components/Project.svelte';
-  import ExternalLinkIcon from '../../lib/components/ExternalLinkIcon.svelte';
 
   const projects = getProjectsDesc();
 </script>
