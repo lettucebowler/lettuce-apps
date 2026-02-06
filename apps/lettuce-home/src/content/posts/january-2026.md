@@ -2,11 +2,13 @@
 title: 'January 2026'
 date: 2026-02-02
 published: true
+tags:
+  - 'media-log'
 ---
 
 <script lang="ts">
-    import FilteredBooks from '../../lib/components/FilteredBooks.svelte';
-    import FilteredMovies from '../../lib/components/FilteredMovies.svelte';
+  import FilteredBooks from '../../lib/components/FilteredBooks.svelte';
+  import FilteredMovies from '../../lib/components/FilteredMovies.svelte';
 </script>
 
 # { title }
@@ -23,7 +25,7 @@ definitely recommend it based on what I've read so far, and I hear it only gets 
 ## Movies watched
 
 Lots of movies this month, too. Quite a few of them were rewatches, but I also watched a number of other movies that I
-would definitely see myself watching again in the future. Send Help was probalbly the biggest surprise for me this
+would definitely see myself watching again in the future. <a class="text-putty-500 italic" href="https://www.themoviedb.org/movie/1198994">Send Help</a> was probalbly the biggest surprise for me this
 month. It surpassed my expectations.
 
 <FilteredMovies years={[2026]} months={['01']} />

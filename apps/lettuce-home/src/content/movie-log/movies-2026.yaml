@@ -42,7 +42,7 @@ movies:
     directors:
       - Amy Poehler
     watched: 2026-01
-    rating: 3
+    rating: 2
   - tmdb: 27205
     title: Inception
     released: 2010

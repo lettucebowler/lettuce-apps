@@ -28,6 +28,6 @@
         <li class="text-sm">{author}</li>
       {/each}
     </ul>
-    <span class="text-sm text-snow-100">{published}</span>
+    <span class="text-sm text-charade-200">{published}</span>
   {/snippet}
 </MediaCard>

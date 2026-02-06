@@ -21,7 +21,7 @@
   {#snippet info()}
     <h3>
       <span class="text-md font-medium">{title} </span>
-      <span class="text-snow-100">({released})</span>
+      <span class="text-charade-200">({released})</span>
     </h3>
     <ul class="mb-1">
       {#each directors as director}
@@ -72,7 +72,7 @@
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      class="size-4 text-snow-300 group-hover:text-swamp-green-500"
+      class="size-4 group-hover:text-swamp-green-500"
     >
       <path
         fill-rule="evenodd"
@@ -89,7 +89,7 @@
       tmdb,
       watched
     )};  position-area: block-end span-inline-end; position-try-fallbacks:flip-inline;"
-    class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 text-snow-300 shadow-sm"
+    class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 shadow-sm"
   >
     <p class="text mt-2">{comment}</p>
   </div>

@@ -3,10 +3,13 @@
     getActiveProjects,
     getCurrentlyReading,
     getLastReadBook,
-    getLastWatchedMovie
+    getLastWatchedMovie,
+    getRecentPosts
   } from '$lib/collections';
   import Book from '$lib/components/Book.svelte';
   import Movie from '$lib/components/Movie.svelte';
+  import Post from '$lib/components/Post.svelte';
+  import Project from '$lib/components/Project.svelte';
   import GithubIcon from './GithubIcon.svelte';
   import ResumeIcon from './ResumeIcon.svelte';
   import TwitterIcon from './TwitterIcon.svelte';
@@ -15,6 +18,7 @@
   const activeProjects = getActiveProjects();
   const latestMovie = getLastWatchedMovie();
   const currentBooks = getCurrentlyReading();
+  const recentPosts = getRecentPosts();
 </script>
 
 <svelte:head>
@@ -24,26 +28,27 @@
   <h1 class="text-3xl font-bold">Grant Montgomery</h1>
   <div id="home-layout" class="grid gap-x-4 gap-y-8 md:grid-cols-2">
     <div id="home-right" class="@container space-y-8">
-      <!-- <section id="activity-section" class="space-y-4">
-        <h2 class="text-2xl font-bold">Recent posts</h2>
-        {#each allPosts.filter((post) => post.published).slice(0, 5) as post (post.slug)}
-          {@render Post({
-            title: post.title,
-            summary: post.summary,
-            date: post.date,
-            slug: post.slug
-          })}
-        {/each}
-      </section> -->
       <section id="activity-section" class="space-y-4">
-        <h2 class="text-2xl font-bold">Active projects</h2>
+        <h2 class="text-2xl font-bold">
+          Recent posts<a
+            href="/posts"
+            class="ml-8 text-sm font-medium text-bouquet-400 hover:underline">View all posts →</a
+          >
+        </h2>
+        {#each recentPosts as post (post.slug)}
+          <Post {...post} />
+        {/each}
+      </section>
+      <section id="activity-section" class="space-y-4">
+        <h2 class="text-2xl font-bold">
+          Active projects <a
+            href="/projects"
+            class="ml-8 text-sm font-medium text-bouquet-400 hover:underline">View all projects →</a
+          >
+        </h2>
         {#each activeProjects as project (project.title)}
-          {#if project.url}
-            <a href={project.url} class="group block">
-              {@render ProjectSummary(project)}
-            </a>
-          {:else}
-            {@render ProjectSummary(project)}{/if}
+          {@const { description, ...rest } = project}
+          <Project {...rest} description={[]} />
         {/each}
       </section>
     </div>
@@ -90,36 +95,3 @@
     </div>
   </div>
 </main>
-
-{#snippet Post({
-  title,
-  summary,
-  date,
-  slug
-}: {
-  title: string;
-  summary?: string;
-  date: string;
-  slug: string;
-})}
-  <a href="/posts/{slug}" class="group block">
-    <h3 class="text-xl font-bold text-swamp-green-500 group-hover:underline">{title}</h3>
-    {#if summary}
-      <p class="">{summary}</p>
-    {/if}
-    {#if date}
-      <p class="text-sm">
-        {new Date(date).toLocaleString('en-US', {
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric'
-        })}
-      </p>
-    {/if}
-  </a>
-{/snippet}
-
-{#snippet ProjectSummary({ title, summary }: { title: string; summary: string })}
-  <h3 class="text-lg font-bold text-swamp-green-500 capitalize group-hover:underline">{title}</h3>
-  <p>{summary}</p>
-{/snippet}

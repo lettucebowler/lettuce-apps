@@ -74,4 +74,18 @@
   --color-charade-900: #323946;
   --color-charade-950: #2a2f3a;
   --color-charade: var(--color-charade-800);
+
+  --color-bouquet-50: #f9f6f9;
+  --color-bouquet-100: #f4eff4;
+  --color-bouquet-200: #eae0e9;
+  --color-bouquet-300: #dbc6d8;
+  --color-bouquet-400: #c3a3be;
+  --color-bouquet-500: #b48ead;
+  --color-bouquet-600: #976b8d;
+  --color-bouquet-700: #805676;
+  --color-bouquet-800: #6b4962;
+  --color-bouquet-900: #5b4054;
+  --color-bouquet-950: #352230;
+
+
 }

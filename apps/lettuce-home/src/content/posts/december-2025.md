@@ -2,7 +2,10 @@
 title: 'December 2025'
 date: 2025-01-10
 summary: End of year vibe check
-published: false
+published: true
+tags:
+  - 'media-log'
+  - 'vibe-check'
 ---
 
 <script lang="ts">

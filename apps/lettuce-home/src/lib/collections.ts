@@ -1,5 +1,5 @@
 import type { MovieLogEntry } from '$lib/schemas';
-import { allMovieLogs, allProjects, allReadingLogs } from 'content-collections';
+import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
 
 export function getLastWatchedMovie(): MovieLogEntry {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
@@ -73,4 +73,16 @@ export function getProjectsDesc() {
 
 export function getActiveProjects() {
   return getProjectsDesc().filter((project) => project.status === 'active');
+}
+
+export function getPostsDesc() {
+  return allPosts.filter((post) => Boolean(post.published)).toReversed();
+}
+
+export function getPost(slug: string) {
+  return allPosts.find((post) => post.slug === slug);
+}
+
+export function getRecentPosts() {
+  return allPosts.toReversed().slice(0, 5);
 }
