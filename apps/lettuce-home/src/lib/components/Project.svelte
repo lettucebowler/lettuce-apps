@@ -14,18 +14,18 @@
     description,
     url,
     heading = 'h3',
-    headingClassname = 'font-medium inline-block mb-2 text-xl text-swamp-green-500 underline'
+    headingClassname = 'font-medium inline-block mb-2 text-xl'
   }: Props = $props();
 </script>
 
 <article>
   {#if url}
     <a href={url} class="group inline text-swamp-green-500">
-      {@render Title({ title, heading, classname: headingClassname })}
+      {@render Title({ title, heading, classname: [headingClassname, 'underline'] })}
       <ExternalLinkIcon class="mb-3 inline-block size-3.5" />
     </a>
   {:else}
-    <div class="text-antique-brass-500">
+    <div class="">
       {@render Title({ title, heading, classname: headingClassname })}
     </div>
   {/if}
@@ -34,7 +34,16 @@
     <dl class="flex">
       <dt>status:</dt>
       &nbsp;
-      <dd class="font-medium">{status}</dd>
+      <dd
+        class={[
+          'font-medium',
+          status === 'active' && 'text-frost-200',
+          status === 'inactive' && 'text-putty-500',
+          status === 'offline' && 'text-contessa-500'
+        ]}
+      >
+        {status}
+      </dd>
     </dl>
     {#each description as paragraph (paragraph)}
       <p>{paragraph}</p>
@@ -49,7 +58,7 @@
 }: {
   title: string;
   heading: string;
-  classname: string;
+  classname: string | string[];
 })}
   <svelte:element this={heading} class={classname}>{title}</svelte:element>
 {/snippet}
