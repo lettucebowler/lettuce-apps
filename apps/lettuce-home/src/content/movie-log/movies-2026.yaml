@@ -1,5 +1,29 @@
 year: 2026
 movies:
+  - tmdb: 553600
+    title: Promare
+    released: 2019
+    directors:
+      - Hiroyuki Imaishi
+    watched: 2026-02
+    rating: 5
+    rewatch: true
+  - tmdb: 631193
+    title: 'Promare / Side: Lio'
+    released: 2019
+    directors:
+      - Tatsumi Fuji
+    watched: 2026-02
+    rating: 4
+    rewatch: true
+  - tmdb: 629014
+    title: 'Promare / Side: Galo'
+    directors:
+      - Hiroyuki Imaishi
+    released: 2019
+    watched: 2026-02
+    rating: 4
+    rewatch: true
   - tmdb: 1084242
     title: Zootopia 2
     released: 2025

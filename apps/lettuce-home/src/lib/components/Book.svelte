@@ -19,6 +19,7 @@
   {#snippet info()}
     <h3 class="">
       <span class="font-bold">{title}</span>
+      <span class="text-sm text-charade-200">{published}</span>
     </h3>
     {#if subtitle}
       <p class="text-sm">{subtitle}</p>
@@ -28,6 +29,5 @@
         <li class="text-sm">{author}</li>
       {/each}
     </ul>
-    <span class="text-sm text-charade-200">{published}</span>
   {/snippet}
 </MediaCard>

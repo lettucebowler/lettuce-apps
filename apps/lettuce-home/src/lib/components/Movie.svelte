@@ -13,17 +13,22 @@
 <MediaCard>
   {#snippet media()}
     <a href="https://www.themoviedb.org/movie/{tmdb}" class="block">
-      <div class="relative aspect-2/3 w-full overflow-hidden">
-        <img loading="lazy" class="rounded" alt={title} src="/posters/movie-{tmdb}.webp" />
+      <div class="relative w-full">
+        <img
+          loading="lazy"
+          class="aspect-2/3 w-full rounded"
+          alt={title}
+          src="/posters/movie-{tmdb}.webp"
+        />
       </div>
     </a>
   {/snippet}
   {#snippet info()}
     <h3>
-      <span class="text-md font-medium">{title} </span>
-      <span class="text-charade-200">({released})</span>
+      <span class="font-medium">{title} </span>
+      <span class="text-sm text-charade-200">{released}</span>
     </h3>
-    <ul class="mb-1">
+    <ul class="">
       {#each directors as director}
         <li class="text-sm">{director}</li>
       {/each}

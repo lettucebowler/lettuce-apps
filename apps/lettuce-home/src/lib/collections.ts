@@ -76,7 +76,7 @@ export function getActiveProjects() {
   return getProjectsDesc().filter((project) => project.status === 'active');
 }
 
-export function getPostsDesc() {
+export function allPostsDesc() {
   return allPosts
     .filter((post) => Boolean(post.published))
     .toSorted((a, b) => {
@@ -89,14 +89,14 @@ export function getPost(slug: string) {
 }
 
 export function getRecentPosts() {
-  return allPosts.toReversed().slice(0, 5);
+  return allPostsDesc().slice(0, 5);
 }
 
 export function getPostsWithTag(tag?: string | null) {
   if (!tag) {
-    return getPostsDesc();
+    return allPostsDesc();
   }
-  return getPostsDesc().filter((post) => post.tags?.includes(tag));
+  return allPostsDesc().filter((post) => post.tags?.includes(tag));
 }
 
 export function getAllPostTags() {
