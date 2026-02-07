@@ -26,10 +26,11 @@
   {/if}
   <p class="flex max-w-120 flex-wrap items-end gap-x-2">
     <time
-      >{new Date(date).toLocaleString('en-US', {
+      >{new Date(date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
-        year: 'numeric'
+        year: 'numeric',
+        timeZone: 'utc'
       })}</time
     >
     {#each tags as tag}
