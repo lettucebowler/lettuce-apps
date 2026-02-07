@@ -1,6 +1,5 @@
 import type { MovieLogEntry } from '$lib/schemas';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
-import { B } from '../../.svelte-kit/output/server/chunks';
 
 export function getLastWatchedMovie(): MovieLogEntry {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
