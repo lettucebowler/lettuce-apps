@@ -6,6 +6,9 @@
   const tags = getAllPostTags();
 </script>
 
+<svelte:head>
+  <title>Posts | Grant Montgomery</title>
+</svelte:head>
 <main class="">
   <h1 class="mb-8 text-3xl font-bold">Posts</h1>
   <h2 class="mb-2 text-2xl font-bold">Filter:</h2>

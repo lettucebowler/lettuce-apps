@@ -3,6 +3,9 @@
   let { data }: PageProps = $props();
 </script>
 
+<svelte:head>
+  <title>{data.meta.title} | Grant Montgomery</title>
+</svelte:head>
 <main class="mx-auto">
   <div
     class="mx-auto prose max-w-full prose-brand sm:max-w-screen-md prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500 prose-figure:pointer-events-none prose-figcaption:text-sm prose-figcaption:text-charade-50"
