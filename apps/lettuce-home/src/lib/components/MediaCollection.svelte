@@ -18,7 +18,7 @@
       >
       {#if subtitle}
         &nbsp;
-        <span>{subtitle}</span>
+        <span class="font-medium text-charade-100">{subtitle}</span>
       {/if}
     </header>
   {/if}

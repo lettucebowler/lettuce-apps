@@ -2,25 +2,31 @@
   import type { Project } from 'content-collections';
   import ExternalLinkIcon from './ExternalLinkIcon.svelte';
 
+  type Props = {
+    heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    headingClassname?: string;
+  } & Project;
+
   let {
     title,
     summary,
     status,
     description,
     url,
-    heading = 'h3'
-  }: Project & { heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' } = $props();
+    heading = 'h3',
+    headingClassname = 'font-medium inline-block mb-2 text-xl text-swamp-green-500 underline'
+  }: Props = $props();
 </script>
 
 <article>
   {#if url}
     <a href={url} class="group inline text-swamp-green-500">
-      {@render Title({ title, heading })}
-      <ExternalLinkIcon class="mb-3 inline-block size-3" />
+      {@render Title({ title, heading, classname: headingClassname })}
+      <ExternalLinkIcon class="mb-3 inline-block size-3.5" />
     </a>
   {:else}
     <div class="text-antique-brass-500">
-      {@render Title({ title, heading })}
+      {@render Title({ title, heading, classname: headingClassname })}
     </div>
   {/if}
   <div class="space-y-1">
@@ -36,10 +42,14 @@
   </div>
 </article>
 
-{#snippet Title({ title, heading }: { title: string; heading: string })}
-  <svelte:element
-    this={heading}
-    class="mb-2 inline-block text-xl font-bold capitalize group-hover:underline"
-    >{title}</svelte:element
-  >
+{#snippet Title({
+  title,
+  heading,
+  classname
+}: {
+  title: string;
+  heading: string;
+  classname: string;
+})}
+  <svelte:element this={heading} class={classname}>{title}</svelte:element>
 {/snippet}

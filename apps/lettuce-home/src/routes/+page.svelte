@@ -30,9 +30,8 @@
     <div id="home-right" class="@container space-y-8">
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Recent posts<a
-            href="/posts"
-            class="ml-8 text-sm font-medium text-bouquet-400 hover:underline">View all posts →</a
+          Recent posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline"
+            >View all posts →</a
           >
         </h2>
         {#each recentPosts as post (post.slug)}
@@ -43,7 +42,7 @@
         <h2 class="text-2xl font-bold">
           Active projects <a
             href="/projects"
-            class="ml-8 text-sm font-medium text-bouquet-400 hover:underline">View all projects →</a
+            class="ml-8 text-base font-medium text-charade-100 underline">View all projects →</a
           >
         </h2>
         {#each activeProjects as project (project.title)}

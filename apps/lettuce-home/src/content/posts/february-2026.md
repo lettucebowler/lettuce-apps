@@ -1,7 +1,7 @@
 ---
-title: 'January 2026'
-date: 2026-02-02
-published: true
+title: 'February 2026'
+date: 2026-03-02
+published: false
 tags:
   - 'media-log'
 ---
@@ -20,7 +20,7 @@ reading Matt Dinniman's <a class="text-putty-500 italic" href="https://openlibra
 series and got hooked pretty quickly. I expect I'll be caught up with the series before the end of next month. I would
 definitely recommend it based on what I've read so far, and I hear it only gets better as you go.
 
-<FilteredBooks years={[2026]} months={['01']} />
+<FilteredBooks years={[2026]} months={['02']} />
 
 ## Movies watched
 
@@ -28,4 +28,4 @@ Lots of movies this month, too. Quite a few of them were rewatches, but I also w
 would definitely see myself watching again in the future. <a class="text-putty-500 italic" href="https://www.themoviedb.org/movie/1198994">Send Help</a> was probably the biggest surprise for me this
 month. It surpassed my expectations.
 
-<FilteredMovies years={[2026]} months={['01']} />
+<FilteredMovies years={[2026]} months={['02']} />

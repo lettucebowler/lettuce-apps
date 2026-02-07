@@ -1,5 +1,6 @@
 import type { MovieLogEntry } from '$lib/schemas';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
+import { B } from '../../.svelte-kit/output/server/chunks';
 
 export function getLastWatchedMovie(): MovieLogEntry {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
@@ -76,7 +77,11 @@ export function getActiveProjects() {
 }
 
 export function getPostsDesc() {
-  return allPosts.filter((post) => Boolean(post.published)).toReversed();
+  return allPosts
+    .filter((post) => Boolean(post.published))
+    .toSorted((a, b) => {
+      return b.date > a.date ? 1 : -1;
+    });
 }
 
 export function getPost(slug: string) {
@@ -85,4 +90,25 @@ export function getPost(slug: string) {
 
 export function getRecentPosts() {
   return allPosts.toReversed().slice(0, 5);
+}
+
+export function getPostsWithTag(tag?: string | null) {
+  if (!tag) {
+    return getPostsDesc();
+  }
+  return getPostsDesc().filter((post) => post.tags?.includes(tag));
+}
+
+export function getAllPostTags() {
+  return Array.from(new Set(allPosts.map((post) => post.tags ?? []).flat())).toSorted();
+}
+
+export function getPostsByYear(tag?: string | null) {
+  const grouped = Object.groupBy(getPostsWithTag(tag), (post) => {
+    return post.date.slice(0, 4);
+  });
+
+  return [...Object.entries(grouped)]
+    .toSorted((a, b) => (a[0] < b[0] ? 1 : -1))
+    .map((group) => ({ title: group[0], items: group[1]! }));
 }
