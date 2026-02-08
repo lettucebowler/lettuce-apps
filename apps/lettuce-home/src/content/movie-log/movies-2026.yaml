@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 762504
+    title: Nope
+    released: 2022
+    directors:
+      - Jordan Peele
+    watched: 2026-02
+    rating: 3
   - tmdb: 553600
     title: Promare
     released: 2019
