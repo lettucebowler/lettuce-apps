@@ -16,16 +16,19 @@ export const Month = v.picklist([
 ]);
 export type Month = v.InferOutput<typeof Month>;
 
-export const ReadingLogEntry = v.object({
-  isbn: v.pipe(v.number(), v.integer()),
-  title: v.string(),
-  subtitle: v.optional(v.string()),
-  authors: v.array(v.string()),
-  published: v.pipe(v.number(), v.integer()),
-  completed: v.optional(v.string()),
-  rating: v.optional(v.pipe(v.number(), v.integer())),
-  comment: v.optional(v.string())
-});
+export const ReadingLogEntry = v.pipe(
+  v.object({
+    isbn: v.pipe(v.number(), v.integer()),
+    title: v.string(),
+    subtitle: v.optional(v.string()),
+    authors: v.array(v.string()),
+    published: v.pipe(v.number(), v.integer()),
+    completed: v.optional(v.string()),
+    rating: v.optional(v.pipe(v.number(), v.integer())),
+    comment: v.optional(v.string())
+  }),
+  v.transform((input) => ({ ...input, type: 'book' as 'book' }))
+);
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
 export const ReadingLog = v.object({
@@ -48,16 +51,19 @@ export const ProjectLog = v.object({
 });
 export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
-export const MovieLogEntry = v.object({
-  tmdb: v.pipe(v.number(), v.integer()),
-  title: v.string(),
-  directors: v.array(v.string()),
-  released: v.pipe(v.number(), v.integer()),
-  watched: v.string(),
-  rating: v.optional(v.pipe(v.number(), v.integer())),
-  comment: v.optional(v.string()),
-  rewatch: v.optional(v.boolean(), false)
-});
+export const MovieLogEntry = v.pipe(
+  v.object({
+    tmdb: v.pipe(v.number(), v.integer()),
+    title: v.string(),
+    directors: v.array(v.string()),
+    released: v.pipe(v.number(), v.integer()),
+    watched: v.string(),
+    rating: v.optional(v.pipe(v.number(), v.integer())),
+    comment: v.optional(v.string()),
+    rewatch: v.optional(v.boolean(), false)
+  }),
+  v.transform((input) => ({ ...input, type: 'movie' as 'movie' }))
+);
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
 export const Post = v.object({

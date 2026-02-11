@@ -99,7 +99,13 @@ export function getPostsWithTag(tag?: string | null) {
 }
 
 export function getAllPostTags() {
-  return Array.from(new Set(allPosts.map((post) => post.tags ?? []).flat())).toSorted();
+  return Array.from(
+    new Set(
+      allPostsDesc()
+        .map((post) => post.tags ?? [])
+        .flat()
+    )
+  ).toSorted();
 }
 
 export function getPostsByYear(tag?: string | null) {

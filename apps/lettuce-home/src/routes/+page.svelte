@@ -26,7 +26,7 @@
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
   <h1 class="text-3xl font-bold">Grant Montgomery</h1>
-  <div id="home-layout" class="grid gap-x-4 gap-y-8 md:grid-cols-2">
+  <div id="home-layout" class="grid gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-[2fr_3fr]">
     <div id="home-right" class="@container space-y-8">
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">

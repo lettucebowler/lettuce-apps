@@ -12,21 +12,21 @@
         loading="lazy"
         alt={`${title}${subtitle ? ': ' + subtitle : ''}`}
         src="/covers/book-{isbn}.webp"
-        class="rounded"
+        class="aspect-2/3 w-full rounded"
       />
     </a>
   {/snippet}
   {#snippet info()}
     <h3 class="">
       <span class="font-bold">{title}</span>
-      <span class="text-sm text-charade-200">{published}</span>
+      <span class="font-thin text-charade-200">{published}</span>
     </h3>
     {#if subtitle}
-      <p class="text-sm">{subtitle}</p>
+      <p class="font-thin">{subtitle}</p>
     {/if}
     <ul class="">
       {#each authors as author}
-        <li class="text-sm">{author}</li>
+        <li class="font-thin">{author}</li>
       {/each}
     </ul>
   {/snippet}

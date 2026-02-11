@@ -13,24 +13,22 @@
 <MediaCard>
   {#snippet media()}
     <a href="https://www.themoviedb.org/movie/{tmdb}" class="block">
-      <div class="relative w-full">
-        <img
-          loading="lazy"
-          class="aspect-2/3 w-full rounded"
-          alt={title}
-          src="/posters/movie-{tmdb}.webp"
-        />
-      </div>
+      <img
+        loading="lazy"
+        class="aspect-2/3 w-full rounded"
+        alt={title}
+        src="/posters/movie-{tmdb}.webp"
+      />
     </a>
   {/snippet}
   {#snippet info()}
     <h3>
       <span class="font-medium">{title} </span>
-      <span class="text-sm text-charade-200">{released}</span>
+      <span class="font-thin text-charade-200">{released}</span>
     </h3>
-    <ul class="">
+    <ul class="mb-1">
       {#each directors as director}
-        <li class="text-sm">{director}</li>
+        <li class="font-thin not-last:after:content-[',']">{director}</li>
       {/each}
     </ul>
     <div class="flex flex-wrap gap-x-2 @min-[18rem]:flex-col">
@@ -42,14 +40,14 @@
         {/if}
       {/if}
       {#if rewatch}
-        <p class="text-sm font-bold text-antique-brass-500 italic">rewatch</p>
+        <p class="font-bold text-antique-brass-500 italic">rewatch</p>
       {/if}
     </div>
   {/snippet}
 </MediaCard>
 
 {#snippet Stars(count: number)}
-  <div class="flex items-center gap-0.5 text-putty-500">
+  <div class="-mb-[2px] flex items-center gap-0.5 text-putty-500">
     {#each { length: count }, i (i)}
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -13,7 +13,7 @@
     tags,
     date,
     heading = 'h3',
-    headingClassname = 'mb-2 text-xl text-swamp-green-500 underline font-medium'
+    headingClassname = 'mb-1 text-xl text-swamp-green-500 underline font-medium'
   }: Props = $props();
 </script>
 
@@ -21,10 +21,7 @@
   <svelte:element this={heading} class={headingClassname}
     ><a href="/posts/{slug}">{title}</a></svelte:element
   >
-  {#if summary}
-    <p class="">{summary}</p>
-  {/if}
-  <p class="flex max-w-120 flex-wrap items-end gap-x-2">
+  <p class="mb-1 flex max-w-120 flex-wrap items-end gap-x-2">
     <time
       >{new Date(date).toLocaleDateString('en-US', {
         month: 'long',
@@ -34,9 +31,12 @@
       })}</time
     >
     {#each tags as tag}
-      <a href="/posts?tag={tag}" class="inline-flex text-sm text-frost-100 hover:underline"
+      <a href="/posts?tag={tag}" class="inline-flex font-light text-frost-100 hover:underline"
         >#{tag}</a
       >
     {/each}
   </p>
+  {#if summary}
+    <p>{summary}</p>
+  {/if}
 </div>

@@ -16,14 +16,14 @@
     <ul class="flex gap-2">
       {#each tags as tag (tag)}
         <li>
-          <a href="/posts?tag={tag}" class="inline-flex text-sm text-frost-100 hover:underline"
+          <a href="/posts?tag={tag}" class="inline-flex font-thin text-frost-100 hover:underline"
             >#{tag}</a
           >
         </li>
       {/each}
     </ul>
   </nav>
-  <div class="space-y-6">
+  <div class="space-y-8">
     {#each postGroups as group (group.title)}
       <div class="space-y-2">
         <header>

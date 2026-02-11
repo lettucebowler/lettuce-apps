@@ -7,11 +7,10 @@ tags:
 ---
 
 <script lang="ts">
-  import FilteredBooks from '../../lib/components/FilteredBooks.svelte';
-  import FilteredMovies from '../../lib/components/FilteredMovies.svelte';
+    import FilteredEntries from '../../lib/components/FilteredEntries.svelte';
 </script>
 
-# { title }
+I'm trying out doing monthly roundups of the books I've read and movies that I've watched. Who knows if this is something that I keep doing long-term but I will try at least for a few months. I also retroactively wrote up a roundup for december of 2025.
 
 ## Books completed
 
@@ -20,7 +19,7 @@ reading Matt Dinniman's <a class="text-putty-500 italic" href="https://openlibra
 series and got hooked pretty quickly. I expect I'll be caught up with the series before the end of next month. I would
 definitely recommend it based on what I've read so far, and I hear it only gets better as you go.
 
-<FilteredBooks years={[2026]} months={['01']} />
+<FilteredEntries type="book" years={[2026]} months={['01']} />
 
 ## Movies watched
 
@@ -28,4 +27,4 @@ Lots of movies this month, too. Quite a few of them were rewatches, but I also w
 would definitely see myself watching again in the future. <a class="text-putty-500 italic" href="https://www.themoviedb.org/movie/1198994">Send Help</a> was probably the biggest surprise for me this
 month. It surpassed my expectations.
 
-<FilteredMovies years={[2026]} months={['01']} />
+<FilteredEntries type="movie" years={[2026]} months={['01']} />

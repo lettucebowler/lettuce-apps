@@ -1,6 +1,7 @@
 ---
 title: 'December 2025'
 date: 2025-01-10
+stuff: 2025-01-10
 summary: End of year vibe check
 published: true
 tags:
@@ -9,11 +10,15 @@ tags:
 ---
 
 <script lang="ts">
-    import FilteredBooks from '../../lib/components/FilteredBooks.svelte';
-    import FilteredMovies from '../../lib/components/FilteredMovies.svelte';
-</script>
+    import FilteredEntries from '../../lib/components/FilteredEntries.svelte';
 
-# { title }
+    let formattedDate = new Date(date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+</script>
 
 More than half of this month was spent on vacation, but I don't feel like I got much out of it. Every day my wife would
 come home from work and when she asked me how my day went, I never had much good to say. It felt Like I wasted a lot of
@@ -26,7 +31,7 @@ instead of doing what I intended to do. That's one thing I'd like to change goin
 
 I've hardly read anything since July. I would like to try and be more consistent with my reading in the new year.
 
-<FilteredBooks years={[2025]} months={['10', '11', '12']} />
+<FilteredEntries type="book" years={[2025]} months={['12']} />
 
 ## Movies watched
 
@@ -34,4 +39,4 @@ I watched a lot of Christmas movies this month to the surprise of no one. It fel
 season. I started listening to a new podcast called RPG Major at the recommendation of my cousing. I'm about 5
 episodes in and am liking it so far.
 
-<FilteredMovies years={[2025]} months={['10', '11', '12']} />
+<FilteredEntries type="movie" years={[2025]} months={['12']} />
