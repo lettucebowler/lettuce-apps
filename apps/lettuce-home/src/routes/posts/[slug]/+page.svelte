@@ -8,7 +8,7 @@
 </svelte:head>
 <main class="mx-auto">
   <div
-    class="mx-auto prose max-w-full prose-brand sm:max-w-screen-md prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500"
+    class="mx-auto prose max-w-full prose-brand sm:max-w-3xl prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500"
   >
     <h1>{data.meta.title}</h1>
     <div class="flex gap-x-4">
@@ -26,7 +26,7 @@
             <li class="m-0! p-0!">
               <a
                 href="/posts?tag={tag}"
-                class="inline-flex font-thin text-frost-100! hover:underline">#{tag}</a
+                class="inline-flex font-light text-frost-100! hover:underline">#{tag}</a
               >
             </li>
           {/each}

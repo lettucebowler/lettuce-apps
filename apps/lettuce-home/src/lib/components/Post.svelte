@@ -31,7 +31,7 @@
       })}</time
     >
     {#each tags as tag}
-      <a href="/posts?tag={tag}" class="inline-flex font-light text-frost-100 hover:underline"
+      <a href="/posts?tag={tag}" class="inline-fle font-light text-frost-100 hover:underline"
         >#{tag}</a
       >
     {/each}

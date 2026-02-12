@@ -18,15 +18,15 @@
   {/snippet}
   {#snippet info()}
     <h3 class="">
-      <span class="font-bold">{title}</span>
-      <span class="font-thin text-charade-200">{published}</span>
+      <span class="font-medium">{title}</span>
+      <span class="font-light text-charade-100">{published}</span>
     </h3>
     {#if subtitle}
-      <p class="font-thin">{subtitle}</p>
+      <p class="font-light text-charade-100">{subtitle}</p>
     {/if}
     <ul class="">
       {#each authors as author}
-        <li class="font-thin">{author}</li>
+        <li class="font-light text-charade-100">{author}</li>
       {/each}
     </ul>
   {/snippet}

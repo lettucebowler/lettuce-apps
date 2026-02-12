@@ -16,7 +16,7 @@
     <ul class="flex gap-2">
       {#each tags as tag (tag)}
         <li>
-          <a href="/posts?tag={tag}" class="inline-flex font-thin text-frost-100 hover:underline"
+          <a href="/posts?tag={tag}" class="inline-flex font-light text-frost-100 hover:underline"
             >#{tag}</a
           >
         </li>
@@ -29,7 +29,7 @@
         <header>
           <h2 class="inline text-2xl font-bold">{group.title}</h2>
           &nbsp;
-          <span class="font-medium text-charade-100"
+          <span class=" font-medium text-charade-100"
             >{group.items.length} {group.items.length > 1 ? 'posts' : 'post'}</span
           >
         </header>
