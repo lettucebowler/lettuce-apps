@@ -43,7 +43,7 @@
 <div class="@container">
   <div class="grid grid-cols-[repeat(auto-fill,_minmax(6rem,_1fr))] gap-4">
     {#each items as item (getEntryId(item))}
-      <img src={getEntryMediaPath(item)} class="m-0!" alt={item.title} />
+      <img src={getEntryMediaPath(item)} class="m-0! aspect-2/3 w-full" alt={item.title} />
     {/each}
   </div>
 </div>
