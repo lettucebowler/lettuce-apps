@@ -12,5 +12,3 @@ export async function load({ params }) {
     error(404, `Could not find ${params.slug}`);
   }
 }
-
-export const prerender = false;

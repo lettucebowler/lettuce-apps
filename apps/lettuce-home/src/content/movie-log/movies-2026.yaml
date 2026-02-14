@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1119449
+    title: Good Luck, Have Fun, Don't Die
+    released: 2026
+    directors:
+      - Gore Verbinski
+    watched: 2026-02-13
+    rating: 4
   - tmdb: 762504
     title: Nope
     released: 2022

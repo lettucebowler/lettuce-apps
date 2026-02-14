@@ -26,7 +26,7 @@
       <span class="font-medium">{title} </span>
       <span class="font-light text-charade-100">{released}</span>
     </h3>
-    <ul class="mb-1">
+    <ul>
       {#each directors as director}
         <li class="font-light text-charade-100 not-last:after:content-[',']">{director}</li>
       {/each}
