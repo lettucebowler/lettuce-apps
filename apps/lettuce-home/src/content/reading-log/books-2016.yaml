@@ -5,22 +5,22 @@ books:
     authors:
       - Andrzej Sapkowski
     published: 1997
-    completed: 2016-08
+    completed: 2016-08-31
   - isbn: 9780575090972
     title: Baptism of Fire
     authors:
       - Andrzej Sapkowski
     published: 1996
-    completed: 2016-08
+    completed: 2016-08-31
   - isbn: 9780316452762
     title: Time of Contempt
     authors:
       - Andrzej Sapkowski
     published: 1995
-    completed: 2016-07
+    completed: 2016-07-31
   - isbn: 9780316073714
     title: Blood of Elves
     authors:
       - Andrzej Sapkowski
     published: 1994
-    completed: 2016-07
+    completed: 2016-07-31

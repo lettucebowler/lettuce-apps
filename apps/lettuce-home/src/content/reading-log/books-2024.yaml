@@ -5,16 +5,16 @@ books:
     authors:
       - Sarah J. Maas
     published: 2017
-    completed: 2024-12
+    completed: 2024-12-31
   - isbn: 9781635575583
     title: A Court of Mist and Fury
     authors:
       - Sarah J. Maas
     published: 2016
-    completed: 2024-06
+    completed: 2024-06-30
   - isbn: 9781635575569
     title: A Court of Thorns and Roses
     authors:
       - Sarah J. Maas
     published: 2014
-    completed: 2024-03
+    completed: 2024-03-31

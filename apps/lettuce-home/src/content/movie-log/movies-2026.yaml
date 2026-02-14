@@ -12,14 +12,14 @@ movies:
     released: 2022
     directors:
       - Jordan Peele
-    watched: 2026-02
+    watched: 2026-02-07
     rating: 3
   - tmdb: 553600
     title: Promare
     released: 2019
     directors:
       - Hiroyuki Imaishi
-    watched: 2026-02
+    watched: 2026-02-06
     rating: 5
     rewatch: true
   - tmdb: 631193
@@ -27,7 +27,7 @@ movies:
     released: 2019
     directors:
       - Tatsumi Fuji
-    watched: 2026-02
+    watched: 2026-02-06
     rating: 4
     rewatch: true
   - tmdb: 629014
@@ -35,7 +35,7 @@ movies:
     directors:
       - Hiroyuki Imaishi
     released: 2019
-    watched: 2026-02
+    watched: 2026-02-06
     rating: 4
     rewatch: true
   - tmdb: 1084242
@@ -44,49 +44,49 @@ movies:
     directors:
       - Byron Howard
       - Jared Bush
-    watched: 2026-01
+    watched: 2026-01-31
     rating: 3
   - tmdb: 1198994
     title: Send Help
     released: 2026
     directors:
       - Sam Raimi
-    watched: 2026-01
+    watched: 2026-01-30
     rating: 4
   - tmdb: 639988
     title: No Other Choice
     released: 2025
     directors:
       - Park Chan-wook
-    watched: 2026-01
+    watched: 2026-01-25
     rating: 3
   - tmdb: 607259
     title: Fatherhood
     released: 2021
     directors:
       - Paul Weitz
-    watched: 2026-01
+    watched: 2026-01-25
     rating: 3
   - tmdb: 555285
     title: Are You There God? It's Me, Margaret.
     released: 2023
     directors:
       - Kelly Fremon Craig
-    watched: 2026-01
+    watched: 2026-01-24
     rating: 4
   - tmdb: 513083
     title: Wine Country
     released: 2019
     directors:
       - Amy Poehler
-    watched: 2026-01
+    watched: 2026-01-24
     rating: 2
   - tmdb: 27205
     title: Inception
     released: 2010
     directors:
       - Christopher Nolan
-    watched: 2026-01
+    watched: 2026-01-17
     rating: 4
     rewatch: true
   - tmdb: 1432547
@@ -94,7 +94,7 @@ movies:
     released: 2026
     directors:
       - Kenichiro Akimoto
-    watched: 2026-01
+    watched: 2026-01-16
     rating: 4
     comment: I don't love the art style for the characters but I loved how colorful and vibrant the world was.
   - tmdb: 493529
@@ -103,7 +103,7 @@ movies:
     directors:
       - Jonathan Goldstein
       - John Francis Daley
-    watched: 2026-01
+    watched: 2026-01-13
     rating: 5
     rewatch: true
     comment: They found the exact tone I was hoping for from a D&D movie.
@@ -112,14 +112,14 @@ movies:
     released: 2025
     directors:
       - Ruben Fleischer
-    watched: 2026-01
+    watched: 2026-01-08
     rating: 3
   - tmdb: 83533
     title: 'Avatar: Fire and Ash'
     released: 2025
     directors:
       - James Cameron
-    watched: 2026-01
+    watched: 2026-01-04
     rating: 3
     comment: I think parts 2 and 3 could have probably been condensed back into a single movie, but overall I enjoyed the continued worldbuilding and characters, like the wind traders.
   - tmdb: 76600
@@ -127,14 +127,14 @@ movies:
     released: 2022
     directors:
       - James Cameron
-    watched: 2026-01
+    watched: 2026-01-03
     rating: 4
   - tmdb: 19995
     title: Avatar
     released: 2009
     directors:
       - James Cameron
-    watched: 2026-01
+    watched: 2026-01-03
     rating: 4
     rewatch: true
   - tmdb: 38357
@@ -142,7 +142,7 @@ movies:
     released: 2025
     directors:
       - Roger Michell
-    watched: 2026-01
+    watched: 2026-01-02
     rating: 3
     rewatch: true
   - tmdb: 967941
@@ -150,7 +150,7 @@ movies:
     directors:
       - Jon M. Chu
     released: 2025
-    watched: 2026-01
+    watched: 2026-01-01
     rating: 2
   - tmdb: 803796
     title: KPop Demon Hunters
@@ -158,13 +158,13 @@ movies:
       - Chris Applehans
       - Maggie Kang
     released: 2025
-    watched: 2026-01
+    watched: 2026-01-01
     rating: 4
   - tmdb: 1061474
     title: Superman
     directors:
       - James Gunn
     released: 2025
-    watched: 2026-01
+    watched: 2026-01-01
     rating: 4
     rewatch: true

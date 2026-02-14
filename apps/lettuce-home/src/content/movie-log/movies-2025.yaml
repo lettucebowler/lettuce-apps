@@ -5,7 +5,7 @@ movies:
     released: 2017
     directors:
       - David Lynch
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 2
   - tmdb: 812583
     title: 'Wake Up Dead Man: A Knives Out Mystery'
@@ -13,20 +13,20 @@ movies:
     directors:
       - Rian Johnson
     rating: 4
-    watched: 2025-12
+    watched: 2025-12-31
   - tmdb: 9833
     title: The Phantom of the Opera
     released: 2004
     directors:
       - Joel Schumacher
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 3
   - tmdb: 5255
     title: The Polar Express
     released: 2004
     directors:
       - Robert Zemeckis
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 5
     comment: You can pry this movie out of my cold, dead hands. I'll be watching it at least once every year until I die.
     rewatch: true
@@ -35,14 +35,14 @@ movies:
     released: 2008
     directors:
       - Seth Gordon
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 3
   - tmdb: 360920
     title: The Grinch
     released: 2018
     directors:
       - Scott Mosier
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 3
     rewatch: true
   - tmdb: 701387
@@ -50,14 +50,14 @@ movies:
     released: 2025
     directors:
       - Yorgos Lanthimos
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 3
   - tmdb: 504253
     title: I Want to Eat Your Pancrease
     released: 2018
     directors:
       - Shinichiro Ushijima
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 5
     rewatch: true
   - tmdb: 10719
@@ -65,7 +65,7 @@ movies:
     released: 2003
     directors:
       - Jon Favreau
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 4
     rewatch: true
   - tmdb: 1228246
@@ -73,14 +73,14 @@ movies:
     released: 2025
     directors:
       - Emma Tammi
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 2
   - tmdb: 14536
     title: New in Town
     released: 2009
     directors:
       - Jonas Elmer
-    watched: 2025-12
+    watched: 2025-12-31
     rating: 3
     rewatch: true
     comment: Infinitely quotable.
@@ -90,21 +90,21 @@ movies:
     released: 2024
     directors:
       - Bobby Farrelly
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 3
   - tmdb: 604079
     title: The Long Walk
     released: 2025
     directors:
       - Francis Lawrence
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 3
   - tmdb: 840430
     title: The Holdovers
     released: 2023
     directors:
       - Alexander Payne
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 4
     comment: This is going into the yearly Christmas movie rotation going forward.
   - tmdb: 9021
@@ -112,7 +112,7 @@ movies:
     released: 2002
     directors:
       - Michael Lembeck
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 3
     rewatch: true
   - tmdb: 11395
@@ -120,7 +120,7 @@ movies:
     released: 1994
     directors:
       - John Pasquin
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 3
     rewatch: true
   - tmdb: 803796
@@ -129,14 +129,14 @@ movies:
       - Chris Applehans
       - Maggie Kang
     released: 2025
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 4
   - tmdb: 632856
     title: Spirited
     released: 2022
     directors:
       - Sean Anders
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 4
     comment: One song added +1 to this score.
   - tmdb: 1235746
@@ -144,7 +144,7 @@ movies:
     released: 2025
     directors:
       - Brian Kirk
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 4
     comment:
       I don't know if I like this movie or not but there is a scene that triggered a powerful emotional response from me
@@ -154,21 +154,21 @@ movies:
     released: 2025
     directors:
       - Gareth Edwards
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 2
   - tmdb: 1153714
     title: Death of a Unicorn
     released: 2025
     directors:
       - Alex Scharfman
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 2
   - tmdb: 330459
     title: 'Rogue One: A Star Wars Story'
     released: 2016
     directors:
       - Gareth Edwards
-    watched: 2025-11
+    watched: 2025-11-30
     rewatch: true
     rating: 4
     comment:
@@ -179,7 +179,7 @@ movies:
     released: 2006
     directors:
       - Betty Thomas
-    watched: 2025-11
+    watched: 2025-11-30
     rating: 3
   # October 2025
   - tmdb: 440472
@@ -187,7 +187,7 @@ movies:
     released: 2019
     directors:
       - Niel Burger
-    watched: 2025-10
+    watched: 2025-10-31
     rating: 4
     comment: Lots of cute moments and it made me laugh.
   - tmdb: 1218925
@@ -195,7 +195,7 @@ movies:
     released: 2025
     directors:
       - Tatsuya Yoshihara
-    watched: 2025-10
+    watched: 2025-10-31
     liked: true
     rating: 5
     comment: Peak fiction.
@@ -204,7 +204,7 @@ movies:
     released: 2025
     directors:
       - Aziz Ansari
-    watched: 2025-10
+    watched: 2025-10-31
     rating: 3
     comment: I liked Keanu
   - tmdb: 685274
@@ -212,7 +212,7 @@ movies:
     released: 2021
     directors:
       - Shukou Murase
-    watched: 2025-10
+    watched: 2025-10-31
     rating: 4
     comment: My favorite Gundam movie.
   - tmdb: 937941
@@ -220,7 +220,7 @@ movies:
     released: 2025
     directors:
       - Chris Stuckmann
-    watched: 2025-10
+    watched: 2025-10-31
     rating: 3
   # September 2025
   - tmdb: 1311031
@@ -228,7 +228,7 @@ movies:
     released: 2025
     directors:
       - Haruo Sotozaki
-    watched: 2025-09
+    watched: 2025-09-30
     rating: 4
     comment: Tanjiro discovers the power of flashback breathing.
   - tmdb: 1035259
@@ -236,7 +236,7 @@ movies:
     released: 2025
     directors:
       - Akiva Schaffer
-    watched: 2025-09
+    watched: 2025-09-30
     rating: 2
     comment: I was really excited for this movie but I feel like the jokes all fell flat.
   - tmdb: 2925
@@ -244,7 +244,7 @@ movies:
     released: 1996
     directors:
       - Hugh Wilson
-    watched: 2025-09
+    watched: 2025-09-30
     rating: 3
   # August 2025
   - tmdb: 1078605
@@ -252,7 +252,7 @@ movies:
     released: 2025
     directors:
       - Zach Cregger
-    watched: 2025-08
+    watched: 2025-08-31
     rating: 5
     comment:
       The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
@@ -263,21 +263,21 @@ movies:
     released: 2025
     directors:
       - Ryan Coogler
-    watched: 2025-07
+    watched: 2025-07-31
     rating: 5
   - tmdb: 617126
     title: 'The Fantastic Four: First Steps'
     released: 2025
     directors:
       - Matt Shakman
-    watched: 2025-07
+    watched: 2025-07-31
     rating: 3
   - tmdb: 950387
     title: A Minecraft Movie
     released: 2025
     directors:
       - Jared Hess
-    watched: 2025-07
+    watched: 2025-07-31
     rating: 3
     comment: An objectively bad movie but it made me laugh.
   - tmdb: 9408
@@ -286,7 +286,7 @@ movies:
     directors:
       - Ash Brannon
       - Christ Buck
-    watched: 2025-07
+    watched: 2025-07-31
     rewatch: true
     rating: 4
   # June 2025
@@ -295,14 +295,14 @@ movies:
     released: 2023
     directors:
       - Aline Brosh McKenna
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
   - tmdb: 239573
     title: Unfinished Business
     released: 2015
     directors:
       - Ken Scott
-    watched: 2025-06
+    watched: 2025-06-30
     rewatch: true
     rating: 3
     comment: Makes me laugh.
@@ -311,7 +311,7 @@ movies:
     released: 1993
     directors:
       - Agnieszka Holland
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
     rewatch: true
   - tmdb: 996821
@@ -319,28 +319,28 @@ movies:
     released: 2025
     directors:
       - Nicholas Stoller
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
   - tmdb: 6557
     title: 27 Dresses
     released: 2008
     directors:
       - Anne Fletcher
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
   - tmdb: 10521
     title: Bride Wars
     released: 2009
     directors:
       - Gary Winick
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
   - tmdb: 455207
     title: Crazy Rich Asians
     released: 2018
     directors:
       - Jon M. Chu
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 4
     rewatch: true
   - tmdb: 4951
@@ -348,7 +348,7 @@ movies:
     released: 1999
     directors:
       - Gil Junger
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 3
     rewatch: true
   - tmdb: 505600
@@ -356,7 +356,7 @@ movies:
     released: 2019
     directors:
       - Olivia Wilde
-    watched: 2025-06
+    watched: 2025-06-30
     rating: 4
     rewatch: true
   # May 2025
@@ -365,20 +365,20 @@ movies:
     directors:
       - Julius Onah
     released: 2025
-    watched: 2025-05
+    watched: 2025-05-31
     rating: 2
   - tmdb: 17335
     title: Obsessed
     released: 2009
     directors:
       - Steve Shill
-    watched: 2025-05
+    watched: 2025-05-31
     rating: 3
   - tmdb: 239563
     title: St. Vincent
     released: 2014
     rating: 4
-    watched: 2025-05
+    watched: 2025-05-31
     rewatch: true
     directors:
       - Theodore Melfi
@@ -387,7 +387,7 @@ movies:
     released: 2025
     directors:
       - Jake Schreier
-    watched: 2025-05
+    watched: 2025-05-31
     rating: 4
     comment: I'm probably over-rating this because of my shock to finally watch a decent marvel movie for the first time in like 5 years.
   # April 2025
@@ -396,7 +396,7 @@ movies:
     released: 2011
     directors:
       - Tim Hill
-    watched: 2025-04
+    watched: 2025-04-30
     rating: 2
     rewatch: true
   - tmdb: 746036
@@ -404,7 +404,7 @@ movies:
     released: 2024
     directors:
       - David Leitch
-    watched: 2025-04
+    watched: 2025-04-30
     rating: 4
     comment: I'm seeing unicorns.
   - tmdb: 696506
@@ -412,7 +412,7 @@ movies:
     title: Mickey 17
     directors:
       - Bong Joon Ho
-    watched: 2025-04
+    watched: 2025-04-30
     rating: 4
     comment: This makes me think about how we discovered that humans are 70% water.
   - tmdb: 38317
@@ -420,7 +420,7 @@ movies:
     released: 2011
     directors:
       - Frank Coraci
-    watched: 2025-04
+    watched: 2025-04-30
     rating: 3
     # Match 2025
   - tmdb: 146216
@@ -428,7 +428,7 @@ movies:
     released: 2013
     directors:
       - Dean Parisot
-    watched: 2025-03
+    watched: 2025-03-31
     rating: 3
     rewatch: true
   - tmdb: 933260
@@ -436,14 +436,14 @@ movies:
     released: 2024
     directors:
       - Coralie Fargeat
-    watched: 2025-03
+    watched: 2025-03-31
     rating: 3
   - tmdb: 550988
     title: Free Guy
     released: 2021
     directors:
       - Shawn Levy
-    watched: 2025-03
+    watched: 2025-03-31
     rating: 5
     rewatch: true
   - tmdb: 12178
@@ -451,7 +451,7 @@ movies:
     released: 2008
     directors:
       - Bharat Nalluri
-    watched: 2025-03
+    watched: 2025-03-31
     rating: 3
   # February 2025
   - tmdb: 286217
@@ -459,7 +459,7 @@ movies:
     released: 2015
     directors:
       - Ridley Scott
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 4
     rewatch: true
   - tmdb: 1084199
@@ -467,7 +467,7 @@ movies:
     released: 2025
     directors:
       - Drew Hancock
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 3
     comment: I don't like that the poster sorta spoils the twist.
   - tmdb: 116741
@@ -475,7 +475,7 @@ movies:
     released: 2013
     directors:
       - Shawn Levy
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 3
     rewatch: true
   - tmdb: 502682
@@ -483,21 +483,21 @@ movies:
     released: 2018
     directors:
       - Bill Holderman
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 3
   - tmdb: 939243
     title: Sonic the Hedgehog 3
     released: 2024
     directors:
       - Jeff Fowler
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 3
   - tmdb: 50646
     title: Crazy, Stupid, Love
     released: 2011
     directors:
       - John Raqua
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 4
     rewatch: true
   - tmdb: 499932
@@ -505,7 +505,7 @@ movies:
     released: 2020
     directors:
       - Antonio Campos
-    watched: 2025-02
+    watched: 2025-02-28
     rating: 3
   # January 2025
   - tmdb: 1397163
@@ -516,20 +516,20 @@ movies:
       - Toko Yatabe
       - Kazuya Tsurumaki
     rating: 3
-    watched: 2025-01
+    watched: 2025-01-31
   - tmdb: 402431
     title: Wicked
     released: 2024
     directors:
       - Jon M. Chu
-    watched: 2025-01
+    watched: 2025-01-31
     rating: 3
   - tmdb: 116745
     title: The Secret Life of Walter Mitty
     released: 2013
     directors:
       - Ben Stiller
-    watched: 2025-01
+    watched: 2025-01-31
     rewatch: true
     rating: 5
   - tmdb: 350
@@ -537,6 +537,6 @@ movies:
     released: 2006
     directors:
       - David Frankel
-    watched: 2025-01
+    watched: 2025-01-31
     rewatch: true
     rating: 4

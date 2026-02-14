@@ -5,11 +5,11 @@ books:
     authors:
       - Orson Scott Card
     published: 1985
-    completed: 2023-10
+    completed: 2023-10-31
   - isbn: 9781421539645
     title: Death Note
     subtitle: Black Edition, Vol. 1
     authors:
       - Tsugumi Ohba
     published: 2010
-    completed: 2023-08
+    completed: 2023-08-31

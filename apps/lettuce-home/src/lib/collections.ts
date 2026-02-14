@@ -1,4 +1,4 @@
-import type { MovieLogEntry } from '$lib/schemas';
+import type { MovieLogEntry, ReadingLogEntry } from '$lib/schemas';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
 
 export function getLastWatchedMovie(): MovieLogEntry {
@@ -49,6 +49,13 @@ export function getFilteredBooks({
     });
 }
 
+export function filterBooks(selector: (book: ReadingLogEntry) => Boolean) {
+  return getReadingLogsDesc()
+    .map((log) => log.items)
+    .flat()
+    .filter(selector);
+}
+
 export function getFilteredMovies({ years, months }: { years: number[]; months: string[] }) {
   return allMovieLogs
     .filter((log) => years.includes(log.year))
@@ -61,6 +68,13 @@ export function getFilteredMovies({ years, months }: { years: number[]; months: 
       const [, movieMonth] = book.watched.split('-');
       return months.includes(movieMonth);
     });
+}
+
+export function filterMovies(selector: (movie: MovieLogEntry) => Boolean) {
+  return getMovieLogsDesc()
+    .map((log) => log.movies)
+    .flat()
+    .filter(selector);
 }
 
 export function getLastReadBook() {

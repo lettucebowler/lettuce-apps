@@ -31,7 +31,7 @@ instead of doing what I intended to do. That's one thing I'd like to change goin
 
 I've hardly read anything since July. I would like to try and be more consistent with my reading in the new year.
 
-<FilteredEntries type="book" years={[2025]} months={['12']} />
+<FilteredEntries type="book" start="2025-12-01" end="2025-12-31" />
 
 ## Movies watched
 
@@ -39,4 +39,4 @@ I watched a lot of Christmas movies this month to the surprise of no one. It fel
 season. I started listening to a new podcast called RPG Major at the recommendation of my cousing. I'm about 5
 episodes in and am liking it so far.
 
-<FilteredEntries type="movie" years={[2025]} months={['12']} />
+<FilteredEntries type="movie" start="2025-12-01" end="2025-12-31"  />

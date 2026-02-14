@@ -14,11 +14,11 @@ I started tracking the tv show seasons that I complete this year. I wasn't sure 
 
 ## Books completed
 
-<FilteredEntries type="book" years={[2026]} months={['02']} />
+<FilteredEntries type="book" start="2026-02-01" end="2026-02-28" />
 
 ## Movies watched
 
-<FilteredEntries type="movie" years={[2026]} months={['02']} />
+<FilteredEntries type="movie" start="2026-02-01" end="2026-02-28" />
 
 ## Shows I've been watching
 
