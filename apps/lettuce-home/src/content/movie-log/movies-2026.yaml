@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 6877
+    title: Failure to Launch
+    released: 2006
+    directors:
+      - Tom Dey
+    watched: 2026-02-14
+    rating: 3
+    rewatch: true
+    comment: A solid rom-com
   - tmdb: 1119449
     title: Good Luck, Have Fun, Don't Die
     released: 2026

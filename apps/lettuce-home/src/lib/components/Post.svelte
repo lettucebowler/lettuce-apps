@@ -37,6 +37,6 @@
     {/each}
   </p>
   {#if summary}
-    <p>{summary}</p>
+    <p class="font-light text-charade-100">{summary}</p>
   {/if}
 </div>
