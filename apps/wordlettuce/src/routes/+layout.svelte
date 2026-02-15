@@ -31,7 +31,12 @@
             class="grid aspect-square size-8 h-full place-items-center p-1 transition-all duration-150 hover:p-0 sm:size-14"
           >
             <div class="aspect-square w-full overflow-hidden rounded sm:rounded-lg">
-              <LettuceAvatar name={session.user.username} />
+              <img
+                src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed={session
+                  .user.username}"
+                alt="{session.user.username} avatar"
+                class="pointer-events-none grid h-full max-w-full place-items-center"
+              />
             </div>
           </div>
         </NavLink>
