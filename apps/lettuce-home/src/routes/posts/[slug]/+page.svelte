@@ -8,7 +8,7 @@
 </svelte:head>
 <main class="mx-auto">
   <div
-    class="mx-auto prose max-w-full prose-brand sm:max-w-3xl prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500"
+    class="mx-auto prose mb-40 max-w-full prose-brand sm:max-w-3xl prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500"
   >
     <h1>{data.meta.title}</h1>
     <div class="flex gap-x-4">
