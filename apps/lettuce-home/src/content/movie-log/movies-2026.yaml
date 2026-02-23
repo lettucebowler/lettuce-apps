@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 403119
+    title: 47 Meters Down
+    released: 2017
+    directors:
+      - Johannes Roberts
+    watched: 2026-02-21
+    rating: 3
   - tmdb: 6877
     title: Failure to Launch
     released: 2006

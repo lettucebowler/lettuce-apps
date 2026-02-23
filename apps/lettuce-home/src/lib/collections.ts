@@ -57,7 +57,7 @@ export function filterBooks(selector: (book: ReadingLogEntry) => Boolean) {
 }
 
 export function getFilteredMovies({ years, months }: { years: number[]; months: string[] }) {
-  return allMovieLogs
+  return getMovieLogsDesc()
     .filter((log) => years.includes(log.year))
     .map((log) => log.movies)
     .flat()

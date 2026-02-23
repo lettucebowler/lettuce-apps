@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9780440418603
+    title: The Golden Compass
+    authors:
+      - Philip Pullman
+    published: 1995
+    completed: 2026-02-23
+    rating: 4
   - isbn: 9780593956014
     title: The Eye of the Bedlam Bride
     authors:

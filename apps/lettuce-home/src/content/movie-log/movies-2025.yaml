@@ -247,6 +247,15 @@ movies:
     watched: 2025-09-30
     rating: 3
   # August 2025
+  - tmdb: 1084199
+    title: Companion
+    released: 2025
+    directors:
+      - Drew Hancock
+    watched: 2025-08-31
+    rating: 3
+    comment: My rating is unchanged on my second viewing.
+    rewatch: true
   - tmdb: 1078605
     title: Weapons
     released: 2025

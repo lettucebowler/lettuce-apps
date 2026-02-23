@@ -25,7 +25,8 @@ export const ReadingLogEntry = v.pipe(
     published: v.pipe(v.number(), v.integer()),
     completed: v.optional(v.string()),
     rating: v.optional(v.pipe(v.number(), v.integer())),
-    comment: v.optional(v.string())
+    comment: v.optional(v.string()),
+    reread: v.optional(v.boolean(), false)
   }),
   v.transform((input) => ({ ...input, type: 'book' as 'book' }))
 );
