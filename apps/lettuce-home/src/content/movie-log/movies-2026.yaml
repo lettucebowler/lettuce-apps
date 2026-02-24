@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 2268
+    title: The Golden Compass
+    released: 2007
+    directors:
+      - Chris Weitz
+    watched: 2026-02-23
+    rating: 2
+    comment: I think this is the first movie I've ever seen adapt 2/3rds of a book.
   - tmdb: 403119
     title: 47 Meters Down
     released: 2017

@@ -6,15 +6,20 @@ books:
       - Sarah J. Maas
     published: 2017
     completed: 2024-12-31
+    rating: 3
+    comment: It's ass pull o'clock.
   - isbn: 9781635575583
     title: A Court of Mist and Fury
     authors:
       - Sarah J. Maas
     published: 2016
     completed: 2024-06-30
+    rating: 4
   - isbn: 9781635575569
     title: A Court of Thorns and Roses
     authors:
       - Sarah J. Maas
     published: 2014
     completed: 2024-03-31
+    rating: 3
+    comment: For some reason I read Amarantha as Meryl Streep and I can't explain it. The vibes don't match at all.
