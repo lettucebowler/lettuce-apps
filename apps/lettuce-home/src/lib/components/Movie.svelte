@@ -33,36 +33,38 @@
     </ul>
     <div class="group flex gap-x-2">
       {#if comment}
-        <button
-          aria-label="movie comment for {title}"
-          popovertarget={createAnchorName(tmdb, watched)}
-          class="flex cursor-pointer items-center gap-2"
-          style="anchor-name: --{createAnchorName(tmdb, watched)}"
-          id="movie-comment-{tmdb}"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-4 group-hover:text-swamp-green-500"
+        <div class="contents @min-[17rem]:hidden">
+          <button
+            aria-label="movie comment for {title}"
+            popovertarget={createAnchorName(tmdb, watched)}
+            class="flex cursor-pointer items-center gap-2"
+            style="anchor-name: --{createAnchorName(tmdb, watched)}"
+            id="movie-comment-{tmdb}"
           >
-            <path
-              fill-rule="evenodd"
-              d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-        <div
-          id={createAnchorName(tmdb, watched)}
-          popover
-          style="position-anchor: --{createAnchorName(
-            tmdb,
-            watched
-          )};  position-area: block-end span-inline-end; position-try-fallbacks:flip-inline;"
-          class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 shadow-sm"
-        >
-          <p class="text-charade-50">{comment}</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-4 group-hover:text-swamp-green-500"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <div
+            id={createAnchorName(tmdb, watched)}
+            popover
+            style="position-anchor: --{createAnchorName(
+              tmdb,
+              watched
+            )};  position-area: block-end span-inline-end; position-try-fallbacks:flip-inline;"
+            class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 shadow-sm"
+          >
+            <p class="text-charade-50">{comment}</p>
+          </div>
         </div>
       {/if}
       {#if rating}
@@ -91,5 +93,8 @@
         <p class="font-bold text-antique-brass-500 italic">rewatch</p>
       {/if}
     </div>
+    {#if comment}
+      <p class="mt-2 font-thin text-charade-100 @max-[17rem]:hidden">{comment}</p>
+    {/if}
   {/snippet}
 </MediaCard>

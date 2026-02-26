@@ -81,3 +81,6 @@ export const MovieLog = v.object({
   movies: v.array(MovieLogEntry)
 });
 export type MovieLog = v.InferOutput<typeof MovieLog>;
+
+export type LogEntry = ReadingLogEntry | MovieLogEntry;
+export type LogEntryType = LogEntry['type'];

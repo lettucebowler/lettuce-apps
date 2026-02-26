@@ -13,16 +13,18 @@
     href="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&radius=20&seed=lettucebowler"
   /></svelte:head
 >
-<div class="container mx-auto h-full space-y-10 xl:max-w-screen-xl">
+<div
+  class="mx-auto h-full space-y-16 p-4 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
+>
   <nav class="flex flex-wrap gap-x-4 gap-y-1">
-    <NavLink to="/"><span class="text-lg font-bold hover:underline">Home</span></NavLink>
+    <NavLink to="/"><span class="text-xl font-bold hover:underline">Home</span></NavLink>
     <NavLink to="/posts" current={page.url.pathname.startsWith('/posts')}
-      ><span class="text-lg font-bold hover:underline">Posts</span></NavLink
+      ><span class="text-xl font-bold hover:underline">Posts</span></NavLink
     >
-    <NavLink to="/projects"><span class="text-lg font-bold hover:underline">Projects</span></NavLink
+    <NavLink to="/projects"><span class="text-xl font-bold hover:underline">Projects</span></NavLink
     >
-    <NavLink to="/books"><span class="text-lg font-bold hover:underline">Books</span></NavLink>
-    <NavLink to="/movies"><span class="text-lg font-bold hover:underline">Movies</span></NavLink>
+    <NavLink to="/books"><span class="text-xl font-bold hover:underline">Books</span></NavLink>
+    <NavLink to="/movies"><span class="text-xl font-bold hover:underline">Movies</span></NavLink>
     <a
       href="https://github.com/lettucebowler"
       class="hidden sm:ml-auto sm:inline"

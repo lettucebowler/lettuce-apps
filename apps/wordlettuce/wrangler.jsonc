@@ -2,51 +2,49 @@
   "name": "wordlettuce",
   "pages_build_output_dir": ".svelte-kit/cloudflare",
   "compatibility_date": "2025-02-09",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "compatibility_flags": ["nodejs_compat"],
   "services": [
     {
       "binding": "lettuce_auth",
-      "service": "lettuce-auth"
-    }
+      "service": "lettuce-auth",
+    },
   ],
   "env": {
     "production": {
       "services": [
         {
           "binding": "lettuce_auth",
-          "service": "lettuce-auth"
-        }
+          "service": "lettuce-auth",
+        },
       ],
       "vars": {
         "NODE_VERSION": "24",
         "PUBLIC_API_WORDLETTUCE_HOST": "https://api.word.lettucebowler.net",
-        "AUTH_HOST": "https://auth.lettucebowler.net"
+        "AUTH_HOST": "https://auth.lettucebowler.net",
       },
       "kv_namespaces": [
         {
           "binding": "lettuce_auth_signing_keys",
-          "id": "31a684ad1101462c9f76deb754fc92fe"
-        }
-      ]
-    }
+          "id": "31a684ad1101462c9f76deb754fc92fe",
+        },
+      ],
+    },
   },
   "placement": {
-    "mode": "off"
+    "mode": "off",
   },
   "vars": {
     "NODE_VERSION": "24",
     "PUBLIC_API_WORDLETTUCE_HOST": "https://api.word.lettucebowler.net",
-    "AUTH_HOST": "https://auth.lettucebowler.net"
+    "AUTH_HOST": "https://auth.lettucebowler.net",
   },
   "kv_namespaces": [
     {
       "binding": "lettuce_auth_signing_keys",
-      "id": "31a684ad1101462c9f76deb754fc92fe"
-    }
+      "id": "31a684ad1101462c9f76deb754fc92fe",
+    },
   ],
   "dev": {
-    "port": 3000
-  }
+    "port": 3000,
+  },
 }

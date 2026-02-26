@@ -7,7 +7,8 @@
   --tw-prose-body: var(--color-charade-50);
   --tw-prose-headings: var(--color-charade-50);
   --tw-prose-lead: var(--color-charade-50);
-  --tw-prose-links: var(--color-charade-50); /* Links will use your brand color */
+  --tw-prose-links: var(--color-charade-50);
+  /* Links will use your brand color */
   --tw-prose-bold: var(--color-charade-50);
   /* ... add other prose variables as needed for complete control ... */
   --tw-prose-quote-borders: var(--color-charade-50);

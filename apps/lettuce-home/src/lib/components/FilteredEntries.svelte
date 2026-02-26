@@ -1,13 +1,10 @@
 <script lang="ts">
   import { filterBooks, filterMovies } from '$lib/collections';
-  import type { MovieLogEntry, ReadingLogEntry } from '$lib/schemas';
-
-  type Entry = ReadingLogEntry | MovieLogEntry;
-  type EntryType = Entry['type'];
+  import type { LogEntry, LogEntryType } from '$lib/schemas';
   type Props = {
     start: string;
     end: string;
-    type: EntryType;
+    type: LogEntryType;
   };
 
   const { start, end, type }: Props = $props();
@@ -28,7 +25,7 @@
         })
   );
 
-  function getEntryMediaPath(entry: Entry) {
+  function getEntryMediaPath(entry: LogEntry) {
     switch (entry.type) {
       case 'book':
         return `/covers/book-${entry.isbn}.webp`;
@@ -37,7 +34,7 @@
     }
   }
 
-  function getEntryId(entry: Entry) {
+  function getEntryId(entry: LogEntry) {
     switch (entry.type) {
       case 'book':
         return `${entry.isbn}:${entry.completed}`;

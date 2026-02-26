@@ -60,6 +60,7 @@ movies:
     watched: 2025-12-31
     rating: 5
     rewatch: true
+    comment: I want to eat this movie's pancreas.
   - tmdb: 10719
     title: Elf
     released: 2003
@@ -106,7 +107,7 @@ movies:
       - Alexander Payne
     watched: 2025-11-30
     rating: 4
-    comment: This is going into the yearly Christmas movie rotation going forward.
+    comment: This is going into the yearly Christmas movie rotation.
   - tmdb: 9021
     title: The Santa Clause 2
     released: 2002
@@ -146,9 +147,7 @@ movies:
       - Brian Kirk
     watched: 2025-11-30
     rating: 4
-    comment:
-      I don't know if I like this movie or not but there is a scene that triggered a powerful emotional response from me
-      so I'm giving it a 4 for that.
+    comment: +1 for a specific scene that triggered a strong emotional response from me.
   - tmdb: 1234821
     title: Jurassic Worls Rebirth
     released: 2025

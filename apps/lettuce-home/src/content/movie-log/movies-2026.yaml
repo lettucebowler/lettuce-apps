@@ -130,7 +130,7 @@ movies:
     watched: 2026-01-13
     rating: 5
     rewatch: true
-    comment: They found the exact tone I was hoping for from a D&D movie.
+    comment: Exactly what I wanted from a DnD movie.
   - tmdb: 425274
     title: "Now You See Me: Now You Don't"
     released: 2025
@@ -145,7 +145,7 @@ movies:
       - James Cameron
     watched: 2026-01-04
     rating: 3
-    comment: I think parts 2 and 3 could have probably been condensed back into a single movie, but overall I enjoyed the continued worldbuilding and characters, like the wind traders.
+    comment: I liked the new world building, but it suffered from being split out into it's own movie.
   - tmdb: 76600
     title: 'Avatar: The Way of Water'
     released: 2022

@@ -25,9 +25,29 @@
   <title>Grant Montgomery</title>
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
-  <h1 class="text-3xl font-bold">Grant Montgomery</h1>
-  <div id="home-layout" class="grid gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-[2fr_3fr]">
+  <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-[2fr_3fr]">
     <div id="home-right" class="@container space-y-8">
+      <section class="space-y-4">
+        <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
+        <p>
+          Grant works as a full-stack web developer in the healthcare industry, working primarily
+          with React and Stencil on the frontend, and Node or Springboot on the backend.
+        </p>
+        <div class="grid grid-cols-3 text-center">
+          <a href="https://twitter.com/lettucebowler" class="group p-4">
+            <TwitterIcon class="mx-auto size-10 fill-frost-300" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="https://github.com/lettucebowler" class="group p-4">
+            <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="/Resume.pdf" target="_blank" class="group p-4">
+            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" />
+            <span class="group-hover:underline">Resume </span>
+          </a>
+        </div>
+      </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
           Recent posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline"
@@ -51,29 +71,8 @@
         {/each}
       </section>
     </div>
-    <div id="home-left" class="@container space-y-8">
-      <section class="space-y-4">
-        <h2 class="text-2xl font-bold">About</h2>
-        <p>
-          Grant works as a full-stack web developer in the healthcare industry, working primarily
-          with React and Stencil on the frontend, and Node or Springboot on the backend.
-        </p>
-        <div class="mx-auto flex max-w-md flex-row flex-wrap justify-around gap-6 text-center">
-          <a href="https://twitter.com/lettucebowler" class="group p-4">
-            <TwitterIcon class="mx-auto size-10 fill-frost-300" />
-            <span class="group-hover:underline">@Lettucebowler</span>
-          </a>
-          <a href="https://github.com/lettucebowler" class="group p-4">
-            <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
-            <span class="group-hover:underline">@Lettucebowler</span>
-          </a>
-          <a href="/Resume.pdf" target="_blank" class="group p-4">
-            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" />
-            <span class="group-hover:underline">Resume </span>
-          </a>
-        </div>
-      </section>
-      <div class="grid gap-4 @min-[400px]:grid-cols-2">
+    <div id="home-left" class="@container space-y-12">
+      <div class="grid gap-4 @min-[35rem]:grid-cols-2">
         <section class="space-y-4">
           <h2 class="text-2xl font-bold">Last read</h2>
           <Book {...latestBook} />
@@ -85,7 +84,7 @@
       </div>
       <section class="space-y-4">
         <h2 class="text-2xl font-bold">Currently reading</h2>
-        <div class="grid gap-4 @min-[400px]:grid-cols-2">
+        <div class="grid gap-4 @min-[35rem]:grid-cols-2">
           {#each currentBooks as book (book.isbn)}
             <Book {...book} />
           {/each}
