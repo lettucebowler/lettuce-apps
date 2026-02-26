@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9798217190041
+    title: This Inevitable Ruin
+    authors:
+      - Matt Dinniman
+    published: 2024
+    completed: 2026-02-25
+    rating: 5
+    comment: This shit gets better with every book
   - isbn: 9780440418603
     title: The Golden Compass
     authors:
