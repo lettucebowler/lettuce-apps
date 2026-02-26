@@ -14,7 +14,7 @@
   --tw-prose-quote-borders: var(--color-charade-50);
   /* Define invert colors for dark mode if necessary */
   --tw-prose-invert-body: var(--color-brand-100);
-  --tw-prose-invert-headings: var(--color-white);
+  --tw-prose-invert-headings: var(--color-charade-50);
   --tw-prose-invert-links: var(--color-brand-300);
   /* ... */
 }
