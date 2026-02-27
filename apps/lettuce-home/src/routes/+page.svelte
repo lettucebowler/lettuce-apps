@@ -26,7 +26,7 @@
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
   <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-[5fr_7fr]">
-    <div id="home-right" class="@container space-y-8">
+    <div id="home-left" class="@container space-y-8">
       <section class="space-y-4">
         <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
         <p>
@@ -71,8 +71,8 @@
         {/each}
       </section>
     </div>
-    <div id="home-left" class="@container space-y-12">
-      <div class="flex w-full flex-wrap gap-4">
+    <div id="home-right" class="@container space-y-12">
+      <div class="flex w-full flex-wrap gap-x-4 gap-y-12">
         <section class="min-w-[18rem] flex-1 basis-auto space-y-4">
           <h2 class="text-2xl font-bold">Last read</h2>
           <Book {...latestBook} />
