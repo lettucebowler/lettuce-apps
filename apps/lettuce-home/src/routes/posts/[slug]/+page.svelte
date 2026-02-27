@@ -8,7 +8,7 @@
 </svelte:head>
 <main class="mx-auto">
   <div
-    class="mx-auto prose mb-40 max-w-full prose-brand sm:max-w-3xl prose-headings:font-bold prose-h1:text-3xl prose-a:cursor-pointer prose-a:text-putty-500"
+    class="mx-auto prose mb-40 prose-brand sm:max-w-3xl prose-headings:font-bold prose-h1:mb-8 prose-h1:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-a:cursor-pointer prose-a:text-putty-500 prose-img:w-full"
   >
     <h1>{data.meta.title}</h1>
     <div class="flex gap-x-4">
@@ -20,7 +20,7 @@
           timeZone: 'UTC'
         })}</time
       >
-      <nav class="mb-6">
+      <nav>
         <ul class="m-0! flex list-none gap-2 p-0!">
           {#each data.meta.tags as tag (tag)}
             <li class="m-0! p-0!">

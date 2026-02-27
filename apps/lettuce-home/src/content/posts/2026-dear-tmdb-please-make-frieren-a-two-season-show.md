@@ -8,7 +8,7 @@ tags:
 
 I recently visited the TMDB page for <a class="italic" href="https://www.themoviedb.org/tv/209867">Frieren: Beyond Journey's End</a> to leave the show a review. The first thing to stick out to me was that the show was listed as having one season. 'That's strange' I thought, considering I had just finished watching the 4th episode of season 2. Then I noticed season 1 was listed as having 39 episodes. Season 1 only had 28 episodes. That's when it hit me. You are counting season 2 as part of season 1 in your official episode ordering.
 
-![screenshot of Frieren season one, shown containing 39 episodes.](/post-media/dear-tmdb-frieren.png)
+<img src="/post-media/dear-tmdb-frieren.png" alt="Screenshot of Frieren season one, showing it containing 39 episodes" width="1035" height="298">
 
 Every time I visit the page my body and soul are filled with an unpleasant sensation that can only be described as not liking what I'm seeing. I have tried to move past it, to ignore it, but it's not working. I can't stop thinking about it.
 
@@ -16,7 +16,7 @@ Current TMDB policy for anime states that official site of a show should be the 
 
 ## It's not a technical limitation
 
-![screenshot of the One Piece TMDB page, showing the most recent episode listed as 22x1155](/post-media/dear-tmdb-one-piece.png)
+<img src="/post-media/dear-tmdb-one-piece.png" width="1065" height="332" alt="Screenshot of the One Piece TMDB page, showing the most recent episode listed as 22x1155">
 
 When looking at the TMDB page for One Piece, you might notice that the most recent episode is noted as 22x1155, but season 22 only has 68 episodes. Curious. It is clear that there are no technical constraints influencing TMDB policy on this matter, since it doesn't negatively impact One Piece. I can see no reason from a technical standpoint that Frieren could not recieve this same treatment.
 

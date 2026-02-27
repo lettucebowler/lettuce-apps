@@ -34,9 +34,7 @@
 </script>
 
 <div class="@container">
-  <figure
-    class="@max-[17rem]:space-y-2 @min-[17rem]:flex @min-[17rem]:gap-x-2 @min-[20rem]:gap-x-4"
-  >
+  <figure class="gap-x-4 @max-[17rem]:space-y-2 @min-[17rem]:flex">
     <div class="max-w-30 min-w-30 flex-2 shadow-sm @max-[18rem]:max-w-44">
       <a
         href={type === 'movie'
