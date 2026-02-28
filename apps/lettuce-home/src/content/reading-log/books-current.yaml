@@ -6,6 +6,11 @@ books:
     authors:
       - David Graeber
     published: 2011
+  - isbn: 9780440418610
+    title: The Subtle Knife
+    authors:
+      - Philip Pullman
+    published: 1997
   - isbn: 9798217190065
     title: A Parade of Horribles
     authors:

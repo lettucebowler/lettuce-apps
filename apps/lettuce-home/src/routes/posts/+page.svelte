@@ -11,9 +11,12 @@
 </svelte:head>
 <main class="">
   <h1 class="mb-8 text-3xl font-bold">Posts</h1>
-  <h2 class="mb-2 text-2xl font-bold">Filter:</h2>
-  <nav class="mb-6">
+  <nav class="mb-8">
+    <div class="mb-1 inline-block text-lg">Filter:</div>
     <ul class="flex gap-2">
+      <li>
+        <a href="/posts" class="inline-flex font-light text-frost-100 hover:underline">all</a>
+      </li>
       {#each tags as tag (tag)}
         <li>
           <a href="/posts?tag={tag}" class="inline-flex font-light text-frost-100 hover:underline"

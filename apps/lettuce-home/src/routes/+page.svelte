@@ -72,7 +72,7 @@
       </section>
     </div>
     <div id="home-right" class="@container space-y-12">
-      <div class="flex w-full flex-wrap gap-x-4 gap-y-12">
+      <div class="grid gap-x-4 gap-y-12 @min-[36rem]:grid-cols-2">
         <section class="min-w-[18rem] flex-1 basis-auto space-y-4">
           <h2 class="text-2xl font-bold">Last read</h2>
           <Book {...latestBook} />
@@ -84,7 +84,7 @@
       </div>
       <section class="space-y-4">
         <h2 class="text-2xl font-bold">Currently reading</h2>
-        <div class="flex w-full flex-wrap gap-4">
+        <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
           {#each currentBooks as book (book.isbn)}
             <div class="min-w-[18rem] flex-1 basis-auto">
               <Book {...book} />
