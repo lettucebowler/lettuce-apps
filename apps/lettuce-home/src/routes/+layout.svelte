@@ -16,15 +16,14 @@
 <div
   class="mx-auto h-full space-y-16 p-4 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
 >
-  <nav class="flex flex-wrap gap-x-4 gap-y-1">
-    <NavLink to="/"><span class="text-xl font-bold hover:underline">Home</span></NavLink>
+  <nav class="flex flex-wrap justify-center gap-x-4 gap-y-1 font-bold sm:justify-start sm:text-xl">
+    <NavLink to="/"><span class="hover:underline">Home</span></NavLink>
     <NavLink to="/posts" current={page.url.pathname.startsWith('/posts')}
-      ><span class="text-xl font-bold hover:underline">Posts</span></NavLink
+      ><span class="hover:underline">Posts</span></NavLink
     >
-    <NavLink to="/projects"><span class="text-xl font-bold hover:underline">Projects</span></NavLink
-    >
-    <NavLink to="/books"><span class="text-xl font-bold hover:underline">Books</span></NavLink>
-    <NavLink to="/movies"><span class="text-xl font-bold hover:underline">Movies</span></NavLink>
+    <NavLink to="/projects"><span class="hover:underline">Projects</span></NavLink>
+    <NavLink to="/books"><span class="hover:underline">Books</span></NavLink>
+    <NavLink to="/movies"><span class="hover:underline">Movies</span></NavLink>
     <a
       href="https://github.com/lettucebowler"
       class="hidden sm:ml-auto sm:inline"
