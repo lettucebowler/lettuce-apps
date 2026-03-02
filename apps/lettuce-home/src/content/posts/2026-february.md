@@ -1,9 +1,10 @@
 ---
 title: 'February 2026'
-date: 2026-02-28
+date: 2026-03-1
 published: true
 tags:
-  - 'media-log'
+  - media-log
+  - vibe-check
 ---
 
 <script lang="ts">
@@ -30,3 +31,33 @@ Most of the movies I watch are older releases. A movie has to really jump out at
 
 I'm not keeping up with very many weekly shows right now. The two main ones are the second season of <a class="italic" href="https://www.thetvdb.com/series/sousou-no-frieren">Frieren: Beyond Journey's End</a> and <a class="italic" href="https://www.thetvdb.com/series/sentenced-to-brave-punishment">Sentenced to be a Hero</a>.
 At some point I will get caught up on <a class="italic" href="https://thetvdb.com/series/jujutsu-kaisen">Jujutsu Kaisen</a> but haven't managed it yet. I finished season 2 of <a class="italic" href="https://www.thetvdb.com/series/fallout">Fallout</a> and would say that I was whelmed. My wife and I watched the first season of <a class="italic" href="https://thetvdb.com/series/the-white-lotus">The White Lotus</a>, which I enjoyed, but she wasn't too impressed with it. We finished the first season of <a class="italic" href="https://www.themoviedb.org/tv/82782-the-righteous-gemstones?language=en-US">The Righteous Gemstones</a> and so far are really enjoying the character development.
+
+## What went well this month
+
+### Book club
+
+I started going a book club with my wife, starting with The Golden Compass. It's been really fun to regularly talk to each other about the book as we go, discuss questions and theories that we have and what we hope happens next in the story. I ended up really liking the book and plan to finish the six-book series.
+
+### Reading goal progress report
+
+As of 02/28/2026, I have completed 10 books. That puts me well above pace for my 24 book goal this year. Even if I don't count the two books from the start of the year that carried over from last year, that still puts me at 4 books ahead of schedule. I would never set myself a goal of more than 24 books in a year, but if I naturally exceed that then that's perfectly fine and good. I want the books I read to be because I enjoyed them and not because I felt like I had to finish my homework.
+
+## What didn't go well this month
+
+### I need to work out more
+
+I set myself a goal of working out more this year and so far I have worked out 10 times. That's only an average of about once per week. I would like to get to at least 3 times each week. One mistake I made was trying to get back into weight lifting based on how I used to train when I was in college and did it regularly. I pushed myself too hard too early and hurt my knee.
+
+### I'm not drinking nearly enough water
+
+Originally I set myself a goal of drinking 120 ounces of water every day. After tracking my success (or more accurately lack of) for the last few months of 2026, I decided to lower my goal to 80 oz each day to give myself a higher chance of success. I though that it was better to get a quick win to build morale and then iteratively improve until get to my original goal of 120 oz. So far that strategy has not worked out.
+
+## What I am going to try to do differently
+
+I am going to prioritize building my habit of working out first before I try to get back to where I was 7 years ago at the peak of my lifting journey. I won't ever get there if I keep failing to jump from nothing to lifting heavy 5 days a week. I struggle with an all-or-nothing mindset so when I fail at the obviously too difficult first step, I end up giving up. Improving iteratively from where I am will make any individual failure less of a setback.
+
+New rule: The only non-water beverage I am allowed to drink before I have had 80 oz of water on any given day is a protein shake or milk. I don't like drinking milk, so if I want something other than water or Premier Protein, I need to get chugging.
+
+## This post is over now
+
+I haven't figured out how to end a post yet but this is the end now.
