@@ -10,6 +10,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import FilteredEntries from '$lib/components/FilteredEntries.svelte';
+  import DateRangePicker from './DateRangePicker.svelte';
 
   const { start, end } = $derived(
     v.parse(querySchema, Object.fromEntries(page.url.searchParams.entries()))
@@ -17,6 +18,7 @@
 </script>
 
 <main class="space-y-8">
+  <DateRangePicker />
   <h1 class="text-3xl font-bold">Media Log</h1>
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">Books read</h2>

@@ -3,7 +3,7 @@
   import './layout.css';
   import NavLink from './NavLink.svelte';
   import GithubIcon from './GithubIcon.svelte';
-  import ResumeIcon from './ResumeIcon.svelte';
+  import ResumeIcon from 'phosphor-svelte/lib/FileTextIcon';
   let { children } = $props();
 </script>
 
@@ -32,7 +32,7 @@
       <GithubIcon class="size-6 fill-swamp-green-500" />
     </a>
     <a href="/Resume.pdf" target="_blank" class="hidden sm:inline" title="Resume">
-      <ResumeIcon class="size-6 text-antique-brass-500" />
+      <ResumeIcon class="size-6 text-antique-brass-500" weight="fill" />
     </a>
   </nav>
   <div>

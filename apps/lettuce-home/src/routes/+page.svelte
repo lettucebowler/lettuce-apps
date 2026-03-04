@@ -11,7 +11,7 @@
   import Post from '$lib/components/Post.svelte';
   import Project from '$lib/components/Project.svelte';
   import GithubIcon from './GithubIcon.svelte';
-  import ResumeIcon from './ResumeIcon.svelte';
+  import ResumeIcon from 'phosphor-svelte/lib/FileTextIcon';
   import TwitterIcon from './TwitterIcon.svelte';
 
   const latestBook = getLastReadBook();
@@ -43,7 +43,7 @@
             <span class="group-hover:underline">@Lettucebowler</span>
           </a>
           <a href="/Resume.pdf" target="_blank" class="group p-4">
-            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" />
+            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" weight="fill" />
             <span class="group-hover:underline">Resume </span>
           </a>
         </div>

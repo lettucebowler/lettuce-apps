@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Project } from 'content-collections';
-  import ExternalLinkIcon from './ExternalLinkIcon.svelte';
+  import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 
   type Props = {
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -22,7 +22,7 @@
   {#if url}
     <a href={url} class="group inline text-swamp-green-500">
       {@render Title({ title, heading, classname: [headingClassname, 'underline'] })}
-      <ExternalLinkIcon class="mb-3 inline-block size-3.5" />
+      <ArrowSquareOutIcon class="mb-3 inline-block size-3.5" weight="bold" />
     </a>
   {:else}
     <div class="">

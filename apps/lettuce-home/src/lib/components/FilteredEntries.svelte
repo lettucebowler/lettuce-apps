@@ -5,12 +5,16 @@
     start: string;
     end: string;
     type: LogEntryType;
+    manualItems?: Array<LogEntry>;
   };
 
-  const { start, end, type }: Props = $props();
+  const { start, end, type, manualItems }: Props = $props();
 
-  const items = $derived(
-    type === 'book'
+  const items = $derived.by(() => {
+    if (manualItems) {
+      return manualItems;
+    }
+    return type === 'book'
       ? filterBooks((book) => {
           if (!book.completed) {
             return false;
@@ -22,8 +26,8 @@
             return false;
           }
           return movie.watched >= start && movie.watched <= end;
-        })
-  );
+        });
+  });
 
   function getEntryMediaPath(entry: LogEntry) {
     switch (entry.type) {
@@ -55,7 +59,7 @@
         ><img src={getEntryMediaPath(item)} class="m-0! aspect-2/3 w-full" alt={item.title} /></a
       >
     {:else}
-      <p class="col-span-full">No entries within specified date range</p>
+      <p class="col-span-full">No {type}s within specified date range</p>
     {/each}
   </div>
 </div>
