@@ -262,8 +262,7 @@ movies:
       - Zach Cregger
     watched: 2025-08-31
     rating: 5
-    comment:
-      The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
+    comment: The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
       second time. I left in shock.
   # July 2025
   - tmdb: 1233413

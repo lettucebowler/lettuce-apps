@@ -26,10 +26,9 @@
       {/each}
     </MediaCollection>
   {/each}
-  <p class="mx-auto mt-32 text-center font-light">
-    Images and data sourced from&nbsp;<a
-      class="text-swamp-green-500 hover:underline"
-      href="https://openlibrary.org">https://openlibrary.org</a
+  <p class="mx-auto mt-32 text-center text-charade-100/90">
+    Images and data sourced from&nbsp;<a class="text-swamp-green-500 hover:underline" href="https://openlibrary.org"
+      >https://openlibrary.org</a
     >
   </p>
 </main>

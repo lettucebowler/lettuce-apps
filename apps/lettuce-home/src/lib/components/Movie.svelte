@@ -2,8 +2,7 @@
   import { type MovieLogEntry } from '$lib/schemas';
   import LogEntry from './LogEntry.svelte';
 
-  let { tmdb, title, directors, released, rewatch, rating, comment, watched }: MovieLogEntry =
-    $props();
+  let { tmdb, title, directors, released, rewatch, rating, comment, watched }: MovieLogEntry = $props();
 
   function createAnchorName(tmdb: number, watched: string) {
     return `movie-${tmdb}-${watched}`;

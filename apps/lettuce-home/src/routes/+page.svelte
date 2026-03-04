@@ -30,8 +30,8 @@
       <section class="space-y-4">
         <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
         <p>
-          Grant works as a full-stack web developer in the healthcare industry, working primarily
-          with React and Stencil on the frontend, and Node or Springboot on the backend.
+          Grant works as a full-stack web developer in the healthcare industry, working primarily with React and Stencil
+          on the frontend, and Node or Springboot on the backend.
         </p>
         <div class="grid grid-cols-3 text-center">
           <a href="https://twitter.com/lettucebowler" class="group p-4">
@@ -50,8 +50,7 @@
       </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Recent posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline"
-            >View all posts →</a
+          Recent posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
           >
         </h2>
         {#each recentPosts as post (post.slug)}
@@ -60,9 +59,8 @@
       </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Active projects <a
-            href="/projects"
-            class="ml-8 text-base font-medium text-charade-100 underline">View all projects →</a
+          Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
+            >View all projects →</a
           >
         </h2>
         {#each activeProjects as project (project.title)}

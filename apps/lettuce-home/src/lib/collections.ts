@@ -26,13 +26,7 @@ export function getReadingLogsDesc() {
     });
 }
 
-export function getFilteredBooks({
-  years,
-  months
-}: {
-  years: Array<number | 'current'>;
-  months: string[];
-}) {
+export function getFilteredBooks({ years, months }: { years: Array<number | 'current'>; months: string[] }) {
   return allReadingLogs
     .filter((log) => years.includes(log.year))
     .map((log) => log.books)

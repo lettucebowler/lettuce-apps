@@ -14,17 +14,14 @@
 <div class="@container space-y-4">
   {#if title}
     <header>
-      <svelte:element this={heading} class="inline-block text-2xl font-bold">{title}</svelte:element
-      >
+      <svelte:element this={heading} class="inline-block text-2xl font-bold">{title}</svelte:element>
       {#if subtitle}
         &nbsp;
         <span class="font-medium text-charade-100">{subtitle}</span>
       {/if}
     </header>
   {/if}
-  <div
-    class="grid grid-cols-1 gap-x-4 gap-y-6 @min-[35rem]:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]"
-  >
+  <div class="grid grid-cols-1 gap-x-4 gap-y-6 @min-[35rem]:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]">
     {@render children?.()}
   </div>
 </div>

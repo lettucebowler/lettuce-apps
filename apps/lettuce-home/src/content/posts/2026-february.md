@@ -38,9 +38,9 @@ At some point I will get caught up on <a class="italic" href="https://thetvdb.co
 
 I started going a book club with my wife, starting with The Golden Compass. It's been really fun to regularly talk to each other about the book as we go, discuss questions and theories that we have and what we hope happens next in the story. I ended up really liking the book and plan to finish the six-book series.
 
-### Reading goal progress report
+### Reading every day
 
-As of 02/28/2026, I have completed 10 books. That puts me well above pace for my 24 book goal this year. Even if I don't count the two books from the start of the year that carried over from last year, that still puts me at 4 books ahead of schedule. I would never set myself a goal of more than 24 books in a year, but if I naturally exceed that then that's perfectly fine and good. I want the books I read to be because I enjoyed them and not because I felt like I had to finish my homework.
+I don't think I've missed a day yet this year. As of 02/28/2026, I have completed 10 books. That puts me well above pace for my 24 book goal this year. Even if I don't count the two books from the start of the year that carried over from last year, that still puts me at 4 books ahead of schedule. I would never set myself a goal of more than 24 books in a year, but if I naturally exceed that then that's perfectly fine and good. I want the books I read to be because I enjoyed them and not because I felt like I had to finish my homework.
 
 ## What didn't go well this month
 

@@ -51,14 +51,6 @@
   </div>
 </article>
 
-{#snippet Title({
-  title,
-  heading,
-  classname
-}: {
-  title: string;
-  heading: string;
-  classname: string | string[];
-})}
+{#snippet Title({ title, heading, classname }: { title: string; heading: string; classname: string | string[] })}
   <svelte:element this={heading} class={classname}>{title}</svelte:element>
 {/snippet}

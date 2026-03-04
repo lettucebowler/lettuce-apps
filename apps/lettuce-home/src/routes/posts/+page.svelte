@@ -12,16 +12,14 @@
 <main class="">
   <h1 class="mb-8 text-3xl font-bold">Posts</h1>
   <nav class="mb-8">
-    <div class="mb-1 inline-block text-lg">Filter:</div>
-    <ul class="flex gap-2">
+    <span class="mr-2 text-lg">Filter:</span>
+    <ul class="inline-flex gap-2">
       <li>
-        <a href="/posts" class="inline-flex font-light text-frost-100 hover:underline">all</a>
+        <a href="/posts" class="inline-flex text-frost-100 hover:underline">all</a>
       </li>
       {#each tags as tag (tag)}
         <li>
-          <a href="/posts?tag={tag}" class="inline-flex font-light text-frost-100 hover:underline"
-            >#{tag}</a
-          >
+          <a href="/posts?tag={tag}" class="inline-flex text-frost-100 hover:underline">#{tag}</a>
         </li>
       {/each}
     </ul>

@@ -18,9 +18,7 @@
 </script>
 
 <div>
-  <svelte:element this={heading} class={headingClassname}
-    ><a href="/posts/{slug}">{title}</a></svelte:element
-  >
+  <svelte:element this={heading} class={headingClassname}><a href="/posts/{slug}">{title}</a></svelte:element>
   <p class="mb-1 flex max-w-120 flex-wrap items-end gap-x-2">
     <time
       >{new Date(date).toLocaleDateString('en-US', {
@@ -31,12 +29,10 @@
       })}</time
     >
     {#each tags as tag}
-      <a href="/posts?tag={tag}" class="inline-fle font-light text-frost-100 hover:underline"
-        >#{tag}</a
-      >
+      <a href="/posts?tag={tag}" class="inline-flex text-frost-100 hover:underline">#{tag}</a>
     {/each}
   </p>
   {#if summary}
-    <p class="font-light text-charade-100">{summary}</p>
+    <p class="text-charade-100">{summary}</p>
   {/if}
 </div>

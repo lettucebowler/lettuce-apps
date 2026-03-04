@@ -26,7 +26,7 @@
 
 <a class={[className]} aria-current={current} href={to}>
   {@render children?.()}
-  <div class="h-1">
+  <div class="mt-0.5 h-1">
     {#if current}
       <div
         class="border-box mx-1 h-1 bg-charade-700"

@@ -39,9 +39,7 @@
   <figure class="gap-x-4 @max-[17rem]:space-y-2 @min-[17rem]:flex">
     <div class="max-w-30 min-w-30 flex-2 shadow-sm @max-[18rem]:max-w-44">
       <a
-        href={type === 'movie'
-          ? `https://www.themoviedb.org/movie/${id}`
-          : `https://openlibrary.org/isbn/${id}`}
+        href={type === 'movie' ? `https://www.themoviedb.org/movie/${id}` : `https://openlibrary.org/isbn/${id}`}
         class="block"
       >
         <img
@@ -55,14 +53,14 @@
     <figcaption class="min-w-40 flex-3">
       <h3>
         <span class="font-medium">{title} </span>
-        <span class="font-light text-charade-100">{year}</span>
+        <span class="text-charade-200">{year}</span>
       </h3>
       {#if subtitle}
-        <p class="mb-1 font-light text-charade-100">{subtitle}</p>
+        <p class="text-charade-200">{subtitle}</p>
       {/if}
       <ul>
         {#each contributors as contributor}
-          <li class="font-light text-charade-100 not-last:after:content-[',']">{contributor}</li>
+          <li class="text-charade-200 not-last:after:content-[',']">{contributor}</li>
         {/each}
       </ul>
       <div class="group flex gap-x-2">
@@ -75,10 +73,7 @@
               style="anchor-name: --{createAnchorName(type, id, completed)}"
               id="{type}-comment-{id}"
             >
-              <ChatCenteredDotsIcon
-                weight="fill"
-                class="size-4 cursor-pointer group-hover:text-swamp-green-500"
-              />
+              <ChatCenteredDotsIcon weight="fill" class="size-4 cursor-pointer group-hover:text-swamp-green-500" />
             </button>
             <div
               id={createAnchorName(type, id, completed)}

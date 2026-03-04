@@ -2,17 +2,7 @@
   import type { ReadingLogEntry } from '$lib/schemas';
   import LogEntry from './LogEntry.svelte';
 
-  let {
-    title,
-    subtitle,
-    authors,
-    isbn,
-    published,
-    reread,
-    comment,
-    completed,
-    rating
-  }: ReadingLogEntry = $props();
+  let { title, subtitle, authors, isbn, published, reread, comment, completed, rating }: ReadingLogEntry = $props();
 </script>
 
 <LogEntry
