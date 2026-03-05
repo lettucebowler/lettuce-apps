@@ -17,7 +17,7 @@
 </script>
 
 <DateRangePicker.Root
-  class="ml-auto flex w-full max-w-100 flex-col gap-1.5 sm:ml-0"
+  class="ml-auto flex w-full max-w-max flex-col gap-1.5 sm:ml-0"
   fixedWeeks={true}
   weekdayFormat="short"
   placeholder={getFirstDayOfTheMonth()}
