@@ -6,7 +6,7 @@
 <svelte:head>
   <title>{data.meta.title} | Grant Montgomery</title>
 </svelte:head>
-<main class="mx-auto max-w-3xl">
+<main class="max-w-3xl">
   <h1 class="mb-8 text-3xl font-bold">{data.meta.title}</h1>
   <div class="flex gap-x-4">
     <time

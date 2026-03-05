@@ -9,7 +9,7 @@
 <svelte:head>
   <title>Posts | Grant Montgomery</title>
 </svelte:head>
-<main class="">
+<main class="max-w-3xl">
   <h1 class="mb-8 text-3xl font-bold">Posts</h1>
   <nav class="mb-8">
     <span class="mr-2 text-lg">Filter:</span>
