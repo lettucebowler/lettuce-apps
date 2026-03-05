@@ -27,7 +27,7 @@
   <div
     class="flex items-center gap-2 rounded-xl border border-1 border-charade-200 bg-charade-950 p-2 tracking-[0.01em] select-none focus-within:border-charade-50 hover:border-charade-50"
   >
-    <div class="flex flex-col flex-wrap items-baseline gap-2 sm:flex-row">
+    <div class="flex flex-wrap items-baseline gap-2">
       {#each ['start', 'end'] as const as type}
         {#if type === 'end'}
           <span aria-hidden="true" class="hidden text-charade-200 sm:ml-2 sm:inline-block">–⁠⁠⁠⁠⁠</span>
@@ -69,13 +69,13 @@
       {#snippet children({ months, weekdays })}
         <DateRangePicker.Header class="flex items-center justify-between">
           <DateRangePicker.PrevButton
-            class="inline-flex size-10 items-center justify-center rounded bg-charade-900 transition-all hover:bg-charade-800 active:scale-[0.98]"
+            class="inline-flex size-10 items-center justify-center rounded transition-all hover:bg-charade-900 active:scale-[0.98]"
           >
             <CaretLeft class="size-6" />
           </DateRangePicker.PrevButton>
           <DateRangePicker.Heading class="text-[15px] font-medium" />
           <DateRangePicker.NextButton
-            class="inline-flex size-10 items-center justify-center rounded bg-charade-900 transition-all hover:bg-charade-800 active:scale-[0.98]"
+            class="inline-flex size-10 items-center justify-center rounded transition-all hover:bg-charade-900 active:scale-[0.98]"
           >
             <CaretRight class="size-6" />
           </DateRangePicker.NextButton>
@@ -102,7 +102,7 @@
                         class="relative m-0 size-10 overflow-visible p-0! text-center focus-within:relative focus-within:z-20"
                       >
                         <DateRangePicker.Day
-                          class="group relative inline-flex size-10 items-center justify-center overflow-visible rounded border border-transparent bg-transparent p-0 font-normal whitespace-nowrap text-charade-100 transition-all hover:border-charade-200  focus-visible:ring-charade-200! data-disabled:pointer-events-none data-disabled:text-charade-400 data-highlighted:rounded-none data-highlighted:bg-charade-800 data-outside-month:pointer-events-none data-selected:bg-charade-800 data-selected:font-medium data-selected:text-charade-50 data-selection-end:rounded data-selection-end:bg-charade-300 data-selection-end:font-medium data-selection-end:text-charade-950 data-selection-start:rounded data-selection-start:bg-charade-300 data-selection-start:font-medium data-selection-start:text-charade-950 data-selection-start:focus-visible:ring-2 data-selection-start:focus-visible:ring-offset-2! data-unavailable:text-charade-400 data-unavailable:line-through data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:border-charade-200 data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:ring-0! data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:ring-offset-0!"
+                          class="group relative inline-flex size-10 items-center justify-center overflow-visible rounded border border-transparent bg-transparent p-0 font-normal whitespace-nowrap text-charade-100 transition-all hover:border-charade-200  focus-visible:ring-charade-200! data-disabled:pointer-events-none data-disabled:text-charade-400 data-highlighted:rounded-none data-highlighted:bg-charade-900 data-outside-month:pointer-events-none data-selected:bg-charade-900 data-selected:font-medium data-selected:text-charade-50 data-selection-end:rounded data-selection-end:bg-charade-300 data-selection-end:font-medium data-selection-end:text-charade-950 data-selection-start:rounded data-selection-start:bg-charade-300 data-selection-start:font-medium data-selection-start:text-charade-950 data-selection-start:focus-visible:ring-2 data-selection-start:focus-visible:ring-offset-2! data-unavailable:text-charade-400 data-unavailable:line-through data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:border-charade-200 data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:ring-0! data-selected:[&:not([data-selection-start])]:[&:not([data-selection-end])]:focus-visible:ring-offset-0!"
                         >
                           <div
                             class="bg-foreground group-data-selected:bg-background absolute top-[5px] hidden size-1 rounded-full transition-all group-data-today:block"

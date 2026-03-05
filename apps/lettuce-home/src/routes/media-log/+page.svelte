@@ -39,16 +39,18 @@
       }
     }}
   >
-    <div class="flex flex-wrap items-end gap-4">
+    <div class="grid grid-cols-1 items-end gap-4 sm:flex">
       <DateRangePicker startName="start" endName="end" {initialValue} />
 
-      <button
-        class="order-1 my-1 box-border h-10.5 cursor-pointer rounded bg-frost-400 px-3 py-1 font-medium text-charade-50 hover:bg-frost-400/90 focus-visible:bg-frost-400/90 active:bg-frost-400/70 sm:order-0"
-        >Filter</button
-      >
-      <a href={new URL(page.url).pathname} class="my-1 ml-auto block h-10.5 py-2 text-charade-100 sm:ml-0"
-        >Clear filters</a
-      >
+      <div class="flex gap-4">
+        <button
+          class="order-1 my-1 box-border h-10.5 cursor-pointer rounded bg-frost-400 px-3 py-1 font-medium text-charade-50 hover:bg-frost-400/90 focus-visible:bg-frost-400/90 active:bg-frost-400/70 sm:order-0"
+          >Filter</button
+        >
+        <a href={new URL(page.url).pathname} class="my-1 ml-auto block h-10.5 py-2 text-charade-100 sm:ml-0"
+          >Clear filters</a
+        >
+      </div>
     </div>
   </form>
   <section class="space-y-6">

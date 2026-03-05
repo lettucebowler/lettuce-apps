@@ -1,11 +1,12 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
-  import Tile from './Tile.svelte';
   import Cookies from 'js-cookie';
   import { browser } from '$app/environment';
-  import { toastError, toastPromise, toastSuccess } from './toast';
-  import { pushState } from '$app/navigation';
   import { page } from '$app/state';
+
+  import Tile from './Tile.svelte';
+  import { toastError, toastPromise } from './toast';
+  import { pushState } from '$app/navigation';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';

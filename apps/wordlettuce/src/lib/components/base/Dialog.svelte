@@ -4,9 +4,10 @@
 </script>
 
 <script lang="ts">
-  import { focusTrap, escapeKey, outsideClick } from '$lib/attachments.svelte';
+  import { focusTrap, outsideClick } from '$lib/attachments.svelte';
   import type { Snippet } from 'svelte';
   import { fade, scale } from 'svelte/transition';
+  import { PressedKeys } from 'runed';
 
   type Props = {
     children?: Snippet;
@@ -17,6 +18,13 @@
   };
 
   let { children, class: className, open = $bindable(false), title = '', onclose = () => {} }: Props = $props();
+
+  const keys = new PressedKeys();
+  keys.onKeys(['escape'], () => {
+    if (open) {
+      onclose();
+    }
+  });
 </script>
 
 {#if open}
@@ -31,11 +39,6 @@
     ]}
   >
     <div
-      {@attach escapeKey(() => {
-        if (open) {
-          onclose();
-        }
-      })}
       {@attach focusTrap()}
       {@attach outsideClick(() => {
         if (open) {
