@@ -15,7 +15,7 @@ I started tracking the tv show seasons that I complete this year. I wasn't sure 
 
 ## Books completed
 
-<FilteredEntries type="book" start="2026-02-01" end="2026-02-28" />
+<FilteredEntries type="book" start="2026-02-01" end="2026-02-28" direction="asc" />
 
 So far I'm not on pace to match the number of books read in January, but I set a relatively conservative goal this year so I'm still way ahead of schedule. As long as I'm reading, I am happy with that. I don't want reading to turn into a chore. I want to read because I enjoy it and benefit from it. The highlight of this month was definitely <a class="italic" href="https://openlibrary.org/isbn/9780593956014">The Eye of the Bedlam Bride</a>.
 
@@ -23,7 +23,7 @@ I started A Parade of Horribles (unreleased) and <a class="italic" href="https:/
 
 ## Movies watched
 
-<FilteredEntries type="movie" start="2026-02-01" end="2026-02-28" />
+<FilteredEntries type="movie" start="2026-02-01" end="2026-02-28" direction="asc" />
 
 Most of the movies I watch are older releases. A movie has to really jump out at me to get me to go see it in theaters, and that's what <a href="https://www.themoviedb.org/movie/1119449" class="italic">Good Luck, Have Fun, Don't Die</a> did to me. I didn't have high expectations for the <a href="https://www.themoviedb.org/movie/1087192" class="italic">How to Train Your Dragon</a> life action remake, but I was pleasantly surprised. I haven't seen the original for a while, so I forgot most of the story. I really liked it.
 

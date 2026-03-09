@@ -6,27 +6,30 @@
     end: string;
     type: LogEntryType;
     manualItems?: Array<LogEntry>;
+    direction?: 'asc' | 'desc';
   };
 
-  const { start, end, type, manualItems }: Props = $props();
+  const { start, end, type, manualItems, direction = 'desc' }: Props = $props();
 
   const items = $derived.by(() => {
     if (manualItems) {
       return manualItems;
     }
-    return type === 'book'
-      ? filterBooks((book) => {
-          if (!book.completed) {
-            return false;
-          }
-          return book.completed >= start && book.completed <= end;
-        })
-      : filterMovies((movie) => {
-          if (!movie.watched) {
-            return false;
-          }
-          return movie.watched >= start && movie.watched <= end;
-        });
+    const entries =
+      type === 'book'
+        ? filterBooks((book) => {
+            if (!book.completed) {
+              return false;
+            }
+            return book.completed >= start && book.completed <= end;
+          })
+        : filterMovies((movie) => {
+            if (!movie.watched) {
+              return false;
+            }
+            return movie.watched >= start && movie.watched <= end;
+          });
+    return direction === 'desc' ? entries : entries.toReversed();
   });
 
   function getEntryMediaPath(entry: LogEntry) {

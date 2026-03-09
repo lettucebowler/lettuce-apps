@@ -33,7 +33,7 @@ export const ReadingLogEntry = v.pipe(
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
 export const ReadingLog = v.object({
-  year: v.union([v.number(), v.literal('current')]),
+  title: v.union([v.number(), v.string()]),
   books: v.array(ReadingLogEntry)
 });
 export type ReadingLog = v.InferOutput<typeof ReadingLog>;

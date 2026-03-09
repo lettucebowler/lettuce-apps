@@ -12,23 +12,23 @@ export function getMovieLogsDesc() {
 }
 
 export function getCurrentlyReading() {
-  return allReadingLogs.find((log) => log.year === 'current')!.books;
+  return allReadingLogs.find((log) => log.title === 'current')!.books;
 }
 
 export function getReadingLogsDesc() {
   return allReadingLogs
-    .filter((log) => log.year !== 'current')
+    .filter((log) => log.title !== 'current')
     .sort((a, b) => {
-      return (b.year as number) - (a.year as number);
+      return (b.title as number) - (a.title as number);
     })
     .map((log) => {
-      return { title: log.year.toString(), items: log.books };
+      return { title: log.title.toString(), items: log.books };
     });
 }
 
-export function getFilteredBooks({ years, months }: { years: Array<number | 'current'>; months: string[] }) {
+export function getFilteredBooks({ years, months }: { years: Array<number | string>; months: string[] }) {
   return allReadingLogs
-    .filter((log) => years.includes(log.year))
+    .filter((log) => years.includes(log.title))
     .map((log) => log.books)
     .flat()
     .filter((book) => {
