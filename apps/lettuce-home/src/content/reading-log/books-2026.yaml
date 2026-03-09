@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9798217190065
+    title: A Parade of Horribles
+    authors:
+      - Matt Dinniman
+    published: 2026
+    completed: 2026-03-08
+    rating: 5
+    comment: I am now cursed to wait for the next book to come out.
   - isbn: 9798217190041
     title: This Inevitable Ruin
     authors:
