@@ -6,12 +6,11 @@ books:
     authors:
       - David Graeber
     published: 2011
-  - isbn: 9781635575620
-    title: A Court of Frost and Starlight
-    published: 2018
+  - isbn: 9781681196282
+    title: A Court of Silver Flames
     authors:
       - Sarah J. Maas
-
+    published: 2021
   # - isbn: 9780440418610
   #   title: The Subtle Knife
   #   authors:

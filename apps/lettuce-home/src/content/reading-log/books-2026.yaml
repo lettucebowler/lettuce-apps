@@ -1,5 +1,12 @@
 title: 2026
 books:
+  - isbn: 9781635575620
+    title: A Court of Frost and Starlight
+    published: 2018
+    authors:
+      - Sarah J. Maas
+    rating: 3
+    completed: 2026-03-12
   - isbn: 9798217190065
     title: A Parade of Horribles
     authors:
