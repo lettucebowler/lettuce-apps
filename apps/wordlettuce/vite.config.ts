@@ -6,7 +6,7 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
   plugins: [tailwindcss(), sveltekit(), devtoolsJson()],
   build: {
-    assetsInlineLimit: 1024,
+    cssMinify: 'esbuild',
   },
 };
 
