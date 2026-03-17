@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 746036
+    title: Fall Guy
+    released: 2024
+    directors:
+      - David Leitch
+    watched: 2026-03-15
+    rating: 4
+    comment: I'm still seeing unicorns.
+    rewatch: true
   - tmdb: 346698
     title: Barbie
     released: 2023
