@@ -1,5 +1,12 @@
 title: 2026
 books:
+  - isbn: 9781681196282
+    title: A Court of Silver Flames
+    authors:
+      - Sarah J. Maas
+    published: 2021
+    completed: 2026-03-18
+    rating: 3
   - isbn: 9781635575620
     title: A Court of Frost and Starlight
     published: 2018
