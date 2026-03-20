@@ -11,7 +11,13 @@
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>
   {#each movieLog as { year, movies } (year)}
-    <MediaCollection title={year.toString()} subtitle={`${movies.length} movie${movies.length === 1 ? '' : 's'}`}>
+    <MediaCollection>
+      {#snippet title()}
+        {year.toString()}
+      {/snippet}
+      {#snippet subtitle()}
+        {movies.length} movie{movies.length === 1 ? '' : 's'}
+      {/snippet}
       {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
         <Movie {...movie} />
       {/each}

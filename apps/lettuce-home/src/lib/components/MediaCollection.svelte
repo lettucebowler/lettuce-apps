@@ -2,8 +2,8 @@
   import type { Snippet } from 'svelte';
 
   type Props = {
-    title?: string;
-    subtitle?: string;
+    title?: Snippet;
+    subtitle?: Snippet;
     children?: Snippet;
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   };
@@ -14,10 +14,10 @@
 <div class="@container space-y-4">
   {#if title}
     <header>
-      <svelte:element this={heading} class="inline-block text-2xl font-bold">{title}</svelte:element>
+      <svelte:element this={heading} class="inline-block text-2xl font-bold">{@render title()}</svelte:element>
       {#if subtitle}
         &nbsp;
-        <span class="font-medium text-charade-100">{subtitle}</span>
+        <span class="font-medium text-charade-100">{@render subtitle()}</span>
       {/if}
     </header>
   {/if}

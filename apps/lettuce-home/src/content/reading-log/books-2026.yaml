@@ -1,5 +1,14 @@
 title: 2026
 books:
+  - isbn: 9781933633862
+    title: Debt
+    subtitle: The First 5,000 Years
+    authors:
+      - David Graeber
+    published: 2011
+    completed: 2026-03-20
+    rating: 5
+    comment: My eyes are open.
   - isbn: 9781681196282
     title: A Court of Silver Flames
     authors:

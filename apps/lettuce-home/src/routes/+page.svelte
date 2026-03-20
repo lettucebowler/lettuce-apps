@@ -50,24 +50,26 @@
       </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Recent posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
+          Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
           >
         </h2>
         {#each recentPosts as post (post.slug)}
           <Post {...post} />
         {/each}
       </section>
-      <section id="activity-section" class="space-y-4">
-        <h2 class="text-2xl font-bold">
-          Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
-            >View all projects →</a
-          >
-        </h2>
-        {#each activeProjects as project (project.title)}
-          {@const { description, ...rest } = project}
-          <Project {...rest} description={[]} />
-        {/each}
-      </section>
+      {#if activeProjects.length}
+        <section id="activity-section" class="space-y-4">
+          <h2 class="text-2xl font-bold">
+            Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
+              >View all projects →</a
+            >
+          </h2>
+          {#each activeProjects as project (project.title)}
+            {@const { description, ...rest } = project}
+            <Project {...rest} description={[]} />
+          {/each}
+        </section>
+      {/if}
     </div>
     <div id="home-right" class="@container space-y-12">
       <div class="grid gap-x-4 gap-y-12 @min-[36rem]:grid-cols-2">
@@ -80,16 +82,18 @@
           <Movie {...latestMovie} />
         </section>
       </div>
-      <section class="space-y-4">
-        <h2 class="text-2xl font-bold">Currently reading</h2>
-        <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
-          {#each currentBooks as book (book.isbn)}
-            <div class="min-w-[18rem] flex-1 basis-auto">
-              <Book {...book} />
-            </div>
-          {/each}
-        </div>
-      </section>
+      {#if currentBooks.length}
+        <section class="space-y-4">
+          <h2 class="text-2xl font-bold">Currently reading</h2>
+          <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
+            {#each currentBooks as book (book.isbn)}
+              <div class="min-w-[18rem] flex-1 basis-auto">
+                <Book {...book} />
+              </div>
+            {/each}
+          </div>
+        </section>
+      {/if}
     </div>
   </div>
 </main>

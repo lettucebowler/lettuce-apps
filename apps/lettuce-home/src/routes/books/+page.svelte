@@ -11,16 +11,27 @@
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <MediaCollection
-    title="Currently reading"
-    subtitle={`${currentBooks.length} book${currentBooks.length === 1 ? '' : 's'}`}
-  >
-    {#each currentBooks as book (book.isbn)}
-      <Book {...book} />
-    {/each}
-  </MediaCollection>
-  {#each bookData as { title, items } (title)}
-    <MediaCollection {title} subtitle={`${items.length} book${items.length === 1 ? '' : 's'}`}>
+  {#if currentBooks.length}
+    <MediaCollection>
+      {#snippet title()}
+        Currently reading
+      {/snippet}
+      {#snippet subtitle()}
+        {@render bookCount(currentBooks.length)}
+      {/snippet}
+      {#each currentBooks as book (book.isbn)}
+        <Book {...book} />
+      {/each}
+    </MediaCollection>
+  {/if}
+  {#each bookData.filter((log) => log.items.length) as { title: year, items } (year)}
+    <MediaCollection>
+      {#snippet title()}
+        {year}
+      {/snippet}
+      {#snippet subtitle()}
+        {@render bookCount(items.length)}
+      {/snippet}
       {#each items as book (book.isbn)}
         <Book {...book} />
       {/each}
@@ -32,3 +43,7 @@
     >
   </p>
 </main>
+
+{#snippet bookCount(count: number)}
+  {count} book{count === 1 ? '' : 's'}
+{/snippet}
