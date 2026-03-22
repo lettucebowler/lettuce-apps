@@ -1,7 +1,7 @@
 title: current
-books: []
-  # - isbn: 9780440418610
-  #   title: The Subtle Knife
-  #   authors:
-  #     - Philip Pullman
-  #   published: 1997
+books:
+  - isbn: 9780440418610
+    title: The Subtle Knife
+    authors:
+      - Philip Pullman
+    published: 1997
