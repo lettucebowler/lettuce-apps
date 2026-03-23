@@ -5,3 +5,8 @@ books:
     authors:
       - Martha Wells
     published: 2017
+  - isbn: 9780593135204
+    title: Project Hail Mary
+    authors:
+      - Andy Weir
+    published: 2021
