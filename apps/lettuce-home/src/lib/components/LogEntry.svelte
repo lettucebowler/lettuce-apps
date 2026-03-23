@@ -36,7 +36,7 @@
 </script>
 
 <div class="@container">
-  <figure class="gap-x-4 @max-[17rem]:space-y-2 @min-[17rem]:flex">
+  <figure class="gap-x-4 @max-[17rem]:space-y-3 @min-[17rem]:flex">
     <div class="max-w-30 min-w-30 flex-2 shadow-sm @max-[18rem]:max-w-44">
       <a
         href={type === 'movie' ? `https://www.themoviedb.org/movie/${id}` : `https://openlibrary.org/isbn/${id}`}
@@ -56,7 +56,7 @@
         <span class="text-charade-200">{year}</span>
       </h3>
       {#if subtitle}
-        <p class="text-charade-200">{subtitle}</p>
+        <p class="mb-1 text-charade-200">{subtitle}</p>
       {/if}
       <ul>
         {#each contributors as contributor}

@@ -1,5 +1,12 @@
 title: 2026
 books:
+  - isbn: 9780440418610
+    title: The Subtle Knife
+    authors:
+      - Philip Pullman
+    published: 1997
+    completed: 2026-03-23
+    rating: 4
   - isbn: 9781933633862
     title: Debt
     subtitle: The First 5,000 Years
