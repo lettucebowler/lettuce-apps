@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 687163
+    title: Project Hail Mary
+    released: 2026
+    directors:
+      - Phil Lord
+      - Christopher Miller
+    watched: 2026-03-30
+    rating: 5
+    comment: A very good adaptation
   - tmdb: 746036
     title: Fall Guy
     released: 2024
