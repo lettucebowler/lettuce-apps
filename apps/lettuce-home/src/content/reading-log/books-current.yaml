@@ -1,2 +1,7 @@
 title: current
-books: []
+books:
+  - isbn: 9781250185433
+    title: Rogue Protocol
+    authors:
+      - Martha Wells
+    published: 2018

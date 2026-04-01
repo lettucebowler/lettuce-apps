@@ -25,7 +25,7 @@
   <title>Grant Montgomery</title>
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
-  <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-[5fr_7fr]">
+  <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-[7fr_5fr]">
     <div id="home-left" class="@container space-y-8">
       <section class="space-y-4">
         <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
@@ -72,7 +72,19 @@
       {/if}
     </div>
     <div id="home-right" class="@container space-y-12">
-      <div class="grid gap-x-4 gap-y-12 @min-[36rem]:grid-cols-2">
+      <div class="grid gap-x-4 gap-y-8 @min-[36rem]:grid-cols-2">
+        {#if currentBooks.length}
+          <section class="space-y-4">
+            <h2 class="text-2xl font-bold">Currently reading</h2>
+            <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
+              {#each currentBooks as book (book.isbn)}
+                <div class="min-w-[18rem] flex-1 basis-auto">
+                  <Book {...book} />
+                </div>
+              {/each}
+            </div>
+          </section>
+        {/if}
         <section class="min-w-[18rem] flex-1 basis-auto space-y-4">
           <h2 class="text-2xl font-bold">Last read</h2>
           <Book {...latestBook} />
@@ -82,18 +94,6 @@
           <Movie {...latestMovie} />
         </section>
       </div>
-      {#if currentBooks.length}
-        <section class="space-y-4">
-          <h2 class="text-2xl font-bold">Currently reading</h2>
-          <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
-            {#each currentBooks as book (book.isbn)}
-              <div class="min-w-[18rem] flex-1 basis-auto">
-                <Book {...book} />
-              </div>
-            {/each}
-          </div>
-        </section>
-      {/if}
     </div>
   </div>
 </main>
