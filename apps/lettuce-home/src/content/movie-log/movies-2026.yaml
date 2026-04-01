@@ -7,7 +7,7 @@ movies:
       - Phil Lord
       - Christopher Miller
     watched: 2026-03-30
-    rating: 5
+    rating: 4
     comment: A very good adaptation
   - tmdb: 746036
     title: Fall Guy
