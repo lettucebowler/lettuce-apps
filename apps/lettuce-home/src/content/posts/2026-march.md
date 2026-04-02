@@ -18,6 +18,6 @@ I was on a roll this month. I am already 75% of the way to my reading goal for t
 
 ## Movies watched
 
-<FilteredEntries type="movie" start="2026-02-01" end="2026-02-28" direction="asc" />
+<FilteredEntries type="movie" start="2026-03-01" end="2026-03-31" direction="asc" />
 
 Not a lot of movies this month.
