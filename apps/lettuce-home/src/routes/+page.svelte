@@ -25,29 +25,8 @@
   <title>Grant Montgomery</title>
 </svelte:head>
 <main class="mx-auto w-full space-y-8">
-  <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-[7fr_5fr]">
+  <div id="home-layout" class="grid gap-x-8 gap-y-12 md:grid-cols-[1fr_20rem] lg:grid-cols-[2fr_3fr]">
     <div id="home-left" class="@container space-y-8">
-      <section class="space-y-4">
-        <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
-        <p>
-          Grant works as a full-stack web developer in the healthcare industry, working primarily with React and Stencil
-          on the frontend, and Node or Springboot on the backend.
-        </p>
-        <div class="grid grid-cols-3 text-center">
-          <a href="https://twitter.com/lettucebowler" class="group p-4">
-            <TwitterIcon class="mx-auto size-10 fill-frost-300" />
-            <span class="group-hover:underline">@Lettucebowler</span>
-          </a>
-          <a href="https://github.com/lettucebowler" class="group p-4">
-            <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
-            <span class="group-hover:underline">@Lettucebowler</span>
-          </a>
-          <a href="/Resume.pdf" target="_blank" class="group p-4">
-            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" weight="fill" />
-            <span class="group-hover:underline">Resume </span>
-          </a>
-        </div>
-      </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
           Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
@@ -72,9 +51,30 @@
       {/if}
     </div>
     <div id="home-right" class="@container space-y-12">
+      <section class="space-y-4">
+        <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
+        <p>
+          Grant works as a full-stack web developer in the healthcare industry, working primarily with React and Stencil
+          on the frontend, and Node or Springboot on the backend.
+        </p>
+        <div class="grid grid-cols-3 text-center">
+          <a href="https://twitter.com/lettucebowler" class="group p-4">
+            <TwitterIcon class="mx-auto size-10 fill-frost-300" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="https://github.com/lettucebowler" class="group p-4">
+            <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="/Resume.pdf" target="_blank" class="group p-4">
+            <ResumeIcon class="mx-auto size-10 text-antique-brass-500" weight="fill" />
+            <span class="group-hover:underline">Resume </span>
+          </a>
+        </div>
+      </section>
       <div class="grid gap-x-4 gap-y-8 @min-[36rem]:grid-cols-2">
         {#if currentBooks.length}
-          <section class="space-y-4">
+          <section class={['space-y-4', currentBooks.length > 1 ? '@min-[36rem]:col-span-2' : 'col-span-1']}>
             <h2 class="text-2xl font-bold">Currently reading</h2>
             <div class="grid gap-x-4 gap-y-6 @min-[36rem]:grid-cols-2">
               {#each currentBooks as book (book.isbn)}
