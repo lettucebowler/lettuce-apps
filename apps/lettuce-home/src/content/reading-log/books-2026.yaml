@@ -1,5 +1,12 @@
 title: 2026
 books:
+  - isbn: 9781250185433
+    title: Rogue Protocol
+    authors:
+      - Martha Wells
+    published: 2018
+    completed: 2026-04-02
+    rating: 3
   - isbn: 9781250186928
     title: Artificial Condition
     authors:
