@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 1226863
+    title: The Super Mario Galaxy Movie
+    released: 2026
+    directors:
+      - Aaron Horvath
+      - Micheal Jelenic
+    rating: 3
+    comment: It looked pretty
+    watched: 2026-04-03
   - tmdb: 687163
     title: Project Hail Mary
     released: 2026

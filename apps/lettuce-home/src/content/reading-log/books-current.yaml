@@ -1,7 +1,14 @@
 title: current
 books:
-  - isbn: 9781250191854
-    title: Exit Strategy
+  - isbn: 9781250229861
+    title: Network Effect
     authors:
       - Martha Wells
-    published: 2018
+    published: 2020
+  # - isbn: 9781250185433
+  #   title: Rogue Protocol
+  #   authors:
+  #     - Martha Wells
+  #   published: 2018
+  #   completed: 2026-04-02
+  #   rating: 3

@@ -107,7 +107,7 @@
         {/if}
       </div>
       {#if comment}
-        <p class="mt-2 font-thin text-charade-100 @max-[17rem]:hidden">{comment}</p>
+        <p class="mt-2 font-light text-charade-100 @max-[17rem]:hidden">{comment}</p>
       {/if}
     </figcaption>
   </figure>

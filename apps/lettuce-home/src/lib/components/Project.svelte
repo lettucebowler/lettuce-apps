@@ -30,7 +30,7 @@
     </div>
   {/if}
   <div class="space-y-1">
-    <p class="font-thin">{summary}</p>
+    <p class="font-light">{summary}</p>
     <dl class="flex">
       <dt>status:</dt>
       &nbsp;

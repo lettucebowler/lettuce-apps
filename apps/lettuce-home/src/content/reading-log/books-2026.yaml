@@ -1,5 +1,12 @@
 title: 2026
 books:
+  - isbn: 9781250191854
+    title: Exit Strategy
+    authors:
+      - Martha Wells
+    published: 2018
+    completed: 2026-04-03
+    rating: 4
   - isbn: 9781250185433
     title: Rogue Protocol
     authors:
