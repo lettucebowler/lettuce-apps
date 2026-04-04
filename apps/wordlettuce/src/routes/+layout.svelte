@@ -9,7 +9,7 @@
   import { appName } from '$lib/app-constants';
 
   let { children } = $props();
-  let session = await getSession();
+  let session = $derived(await getSession());
 </script>
 
 <svelte:head>

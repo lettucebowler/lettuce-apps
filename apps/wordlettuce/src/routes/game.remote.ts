@@ -4,12 +4,14 @@ import { error as svelteError } from '@sveltejs/kit';
 import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 import { ActionFormInput } from './game.schemas';
+import { getSession } from './auth.remote';
 
-export const getGameState = query(() => {
+export const getGameState = query(async () => {
   return getGameStateFromCookie();
 });
 
 export const action = form(ActionFormInput, async (input) => {
+  await getSession().refresh();
   const game = getGameStateFromCookie();
   if (input.letter) {
     game.doLetter(input.letter);
