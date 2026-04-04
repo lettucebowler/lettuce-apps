@@ -23,9 +23,10 @@
   import { action, getGameState } from './game.remote';
   import { getSession } from './auth.remote';
   import { AllowedGuess } from './game.schemas';
-  let game = $derived(await getGameState());
+  let game = await getGameState();
 
   import * as v from 'valibot';
+  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
 
   function createGameActionKeyID(l: string) {
     return `wordlettuce-game-action-key-${l}`;
@@ -60,7 +61,7 @@
     });
   }
 
-  function getItemsForGrid() {
+  function getItemsForGrid(game: WordlettuceGame) {
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
     const previousGuesses = game.guesses
@@ -113,7 +114,7 @@
       bind:this={tileGridEl}
       class="m-auto grid w-full max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] grid-rows-[repeat(6,1fr)] gap-2"
     >
-      {#each getItemsForGrid() as row (row.index)}
+      {#each getItemsForGrid(game) as row (row.index)}
         <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index} animate:flip={{ duration: 150 }}>
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
             {@const doJump = game.answers.at(row.index)?.length === 5}

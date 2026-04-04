@@ -5,7 +5,7 @@ import * as apiWordlettuce from '$lib/api-wordlettuce.server';
 import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/game.server';
 import { ActionFormInput } from './game.schemas';
 
-export const getGameState = query(async () => {
+export const getGameState = query(() => {
   return getGameStateFromCookie();
 });
 

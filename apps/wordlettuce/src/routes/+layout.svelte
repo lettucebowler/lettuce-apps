@@ -1,16 +1,15 @@
 <script lang="ts">
-  import { LettuceAvatar, PageContentContainer } from '@lettuce-apps-packages/svelte-common';
+  import { PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
   import { getSession } from './auth.remote';
   import { Toasts } from 'svoast';
   import favicon from '$lib/assets/favicon.svg';
   import { page } from '$app/state';
-  import { getGameNum } from '$lib/words';
   import { appName } from '$lib/app-constants';
 
   let { children } = $props();
-  const session = $derived(await getSession());
+  let session = await getSession();
 </script>
 
 <svelte:head>

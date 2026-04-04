@@ -12,12 +12,12 @@
   const { params } = $props();
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
-  let [session, profileData] = await Promise.all([
-    getSession(),
-    hydratable('profileData', () => getProfileData({ user: params.profileUser, start })),
-  ]);
+  let session = await getSession();
+  let profileData = $derived(
+    await hydratable('profileData', () => getProfileData({ user: params.profileUser, start })),
+  );
   let isSelf = $derived(session.user?.username === profileData.profileUser);
-  let pages = $state([{ results: profileData.pastResults, start: profileData.start, next: profileData.next }]);
+  let pages = $derived([{ results: profileData.pastResults, start: profileData.start, next: profileData.next }]);
 
   async function getResults() {
     const next = pages.at(-1)?.next;
@@ -25,7 +25,7 @@
       return;
     }
     const nextPage = await getGameResults({ userID: profileData.profileUserID, start: next, limit: 60 });
-    pages.push({ start: nextPage.start, next: nextPage.next, results: nextPage.results });
+    pages = pages.concat({ start: nextPage.start, next: nextPage.next, results: nextPage.results });
   }
 </script>
 
