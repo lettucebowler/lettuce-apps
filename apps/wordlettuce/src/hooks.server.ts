@@ -7,10 +7,10 @@ const fetchHandler: Handle = ({ event, resolve }) => {
   });
 };
 
-import { getSession } from '$lib/auth.server';
+import { verifySession } from '$lib/server/auth';
 
 const authHandler: Handle = async ({ event, resolve }) => {
-  event.locals.session = await getSession();
+  event.locals.session = await verifySession();
   return await resolve(event);
 };
 

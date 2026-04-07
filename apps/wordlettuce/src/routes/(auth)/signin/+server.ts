@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-import { createAuthClient } from '$lib/auth.server.js';
+import { createAuthClient } from '$lib/server/auth';
 
 import * as v from 'valibot';
 

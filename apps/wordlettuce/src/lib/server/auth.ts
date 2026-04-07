@@ -1,11 +1,24 @@
+import { getRequestEvent } from '$app/server';
 import type { RequestEvent } from '@sveltejs/kit';
 import { createAuthClient } from '@lettuce-apps-packages/auth';
 import { dev } from '$app/environment';
 import { AUTH_HOST } from '$env/static/private';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
-import { getRequestEvent } from '$app/server';
-
 import { subjects } from '@lettuce-apps-packages/auth';
+
+export async function getSession() {
+  const event = getRequestEvent();
+  if (!event.locals.session) {
+    return {
+      authenticated: false as const,
+    };
+  }
+  const user = event.locals.session;
+  return {
+    authenticated: true as const,
+    user,
+  };
+}
 
 function _createAuthClient() {
   const event = getRequestEvent();
@@ -23,7 +36,7 @@ function _createAuthClient() {
 
 export { _createAuthClient as createAuthClient };
 
-export async function getSession() {
+export async function verifySession() {
   const event = getRequestEvent();
   const authClient = _createAuthClient();
   const access_token = event.cookies.get('access_token') || '';

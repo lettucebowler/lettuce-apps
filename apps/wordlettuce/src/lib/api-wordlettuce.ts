@@ -6,7 +6,7 @@ import { getGameNum } from './words';
 
 function createAPIWordlettuceClient() {
   return ky.create({
-    prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: PUBLIC_API_WORDLETTUCE_HOST,
   });
 }
 

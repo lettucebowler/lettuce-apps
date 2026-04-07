@@ -1,8 +1,8 @@
 import { redirect } from '@sveltejs/kit';
-import { clearTokens, createAuthClient, setTokens } from '$lib/auth.server';
+import { clearTokens, createAuthClient, setTokens } from '$lib/server/auth';
 import * as apiWordLettuce from '$lib/api-wordlettuce.server';
 import { subjects } from '@lettuce-apps-packages/auth';
-import { getGameStateFromCookie } from '$lib/game.server';
+import { getGameStateFromCookie } from '$lib/server/game';
 
 export async function GET(event) {
   const code = event.url.searchParams.get('code');

@@ -6,13 +6,13 @@
   import { infiniteScroll } from './infinite-scroll.svelte.js';
   import { getGameResults, getProfileData } from '$lib/api-wordlettuce';
   import { page } from '$app/state';
-  import { getSession } from '../../auth.remote';
+  import { sessionQuery } from '../../auth.remote';
   import { hydratable } from 'svelte';
 
   const { params } = $props();
   const gameNum = getGameNum();
   const start = page.url.searchParams.get('start') ? (Number(page.url.searchParams.get('start')) ?? gameNum) : gameNum;
-  let session = await getSession();
+  let session = await sessionQuery();
   let profileData = $derived(
     await hydratable('profileData', () => getProfileData({ user: params.profileUser, start })),
   );

@@ -21,7 +21,7 @@
   } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
   import { action, getGameState } from './game.remote';
-  import { getSession } from './auth.remote';
+  import { sessionQuery } from './auth.remote';
   import { AllowedGuess } from './game.schemas';
   let game = await getGameState();
 
@@ -243,7 +243,7 @@
   onclose={() => history.back()}
   gameNum={game.gameNum}
   answers={game.answers}
-  authenticated={(await getSession()).authenticated}
+  authenticated={(await sessionQuery()).authenticated}
 />
 
 <style>

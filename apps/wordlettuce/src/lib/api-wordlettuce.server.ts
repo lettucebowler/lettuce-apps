@@ -1,6 +1,5 @@
 import { API_WORDLETTUCE_TOKEN } from '$env/static/private';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
-import { error as svelteError } from '@sveltejs/kit';
 import { getRequestEvent } from '$app/server';
 import ky, { HTTPError } from 'ky';
 import * as v from 'valibot';
@@ -9,7 +8,7 @@ import type { GameResult } from './types';
 function createAPIWordlettuceClient() {
   const event = getRequestEvent();
   return ky.create({
-    prefixUrl: PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: PUBLIC_API_WORDLETTUCE_HOST,
     fetch: event.fetch,
     headers: {
       Authorization: `Bearer ${API_WORDLETTUCE_TOKEN}`,

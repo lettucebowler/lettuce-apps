@@ -1,8 +1,8 @@
 import { redirect } from '@sveltejs/kit';
-import { getSession } from '../auth.remote';
+import { sessionQuery } from '../auth.remote';
 
 export async function GET(event) {
-  const session = await getSession();
+  const session = await sessionQuery();
   if (session.authenticated) {
     throw redirect(307, `/profile/${session.user.username}`);
   } else {

@@ -2,20 +2,18 @@
   import { PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
   import '../app.css';
-  import { getSession } from './auth.remote';
+  import { sessionQuery } from './auth.remote';
   import { Toasts } from 'svoast';
   import favicon from '$lib/assets/favicon.svg';
-  import { page } from '$app/state';
-  import { appName } from '$lib/app-constants';
 
   let { children } = $props();
-  let session = $derived(await getSession());
+  let session = $derived(await sessionQuery());
 </script>
 
 <svelte:head>
   <link rel="icon" href={favicon} />
-  <title>{page.data['title'] ?? `${appName}`}</title>
-  <meta name="title" content={page.data['metaTitle'] ?? page.data['title'] ?? appName} />
+  <!-- <title>{page.data['title'] ?? `${appName}`}</title> -->
+  <!-- <meta name="title" content={page.data['metaTitle'] ?? page.data['title'] ?? appName} /> -->
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
@@ -42,6 +40,7 @@
       {:else}
         <NavLink to="/signin" class="ml-auto" label="sign in" />
       {/if}
+      <button onclick={() => sessionQuery().refresh()}>refresh</button>
     </NavBar>
     {@render children()}
   </div>

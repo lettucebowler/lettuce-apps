@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-import { clearTokens } from '$lib/auth.server.js';
+import { clearTokens } from '$lib/server/auth';
 
 export async function GET(event) {
   clearTokens();
