@@ -4,18 +4,23 @@
 
   import FilteredEntries from '$lib/components/FilteredEntries.svelte';
   import DateRangePicker from './DateRangePicker.svelte';
-  import { ISODateString, MediaLogFilters, mediaLogFiltersFallbackEnd, mediaLogFiltersFallbackStart } from './schemas';
+  import {
+    ISODateString,
+    DateRangeFromISODateStrings,
+    mediaLogFiltersFallbackEnd,
+    mediaLogFiltersFallbackStart,
+  } from '$lib/schemas';
   import { page } from '$app/state';
   import { parseDate } from '@internationalized/date';
 
-  let { data: params } = $derived(validateSearchParams(page.url, MediaLogFilters));
-  let initialValue = $derived(
+  let { data: params } = $derived(validateSearchParams(page.url, DateRangeFromISODateStrings));
+  let dateRange = $derived(
     params.start === mediaLogFiltersFallbackStart || params.end === mediaLogFiltersFallbackEnd
       ? undefined
       : {
           start: parseDate(params.start),
-          end: parseDate(params.end)
-        }
+          end: parseDate(params.end),
+        },
   );
 </script>
 
@@ -29,9 +34,9 @@
       const validationResult = v.safeParse(
         v.object({
           start: ISODateString,
-          end: ISODateString
+          end: ISODateString,
         }),
-        formObject
+        formObject,
       );
       if (!validationResult.success) {
         e.preventDefault();
@@ -40,7 +45,7 @@
     }}
   >
     <div class="grid grid-cols-1 items-end gap-4 sm:flex">
-      <DateRangePicker startName="start" endName="end" {initialValue} />
+      <DateRangePicker startName="start" endName="end" initialValue={dateRange} />
 
       <div class="flex gap-4">
         <button
@@ -55,11 +60,11 @@
   </form>
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">Books read</h2>
-    <FilteredEntries type="book" start={params.start} end={params.end} />
+    <FilteredEntries type="book" start={dateRange?.start} end={dateRange?.end} />
   </section>
 
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">Movies watched</h2>
-    <FilteredEntries type="movie" start={params.start} end={params.end} />
+    <FilteredEntries type="movie" start={dateRange?.start} end={dateRange?.end} />
   </section>
 </main>

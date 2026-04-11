@@ -1,0 +1,6 @@
+books:
+  - isbn: 9781250229861
+    title: Network Effect
+    authors:
+      - Martha Wells
+    published: 2020

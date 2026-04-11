@@ -1,7 +1,8 @@
-import type { MovieLogEntry, ReadingLogEntry } from '$lib/schemas';
-import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
+import { parseDate } from '@internationalized/date';
+import type { DateRange } from 'bits-ui';
+import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
 
-export function getLastWatchedMovie(): MovieLogEntry {
+export function getLastWatchedMovie() {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
 }
 
@@ -12,63 +13,44 @@ export function getMovieLogsDesc() {
 }
 
 export function getCurrentlyReading() {
-  return allReadingLogs.find((log) => log.title === 'current')!.books;
+  return currentlyReading.books;
 }
 
 export function getReadingLogsDesc() {
   return allReadingLogs
-    .filter((log) => log.title !== 'current')
     .sort((a, b) => {
       return (b.title as number) - (a.title as number);
     })
     .map((log) => {
-      return { title: log.title.toString(), items: log.books };
+      return {
+        title: log.title.toString(),
+        items: log.books,
+      };
     });
 }
 
-export function getFilteredBooks({ years, months }: { years: Array<number | string>; months: string[] }) {
-  return allReadingLogs
-    .filter((log) => years.includes(log.title))
-    .map((log) => log.books)
-    .flat()
-    .filter((book) => {
-      if (!months.length) {
-        return true;
-      }
-      if (!book.completed) {
-        return false;
-      }
-      const [, bookMonth] = book.completed.split('-');
-      return months.includes(bookMonth);
-    });
-}
-
-export function filterBooks(selector: (book: ReadingLogEntry) => Boolean) {
+export function filterBooks(dateRange: DateRange) {
   return getReadingLogsDesc()
     .map((log) => log.items)
     .flat()
-    .filter(selector);
-}
-
-export function getFilteredMovies({ years, months }: { years: number[]; months: string[] }) {
-  return getMovieLogsDesc()
-    .filter((log) => years.includes(log.year))
-    .map((log) => log.movies)
-    .flat()
-    .filter((book) => {
-      if (!months.length) {
-        return true;
-      }
-      const [, movieMonth] = book.watched.split('-');
-      return months.includes(movieMonth);
+    .filter((item) => {
+      const completionDate = parseDate(item.completed);
+      return (
+        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate < dateRange.end)
+      );
     });
 }
 
-export function filterMovies(selector: (movie: MovieLogEntry) => Boolean) {
+export function filterMovies(dateRange: DateRange) {
   return getMovieLogsDesc()
     .map((log) => log.movies)
     .flat()
-    .filter(selector);
+    .filter((item) => {
+      const completionDate = parseDate(item.watched);
+      return (
+        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate < dateRange.end)
+      );
+    });
 }
 
 export function getLastReadBook() {
@@ -111,8 +93,8 @@ export function getAllPostTags() {
     new Set(
       allPostsDesc()
         .map((post) => post.tags ?? [])
-        .flat()
-    )
+        .flat(),
+    ),
   ).toSorted();
 }
 

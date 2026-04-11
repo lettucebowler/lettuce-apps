@@ -21,8 +21,8 @@
       <NavLink to="/" class="pt-1 hover:underline">Home</NavLink>
       <NavLink to="/posts" current={page.url.pathname.startsWith('/posts')} class="pt-1 hover:underline">Posts</NavLink>
       <NavLink to="/projects" class="pt-1 hover:underline">Projects</NavLink>
-      <NavLink to="/books" class="pt-1 hover:underline">Books</NavLink>
-      <NavLink to="/movies" class="pt-1 hover:underline">Movies</NavLink>
+      <NavLink to="/reading-log" class="pt-1 hover:underline">Books</NavLink>
+      <NavLink to="/movie-log" class="pt-1 hover:underline">Movies</NavLink>
       <a
         href="https://github.com/lettucebowler"
         class="hidden sm:ml-auto sm:flex sm:items-center"

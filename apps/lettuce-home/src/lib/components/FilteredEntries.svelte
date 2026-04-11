@@ -1,9 +1,10 @@
 <script lang="ts">
   import { filterBooks, filterMovies } from '$lib/collections';
   import type { LogEntry, LogEntryType } from '$lib/schemas';
+  import type { CalendarDate } from '@internationalized/date';
   type Props = {
-    start: string;
-    end: string;
+    start?: CalendarDate | undefined;
+    end?: CalendarDate | undefined;
     type: LogEntryType;
     manualItems?: Array<LogEntry>;
     direction?: 'asc' | 'desc';
@@ -17,18 +18,11 @@
     }
     const entries =
       type === 'book'
-        ? filterBooks((book) => {
-            if (!book.completed) {
-              return false;
-            }
-            return book.completed >= start && book.completed <= end;
+        ? filterBooks({
+            start,
+            end
           })
-        : filterMovies((movie) => {
-            if (!movie.watched) {
-              return false;
-            }
-            return movie.watched >= start && movie.watched <= end;
-          });
+        : filterMovies({ start, end });
     return direction === 'desc' ? entries : entries.toReversed();
   });
 

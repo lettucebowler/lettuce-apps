@@ -1,40 +1,36 @@
+import { parseDate, today } from '@internationalized/date';
 import * as v from 'valibot';
 
-export const Month = v.picklist([
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december'
-]);
-export type Month = v.InferOutput<typeof Month>;
+export const ISODateString = v.pipe(v.string(), v.nonEmpty(), v.isoDate());
+
+const Book = v.object({
+  isbn: v.pipe(v.number(), v.toString(), v.isbn()),
+  title: v.string(),
+  subtitle: v.optional(v.string()),
+  authors: v.array(v.string()),
+  published: v.pipe(v.number(), v.integer()),
+});
+export type Book = v.InferOutput<typeof Book>;
+
+export const CurrentlyReadingList = v.object({
+  books: v.array(Book),
+});
 
 export const ReadingLogEntry = v.pipe(
   v.object({
-    isbn: v.pipe(v.number(), v.integer()),
-    title: v.string(),
-    subtitle: v.optional(v.string()),
-    authors: v.array(v.string()),
-    published: v.pipe(v.number(), v.integer()),
-    completed: v.optional(v.string()),
+    ...Book.entries,
+    completed: ISODateString,
     rating: v.optional(v.pipe(v.number(), v.integer())),
     comment: v.optional(v.string()),
-    reread: v.optional(v.boolean(), false)
+    reread: v.optional(v.boolean(), false),
   }),
-  v.transform((input) => ({ ...input, type: 'book' as 'book' }))
+  v.transform((input) => ({ ...input, type: 'book' as 'book' })),
 );
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
 export const ReadingLog = v.object({
-  title: v.union([v.number(), v.string()]),
-  books: v.array(ReadingLogEntry)
+  title: v.number(),
+  books: v.array(ReadingLogEntry),
 });
 export type ReadingLog = v.InferOutput<typeof ReadingLog>;
 
@@ -43,12 +39,12 @@ export const Project = v.object({
   status: v.picklist(['active', 'inactive', 'offline']),
   url: v.optional(v.pipe(v.string(), v.url())),
   description: v.optional(v.array(v.string())),
-  summary: v.string()
+  summary: v.string(),
 });
 export type Project = v.InferOutput<typeof Project>;
 
 export const ProjectLog = v.object({
-  projects: v.array(Project)
+  projects: v.array(Project),
 });
 export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
@@ -58,12 +54,12 @@ export const MovieLogEntry = v.pipe(
     title: v.string(),
     directors: v.array(v.string()),
     released: v.pipe(v.number(), v.integer()),
-    watched: v.string(),
+    watched: ISODateString,
     rating: v.optional(v.pipe(v.number(), v.integer())),
     comment: v.optional(v.string()),
-    rewatch: v.optional(v.boolean(), false)
+    rewatch: v.optional(v.boolean(), false),
   }),
-  v.transform((input) => ({ ...input, type: 'movie' as 'movie' }))
+  v.transform((input) => ({ ...input, type: 'movie' as 'movie' })),
 );
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
@@ -72,15 +68,30 @@ export const Post = v.object({
   summary: v.optional(v.string()),
   date: v.string(),
   tags: v.optional(v.array(v.string())),
-  published: v.boolean()
+  published: v.boolean(),
 });
 export type Post = v.InferOutput<typeof Post>;
 
 export const MovieLog = v.object({
   year: v.number(),
-  movies: v.array(MovieLogEntry)
+  movies: v.array(MovieLogEntry),
 });
 export type MovieLog = v.InferOutput<typeof MovieLog>;
 
 export type LogEntry = ReadingLogEntry | MovieLogEntry;
 export type LogEntryType = LogEntry['type'];
+
+export const mediaLogFiltersFallbackStart = '1998-12-12';
+export const mediaLogFiltersFallbackEnd = today('America/Chicago').toString();
+
+export const CalendarDateFromISODateString = v.pipe(
+  ISODateString,
+  v.transform((value) => {
+    return parseDate(value);
+  }),
+);
+
+export const DateRangeFromISODateStrings = v.object({
+  start: v.optional(v.fallback(ISODateString, mediaLogFiltersFallbackStart), mediaLogFiltersFallbackStart),
+  end: v.optional(v.fallback(ISODateString, mediaLogFiltersFallbackEnd), mediaLogFiltersFallbackEnd),
+});
