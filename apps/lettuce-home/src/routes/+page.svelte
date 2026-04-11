@@ -1,11 +1,5 @@
 <script lang="ts">
-  import {
-    getActiveProjects,
-    getCurrentlyReading,
-    getLastReadBook,
-    getLastWatchedMovie,
-    getRecentPosts
-  } from '$lib/collections';
+  // import { getActiveProjects, getLastReadBook, getLastWatchedMovie, getRecentPosts } from '$lib/collections';
   import Book from '$lib/components/Book.svelte';
   import Movie from '$lib/components/Movie.svelte';
   import Post from '$lib/components/Post.svelte';
@@ -13,12 +7,19 @@
   import GithubIcon from './GithubIcon.svelte';
   import ResumeIcon from 'phosphor-svelte/lib/FileTextIcon';
   import TwitterIcon from './TwitterIcon.svelte';
+  import {
+    getCurrentlyReading,
+    getLastReadBook,
+    getActiveProjects,
+    getLastWatchedMovie,
+    getRecentPosts
+  } from '$lib/remote/content.remote';
 
-  const latestBook = getLastReadBook();
-  const activeProjects = getActiveProjects();
-  const latestMovie = getLastWatchedMovie();
-  const currentBooks = getCurrentlyReading();
-  const recentPosts = getRecentPosts();
+  const latestBook = await getLastReadBook();
+  const activeProjects = await getActiveProjects();
+  const latestMovie = await getLastWatchedMovie();
+  const currentBooks = await getCurrentlyReading();
+  const recentPosts = await getRecentPosts();
 </script>
 
 <svelte:head>
@@ -77,7 +78,6 @@
         <section
           class={[
             'space-y-4',
-            // currentBooks.length > 1 ? '@min-[36rem]:col-span-2' : 'col-span-1',
             currentBooks.length === 1 && 'col-span-1',
             currentBooks.length > 1 && '@min-[36.25rem]:col-span-2',
             currentBooks.length > 2 && '@min-[54rem]:col-span-3'

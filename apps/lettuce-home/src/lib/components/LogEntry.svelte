@@ -29,7 +29,7 @@
     comment,
     type,
     id,
-    completed,
+    completed = 'current',
     revisited = false,
     subtitle
   }: MediaCardProps = $props();

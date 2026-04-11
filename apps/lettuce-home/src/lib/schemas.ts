@@ -16,17 +16,32 @@ export const Month = v.picklist([
 ]);
 export type Month = v.InferOutput<typeof Month>;
 
+const BaseBook = v.object({
+  isbn: v.pipe(v.number(), v.integer()),
+  title: v.string(),
+  subtitle: v.optional(v.string()),
+  authors: v.array(v.string()),
+  published: v.pipe(v.number(), v.integer()),
+  reread: v.optional(v.boolean(), false)
+});
+
+export const CurrentBookEntry = v.pipe(
+  BaseBook,
+  v.transform((input) => ({ ...input, type: 'book' as 'book', completed: 'current' }))
+);
+export type CurrentBookEntry = v.InferOutput<typeof CurrentBookEntry>;
+
+export const CurrentBookList = v.object({
+  books: v.array(CurrentBookEntry)
+});
+export type CurrentBookList = v.InferOutput<typeof CurrentBookEntry>;
+
 export const ReadingLogEntry = v.pipe(
   v.object({
-    isbn: v.pipe(v.number(), v.integer()),
-    title: v.string(),
-    subtitle: v.optional(v.string()),
-    authors: v.array(v.string()),
-    published: v.pipe(v.number(), v.integer()),
-    completed: v.optional(v.string()),
+    ...BaseBook.entries,
+    completed: v.pipe(v.string(), v.isoDate()),
     rating: v.optional(v.pipe(v.number(), v.integer())),
-    comment: v.optional(v.string()),
-    reread: v.optional(v.boolean(), false)
+    comment: v.optional(v.string())
   }),
   v.transform((input) => ({ ...input, type: 'book' as 'book' }))
 );

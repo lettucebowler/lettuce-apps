@@ -1,5 +1,5 @@
-import type { MovieLogEntry, ReadingLogEntry } from '$lib/schemas';
-import { allMovieLogs, allProjects, allReadingLogs, allPosts } from 'content-collections';
+import type { LogEntry, MovieLogEntry, ReadingLogEntry } from '$lib/schemas';
+import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentBook } from 'content-collections';
 
 export function getLastWatchedMovie(): MovieLogEntry {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
@@ -12,34 +12,21 @@ export function getMovieLogsDesc() {
 }
 
 export function getCurrentlyReading() {
-  return allReadingLogs.find((log) => log.title === 'current')!.books;
+  return currentBook.books.map((book) => {
+    return {
+      ...book,
+      reread: false
+    };
+  });
 }
 
 export function getReadingLogsDesc() {
   return allReadingLogs
-    .filter((log) => log.title !== 'current')
     .sort((a, b) => {
       return (b.title as number) - (a.title as number);
     })
     .map((log) => {
       return { title: log.title.toString(), items: log.books };
-    });
-}
-
-export function getFilteredBooks({ years, months }: { years: Array<number | string>; months: string[] }) {
-  return allReadingLogs
-    .filter((log) => years.includes(log.title))
-    .map((log) => log.books)
-    .flat()
-    .filter((book) => {
-      if (!months.length) {
-        return true;
-      }
-      if (!book.completed) {
-        return false;
-      }
-      const [, bookMonth] = book.completed.split('-');
-      return months.includes(bookMonth);
     });
 }
 

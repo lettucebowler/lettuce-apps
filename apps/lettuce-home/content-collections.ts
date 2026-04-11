@@ -1,5 +1,5 @@
-import { MovieLog, Post, Project, ReadingLog } from './src/lib/schemas';
-import { defineCollection, defineConfig } from '@content-collections/core';
+import { CurrentBookList, MovieLog, Post, Project, ReadingLog } from './src/lib/schemas';
+import { defineCollection, defineConfig, defineSingleton } from '@content-collections/core';
 
 const posts = defineCollection({
   name: 'posts',
@@ -39,6 +39,13 @@ const projects = defineCollection({
   parser: 'yaml'
 });
 
+const currentBooks = defineSingleton({
+  name: 'currentBooks',
+  filePath: 'src/content/current-books.yaml',
+  schema: CurrentBookList,
+  parser: 'yaml'
+});
+
 export default defineConfig({
-  content: [posts, movieLogs, readingLogs, projects]
+  content: [posts, movieLogs, readingLogs, projects, currentBooks]
 });
