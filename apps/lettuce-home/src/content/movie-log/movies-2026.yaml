@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 331482
+    title: Little Women
+    released: 2019
+    directors:
+      - Greta Gerwig
+    rating: 5
+    watched: 2026-04-11
   - tmdb: 1226863
     title: The Super Mario Galaxy Movie
     released: 2026
