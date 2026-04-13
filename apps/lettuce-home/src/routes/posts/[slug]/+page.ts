@@ -6,7 +6,7 @@ export async function load({ params }) {
     const post = await import(`../../../content/posts/${params.slug}.md`);
     return {
       content: post.default,
-      meta: post.metadata as Post
+      meta: post.metadata as Post,
     };
   } catch (e) {
     error(404, `Could not find ${params.slug}`);

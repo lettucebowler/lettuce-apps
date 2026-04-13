@@ -8,21 +8,21 @@ const config = {
   preprocess: [vitePreprocess(), mdsvex({ extensions: ['md'] })],
   compilerOptions: {
     experimental: {
-      async: true
-    }
+      async: true,
+    },
   },
 
   kit: {
     adapter: adapter(),
     experimental: {
       remoteFunctions: true,
-      forkPreloads: true
+      forkPreloads: true,
     },
     alias: {
-      'content-collections': './.content-collections/generated'
-    }
+      'content-collections': './.content-collections/generated',
+    },
   },
-  extensions: ['.svelte', '.svx', '.md']
+  extensions: ['.svelte', '.svx', '.md'],
 };
 
 export default config;

@@ -1,6 +1,12 @@
 books:
-  - isbn: 9781250229861
-    title: Network Effect
+  - isbn: 9781250765376
+    title: Fugitive Telemetry
     authors:
       - Martha Wells
     published: 2020
+  - isbn: 9780765350381
+    title: Mistborn
+    subtitle: The Final Empire
+    authors:
+      - Brandon Sanderson
+    published: 2006

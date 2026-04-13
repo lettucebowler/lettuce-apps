@@ -10,9 +10,9 @@ const posts = defineCollection({
   transform: async (doc, context) => {
     return {
       ...doc,
-      slug: doc._meta.path
+      slug: doc._meta.path,
     };
-  }
+  },
 });
 
 const movieLogs = defineCollection({
@@ -20,7 +20,7 @@ const movieLogs = defineCollection({
   directory: 'src/content/movie-log',
   include: '*.yaml',
   schema: MovieLog,
-  parser: 'yaml'
+  parser: 'yaml',
 });
 
 const readingLogs = defineCollection({
@@ -28,7 +28,7 @@ const readingLogs = defineCollection({
   directory: 'src/content/reading-log',
   include: '*.yaml',
   schema: ReadingLog,
-  parser: 'yaml'
+  parser: 'yaml',
 });
 
 const projects = defineCollection({
@@ -36,16 +36,16 @@ const projects = defineCollection({
   directory: 'src/content/projects',
   include: '*.yaml',
   schema: Project,
-  parser: 'yaml'
+  parser: 'yaml',
 });
 
 const currentlyReading = defineSingleton({
   name: 'currentlyReading',
   filePath: 'src/content/currently-reading.yaml',
   parser: 'yaml',
-  schema: CurrentlyReadingList
+  schema: CurrentlyReadingList,
 });
 
 export default defineConfig({
-  content: [posts, movieLogs, readingLogs, projects, currentlyReading]
+  content: [posts, movieLogs, readingLogs, projects, currentlyReading],
 });

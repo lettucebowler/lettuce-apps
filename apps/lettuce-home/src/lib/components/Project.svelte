@@ -14,7 +14,7 @@
     description,
     url,
     heading = 'h3',
-    headingClassname = 'font-medium inline-block mb-2 text-xl'
+    headingClassname = 'font-medium inline-block mb-2 text-xl',
   }: Props = $props();
 </script>
 
@@ -39,7 +39,7 @@
           'font-medium',
           status === 'active' && 'text-frost-200',
           status === 'inactive' && 'text-putty-500',
-          status === 'offline' && 'text-contessa-500'
+          status === 'offline' && 'text-contessa-500',
         ]}
       >
         {status}

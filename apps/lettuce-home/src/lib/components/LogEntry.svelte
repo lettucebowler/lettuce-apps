@@ -31,7 +31,7 @@
     id,
     completed,
     revisited = false,
-    subtitle
+    subtitle,
   }: MediaCardProps = $props();
 </script>
 
@@ -81,7 +81,7 @@
               style="position-anchor: --{createAnchorName(
                 type,
                 id,
-                completed
+                completed,
               )};  position-area: block-end span-inline-end; position-try-fallbacks:flip-inline;"
               class="mt-2 max-w-100 border border-charade-600 bg-charade-950 p-6 shadow-sm"
             >

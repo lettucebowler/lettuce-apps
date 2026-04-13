@@ -1,5 +1,13 @@
 title: 2026
 books:
+  - isbn: 9781250229861
+    title: Network Effect
+    authors:
+      - Martha Wells
+    published: 2020
+    completed: 2026-04-12
+    rating: 4
+    comment: I really liked the last 3rd but the middle was a bit of a slog for me.
   - isbn: 9781250191854
     title: Exit Strategy
     authors:

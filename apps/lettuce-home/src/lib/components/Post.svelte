@@ -13,7 +13,7 @@
     tags,
     date,
     heading = 'h3',
-    headingClassname = 'mb-1 text-xl text-swamp-green-500 underline font-medium'
+    headingClassname = 'mb-1 text-xl text-swamp-green-500 underline font-medium',
   }: Props = $props();
 </script>
 
@@ -25,7 +25,7 @@
         month: 'long',
         day: 'numeric',
         year: 'numeric',
-        timeZone: 'utc'
+        timeZone: 'utc',
       })}</time
     >
     {#each tags as tag}

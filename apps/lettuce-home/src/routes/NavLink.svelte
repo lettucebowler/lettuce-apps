@@ -4,7 +4,7 @@
 
   const [send, recieve] = crossfade({
     duration: 250,
-    easing: cubicOut
+    easing: cubicOut,
   });
 </script>
 

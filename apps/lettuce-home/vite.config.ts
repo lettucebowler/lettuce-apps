@@ -8,6 +8,6 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 export default defineConfig({
   plugins: [tailwindcss(), enhancedImages(), sveltekit(), devtoolsJson(), contentCollections()],
   build: {
-    cssMinify: 'esbuild'
-  }
+    cssMinify: 'esbuild',
+  },
 });

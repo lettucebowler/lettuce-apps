@@ -4,7 +4,7 @@
     getCurrentlyReading,
     getLastReadBook,
     getLastWatchedMovie,
-    getRecentPosts
+    getRecentPosts,
   } from '$lib/collections';
   import Book from '$lib/components/Book.svelte';
   import Movie from '$lib/components/Movie.svelte';
@@ -80,7 +80,7 @@
             // currentBooks.length > 1 ? '@min-[36rem]:col-span-2' : 'col-span-1',
             currentBooks.length === 1 && 'col-span-1',
             currentBooks.length > 1 && '@min-[36.25rem]:col-span-2',
-            currentBooks.length > 2 && '@min-[54rem]:col-span-3'
+            currentBooks.length > 2 && '@min-[54rem]:col-span-3',
           ]}
         >
           <h2 class="text-2xl font-bold">Currently reading</h2>

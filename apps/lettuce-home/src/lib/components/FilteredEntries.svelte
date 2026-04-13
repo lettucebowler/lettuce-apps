@@ -20,7 +20,7 @@
       type === 'book'
         ? filterBooks({
             start,
-            end
+            end,
           })
         : filterMovies({ start, end });
     return direction === 'desc' ? entries : entries.toReversed();

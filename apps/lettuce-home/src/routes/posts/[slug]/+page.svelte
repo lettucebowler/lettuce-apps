@@ -14,7 +14,7 @@
         month: 'long',
         day: 'numeric',
         year: 'numeric',
-        timeZone: 'UTC'
+        timeZone: 'UTC',
       })}</time
     >
     <nav>
