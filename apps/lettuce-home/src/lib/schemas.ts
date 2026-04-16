@@ -81,17 +81,23 @@ export type MovieLog = v.InferOutput<typeof MovieLog>;
 export type LogEntry = ReadingLogEntry | MovieLogEntry;
 export type LogEntryType = LogEntry['type'];
 
+export const CalendarDateFromISODateString = v.fallback(
+  v.pipe(
+    v.optional(ISODateString, () => undefined),
+    v.transform((value) => {
+      if (!value) {
+        return undefined;
+      }
+      return parseDate(value);
+    }),
+  ),
+  undefined,
+);
+
 export const mediaLogFiltersFallbackStart = '1998-12-12';
 export const mediaLogFiltersFallbackEnd = today('America/Chicago').toString();
 
-export const CalendarDateFromISODateString = v.pipe(
-  ISODateString,
-  v.transform((value) => {
-    return parseDate(value);
-  }),
-);
-
 export const DateRangeFromISODateStrings = v.object({
-  start: v.optional(v.fallback(ISODateString, mediaLogFiltersFallbackStart), mediaLogFiltersFallbackStart),
-  end: v.optional(v.fallback(ISODateString, mediaLogFiltersFallbackEnd), mediaLogFiltersFallbackEnd),
+  start: CalendarDateFromISODateString,
+  end: CalendarDateFromISODateString,
 });

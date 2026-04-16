@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>Movies | Grant Montgomery</title>
+  <title>Movie log | Grant Montgomery</title>
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>

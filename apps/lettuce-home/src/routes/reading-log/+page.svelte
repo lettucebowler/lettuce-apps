@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>Books | Grant Montgomery</title>
+  <title>Reading log | Grant Montgomery</title>
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
