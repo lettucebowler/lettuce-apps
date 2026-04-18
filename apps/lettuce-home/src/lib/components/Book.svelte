@@ -2,7 +2,19 @@
   import type { ReadingLogEntry } from '$lib/schemas';
   import LogEntry from './LogEntry.svelte';
 
-  let { title, subtitle, authors, isbn, published, reread, comment, completed, rating }: ReadingLogEntry = $props();
+  type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+  let {
+    title,
+    subtitle,
+    authors,
+    isbn,
+    published,
+    reread = false,
+    comment,
+    completed,
+    rating,
+  }: Optional<Omit<ReadingLogEntry, 'type'>, 'reread' | 'completed'> = $props();
 </script>
 
 <LogEntry

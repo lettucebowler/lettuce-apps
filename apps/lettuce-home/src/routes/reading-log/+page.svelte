@@ -20,7 +20,7 @@
         {@render bookCount(currentBooks.length)}
       {/snippet}
       {#each currentBooks as book (book.isbn)}
-        <Book {...book} />
+        <Book {...book} reread={false} />
       {/each}
     </MediaCollection>
   {/if}

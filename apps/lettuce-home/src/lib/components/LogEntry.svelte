@@ -1,5 +1,5 @@
 <script module lang="ts">
-  function createAnchorName(type: LogEntryType, id: number, watched: string) {
+  function createAnchorName(type: LogEntryType, id: string, watched: string) {
     return `${type}-${id}-${watched}`;
   }
 </script>
@@ -16,7 +16,7 @@
     rating?: number;
     comment?: string;
     type: LogEntryType;
-    id: number;
+    id: string;
     completed?: string;
     revisited?: boolean;
     subtitle?: string;

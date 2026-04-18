@@ -77,7 +77,6 @@
         <section
           class={[
             'space-y-4',
-            // currentBooks.length > 1 ? '@min-[36rem]:col-span-2' : 'col-span-1',
             currentBooks.length === 1 && 'col-span-1',
             currentBooks.length > 1 && '@min-[36.25rem]:col-span-2',
             currentBooks.length > 2 && '@min-[54rem]:col-span-3',

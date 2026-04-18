@@ -50,7 +50,7 @@ export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
 export const MovieLogEntry = v.pipe(
   v.object({
-    tmdb: v.pipe(v.number(), v.integer()),
+    tmdb: v.pipe(v.number(), v.integer(), v.toString()),
     title: v.string(),
     directors: v.array(v.string()),
     released: v.pipe(v.number(), v.integer()),

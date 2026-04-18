@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 457335
+    title: Guns Akimbo
+    released: 2020
+    directors:
+      - Jason Lei Howden
+    rating: 2
+    watched: 2026-04-17
   - tmdb: 331482
     title: Little Women
     released: 2019
