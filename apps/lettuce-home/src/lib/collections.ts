@@ -36,7 +36,7 @@ export function filterBooks(dateRange: DateRange) {
     .filter((item) => {
       const completionDate = parseDate(item.completed);
       return (
-        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate < dateRange.end)
+        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
       );
     });
 }
@@ -48,7 +48,7 @@ export function filterMovies(dateRange: DateRange) {
     .filter((item) => {
       const completionDate = parseDate(item.watched);
       return (
-        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate < dateRange.end)
+        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
       );
     });
 }
