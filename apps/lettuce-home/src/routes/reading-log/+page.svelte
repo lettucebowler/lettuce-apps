@@ -2,6 +2,7 @@
   import Book from '../../lib/components/Book.svelte';
   import MediaCollection from '$lib/components/MediaCollection.svelte';
   import { getCurrentlyReading, getReadingLogsDesc } from '$lib/collections';
+  import MediaFigure from '$lib/components/MediaFigure.svelte';
   const bookData = getReadingLogsDesc();
   const currentBooks = getCurrentlyReading();
 </script>
@@ -24,7 +25,7 @@
       {/each}
     </MediaCollection>
   {/if}
-  {#each bookData.filter((log) => log.items.length) as { title: year, items } (year)}
+  {#each bookData.filter((log) => log.items.length) as { year, items } (year)}
     <MediaCollection>
       {#snippet title()}
         {year}

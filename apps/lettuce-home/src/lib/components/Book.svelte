@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ReadingLogEntry } from '$lib/schemas';
-  import LogEntry from './LogEntry.svelte';
+  import MediaFigure from './MediaFigure.svelte';
 
   type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
@@ -12,20 +12,26 @@
     published,
     reread = false,
     comment,
-    completed,
     rating,
-  }: Optional<Omit<ReadingLogEntry, 'type'>, 'reread' | 'completed'> = $props();
+    imageSrc,
+    url,
+  }: Optional<Omit<ReadingLogEntry, 'type' | 'logDate'>, 'reread'> = $props();
 </script>
 
-<LogEntry
-  type="book"
+{#snippet feature()}
+  {#if reread}
+    <p class="font-bold text-antique-brass-500 italic">reread</p>
+  {/if}
+{/snippet}
+
+<MediaFigure
   {title}
-  year={published}
-  contributors={authors}
-  id={isbn}
-  revisited={reread}
   {subtitle}
+  contributors={authors}
+  year={published}
   {comment}
   {rating}
-  {completed}
+  {imageSrc}
+  href={url}
+  {feature}
 />

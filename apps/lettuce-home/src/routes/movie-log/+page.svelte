@@ -10,7 +10,7 @@
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>
-  {#each movieLog as { year, movies } (year)}
+  {#each movieLog as { year, items: movies } (year)}
     <MediaCollection>
       {#snippet title()}
         {year.toString()}
@@ -18,7 +18,7 @@
       {#snippet subtitle()}
         {movies.length} movie{movies.length === 1 ? '' : 's'}
       {/snippet}
-      {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.watched)}
+      {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.logDate)}
         <Movie {...movie} />
       {/each}
     </MediaCollection>

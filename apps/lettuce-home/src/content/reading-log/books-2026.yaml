@@ -1,5 +1,14 @@
-title: 2026
+year: 2026
 books:
+  - isbn: 9780765350381
+    title: Mistborn
+    subtitle: The Final Empire
+    authors:
+      - Brandon Sanderson
+    published: 2006
+    rating: 4
+    comment: The power systems are interesting.
+    completed: 2026-05-10
   - isbn: 9781250229861
     title: Network Effect
     authors:

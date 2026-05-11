@@ -1,11 +1,11 @@
 <script lang="ts">
   import { filterBooks, filterMovies } from '$lib/collections';
-  import type { LogEntry, LogEntryType } from '$lib/schemas';
+  import type { LogEntry } from '$lib/schemas';
   import type { CalendarDate } from '@internationalized/date';
   type Props = {
     start?: CalendarDate | undefined;
     end?: CalendarDate | undefined;
-    type: LogEntryType;
+    type: 'movie' | 'book';
     manualItems?: Array<LogEntry>;
     direction?: 'asc' | 'desc';
   };
@@ -25,35 +25,13 @@
         : filterMovies({ start, end });
     return direction === 'desc' ? entries : entries.toReversed();
   });
-
-  function getEntryMediaPath(entry: LogEntry) {
-    switch (entry.type) {
-      case 'book':
-        return `/covers/book-${entry.isbn}.webp`;
-      case 'movie':
-        return `/posters/movie-${entry.tmdb}.webp`;
-    }
-  }
-
-  function getEntryId(entry: LogEntry) {
-    switch (entry.type) {
-      case 'book':
-        return `${entry.isbn}:${entry.completed}`;
-      case 'movie':
-        return `${entry.tmdb}:${entry.watched}`;
-    }
-  }
 </script>
 
 <div class="@container">
   <div class="grid grid-cols-[repeat(auto-fill,_minmax(6rem,_1fr))] gap-4">
-    {#each items as item (getEntryId(item))}
-      <a
-        title={item.title}
-        href={item.type === 'book'
-          ? `https://openlibrary.org/isbn/${item.isbn}`
-          : `https://www.themoviedb.org/movie/${item.tmdb}`}
-        ><img src={getEntryMediaPath(item)} class="m-0! aspect-2/3 w-full" alt={item.title} /></a
+    {#each items as item (`${item.id}:${item.logDate}`)}
+      <a title={item.title} href={item.url}
+        ><img src={item.imageSrc} class="m-0! aspect-2/3 w-full" alt={item.title} /></a
       >
     {:else}
       <p class="col-span-full">No {type}s within specified date range</p>

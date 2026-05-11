@@ -23,21 +23,40 @@ export async function getGameResults({
   start,
 }: GetGameResultsInput): Promise<GetGameResultsOutput> {
   const client = createAPIWordlettuceClient();
+  let params: {
+    limit: number;
+    start?: number;
+    userID?: number;
+    username?: string;
+  } = {
+    limit,
+  };
+  if (start) {
+    params.start = start;
+  }
+  if (username) {
+    params.username = username;
+  } else {
+    params.userID = userID;
+  }
   return client
     .get<GetGameResultsOutput>('v1/game-results', {
-      searchParams: userID ? { userID, start, limit } : { username: username!, start, limit },
+      searchParams: params,
     })
     .json();
 }
 
 export async function getProfileData({ user, start }: { user: string; start: number }) {
   const gameNum = getGameNum();
-  const { results, limit } = await getGameResults({ username: user, limit: 37, start }).catch(() => ({
+  const { results, limit } = await getGameResults({ username: user, limit: 37 }).catch(() => ({
     results: [],
     limit: 30,
   }));
-  const currentResults = start === gameNum ? results.filter((result) => result.gameNum > getGameNum() - 7) : [];
-  const pastResults = results.slice(currentResults.length).slice(0, 30);
+  const currentResults =
+    start === gameNum ? results.filter((result) => result.gameNum > gameNum - 7 && result.gameNum <= gameNum) : [];
+  const pastResults = results.filter((result) => {
+    return !currentResults.find((c) => c.gameNum === result.gameNum);
+  });
   const profileData = {
     profileUser: user,
     profileUserID: results.at(0)?.userID!,
@@ -63,6 +82,6 @@ export const GetGameResultsInput = v.object({
   username: v.optional(v.string()),
   userID: v.optional(v.pipe(v.number(), v.integer(), v.minValue(0))),
   limit: v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  start: v.pipe(v.number(), v.integer(), v.minValue(0)),
+  start: v.optional(v.pipe(v.number(), v.integer(), v.minValue(0))),
 });
 export type GetGameResultsInput = v.InferOutput<typeof GetGameResultsInput>;

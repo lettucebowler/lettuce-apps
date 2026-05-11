@@ -1,22 +1,14 @@
 <script lang="ts">
   import { type MovieLogEntry } from '$lib/schemas';
-  import LogEntry from './LogEntry.svelte';
+  import MediaFigure from './MediaFigure.svelte';
 
-  let { tmdb, title, directors, released, rewatch, rating, comment, watched }: MovieLogEntry = $props();
-
-  function createAnchorName(tmdb: number, watched: string) {
-    return `movie-${tmdb}-${watched}`;
-  }
+  let { title, directors, released, rewatch, rating, comment, imageSrc, url }: MovieLogEntry = $props();
 </script>
 
-<LogEntry
-  type="movie"
-  {title}
-  year={released}
-  contributors={directors}
-  id={tmdb}
-  revisited={rewatch}
-  {comment}
-  {rating}
-  completed={watched}
-/>
+{#snippet feature()}
+  {#if rewatch}
+    <p class="font-bold text-antique-brass-500 italic">rewatch</p>
+  {/if}
+{/snippet}
+
+<MediaFigure {title} contributors={directors} year={released} {comment} {rating} {imageSrc} href={url} {feature} />

@@ -3,13 +3,25 @@ import * as v from 'valibot';
 
 export const ISODateString = v.pipe(v.string(), v.nonEmpty(), v.isoDate());
 
-const Book = v.object({
-  isbn: v.pipe(v.number(), v.toString(), v.isbn()),
-  title: v.string(),
-  subtitle: v.optional(v.string()),
-  authors: v.array(v.string()),
-  published: v.pipe(v.number(), v.integer()),
-});
+function transformBook<TBook extends { isbn: string }>(book: TBook) {
+  return {
+    ...book,
+    imageSrc: `/covers/book-${book.isbn}.webp`,
+    url: `https://openlibrary.org/isbn/${book.isbn}`,
+    id: book.isbn,
+  };
+}
+
+const Book = v.pipe(
+  v.object({
+    isbn: v.pipe(v.number(), v.toString(), v.isbn()),
+    title: v.string(),
+    subtitle: v.optional(v.string()),
+    authors: v.array(v.string()),
+    published: v.pipe(v.number(), v.integer()),
+  }),
+  v.transform((book) => transformBook(book)),
+);
 export type Book = v.InferOutput<typeof Book>;
 
 export const CurrentlyReadingList = v.object({
@@ -24,12 +36,19 @@ export const ReadingLogEntry = v.pipe(
     comment: v.optional(v.string()),
     reread: v.optional(v.boolean(), false),
   }),
-  v.transform((input) => ({ ...input, type: 'book' as 'book' })),
+  v.transform((book) => {
+    const { completed, ...rest } = book;
+    return {
+      ...rest,
+      logDate: completed,
+    };
+  }),
+  v.transform((book) => transformBook(book)),
 );
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
 export const ReadingLog = v.object({
-  title: v.number(),
+  year: v.number(),
   books: v.array(ReadingLogEntry),
 });
 export type ReadingLog = v.InferOutput<typeof ReadingLog>;
@@ -59,7 +78,16 @@ export const MovieLogEntry = v.pipe(
     comment: v.optional(v.string()),
     rewatch: v.optional(v.boolean(), false),
   }),
-  v.transform((input) => ({ ...input, type: 'movie' as 'movie' })),
+  v.transform((movie) => {
+    const { watched, ...rest } = movie;
+    return {
+      ...rest,
+      imageSrc: `/posters/movie-${movie.tmdb}.webp`,
+      url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
+      id: movie.tmdb,
+      logDate: watched,
+    };
+  }),
 );
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
@@ -79,7 +107,6 @@ export const MovieLog = v.object({
 export type MovieLog = v.InferOutput<typeof MovieLog>;
 
 export type LogEntry = ReadingLogEntry | MovieLogEntry;
-export type LogEntryType = LogEntry['type'];
 
 export const CalendarDateFromISODateString = v.fallback(
   v.pipe(

@@ -3,13 +3,20 @@ import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
 
 export function getLastWatchedMovie() {
-  return getMovieLogsDesc().at(0)!.movies.at(0)!;
+  return getMovieLogsDesc().at(0)!.items.at(0)!;
 }
 
 export function getMovieLogsDesc() {
-  return allMovieLogs.sort((a, b) => {
-    return b.year - a.year;
-  });
+  return allMovieLogs
+    .sort((a, b) => {
+      return b.year - a.year;
+    })
+    .map((log) => {
+      return {
+        year: log.year,
+        items: log.movies,
+      };
+    });
 }
 
 export function getCurrentlyReading() {
@@ -19,11 +26,11 @@ export function getCurrentlyReading() {
 export function getReadingLogsDesc() {
   return allReadingLogs
     .sort((a, b) => {
-      return (b.title as number) - (a.title as number);
+      return b.year - a.year;
     })
     .map((log) => {
       return {
-        title: log.title.toString(),
+        year: log.year,
         items: log.books,
       };
     });
@@ -34,7 +41,7 @@ export function filterBooks(dateRange: DateRange) {
     .map((log) => log.items)
     .flat()
     .filter((item) => {
-      const completionDate = parseDate(item.completed);
+      const completionDate = parseDate(item.logDate);
       return (
         (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
       );
@@ -43,10 +50,9 @@ export function filterBooks(dateRange: DateRange) {
 
 export function filterMovies(dateRange: DateRange) {
   return getMovieLogsDesc()
-    .map((log) => log.movies)
-    .flat()
+    .flatMap((log) => log.items)
     .filter((item) => {
-      const completionDate = parseDate(item.watched);
+      const completionDate = parseDate(item.logDate);
       return (
         (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
       );

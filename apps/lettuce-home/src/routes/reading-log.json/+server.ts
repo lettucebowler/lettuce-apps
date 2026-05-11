@@ -5,7 +5,15 @@ export async function GET() {
   const currentlyReading = getCurrentlyReading();
   const readingLogs = getReadingLogsDesc();
   return json({
-    currentlyReading,
-    completed: readingLogs.flatMap((log) => log.items),
+    currentlyReading: currentlyReading.map((item) => {
+      const { id, ...rest } = item;
+      return rest;
+    }),
+    completed: readingLogs.flatMap((log) =>
+      log.items.map((item) => {
+        const { id, ...rest } = item;
+        return rest;
+      }),
+    ),
   });
 }
