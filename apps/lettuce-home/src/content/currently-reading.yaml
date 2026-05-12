@@ -1,4 +1,9 @@
 books:
+  - isbn: 9781250826985
+    title: System Collapse
+    authors:
+      - Martha Wells
+    published: 2023
   - isbn: 9798888777794
     title: 'Witch Hat Atelier: Grimoire Edition 1'
     authors:
