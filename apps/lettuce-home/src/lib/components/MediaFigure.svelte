@@ -51,10 +51,10 @@
         <span class="text-charade-200">{year}</span>
       </svelte:element>
       {#if subtitle}
-        <p class="mb-1 text-charade-200">{subtitle}</p>
+        <p class=" text-charade-200">{subtitle}</p>
       {/if}
       {#if contributors.length}
-        <ul>
+        <ul class={[subtitle && 'mt-1']}>
           {#each contributors as contributor}
             <li class="text-charade-200">{contributor}</li>
           {/each}
@@ -63,34 +63,36 @@
       <div class="flex gap-x-2" id="media-figure-{uid}-rating-bar">
         <div class={['group flex gap-x-2', comment && 'hover:cursor-pointer']}>
           {#if comment}
-            <Popover.Root>
-              <Popover.Trigger>
-                <ChatCenteredDotsIcon weight="fill" class="size-4 cursor-pointer group-hover:text-swamp-green-500" />
-                {#snippet child({ props })}
-                  <button
-                    {...props}
-                    aria-label="movie comment for {title}"
-                    class="flex cursor-pointer items-center gap-2"
-                    id="media-figure-{uid}-comment-trigger"
+            <div class="hidden @max-[17rem]:contents">
+              <Popover.Root>
+                <Popover.Trigger>
+                  <ChatCenteredDotsIcon weight="fill" class="size-4 cursor-pointer group-hover:text-swamp-green-500" />
+                  {#snippet child({ props })}
+                    <button
+                      {...props}
+                      aria-label="movie comment for {title}"
+                      class="flex cursor-pointer items-center gap-2"
+                      id="media-figure-{uid}-comment-trigger"
+                    >
+                      <ChatCenteredDotsIcon
+                        weight="fill"
+                        class="size-4 cursor-pointer group-hover:text-swamp-green-500"
+                      />
+                    </button>
+                  {/snippet}
+                </Popover.Trigger>
+                <Popover.Portal>
+                  <Popover.Content
+                    class="shadow-popover data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-30 w-full max-w-[328px] origin-(--bits-popover-content-transform-origin) rounded border border-charade-700 bg-charade-950 p-4"
+                    align="center"
+                    alignOffset={100}
+                    customAnchor="#media-figure-{uid}-rating-bar"
                   >
-                    <ChatCenteredDotsIcon
-                      weight="fill"
-                      class="size-4 cursor-pointer group-hover:text-swamp-green-500"
-                    />
-                  </button>
-                {/snippet}
-              </Popover.Trigger>
-              <Popover.Portal>
-                <Popover.Content
-                  class="shadow-popover data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-30 w-full max-w-[328px] origin-(--bits-popover-content-transform-origin) rounded border border-charade-700 bg-charade-950 p-4"
-                  align="center"
-                  alignOffset={100}
-                  customAnchor="#media-figure-{uid}-rating-bar"
-                >
-                  {comment}
-                </Popover.Content>
-              </Popover.Portal>
-            </Popover.Root>
+                    {comment}
+                  </Popover.Content>
+                </Popover.Portal>
+              </Popover.Root>
+            </div>
           {/if}
           {#if rating}
             <svelte:element
@@ -110,7 +112,7 @@
         {@render feature?.()}
       </div>
       {#if comment}
-        <p class="mt-2 font-light text-charade-100 @max-[17rem]:hidden">{comment}</p>
+        <p class="mt-2 text-charade-100 @max-[17rem]:hidden">{comment}</p>
       {/if}
     </figcaption>
   </figure>
