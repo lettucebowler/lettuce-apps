@@ -3,7 +3,7 @@ import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
 
 export function getLastWatchedMovie() {
-  return getMovieLogsDesc().at(0)!.items.at(0)!;
+  return getMovieLogsDesc().at(0)!.movies.at(0)!;
 }
 
 export function getMovieLogsDesc() {
@@ -14,7 +14,7 @@ export function getMovieLogsDesc() {
     .map((log) => {
       return {
         year: log.year,
-        items: log.movies,
+        movies: log.movies,
       };
     });
 }
@@ -28,17 +28,12 @@ export function getReadingLogsDesc() {
     .sort((a, b) => {
       return b.year - a.year;
     })
-    .map((log) => {
-      return {
-        year: log.year,
-        items: log.books,
-      };
-    });
+    .map((log) => ({ year: log.year, books: log.books }));
 }
 
 export function filterBooks(dateRange: DateRange) {
   return getReadingLogsDesc()
-    .map((log) => log.items)
+    .map((log) => log.books)
     .flat()
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
@@ -50,7 +45,7 @@ export function filterBooks(dateRange: DateRange) {
 
 export function filterMovies(dateRange: DateRange) {
   return getMovieLogsDesc()
-    .flatMap((log) => log.items)
+    .flatMap((log) => log.movies)
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
       return (
@@ -60,7 +55,7 @@ export function filterMovies(dateRange: DateRange) {
 }
 
 export function getLastReadBook() {
-  return getReadingLogsDesc()[0].items.at(0)!;
+  return getReadingLogsDesc()[0].books.at(0)!;
 }
 
 export function getProjectsDesc() {

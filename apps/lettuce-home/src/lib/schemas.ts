@@ -3,15 +3,6 @@ import * as v from 'valibot';
 
 export const ISODateString = v.pipe(v.string(), v.nonEmpty(), v.isoDate());
 
-function transformBook<TBook extends { isbn: string }>(book: TBook) {
-  return {
-    ...book,
-    imageSrc: `/covers/book-${book.isbn}.webp`,
-    url: `https://openlibrary.org/isbn/${book.isbn}`,
-    id: book.isbn,
-  };
-}
-
 const Book = v.pipe(
   v.object({
     isbn: v.pipe(v.number(), v.toString(), v.isbn()),
@@ -20,7 +11,13 @@ const Book = v.pipe(
     authors: v.array(v.string()),
     published: v.pipe(v.number(), v.integer()),
   }),
-  v.transform((book) => transformBook(book)),
+  v.transform((book) => {
+    return {
+      ...book,
+      imageSrc: `/covers/book-${book.isbn}.webp`,
+      url: `https://openlibrary.org/isbn/${book.isbn}`,
+    };
+  }),
 );
 export type Book = v.InferOutput<typeof Book>;
 
@@ -28,23 +25,17 @@ export const CurrentlyReadingList = v.object({
   books: v.array(Book),
 });
 
-export const ReadingLogEntry = v.pipe(
-  v.object({
-    ...Book.entries,
-    completed: ISODateString,
-    rating: v.optional(v.pipe(v.number(), v.integer())),
-    comment: v.optional(v.string()),
-    reread: v.optional(v.boolean(), false),
-  }),
-  v.transform((book) => {
-    const { completed, ...rest } = book;
-    return {
-      ...rest,
-      logDate: completed,
-    };
-  }),
-  v.transform((book) => transformBook(book)),
-);
+export const ReadingLogEntry = v.intersect([
+  Book,
+  v.pipe(
+    v.object({
+      logDate: ISODateString,
+      rating: v.optional(v.pipe(v.number(), v.integer())),
+      comment: v.optional(v.string()),
+      reread: v.optional(v.boolean(), false),
+    }),
+  ),
+]);
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
 export const ReadingLog = v.object({
@@ -73,19 +64,16 @@ export const MovieLogEntry = v.pipe(
     title: v.string(),
     directors: v.array(v.string()),
     released: v.pipe(v.number(), v.integer()),
-    watched: ISODateString,
+    logDate: ISODateString,
     rating: v.optional(v.pipe(v.number(), v.integer())),
     comment: v.optional(v.string()),
     rewatch: v.optional(v.boolean(), false),
   }),
   v.transform((movie) => {
-    const { watched, ...rest } = movie;
     return {
-      ...rest,
+      ...movie,
       imageSrc: `/posters/movie-${movie.tmdb}.webp`,
       url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
-      id: movie.tmdb,
-      logDate: watched,
     };
   }),
 );

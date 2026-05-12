@@ -10,7 +10,7 @@
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>
-  {#each movieLog as { year, items: movies } (year)}
+  {#each movieLog as { year, movies } (year)}
     <MediaCollection>
       {#snippet title()}
         {year.toString()}

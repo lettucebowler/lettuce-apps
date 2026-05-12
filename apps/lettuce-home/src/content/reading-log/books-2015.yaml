@@ -5,5 +5,5 @@ books:
     authors:
       - Andrzej Sapkowski
     published: 1993
-    completed: 2015-12-31
+    logDate: 2015-12-31
     rating: 4

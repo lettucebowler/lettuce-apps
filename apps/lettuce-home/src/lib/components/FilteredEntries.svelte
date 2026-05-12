@@ -29,7 +29,7 @@
 
 <div class="@container">
   <div class="grid grid-cols-[repeat(auto-fill,_minmax(6rem,_1fr))] gap-4">
-    {#each items as item (`${item.id}:${item.logDate}`)}
+    {#each items as item (`${item.url}:${item.logDate}`)}
       <a title={item.title} href={item.url}
         ><img src={item.imageSrc} class="m-0! aspect-2/3 w-full" alt={item.title} /></a
       >

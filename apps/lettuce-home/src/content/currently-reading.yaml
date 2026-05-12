@@ -1,9 +1,4 @@
 books:
-  - isbn: 9781250765376
-    title: Fugitive Telemetry
-    authors:
-      - Martha Wells
-    published: 2020
   - isbn: 9798888777794
     title: 'Witch Hat Atelier: Grimoire Edition 1'
     authors:
