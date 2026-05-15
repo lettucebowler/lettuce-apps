@@ -3,6 +3,6 @@ import { getCurrentlyReading, getReadingLogsDesc } from '$lib/collections';
 
 export async function GET() {
   const current = getCurrentlyReading();
-  const completed = getReadingLogsDesc();
+  const completed = getReadingLogsDesc().flatMap((year) => year.books);
   return json({ current, completed });
 }

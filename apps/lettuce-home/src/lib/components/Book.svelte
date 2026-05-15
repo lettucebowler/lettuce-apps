@@ -20,7 +20,7 @@
 
 {#snippet feature()}
   {#if reread}
-    <p class="font-bold text-antique-brass-500 italic">reread</p>
+    <p class="ml-auto font-bold text-antique-brass-500 italic">reread</p>
   {/if}
 {/snippet}
 

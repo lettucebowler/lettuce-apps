@@ -17,9 +17,7 @@
 </script>
 
 <script lang="ts">
-  import ChatCenteredDotsIcon from 'phosphor-svelte/lib/ChatCenteredDotsIcon';
   import { Popover } from 'bits-ui';
-  import StarIcon from 'phosphor-svelte/lib/StarIcon';
   import type { Snippet } from 'svelte';
 
   const {
@@ -60,13 +58,12 @@
           {/each}
         </ul>
       {/if}
-      <div class="flex gap-x-2" id="media-figure-{uid}-rating-bar">
+      <div class="mt-1.5 flex gap-x-2" id="media-figure-{uid}-rating-bar">
         <div class={['group flex gap-x-2', comment && 'hover:cursor-pointer']}>
           {#if comment}
             <div class="hidden @max-[17rem]:contents">
               <Popover.Root>
                 <Popover.Trigger>
-                  <ChatCenteredDotsIcon weight="fill" class="size-4 cursor-pointer group-hover:text-swamp-green-500" />
                   {#snippet child({ props })}
                     <button
                       {...props}
@@ -74,10 +71,9 @@
                       class="flex cursor-pointer items-center gap-2"
                       id="media-figure-{uid}-comment-trigger"
                     >
-                      <ChatCenteredDotsIcon
-                        weight="fill"
-                        class="size-4 cursor-pointer group-hover:text-swamp-green-500"
-                      />
+                      <span
+                        class="icon-[heroicons--chat-bubble-left-ellipsis-solid] size-4 cursor-pointer group-hover:text-swamp-green-500"
+                      ></span>
                     </button>
                   {/snippet}
                 </Popover.Trigger>
@@ -97,14 +93,20 @@
           {#if rating}
             <svelte:element
               this={comment ? 'label' : 'div'}
-              class={['my-1.5 flex items-center gap-0.5 text-putty-500']}
+              class={['flex items-center gap-0.5 text-putty-500']}
               for="media-figure-{uid}-comment-trigger"
             >
-              {#each { length: rating }, i (i)}
-                <StarIcon
-                  weight="fill"
-                  class={['size-3', comment && 'group-hover:scale-105 group-hover:cursor-pointer']}
-                />
+              {#each { length: 5 }, i (i)}
+                {#if i < rating}
+                  <span
+                    class={[
+                      'icon-[heroicons--star-solid]',
+                      comment && 'group-hover:scale-105 group-hover:cursor-pointer',
+                    ]}
+                  ></span>
+                {:else}
+                  <span class={['icon-[heroicons--star]', comment && 'group-hover:cursor-pointer']}></span>
+                {/if}
               {/each}
             </svelte:element>
           {/if}

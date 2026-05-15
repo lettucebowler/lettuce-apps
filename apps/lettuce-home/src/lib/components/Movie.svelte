@@ -7,7 +7,7 @@
 
 {#snippet feature()}
   {#if rewatch}
-    <p class="font-bold text-antique-brass-500 italic">rewatch</p>
+    <p class="ml-auto font-bold text-antique-brass-500 italic">rewatch</p>
   {/if}
 {/snippet}
 

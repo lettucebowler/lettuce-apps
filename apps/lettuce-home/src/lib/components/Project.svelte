@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Project } from 'content-collections';
-  import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
 
   type Props = {
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -22,7 +21,8 @@
   {#if url}
     <a href={url} class="group inline text-swamp-green-500">
       {@render Title({ title, heading, classname: [headingClassname, 'underline'] })}
-      <ArrowSquareOutIcon class="mb-3 inline-block size-3.5" weight="bold" />
+      <!-- <ArrowSquareOutIcon class="" weight="bold" /> -->
+      <span class="mb-1 icon-[heroicons--arrow-top-right-on-square-solid] inline-block size-4"></span>
     </a>
   {:else}
     <div class="">

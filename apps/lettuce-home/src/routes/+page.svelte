@@ -10,9 +10,6 @@
   import Movie from '$lib/components/Movie.svelte';
   import Post from '$lib/components/Post.svelte';
   import Project from '$lib/components/Project.svelte';
-  import GithubIcon from './GithubIcon.svelte';
-  import ResumeIcon from 'phosphor-svelte/lib/FileTextIcon';
-  import TwitterIcon from './TwitterIcon.svelte';
 
   const latestBook = getLastReadBook();
   const activeProjects = getActiveProjects();
@@ -58,16 +55,16 @@
       <div
         class="mx-auto flex max-w-120 flex-col flex-wrap justify-center text-center @min-[20rem]:flex-row @min-[30rem]:grid @min-[30rem]:grid-cols-3"
       >
-        <a href="https://twitter.com/lettucebowler" class="group p-4">
-          <TwitterIcon class="mx-auto size-10 fill-frost-300" />
+        <a href="https://twitter.com/lettucebowler" class="group flex flex-col justify-between p-4">
+          <span class="mx-auto icon-[mdi--twitter] size-10 text-frost-300"></span>
           <span class="group-hover:underline">@Lettucebowler</span>
         </a>
-        <a href="https://github.com/lettucebowler" class="group p-4">
-          <GithubIcon class="mx-auto size-10 fill-swamp-green-500" />
+        <a href="https://github.com/lettucebowler" class="group flex flex-col justify-between p-4">
+          <span class="mx-auto icon-[mdi--github] size-10 text-swamp-green-500"></span>
           <span class="group-hover:underline">@Lettucebowler</span>
         </a>
-        <a href="/Resume.pdf" target="_blank" class="group p-4">
-          <ResumeIcon class="mx-auto size-10 text-antique-brass-500" weight="fill" />
+        <a href="/Resume.pdf" target="_blank" class="group flex flex-col justify-between p-4">
+          <span class="mx-auto icon-[heroicons--document-text-solid] block size-10 text-antique-brass-500"></span>
           <span class="group-hover:underline">Resume </span>
         </a>
       </div>

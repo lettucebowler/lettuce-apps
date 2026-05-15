@@ -2,8 +2,6 @@
   import { page } from '$app/state';
   import './layout.css';
   import NavLink from './NavLink.svelte';
-  import GithubIcon from './GithubIcon.svelte';
-  import ResumeIcon from 'phosphor-svelte/lib/FileTextIcon';
   let { children } = $props();
 </script>
 
@@ -28,10 +26,10 @@
         class="hidden sm:ml-auto sm:flex sm:items-center"
         title="Github profile"
       >
-        <GithubIcon class="size-6 fill-swamp-green-500" />
+        <span class="icon-[mdi--github] size-7 text-swamp-green-500"></span>
       </a>
       <a href="/Resume.pdf" target="_blank" class="hidden sm:flex sm:items-center" title="Resume">
-        <ResumeIcon class="size-7 text-antique-brass-500" weight="fill" />
+        <span class="icon-[heroicons--document-text-solid] size-7 text-antique-brass-500"></span>
       </a>
     </nav>
   </div>

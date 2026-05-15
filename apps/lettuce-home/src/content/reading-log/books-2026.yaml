@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9798888777794
+    title: 'Witch Hat Atelier: Grimoire Edition 1'
+    authors:
+      - Kamome Shirahama
+    published: 2026
+    logDate: 2026-05-14
+    rating: 5
+    comment: The art is so good! Excited to learn more about the story.
   - isbn: 9781250765376
     title: Fugitive Telemetry
     authors:
@@ -114,6 +122,7 @@ books:
     logDate: 2026-02-23
     rating: 4
     reread: true
+    comment: This brought me back.
   - isbn: 9780593956014
     title: The Eye of the Bedlam Bride
     authors:

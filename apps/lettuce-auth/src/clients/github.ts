@@ -3,7 +3,7 @@ import ky from 'ky';
 
 export async function getUser({ accessToken }: { accessToken: string }): Promise<ProviderUser> {
   const githubKY = ky.create({
-    prefixUrl: 'https://api.github.com',
+    prefix: 'https://api.github.com',
     headers: {
       'user-agent': 'lettuce-auth',
       ['Authorization']: `token ${accessToken}`,

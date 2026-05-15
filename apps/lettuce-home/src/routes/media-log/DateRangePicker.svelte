@@ -1,9 +1,6 @@
 <script lang="ts">
   import { getFirstDayOfTheMonth } from '$lib/utils/CalendarDate';
   import { DateRangePicker, type DateRange } from 'bits-ui';
-  import CalendarBlankIcon from 'phosphor-svelte/lib/CalendarBlankIcon';
-  import CaretLeft from 'phosphor-svelte/lib/CaretLeftIcon';
-  import CaretRight from 'phosphor-svelte/lib/CaretRightIcon';
 
   type Props = {
     startName?: string;
@@ -58,7 +55,7 @@
     <DateRangePicker.Trigger
       class="ml-auto inline-flex size-8 items-center justify-center rounded text-charade-200 transition-all hover:bg-charade-800 hover:text-charade-50 active:bg-charade-950 active:text-charade-200"
     >
-      <CalendarBlankIcon class="size-6" />
+      <span class="icon-[heroicons--calendar-solid] size-6"></span>
     </DateRangePicker.Trigger>
   </div>
 
@@ -71,13 +68,13 @@
           <DateRangePicker.PrevButton
             class="inline-flex size-10 items-center justify-center rounded transition-all hover:bg-charade-900 active:scale-[0.98]"
           >
-            <CaretLeft class="size-6" />
+            <span class="icon-[heroicons--chevron-left-solid] size-6"></span>
           </DateRangePicker.PrevButton>
           <DateRangePicker.Heading class="text-[15px] font-medium" />
           <DateRangePicker.NextButton
             class="inline-flex size-10 items-center justify-center rounded transition-all hover:bg-charade-900 active:scale-[0.98]"
           >
-            <CaretRight class="size-6" />
+            <span class="icon-[heroicons--chevron-right-solid] size-6"></span>
           </DateRangePicker.NextButton>
         </DateRangePicker.Header>
         <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-y-0 sm:space-x-4">

@@ -6,7 +6,7 @@ const DEFAULT_HOST = 'https://auth.lettucebowler.net';
 
 export function createLettuceAuthClient(c: Context<ApiWordlettuceHono>) {
   const lettuceAuthKY = ky.create({
-    prefixUrl: c.env.AUTH_HOST ?? DEFAULT_HOST,
+    prefix: c.env.AUTH_HOST ?? DEFAULT_HOST,
     fetch: (a, b) => c.env.lettuce_auth.fetch(a, b),
   });
 

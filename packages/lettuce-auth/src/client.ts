@@ -78,7 +78,7 @@ export function createAuthClient(input: AuthClientInput) {
   }
 
   const api = ky.create({
-    prefixUrl: input.issuer,
+    prefix: input.issuer,
     fetch: f,
   });
 
