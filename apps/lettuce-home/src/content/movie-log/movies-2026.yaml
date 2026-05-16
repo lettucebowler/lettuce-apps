@@ -1,10 +1,20 @@
 year: 2026
 movies:
+  - tmdb: 910850
+    title: 'Mobile Suit Gundam Hathaway: The Sorcery of Nymph Circe'
+    released: 2026
+    directors:
+      - Shukou Murase
+    poster_path: mNcSpv3W388DMp9U8dmRRiLTqYY.jpg
+    logDate: 2026-05-15
+    rating: 4
+    comment: The 'Wow cool robot!' crowd are gonna hate this one
   - tmdb: 457335
     title: Guns Akimbo
     released: 2020
     directors:
       - Jason Lei Howden
+    poster_path: r0F95AfQWzNqy9Ch86U0L1cnEVr.jpg
     rating: 2
     logDate: 2026-04-17
     comment: I hyped myself up about this movie for years only to be dissapointed.
@@ -13,6 +23,7 @@ movies:
     released: 2019
     directors:
       - Greta Gerwig
+    poster_path: yn5ihODtZ7ofn8pDYfxCmxh8AXI.jpg
     rating: 5
     logDate: 2026-04-11
     comment: I don't love the time skips, but overall found the story to be very heartwarming.
@@ -22,6 +33,7 @@ movies:
     directors:
       - Aaron Horvath
       - Micheal Jelenic
+    poster_path: eJGWx219ZcEMVQJhAgMiqo8tYY.jpg
     rating: 3
     comment: It looked pretty
     logDate: 2026-04-03
@@ -31,6 +43,7 @@ movies:
     directors:
       - Phil Lord
       - Christopher Miller
+    poster_path: huVzcVrlK8aiLd240ienleODvWl.jpg
     logDate: 2026-03-30
     rating: 4
     comment: A very good adaptation
@@ -39,6 +52,7 @@ movies:
     released: 2024
     directors:
       - David Leitch
+    poster_path: e7olqFmzcIX5c23kX4zSmLPJi8c.jpg
     logDate: 2026-03-15
     rating: 4
     comment: I'm still seeing unicorns.

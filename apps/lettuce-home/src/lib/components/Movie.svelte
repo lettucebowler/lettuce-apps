@@ -6,9 +6,16 @@
 </script>
 
 {#snippet feature()}
-  {#if rewatch}
-    <p class="ml-auto font-bold text-antique-brass-500 italic">rewatch</p>
-  {/if}
+  <p class="font-bold text-antique-brass-500 italic">rewatch</p>
 {/snippet}
 
-<MediaFigure {title} contributors={directors} year={released} {comment} {rating} {imageSrc} href={url} {feature} />
+<MediaFigure
+  {title}
+  contributors={directors}
+  year={released}
+  {comment}
+  {rating}
+  {imageSrc}
+  href={url}
+  feature={rewatch ? feature : undefined}
+/>

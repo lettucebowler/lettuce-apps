@@ -36,14 +36,12 @@
   const uid = $props.id();
 </script>
 
-<div class="@container">
-  <figure class="gap-x-4 @max-[17rem]:space-y-3 @min-[17rem]:flex">
-    <div class="max-w-30 min-w-30 flex-2 shadow-sm @max-[18rem]:max-w-44">
-      <a {href} class="block">
-        <img class="aspect-2/3 w-full rounded" loading="lazy" alt={title} src={imageSrc} />
-      </a>
-    </div>
-    <figcaption class="min-w-40 flex-3">
+<div class="@container min-w-44">
+  <figure class="flex flex-col gap-x-4 gap-y-3 @min-[18.5rem]:flex-row">
+    <a {href} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-24 @min-[34rem]:max-w-40">
+      <img class="aspect-2/3 w-full rounded shadow-lg" loading="lazy" alt={title} src={imageSrc} />
+    </a>
+    <figcaption class="@min-[24rem]: w-full min-w-40 @min-[18.5rem]:flex-1">
       <svelte:element this={headingTag ?? 'h3'}>
         <span class="font-medium">{title} </span>
         <span class="text-charade-200">{year}</span>
@@ -60,6 +58,26 @@
       {/if}
       <div class="mt-1.5 flex gap-x-2" id="media-figure-{uid}-rating-bar">
         <div class={['group flex gap-x-2', comment && 'hover:cursor-pointer']}>
+          {#if rating}
+            <svelte:element
+              this={comment ? 'label' : 'div'}
+              class={['flex items-center gap-0.5 text-putty-500']}
+              for="media-figure-{uid}-comment-trigger"
+            >
+              {#each { length: 5 }, i (i)}
+                {#if i < rating}
+                  <span
+                    class={[
+                      'icon-[heroicons--star-solid]',
+                      comment && 'group-hover:scale-105 group-hover:cursor-pointer',
+                    ]}
+                  ></span>
+                {:else}
+                  <span class={['icon-[heroicons--star]', comment && 'group-hover:cursor-pointer']}></span>
+                {/if}
+              {/each}
+            </svelte:element>
+          {/if}
           {#if comment}
             <div class="hidden @max-[17rem]:contents">
               <Popover.Root>
@@ -89,26 +107,6 @@
                 </Popover.Portal>
               </Popover.Root>
             </div>
-          {/if}
-          {#if rating}
-            <svelte:element
-              this={comment ? 'label' : 'div'}
-              class={['flex items-center gap-0.5 text-putty-500']}
-              for="media-figure-{uid}-comment-trigger"
-            >
-              {#each { length: 5 }, i (i)}
-                {#if i < rating}
-                  <span
-                    class={[
-                      'icon-[heroicons--star-solid]',
-                      comment && 'group-hover:scale-105 group-hover:cursor-pointer',
-                    ]}
-                  ></span>
-                {:else}
-                  <span class={['icon-[heroicons--star]', comment && 'group-hover:cursor-pointer']}></span>
-                {/if}
-              {/each}
-            </svelte:element>
           {/if}
         </div>
         {@render feature?.()}

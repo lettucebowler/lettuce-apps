@@ -68,11 +68,14 @@ export const MovieLogEntry = v.pipe(
     rating: v.optional(v.pipe(v.number(), v.integer())),
     comment: v.optional(v.string()),
     rewatch: v.optional(v.boolean(), false),
+    poster_path: v.optional(v.pipe(v.string())),
   }),
   v.transform((movie) => {
     return {
       ...movie,
-      imageSrc: `/posters/movie-${movie.tmdb}.webp`,
+      imageSrc: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+        : `/posters/movie-${movie.tmdb}.webp`,
       url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
     };
   }),

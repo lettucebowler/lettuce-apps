@@ -305,6 +305,9 @@ importers:
       globals:
         specifier: ^17.6.0
         version: 17.6.0
+      ky:
+        specifier: ^2.0.2
+        version: 2.0.2
       mdsvex:
         specifier: ^0.12.7
         version: 0.12.7(svelte@5.55.7)

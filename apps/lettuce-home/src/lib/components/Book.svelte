@@ -8,7 +8,6 @@
     title,
     subtitle,
     authors,
-    isbn,
     published,
     reread = false,
     comment,
@@ -19,9 +18,7 @@
 </script>
 
 {#snippet feature()}
-  {#if reread}
-    <p class="ml-auto font-bold text-antique-brass-500 italic">reread</p>
-  {/if}
+  <p class="font-bold text-antique-brass-500 italic">reread</p>
 {/snippet}
 
 <MediaFigure
@@ -33,5 +30,5 @@
   {rating}
   {imageSrc}
   href={url}
-  {feature}
+  feature={reread ? feature : undefined}
 />
