@@ -36,12 +36,12 @@
   const uid = $props.id();
 </script>
 
-<div class="@container min-w-44">
+<div class="@container min-w-43">
   <figure class="flex flex-col gap-x-4 gap-y-3 @min-[18.5rem]:flex-row">
-    <a {href} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-24 @min-[34rem]:max-w-40">
+    <a {href} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-40 @min-[18.5rem]:flex-1">
       <img class="aspect-2/3 w-full rounded shadow-lg" loading="lazy" alt={title} src={imageSrc} />
     </a>
-    <figcaption class="@min-[24rem]: w-full min-w-40 @min-[18.5rem]:flex-1">
+    <figcaption class="w-full min-w-40 @min-[18.5rem]:flex-2">
       <svelte:element this={headingTag ?? 'h3'}>
         <span class="font-medium">{title} </span>
         <span class="text-charade-200">{year}</span>
@@ -65,16 +65,13 @@
               for="media-figure-{uid}-comment-trigger"
             >
               {#each { length: 5 }, i (i)}
-                {#if i < rating}
-                  <span
-                    class={[
-                      'icon-[heroicons--star-solid]',
-                      comment && 'group-hover:scale-105 group-hover:cursor-pointer',
-                    ]}
-                  ></span>
-                {:else}
-                  <span class={['icon-[heroicons--star]', comment && 'group-hover:cursor-pointer']}></span>
-                {/if}
+                <span
+                  class={[
+                    'size-3.5',
+                    comment && 'group-hover:cursor-pointer',
+                    i < rating ? 'icon-[heroicons--star-solid]' : 'icon-[heroicons--star]',
+                  ]}
+                ></span>
               {/each}
             </svelte:element>
           {/if}

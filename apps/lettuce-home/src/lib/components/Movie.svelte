@@ -2,7 +2,7 @@
   import { type MovieLogEntry } from '$lib/schemas';
   import MediaFigure from './MediaFigure.svelte';
 
-  let { title, directors, released, rewatch, rating, comment, imageSrc, url }: MovieLogEntry = $props();
+  let { title, directors, released, rewatch, rating, comment, imageSrc, url, tmdb }: MovieLogEntry = $props();
 </script>
 
 {#snippet feature()}

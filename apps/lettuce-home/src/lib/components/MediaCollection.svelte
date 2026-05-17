@@ -21,7 +21,7 @@
       {/if}
     </header>
   {/if}
-  <div class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-[repeat(auto-fill,minmax(11rem,1fr))]">
+  <div class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-[repeat(auto-fill,minmax(10.75rem,1fr))]">
     {@render children?.()}
   </div>
 </div>

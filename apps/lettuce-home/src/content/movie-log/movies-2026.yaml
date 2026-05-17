@@ -1,39 +1,43 @@
 year: 2026
 movies:
+  - tmdb: 1339713
+    title: Obsession
+    released: 2026
+    directors:
+      - Curry Barker
+    logDate: 2026-05-16
+    rating: 4
+    comment: This movie had me wishing it would end just so I could stop feeling so unnerved
   - tmdb: 910850
     title: 'Mobile Suit Gundam Hathaway: The Sorcery of Nymph Circe'
     released: 2026
     directors:
       - Shukou Murase
-    poster_path: mNcSpv3W388DMp9U8dmRRiLTqYY.jpg
     logDate: 2026-05-15
     rating: 4
-    comment: The 'Wow cool robot!' crowd are gonna hate this one
+    comment: Not for the 'Wow cool robot!' fans.
   - tmdb: 457335
     title: Guns Akimbo
     released: 2020
     directors:
       - Jason Lei Howden
-    poster_path: r0F95AfQWzNqy9Ch86U0L1cnEVr.jpg
     rating: 2
     logDate: 2026-04-17
-    comment: I hyped myself up about this movie for years only to be dissapointed.
+    comment: I hyped myself up about this movie for years only to be dissapointed
   - tmdb: 331482
     title: Little Women
     released: 2019
     directors:
       - Greta Gerwig
-    poster_path: yn5ihODtZ7ofn8pDYfxCmxh8AXI.jpg
     rating: 5
     logDate: 2026-04-11
-    comment: I don't love the time skips, but overall found the story to be very heartwarming.
+    comment: I don't love the time skips, but overall found the story to be very heartwarming
   - tmdb: 1226863
     title: The Super Mario Galaxy Movie
     released: 2026
     directors:
       - Aaron Horvath
       - Micheal Jelenic
-    poster_path: eJGWx219ZcEMVQJhAgMiqo8tYY.jpg
     rating: 3
     comment: It looked pretty
     logDate: 2026-04-03
@@ -43,7 +47,6 @@ movies:
     directors:
       - Phil Lord
       - Christopher Miller
-    poster_path: huVzcVrlK8aiLd240ienleODvWl.jpg
     logDate: 2026-03-30
     rating: 4
     comment: A very good adaptation
@@ -52,7 +55,6 @@ movies:
     released: 2024
     directors:
       - David Leitch
-    poster_path: e7olqFmzcIX5c23kX4zSmLPJi8c.jpg
     logDate: 2026-03-15
     rating: 4
     comment: I'm still seeing unicorns.
@@ -63,7 +65,7 @@ movies:
     directors:
       - Greta Gerwig
     rating: 5
-    comment: It was interesting to go back after a few years and see new details I didn't notice the first time.
+    comment: It was interesting to go back after a few years and see new details I didn't notice the first time
     rewatch: true
     logDate: 2026-03-07
   - tmdb: 1087192
@@ -80,7 +82,7 @@ movies:
       - Chris Weitz
     logDate: 2026-02-23
     rating: 2
-    comment: I think this is the first movie I've ever seen adapt 2/3rds of a book.
+    comment: I think this is the first movie I've ever seen adapt 2/3rds of a book
   - tmdb: 403119
     title: 47 Meters Down
     released: 2017
@@ -165,7 +167,7 @@ movies:
     logDate: 2026-01-25
     rating: 3
   - tmdb: 555285
-    title: Are You There God? It's Me, Margaret.
+    title: Are You There God? It's Me, Margaret
     released: 2023
     directors:
       - Kelly Fremon Craig
@@ -193,7 +195,7 @@ movies:
       - Kenichiro Akimoto
     logDate: 2026-01-16
     rating: 4
-    comment: I don't love the art style for the characters but I loved how colorful and vibrant the world was.
+    comment: I don't love the art style for the characters but I loved how colorful and vibrant the world was
   - tmdb: 493529
     title: 'Dungeons & Dragons: Honor Among Thieves'
     released: 2023
@@ -218,7 +220,7 @@ movies:
       - James Cameron
     logDate: 2026-01-04
     rating: 3
-    comment: I liked the new world building, but it suffered from being split out into it's own movie.
+    comment: I liked the new world building, but it suffered from being split out into it's own movie
   - tmdb: 76600
     title: 'Avatar: The Way of Water'
     released: 2022

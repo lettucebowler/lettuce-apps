@@ -28,7 +28,7 @@ movies:
       - Robert Zemeckis
     logDate: 2025-12-31
     rating: 5
-    comment: You can pry this movie out of my cold, dead hands. I'll be watching it at least once every year until I die.
+    comment: You can pry this movie out of my cold, dead hands. I'll be watching it at least once every year until I die
     rewatch: true
   - tmdb: 12193
     title: Four Christmases
@@ -107,7 +107,7 @@ movies:
       - Alexander Payne
     logDate: 2025-11-30
     rating: 4
-    comment: This is going into the yearly Christmas movie rotation.
+    comment: This is going into the yearly Christmas movie rotation
   - tmdb: 9021
     title: The Santa Clause 2
     released: 2002
@@ -147,7 +147,7 @@ movies:
       - Brian Kirk
     logDate: 2025-11-30
     rating: 4
-    comment: +1 for a specific scene that triggered a strong emotional response from me.
+    comment: +1 for a specific scene that triggered a strong emotional response from me
   - tmdb: 1234821
     title: Jurassic Worls Rebirth
     released: 2025
@@ -170,9 +170,6 @@ movies:
     logDate: 2025-11-30
     rewatch: true
     rating: 4
-    comment:
-      It's hard to get fully invested when you already know the ending going into it. Very well-executed and was a great
-      watch after recently finishing Andor.
   - tmdb: 9293
     title: John Tucker Must die
     released: 2006
@@ -188,7 +185,7 @@ movies:
       - Niel Burger
     logDate: 2025-10-31
     rating: 4
-    comment: Lots of cute moments and it made me laugh.
+    comment: Lots of cute moments and it made me laugh
   - tmdb: 1218925
     title: 'Chainsaw Man - The Movie: Reze Arc'
     released: 2025
@@ -229,7 +226,7 @@ movies:
       - Haruo Sotozaki
     logDate: 2025-09-30
     rating: 4
-    comment: Tanjiro discovers the power of flashback breathing.
+    comment: Tanjiro discovers the power of flashback breathing
   - tmdb: 1035259
     title: The Naked Gun
     released: 2025
@@ -237,7 +234,7 @@ movies:
       - Akiva Schaffer
     logDate: 2025-09-30
     rating: 2
-    comment: I was really excited for this movie but I feel like the jokes all fell flat.
+    comment: I was really excited for this movie but I feel like the jokes all fell flat
   - tmdb: 2925
     title: The First Wives Club
     released: 1996
@@ -253,7 +250,7 @@ movies:
       - Drew Hancock
     logDate: 2025-08-31
     rating: 3
-    comment: My rating is unchanged on my second viewing.
+    comment: My rating is unchanged on my second viewing
     rewatch: true
   - tmdb: 1078605
     title: Weapons
@@ -262,8 +259,7 @@ movies:
       - Zach Cregger
     logDate: 2025-08-31
     rating: 5
-    comment: The movie theater flooded when I went to see it the first time but it was worth the hassle to go back a
-      second time. I left in shock.
+    comment: Movie of the year
   # July 2025
   - tmdb: 1233413
     title: Sinners
@@ -286,7 +282,7 @@ movies:
       - Jared Hess
     logDate: 2025-07-31
     rating: 3
-    comment: An objectively bad movie but it made me laugh.
+    comment: An objectively bad movie but it made me laugh
   - tmdb: 9408
     title: Surfs Up
     released: 2025
@@ -396,7 +392,7 @@ movies:
       - Jake Schreier
     logDate: 2025-05-31
     rating: 4
-    comment: I'm probably over-rating this because of my shock to finally watch a decent marvel movie for the first time in like 5 years.
+    comment: I'm probably over-rating this because of my shock to finally watch a decent marvel movie for the first time in like 5 years
   # April 2025
   - tmdb: 50359
     title: Hop
@@ -421,7 +417,7 @@ movies:
       - Bong Joon Ho
     logDate: 2025-04-30
     rating: 4
-    comment: This makes me think about how we discovered that humans are 70% water.
+    comment: This makes me think about how we discovered that humans are 70% water
   - tmdb: 38317
     title: Zookeeper
     released: 2011
@@ -476,7 +472,7 @@ movies:
       - Drew Hancock
     logDate: 2025-02-28
     rating: 3
-    comment: I don't like that the poster sorta spoils the twist.
+    comment: I don't like that the poster sorta spoils the twist
   - tmdb: 116741
     title: The Internship
     released: 2013

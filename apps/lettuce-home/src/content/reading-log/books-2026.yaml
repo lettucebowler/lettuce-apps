@@ -7,7 +7,7 @@ books:
     published: 2026
     logDate: 2026-05-14
     rating: 5
-    comment: The art is so good! Excited to learn more about the story.
+    comment: Peak art from a peak author
   - isbn: 9781250765376
     title: Fugitive Telemetry
     authors:
@@ -15,7 +15,7 @@ books:
     published: 2020
     rating: 4
     logDate: 2026-05-11
-    comment: I too want to watch media and not exist.
+    comment: I too want to watch media and not exist
   - isbn: 9780765350381
     title: Mistborn
     subtitle: The Final Empire
@@ -23,7 +23,7 @@ books:
       - Brandon Sanderson
     published: 2006
     rating: 4
-    comment: The power systems are interesting.
+    comment: The power systems are interesting
     logDate: 2026-05-10
   - isbn: 9781250229861
     title: Network Effect
@@ -32,7 +32,7 @@ books:
     published: 2020
     logDate: 2026-04-12
     rating: 4
-    comment: I really liked the last 3rd but the middle was a bit of a slog for me.
+    comment: I really liked the last 3rd but the middle was a bit of a slog for me
   - isbn: 9781250191854
     title: Exit Strategy
     authors:
@@ -105,7 +105,7 @@ books:
     published: 2026
     logDate: 2026-03-08
     rating: 5
-    comment: I am now cursed to wait for the next book to come out.
+    comment: I am now cursed to wait for the next book to come out
   - isbn: 9798217190041
     title: This Inevitable Ruin
     authors:
@@ -172,7 +172,7 @@ books:
     published: 2023
     logDate: 2026-01-04
     rating: 4
-    comment: Arc 8 is starting to feel a bit long but I am still enjoying it a lot.
+    comment: Arc 8 is starting to feel a bit long but I am still enjoying it a lot
   - isbn: 9781506726076
     title: Birdking, Vol. 1
     authors:

@@ -7,7 +7,7 @@ books:
     published: 2018
     logDate: 2025-12-31
     rating: 3
-    comment: I like the bullet journal method but I don't think this book is necessary to understand it.
+    comment: I like the bullet journal method but I don't think this book is necessary to understand it
   - isbn: 9784046828637
     title: Re:Zero, Vol. 35
     authors:
@@ -29,7 +29,7 @@ books:
     published: 2023
     logDate: 2025-07-31
     rating: 4
-    comment: A full-of-hype ending to arc 7.
+    comment: A full-of-hype ending to arc 7
   - isbn: 9784046820419
     title: Re:Zero, Vol. 32
     authors:
@@ -44,7 +44,7 @@ books:
     published: 2022
     logDate: 2025-06-30
     rating: 4
-    comment: I love the new characters introduced in this volume.
+    comment: I love the new characters introduced in this volume
   - isbn: 9784046814760
     title: Re:Zero, Vol. 30
     authors:

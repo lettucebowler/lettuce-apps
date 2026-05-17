@@ -14,86 +14,74 @@
   const latestBook = getLastReadBook();
   const activeProjects = getActiveProjects();
   const latestMovie = getLastWatchedMovie();
-  const currentBooks = getCurrentlyReading();
   const recentPosts = getRecentPosts();
+  const currentBook = getCurrentlyReading().at(0);
 </script>
 
 <svelte:head>
   <title>Grant Montgomery</title>
 </svelte:head>
-<main class="mx-auto grid gap-x-8 gap-y-12 md:grid-cols-[1fr_20rem] lg:grid-cols-[30rem_1fr]">
-  <div id="home-left" class="@container space-y-8">
-    <section id="activity-section" class="space-y-4">
-      <h2 class="text-2xl font-bold">
-        Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a>
-      </h2>
-      {#each recentPosts as post (post.slug)}
-        <Post {...post} />
-      {/each}
-    </section>
-    {#if activeProjects.length}
+<main class="@container mx-auto">
+  <div class="flex flex-col gap-x-8 gap-y-12 md:flex-row">
+    <div id="home-left" class="@container max-w-160 flex-1 space-y-8">
+      <section class=" space-y-4">
+        <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
+        <p>
+          Grant works as a full-stack web developer in the healthcare industry, working primarily with React and Stencil
+          on the frontend, and Node or Springboot on the backend.
+        </p>
+        <div
+          class="mx-auto flex max-w-120 flex-col flex-wrap justify-center text-center @min-[20rem]:flex-row @min-[30rem]:grid @min-[30rem]:grid-cols-3"
+        >
+          <a href="https://twitter.com/lettucebowler" class="group flex flex-col justify-between p-4">
+            <span class="mx-auto icon-[mdi--twitter] size-10 text-frost-300"></span>
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="https://github.com/lettucebowler" class="group flex flex-col justify-between p-4">
+            <span class="mx-auto icon-[mdi--github] size-10 text-swamp-green-500"></span>
+            <span class="group-hover:underline">@Lettucebowler</span>
+          </a>
+          <a href="/Resume.pdf" target="_blank" class="group flex flex-col justify-between p-4">
+            <span class="mx-auto icon-[heroicons--document-text-solid] block size-10 text-antique-brass-500"></span>
+            <span class="group-hover:underline">Resume </span>
+          </a>
+        </div>
+      </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
-            >View all projects →</a
+          Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
           >
         </h2>
-        {#each activeProjects as project (project.title)}
-          {@const { description, ...rest } = project}
-          <Project {...rest} description={[]} />
+        {#each recentPosts as post (post.slug)}
+          <Post {...post} />
         {/each}
       </section>
-    {/if}
-  </div>
-  <div id="home-right" class="@container space-y-12">
-    <section class="space-y-4">
-      <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
-      <p>
-        Grant works as a full-stack web developer in the healthcare industry, working primarily with React and Stencil
-        on the frontend, and Node or Springboot on the backend.
-      </p>
-      <div
-        class="mx-auto flex max-w-120 flex-col flex-wrap justify-center text-center @min-[20rem]:flex-row @min-[30rem]:grid @min-[30rem]:grid-cols-3"
-      >
-        <a href="https://twitter.com/lettucebowler" class="group flex flex-col justify-between p-4">
-          <span class="mx-auto icon-[mdi--twitter] size-10 text-frost-300"></span>
-          <span class="group-hover:underline">@Lettucebowler</span>
-        </a>
-        <a href="https://github.com/lettucebowler" class="group flex flex-col justify-between p-4">
-          <span class="mx-auto icon-[mdi--github] size-10 text-swamp-green-500"></span>
-          <span class="group-hover:underline">@Lettucebowler</span>
-        </a>
-        <a href="/Resume.pdf" target="_blank" class="group flex flex-col justify-between p-4">
-          <span class="mx-auto icon-[heroicons--document-text-solid] block size-10 text-antique-brass-500"></span>
-          <span class="group-hover:underline">Resume </span>
-        </a>
-      </div>
-    </section>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] gap-x-4 gap-y-8">
-      {#if currentBooks.length}
-        <section
-          class={[
-            'space-y-4',
-            currentBooks.length === 1 && 'col-span-1',
-            currentBooks.length > 1 && '@min-[36.25rem]:col-span-2',
-            currentBooks.length > 2 && '@min-[54rem]:col-span-3',
-          ]}
-        >
-          <h2 class="text-2xl font-bold">Currently reading</h2>
-          <div class="grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] gap-x-4 gap-y-6">
-            {#each currentBooks as book (book.isbn)}
-              <div class="min-w-[18rem] flex-1 basis-auto">
-                <Book {...book} />
-              </div>
-            {/each}
-          </div>
+      {#if activeProjects.length}
+        <section id="activity-section" class="space-y-4">
+          <h2 class="text-2xl font-bold">
+            Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
+              >View all projects →</a
+            >
+          </h2>
+          {#each activeProjects as project (project.title)}
+            {@const { description, ...rest } = project}
+            <Project {...rest} description={[]} />
+          {/each}
         </section>
       {/if}
-      <section class="min-w-[18rem] flex-1 basis-auto space-y-4">
+    </div>
+    <div id="home-right" class="@container ml-auto flex-1 space-y-8 md:max-w-120">
+      {#if currentBook}
+        <section class={['space-y-4']}>
+          <h2 class="text-2xl font-bold">Currently reading</h2>
+          <Book {...currentBook} />
+        </section>
+      {/if}
+      <section class="space-y-4">
         <h2 class="text-2xl font-bold">Last read</h2>
         <Book {...latestBook} />
       </section>
-      <section class="min-w-[18rem] flex-1 basis-auto space-y-4">
+      <section class="space-y-4">
         <h2 class="text-2xl font-bold">Last watched</h2>
         <Movie {...latestMovie} />
       </section>
