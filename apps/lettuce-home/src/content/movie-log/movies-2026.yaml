@@ -13,7 +13,7 @@ movies:
     directors:
       - Curry Barker
     logDate: 2026-05-16
-    rating: 4
+    rating: 5
     comment: This movie had me wishing it would end just so I could stop feeling so unnerved
   - tmdb: 910850
     title: 'Mobile Suit Gundam Hathaway: The Sorcery of Nymph Circe'
@@ -158,7 +158,7 @@ movies:
     directors:
       - Sam Raimi
     logDate: 2026-01-30
-    rating: 4
+    rating: 3
   - tmdb: 639988
     title: No Other Choice
     released: 2025
@@ -245,7 +245,7 @@ movies:
     rewatch: true
   - tmdb: 38357
     title: Morning Glory
-    released: 2025
+    released: 2010
     directors:
       - Roger Michell
     logDate: 2026-01-02
