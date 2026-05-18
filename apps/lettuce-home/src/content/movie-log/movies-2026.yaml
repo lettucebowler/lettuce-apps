@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1208348
+    title: Rental Family
+    released: 2025
+    directors:
+      - Hikari
+    logDate: 2026-05-17
+    rating: 5
   - tmdb: 1339713
     title: Obsession
     released: 2026
