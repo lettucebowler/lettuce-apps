@@ -19,3 +19,11 @@
   --tw-prose-invert-links: var(--color-brand-300);
   /* ... */
 }
+
+@theme {
+  --container-screen-sm: 40rem;
+  --container-screen-md: 48rem;
+  --container-screen-lg: 64rem;
+  --container-screen-xl: 80rem;
+  --container-screen-2xl: 96rem;
+}

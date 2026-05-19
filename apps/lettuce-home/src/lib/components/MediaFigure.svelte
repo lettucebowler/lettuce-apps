@@ -56,8 +56,8 @@
           {/each}
         </ul>
       {/if}
-      <div class="mt-1.5 flex gap-x-2" id="media-figure-{uid}-rating-bar">
-        <div class={['group flex gap-x-2', comment && 'hover:cursor-pointer']}>
+      <div class="mt-1.5 flex gap-x-1.5" id="media-figure-{uid}-rating-bar">
+        <div class={['group flex gap-x-1.5', comment && 'hover:cursor-pointer']}>
           {#if rating}
             <svelte:element
               this={comment ? 'label' : 'div'}
@@ -67,7 +67,7 @@
               {#each { length: 5 }, i (i)}
                 <span
                   class={[
-                    'size-3.5',
+                    'size-4',
                     comment && 'group-hover:cursor-pointer',
                     i < rating ? 'icon-[heroicons--star-solid]' : 'icon-[heroicons--star]',
                   ]}

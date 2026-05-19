@@ -11,7 +11,7 @@
     href="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&radius=20&seed=lettucebowler"
   /></svelte:head
 >
-<div class="mx-auto h-full space-y-16 xl:max-w-screen-xl">
+<div class="mx-auto h-full space-y-16">
   <div class="container mx-auto box-border">
     <div class="mx-2 mt-2 rounded bg-charade-950">
       <nav class="flex flex-wrap justify-center gap-x-4 gap-y-1 px-4 py-2 font-bold sm:justify-start sm:text-xl">
@@ -35,7 +35,7 @@
       </nav>
     </div>
   </div>
-  <div class="container mx-auto px-6 pb-5">
+  <div class="container mx-auto px-6 pb-4">
     {@render children()}
   </div>
 </div>
