@@ -18,7 +18,7 @@
 </script>
 
 {#snippet feature()}
-  <p class="font-bold text-antique-brass-500 italic">reread</p>
+  <span class="-m-0.5 icon-[heroicons--arrow-path-16-solid] size-5 text-antique-brass-500" title="reread"></span>
 {/snippet}
 
 <MediaFigure

@@ -265,12 +265,13 @@ movies:
       - Maggie Kang
     released: 2025
     logDate: 2026-01-01
-    rating: 4
+    rating: 5
+    rewatch: true
   - tmdb: 1061474
     title: Superman
     directors:
       - James Gunn
     released: 2025
     logDate: 2026-01-01
-    rating: 4
+    rating: 5
     rewatch: true
