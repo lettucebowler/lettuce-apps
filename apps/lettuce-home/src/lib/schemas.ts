@@ -10,11 +10,11 @@ const Book = v.pipe(
     subtitle: v.optional(v.string()),
     authors: v.array(v.string()),
     published: v.pipe(v.number(), v.integer()),
+    reread: v.optional(v.boolean(), false),
   }),
   v.transform((book) => {
     return {
       ...book,
-      imageSrc: `/covers/book-${book.isbn}.webp`,
       url: `https://openlibrary.org/isbn/${book.isbn}`,
     };
   }),
@@ -27,14 +27,11 @@ export const CurrentlyReadingList = v.object({
 
 export const ReadingLogEntry = v.intersect([
   Book,
-  v.pipe(
-    v.object({
-      logDate: ISODateString,
-      rating: v.optional(v.pipe(v.number(), v.integer())),
-      comment: v.optional(v.string()),
-      reread: v.optional(v.boolean(), false),
-    }),
-  ),
+  v.object({
+    logDate: ISODateString,
+    rating: v.optional(v.pipe(v.number(), v.integer())),
+    comment: v.optional(v.string()),
+  }),
 ]);
 export type ReadingLogEntry = v.InferOutput<typeof ReadingLogEntry>;
 
@@ -73,9 +70,6 @@ export const MovieLogEntry = v.pipe(
   v.transform((movie) => {
     return {
       ...movie,
-      imageSrc: movie.poster_path
-        ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
-        : `/posters/movie-${movie.tmdb}.webp`,
       url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
     };
   }),

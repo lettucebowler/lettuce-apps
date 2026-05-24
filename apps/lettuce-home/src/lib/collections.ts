@@ -33,8 +33,7 @@ export function getReadingLogsDesc() {
 
 export function filterBooks(dateRange: DateRange) {
   return getReadingLogsDesc()
-    .map((log) => log.books)
-    .flat()
+    .flatMap((log) => log.books)
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
       return (

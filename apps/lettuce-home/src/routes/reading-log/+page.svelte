@@ -2,8 +2,6 @@
   import Book from '../../lib/components/Book.svelte';
   import MediaCollection from '$lib/components/MediaCollection.svelte';
   import { getCurrentlyReading, getReadingLogsDesc } from '$lib/collections';
-  import MediaFigure from '$lib/components/MediaFigure.svelte';
-  import { today } from '@internationalized/date';
 
   const current = getCurrentlyReading();
   const completed = getReadingLogsDesc();
@@ -14,7 +12,7 @@
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
-  <!-- {#if current.length}
+  {#if current.length}
     <MediaCollection>
       {#snippet title()}
         Currently reading
@@ -26,7 +24,7 @@
         <Book {...book} reread={false} />
       {/each}
     </MediaCollection>
-  {/if} -->
+  {/if}
   {#each completed as { year, books } (year)}
     <MediaCollection>
       {#snippet title()}
@@ -35,22 +33,6 @@
       {#snippet subtitle()}
         {@render bookCount(books.length)}
       {/snippet}
-      {#if year === today('America/Chicago').year}
-        {#each current as book (book.isbn)}
-          <MediaFigure
-            title={book.title}
-            subtitle={book.subtitle}
-            contributors={book.authors}
-            year={book.published}
-            imageSrc={book.imageSrc}
-            href={book.url}
-          >
-            {#snippet feature()}
-              <p class="-mt-1 font-medium text-antique-brass-500">in-progress</p>
-            {/snippet}
-          </MediaFigure>
-        {/each}
-      {/if}
       {#each books as book (book.isbn)}
         <Book {...book} />
       {/each}
