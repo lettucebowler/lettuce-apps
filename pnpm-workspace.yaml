@@ -1,5 +1,14 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+  sharp: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - '@cloudflare/workers-types@4.20260523.1'
 onlyBuiltDependencies:
   - esbuild
+overrides:
+  cookie: ^1.0.2

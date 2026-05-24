@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 1226863
+    title: The Super Mario Galaxy Movie
+    released: 2026
+    directors:
+      - Aaron Horvath
+      - Micheal Jelenic
+    logDate: 2026-05-22
+    rating: 2
+    comment: On my second viewing the eye candy wasn't enough to keep me engaged
   - tmdb: 1208348
     title: Rental Family
     released: 2025

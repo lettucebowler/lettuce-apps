@@ -1,6 +1,7 @@
 books:
-  - isbn: 9781250827012
-    title: Platform Decay
-    published: 2026
+  - isbn: 9781250868299
+    title: The Well of Ascension
+    subtitle: A Mistborn Novel
     authors:
-      - Martha Wells
+      - Brandon Sanderson
+    published: 2007

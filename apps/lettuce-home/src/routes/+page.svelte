@@ -22,8 +22,8 @@
   <title>Grant Montgomery</title>
 </svelte:head>
 <main class="@container mx-auto">
-  <div class="flex flex-col gap-x-8 gap-y-12 md:flex-row">
-    <div id="home-left" class="@container max-w-160 flex-1 space-y-8">
+  <div class="grid gap-x-8 gap-y-12 md:grid-cols-2">
+    <div id="home-left" class="@container max-w-160 space-y-8">
       <section class=" space-y-4">
         <h1 class="mb-8 text-3xl font-bold">Grant Montgomery</h1>
         <p>
@@ -70,7 +70,7 @@
         </section>
       {/if}
     </div>
-    <div id="home-right" class="@container ml-auto flex-1 space-y-8 md:max-w-120">
+    <div id="home-right" class="@container w-full space-y-8 md:ml-auto md:max-w-120">
       {#if currentBook}
         <section class={['space-y-4']}>
           <h2 class="text-2xl font-bold">Currently reading</h2>

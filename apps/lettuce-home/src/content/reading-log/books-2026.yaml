@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781250827012
+    title: Platform Decay
+    published: 2026
+    authors:
+      - Martha Wells
+    logDate: 2026-05-23
+    rating: 5
+    comment: I gobbled up this series. It's been incredible to see the main character's development throughout the series.
   - isbn: 9781250826985
     title: System Collapse
     authors:
@@ -20,9 +28,9 @@ books:
     authors:
       - Martha Wells
     published: 2020
-    rating: 4
+    rating: 5
     logDate: 2026-05-11
-    comment: I too want to watch media and not exist
+    comment: A murder mystery... in spaaaaace!
   - isbn: 9780765350381
     title: Mistborn
     subtitle: The Final Empire
