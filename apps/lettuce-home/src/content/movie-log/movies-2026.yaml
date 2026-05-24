@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1292695
+    title: They Will Kill You
+    released: 2026
+    directors:
+      - Kirill Sokolov
+    logDate: 2026-05-23
+    rating: 2
   - tmdb: 1226863
     title: The Super Mario Galaxy Movie
     released: 2026
