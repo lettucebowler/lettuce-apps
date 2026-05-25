@@ -9,7 +9,6 @@
     eager: true,
     import: 'default',
     query: {
-      enhanced: true,
       w: '240',
     },
   });

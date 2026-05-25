@@ -20,7 +20,7 @@
     "@lettuce-apps-packages/svelte-common": "workspace:*",
     "@libsql/client": "^0.17.3",
     "@sveltejs/adapter-cloudflare": "^7.2.8",
-    "@sveltejs/kit": "^2.60.1",
+    "@sveltejs/kit": "2.60.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/svelte-query": "^6.1.29",
