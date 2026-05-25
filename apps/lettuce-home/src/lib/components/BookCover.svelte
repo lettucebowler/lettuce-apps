@@ -9,8 +9,10 @@
     eager: true,
     import: 'default',
     query: {
+      enhanced: true,
       w: '240',
-      format: 'webp',
+      h: '360',
+      format: 'avif;webp',
     },
   });
   const image = $derived.by(() => {
