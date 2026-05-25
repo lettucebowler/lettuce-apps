@@ -10,6 +10,7 @@
     import: 'default',
     query: {
       w: '240',
+      format: 'webp',
     },
   });
   const image = $derived.by(() => {
