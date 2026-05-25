@@ -10,6 +10,7 @@
     import: 'default',
     query: {
       w: '240',
+      h: '360',
       format: 'webp',
     },
   });
