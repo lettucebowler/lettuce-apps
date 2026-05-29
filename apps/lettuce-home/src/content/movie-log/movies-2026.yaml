@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1325734
+    title: The Drama
+    released: 2026
+    directors:
+      - Kristoffer Borgli
+    logDate: 2026-05-28
+    rating: 5
   - tmdb: 1292695
     title: They Will Kill You
     released: 2026
