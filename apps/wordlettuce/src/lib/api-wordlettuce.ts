@@ -1,4 +1,4 @@
-import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
@@ -6,7 +6,7 @@ import { getGameNum } from './words';
 
 function createAPIWordlettuceClient() {
   return ky.create({
-    prefix: PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: env.PUBLIC_API_WORDLETTUCE_HOST,
   });
 }
 
