@@ -8,6 +8,7 @@
   import { page } from '$app/state';
   import { sessionQuery } from '../../auth.remote';
   import { hydratable } from 'svelte';
+  import { appName } from '$lib/app-constants';
 
   const { params } = $props();
   const gameNum = getGameNum();
@@ -29,6 +30,9 @@
   }
 </script>
 
+<svelte:head>
+  <title>{params.profileUser} | {appName}</title>
+</svelte:head>
 <svelte:body
   {@attach infiniteScroll({
     distance: 1000,

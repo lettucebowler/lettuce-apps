@@ -3,6 +3,7 @@ import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
 import { getGameNum } from './words';
+import { error } from '@sveltejs/kit';
 
 function createAPIWordlettuceClient() {
   return ky.create({

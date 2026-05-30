@@ -1,6 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { getCurrentlyReading, getReadingLogsDesc } from '$lib/collections';
 
+export const prerender = true;
+
 export async function GET() {
   const current = getCurrentlyReading();
   const completed = getReadingLogsDesc().flatMap((year) => year.books);

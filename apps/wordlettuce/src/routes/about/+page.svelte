@@ -2,6 +2,9 @@
   import { appName } from '$lib/app-constants';
 </script>
 
+<svelte:head>
+  <title>About | {appName}</title>
+</svelte:head>
 <main class="grid gap-8">
   <h1 class="text-snow-300 mt-4 text-center text-3xl font-bold">About {appName}</h1>
   <p class="text-snow-300 box-border px-4 text-left text-lg">

@@ -3,10 +3,14 @@
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import { getRankings } from '$lib/api-wordlettuce';
   import { hydratable } from 'svelte';
+  import { appName } from '$lib/app-constants';
 
   const rankings = await hydratable('rankings', () => getRankings());
 </script>
 
+<svelte:head>
+  <title>Rankings | {appName}</title>
+</svelte:head>
 <main class="grid gap-8">
   <h1 class="text-snow-300 mt-4 text-center text-3xl font-bold">LeaderBoard</h1>
   <p class="text-snow-300 box-border px-4 text-left text-lg">

@@ -3,10 +3,12 @@
   import Cookies from 'js-cookie';
   import { browser } from '$app/environment';
   import { page } from '$app/state';
+  import { pushState } from '$app/navigation';
+  import * as v from 'valibot';
 
+  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
   import Tile from './Tile.svelte';
   import { toastError, toastPromise } from './toast';
-  import { pushState } from '$app/navigation';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
   import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
@@ -20,13 +22,9 @@
     LetterStatus,
   } from '$lib/game-schemas';
   import MegaModal from './MegaModal.svelte';
-  import { action, getGameState } from './game.remote';
+  import { action } from './game.remote';
   import { sessionQuery } from './auth.remote';
   import { AllowedGuess } from './game.schemas';
-  let game = await getGameState();
-
-  import * as v from 'valibot';
-  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
 
   function createGameActionKeyID(l: string) {
     return `wordlettuce-game-action-key-${l}`;
@@ -86,6 +84,11 @@
     const items = [...previousGuesses, ...currentGuesses, ...fillerGuesses].filter(Boolean).slice(0, 6);
     return items;
   }
+
+  // let game = $derived(await getGameState());
+
+  let { data } = $props();
+  let game = $derived(data.game);
 
   let tileGridEl: HTMLDivElement | null = $state(null);
   let timeout: NodeJS.Timeout;

@@ -8,6 +8,8 @@ const config = {
     adapter: adapter(),
     experimental: {
       remoteFunctions: true,
+      forkPreloads: true,
+      handleRenderingErrors: true,
     },
   },
 

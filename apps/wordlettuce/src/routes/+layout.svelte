@@ -5,7 +5,6 @@
   import { sessionQuery } from './auth.remote';
   import { Toasts } from 'svoast';
   import favicon from '$lib/assets/favicon.svg';
-  import { page } from '$app/state';
   import { appName } from '$lib/app-constants';
 
   let { children } = $props();
@@ -14,8 +13,7 @@
 
 <svelte:head>
   <link rel="icon" href={favicon} />
-  <title>{page.data['title'] ?? `${appName}`}</title>
-  <meta name="title" content={page.data['metaTitle'] ?? page.data['title'] ?? appName} />
+  <meta name="title" content={appName} />
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
