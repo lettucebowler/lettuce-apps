@@ -1,4 +1,5 @@
-import { env } from '$env/dynamic/private';
+import { env as privateEnv } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
 import { getRequestEvent } from '$app/server';
 import ky, { HTTPError } from 'ky';
 import * as v from 'valibot';
@@ -7,10 +8,10 @@ import type { GameResult } from './types';
 function createAPIWordlettuceClient() {
   const event = getRequestEvent();
   return ky.create({
-    prefix: env.PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: publicEnv.PUBLIC_API_WORDLETTUCE_HOST,
     fetch: event.fetch,
     headers: {
-      Authorization: `Bearer ${env.API_WORDLETTUCE_TOKEN}`,
+      Authorization: `Bearer ${privateEnv.API_WORDLETTUCE_TOKEN}`,
     },
   });
 }
@@ -23,7 +24,7 @@ export async function saveGame({
   try {
     const client = createAPIWordlettuceClient();
     const saveGameResponse = await client
-      .post<SaveGameOutput>('v1/game-results', { json: { userID, gameNum, answers } })
+      .post<SaveGameOutput>('/v1/game-results', { json: { userID, gameNum, answers } })
       .json();
     return [saveGameResponse, null];
   } catch (error) {
