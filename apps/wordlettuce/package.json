@@ -11,7 +11,7 @@
     "lint": "prettier --ignore-path ../../.gitignore --check . && eslint .",
     "find": "prettier --find-config-path .",
     "prepare": "svelte-kit sync",
-    "ship": "wrangler pages deploy"
+    "ship": "wrangler deploy -c wrangler.jsonc"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260515.1",

@@ -1,7 +1,12 @@
 {
   "name": "wordlettuce",
-  "pages_build_output_dir": ".svelte-kit/cloudflare",
-  "compatibility_date": "2025-02-09",
+  // "pages_build_output_dir": ".svelte-kit/cloudflare",
+  "assets": {
+    "directory": ".svelte-kit/cloudflare",
+    "binding": "ASSETS",
+  },
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2025-05-29",
   "compatibility_flags": ["nodejs_compat"],
   "services": [
     {
@@ -9,27 +14,6 @@
       "service": "lettuce-auth",
     },
   ],
-  "env": {
-    "production": {
-      "services": [
-        {
-          "binding": "lettuce_auth",
-          "service": "lettuce-auth",
-        },
-      ],
-      "vars": {
-        "NODE_VERSION": "24",
-        "PUBLIC_API_WORDLETTUCE_HOST": "https://api.word.lettucebowler.net",
-        "AUTH_HOST": "https://auth.lettucebowler.net",
-      },
-      "kv_namespaces": [
-        {
-          "binding": "lettuce_auth_signing_keys",
-          "id": "31a684ad1101462c9f76deb754fc92fe",
-        },
-      ],
-    },
-  },
   "placement": {
     "mode": "off",
   },
@@ -46,5 +30,8 @@
   ],
   "dev": {
     "port": 3000,
+  },
+  "secrets": {
+    "required": ["API_WORDLETTUCE_TOKEN"],
   },
 }

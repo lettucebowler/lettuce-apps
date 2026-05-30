@@ -2,7 +2,7 @@ import { getRequestEvent } from '$app/server';
 import type { RequestEvent } from '@sveltejs/kit';
 import { createAuthClient } from '@lettuce-apps-packages/auth';
 import { dev } from '$app/environment';
-import { AUTH_HOST } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 import { subjects } from '@lettuce-apps-packages/auth';
 
@@ -24,7 +24,7 @@ function _createAuthClient() {
   const event = getRequestEvent();
   return createAuthClient({
     clientID: 'lettuce-auth-test',
-    issuer: AUTH_HOST,
+    issuer: env.AUTH_HOST,
     fetch:
       dev || !event.platform?.env
         ? event.fetch

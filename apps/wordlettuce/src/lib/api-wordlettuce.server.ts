@@ -1,4 +1,4 @@
-import { API_WORDLETTUCE_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$env/static/public';
 import { getRequestEvent } from '$app/server';
 import ky, { HTTPError } from 'ky';
@@ -11,7 +11,7 @@ function createAPIWordlettuceClient() {
     prefix: PUBLIC_API_WORDLETTUCE_HOST,
     fetch: event.fetch,
     headers: {
-      Authorization: `Bearer ${API_WORDLETTUCE_TOKEN}`,
+      Authorization: `Bearer ${env.API_WORDLETTUCE_TOKEN}`,
     },
   });
 }
