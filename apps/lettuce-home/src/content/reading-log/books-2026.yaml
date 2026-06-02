@@ -1,5 +1,14 @@
 year: 2026
 books:
+  - isbn: 9781534395565
+    title: The Power Fantasy, Volume One
+    subtitle: The Superpowers
+    authors:
+      - Kieron Gillen
+      - Caspar Wijngaard
+    published: 2025
+    logDate: 2026-06-02
+    rating: 4
   - isbn: 9781250827012
     title: Platform Decay
     published: 2026

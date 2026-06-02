@@ -57,19 +57,16 @@
         {#if subtitle}
           <span class="text-charade-200">{subtitle}</span>
         {/if}
-        <span class="text-charade-100">({year})</span>
+        <span class="text-charade-200">({year})</span>
       </svelte:element>
-      <!-- {#if subtitle}
-        <p class=" text-charade-200">{subtitle}</p>
-      {/if} -->
       {#if contributors.length}
-        <ul>
+        <ul class="">
           {#each contributors as contributor}
-            <li class="text-charade-100">{contributor}</li>
+            <li class="text-charade-200">{contributor}</li>
           {/each}
         </ul>
       {/if}
-      <div class="mt-1 flex gap-x-2" id="media-figure-{uid}-rating-bar">
+      <div class="mt-2 flex gap-x-2" id="media-figure-{uid}-rating-bar">
         {#if comment || rating}
           <div class={['group flex gap-x-2', comment && 'hover:cursor-pointer']}>
             {#if rating}
