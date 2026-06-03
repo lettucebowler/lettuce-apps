@@ -120,9 +120,9 @@
       {#each getItemsForGrid(game) as row (row.index)}
         <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index} animate:flip={{ duration: 150 }}>
           {#each row.guess.padEnd(5, ' ').slice(0, 5).split('') as letter, j}
-            {@const doJump = game.answers.at(row.index)?.length === 5}
-            {@const doWiggleOnce = !browser && action.fields.word.issues() && row.current}
-            {@const answer = game.answers.at(row.index)?.charAt(j)}
+            {let doJump = $derived(game.answers.at(row.index)?.length === 5)}
+            {let doWiggleOnce = $derived(!browser && action.fields.word.issues() && row.current)}
+            {let answer = $derived(game.answers.at(row.index)?.charAt(j))}
             <div
               style="--animation-delay:{j * 0.03}s; --transition-delay: {j * 0.03 + 0.15}s"
               class={[

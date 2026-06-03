@@ -62,7 +62,12 @@ export function getProjectsDesc() {
 }
 
 export function getActiveProjects() {
-  return getProjectsDesc().filter((project) => project.status === 'active');
+  return getProjectsDesc()
+    .filter((project) => project.status === 'active')
+    .map((project) => {
+      const { _meta, ...rest } = project;
+      return rest;
+    });
 }
 
 export function allPostsDesc() {

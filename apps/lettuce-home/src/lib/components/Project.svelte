@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Project } from 'content-collections';
+  import type { Project } from '$lib/schemas';
 
   type Props = {
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

@@ -64,8 +64,13 @@
             >
           </h2>
           {#each activeProjects as project (project.title)}
-            {@const { description, ...rest } = project}
-            <Project {...rest} description={[]} />
+            <Project
+              description={[]}
+              title={project.title}
+              summary={project.summary}
+              status={project.status}
+              url={project.url}
+            />
           {/each}
         </section>
       {/if}
