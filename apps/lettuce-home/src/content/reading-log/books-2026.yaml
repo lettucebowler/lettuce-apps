@@ -1,7 +1,25 @@
 year: 2026
 books:
+  - isbn: 9781534330849
+    title: The Power Fantasy, Vol. 3
+    subtitle: The End of History
+    authors:
+      - Kieron Gillen
+      - Caspar Wijngaard
+    published: 2026
+    logDate: 2026-06-02
+    rating: 4
+  - isbn: 9781534333109
+    title: The Power Fantasy, Vol. 2
+    subtitle: Mutually Reassuring Desctruction
+    authors:
+      - Kieron Gillen
+      - Caspar Wijngaard
+    published: 2025
+    logDate: 2026-06-02
+    rating: 4
   - isbn: 9781534395565
-    title: The Power Fantasy, Volume One
+    title: The Power Fantasy, Vol. 1
     subtitle: The Superpowers
     authors:
       - Kieron Gillen
