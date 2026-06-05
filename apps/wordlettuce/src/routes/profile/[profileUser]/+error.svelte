@@ -1,8 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
-
-  $inspect(page.error);
 </script>
 
 <main class="space-y-8">
