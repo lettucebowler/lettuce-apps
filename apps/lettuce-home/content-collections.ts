@@ -4,7 +4,7 @@ import { defineCollection, defineConfig, defineSingleton } from '@content-collec
 const posts = defineCollection({
   name: 'posts',
   directory: 'src/content/posts',
-  include: '*.md',
+  include: '**/*.md',
   schema: Post,
   parser: 'frontmatter-only',
   transform: async (doc, context) => {

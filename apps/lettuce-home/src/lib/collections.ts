@@ -1,6 +1,7 @@
 import { parseDate } from '@internationalized/date';
 import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
+import type { Post } from './schemas';
 
 export function getLastWatchedMovie() {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
@@ -93,6 +94,10 @@ export function getPostsWithTag(tag?: string | null) {
   return allPostsDesc().filter((post) => post.tags?.includes(tag));
 }
 
+export function filterPosts(filter: (post: Post) => boolean = () => true) {
+  return allPostsDesc().filter(filter);
+}
+
 export function getAllPostTags() {
   return Array.from(
     new Set(
@@ -103,8 +108,8 @@ export function getAllPostTags() {
   ).toSorted();
 }
 
-export function getPostsByYear(tag?: string | null) {
-  const grouped = Object.groupBy(getPostsWithTag(tag), (post) => {
+export function getPostsByYear(filter: (post: Post) => boolean = () => true) {
+  const grouped = Object.groupBy(filterPosts(filter), (post) => {
     return post.date.slice(0, 4);
   });
 

@@ -2,7 +2,13 @@
   import { page } from '$app/state';
   import { getAllPostTags, getPostsByYear } from '$lib/collections';
   import Post from '$lib/components/Post.svelte';
-  const postGroups = $derived.by(() => getPostsByYear(page.url.searchParams.get('tag')));
+  const postGroups = $derived.by(() => {
+    const tag = page.url.searchParams.get('tag');
+    if (!tag) {
+      return getPostsByYear();
+    }
+    return getPostsByYear((post) => !!post.tags?.includes(tag));
+  });
   const tags = getAllPostTags();
 </script>
 
