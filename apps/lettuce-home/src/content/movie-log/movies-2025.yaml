@@ -242,6 +242,13 @@ movies:
       - Hugh Wilson
     logDate: 2025-09-30
     rating: 3
+  - tmdb: 1239655
+    title: Friendship
+    released: 2025
+    directors:
+      - Andrew DeYoung
+    logDate: 2025-09-01
+    rating: 2
   # August 2025
   - tmdb: 1084199
     title: Companion
