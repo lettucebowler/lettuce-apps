@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1327819
+    title: Hoppers
+    released: 2026
+    directors:
+      - Daniel Chong
+    logDate: 2026-06-07
+    rating: 4
   - tmdb: 1325734
     title: The Drama
     released: 2026
