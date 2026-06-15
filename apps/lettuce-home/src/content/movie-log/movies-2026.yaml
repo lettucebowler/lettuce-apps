@@ -1,5 +1,33 @@
 year: 2026
 movies:
+  - tmdb: 109431
+    title: Identity Thief
+    released: 2013
+    directors:
+      - Seth Gordon
+    logDate: 2026-06-14
+    rating: 4
+  - tmdb: 228161
+    title: Home
+    released: 2015
+    directors:
+      - Tim Johnson
+    logDate: 2026-06-13
+    rating: 2
+  - tmdb: 1430077
+    title: Hokum
+    released: 2026
+    directors:
+      - Damian McCarthy
+    logDate: 2026-06-12
+    rating: 4
+  - tmdb: 9655
+    title: "She's the Man"
+    released: 2006
+    directors:
+      - Andy Fickman
+    logDate: 2026-06-12
+    rating: 2
   - tmdb: 1327819
     title: Hoppers
     released: 2026

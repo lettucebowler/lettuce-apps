@@ -16,7 +16,7 @@
     },
   });
   const image = $derived.by(() => {
-    const path = Object.keys(images).find((key) => key.includes(isbn));
+    const path = Object.keys(images).find((key) => key.includes(`book-${isbn}`));
     if (!path) {
       return undefined;
     }

@@ -1,5 +1,15 @@
 year: 2026
 books:
+  - isbn: 9781607067726
+    title: Invincible, Compendium Two
+    authors:
+      - Robert Kirkman
+      - Ryan Ottley
+      - Corey Walker
+      - Cliff Rathburn
+    published: 2013
+    logDate: 2026-06-13
+    rating: 3
   - isbn: 9781534330849
     title: The Power Fantasy, Vol. 3
     subtitle: The End of History

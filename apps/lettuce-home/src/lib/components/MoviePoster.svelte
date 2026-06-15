@@ -17,7 +17,7 @@
     },
   });
   const image = $derived.by(() => {
-    const path = Object.keys(images).find((key) => key.includes(tmdb.toString()));
+    const path = Object.keys(images).find((key) => key.includes(`movie-${tmdb}.`));
     if (!path) {
       return undefined;
     }
