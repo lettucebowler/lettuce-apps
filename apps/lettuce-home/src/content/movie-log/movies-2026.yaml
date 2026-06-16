@@ -1,5 +1,14 @@
 year: 2026
 movies:
+  - tmdb: 687163
+    title: Project Hail Mary
+    released: 2026
+    directors:
+      - Phil Lord
+      - Christopher Miller
+    logDate: 2026-06-15
+    rating: 4
+    rewatch: true
   - tmdb: 109431
     title: Identity Thief
     released: 2013
