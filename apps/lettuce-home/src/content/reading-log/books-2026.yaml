@@ -1,7 +1,17 @@
 year: 2026
 books:
+  - isbn: 9781534306868
+    title: Invincible Compendium Volume 3
+    published: 2018
+    authors:
+      - Robert Kirkman
+      - Ryan Ottley
+      - Corey Walker
+      - Cliff Rathburn
+    logDate: 2026-06-19
+    rating: 3
   - isbn: 9781607067726
-    title: Invincible, Compendium Two
+    title: Invincible Compendium Volume 2
     authors:
       - Robert Kirkman
       - Ryan Ottley
