@@ -33,7 +33,7 @@
       {#snippet subtitle()}
         {@render bookCount(books.length)}
       {/snippet}
-      {#each books as book (book.isbn)}
+      {#each books as book (`${book.isbn}-${book.logDate}`)}
         <Book {...book} />
       {/each}
     </MediaCollection>

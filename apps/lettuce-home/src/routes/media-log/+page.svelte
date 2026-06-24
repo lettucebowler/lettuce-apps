@@ -5,6 +5,7 @@
   import FilteredEntries from '$lib/components/FilteredEntries.svelte';
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
+  import { DateRangeFromISODateStrings } from '$lib/schemas.js';
 
   const defaultStart = new CalendarDate(1998, 12, 12);
   const defaultEnd = today('America/Chicago');
@@ -25,14 +26,20 @@
     }
   };
 
-  let { data } = $props();
+  let { start, end } = $derived.by(() => {
+    const input = {
+      start: page.url.searchParams.get('start') ?? defaultStart,
+      end: page.url.searchParams.get('end') ?? defaultEnd,
+    };
+    return v.parse(DateRangeFromISODateStrings, input);
+  });
 </script>
 
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Media Log</h1>
   <form method="get" onsubmit={onSubmit}>
     <div class="grid grid-cols-1 items-end gap-4 sm:flex">
-      <DateRangePicker startName="start" endName="end" initialValue={data} />
+      <DateRangePicker startName="start" endName="end" initialValue={{ start, end }} />
       <div class="flex gap-4">
         <button
           class="order-1 my-1 box-border h-10.5 cursor-pointer rounded bg-frost-400 px-3 py-1 font-medium text-charade-50 hover:bg-frost-400/90 focus-visible:bg-frost-400/90 active:bg-frost-400/70 sm:order-0"
@@ -46,10 +53,10 @@
   </form>
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">Books read</h2>
-    <FilteredEntries type="book" start={data.start ?? defaultStart} end={data.end ?? defaultEnd} />
+    <FilteredEntries type="book" {start} {end} />
   </section>
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">Movies watched</h2>
-    <FilteredEntries type="movie" start={data.start ?? defaultStart} end={data.end ?? defaultEnd} />
+    <FilteredEntries type="movie" {start} {end} />
   </section>
 </main>

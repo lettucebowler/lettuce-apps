@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 7326
+    title: Juno
+    released: 2007
+    directors:
+      - Jason Reitman
+    logDate: 2026-06-21
+    rating: 4
   - tmdb: 687163
     title: Project Hail Mary
     released: 2026
