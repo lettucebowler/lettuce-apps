@@ -148,7 +148,8 @@
   </div>
   <form
     class="keyboard grid w-full flex-auto gap-1"
-    {...action.enhance(async ({ data, submit }) => {
+    {...action.enhance(async (form) => {
+      const data = form.fields.value();
       if (data.letter) {
         game.doLetter(data.letter);
         return saveGameStateToCookie();
@@ -167,7 +168,7 @@
         if (!success) {
           return saveGameStateToCookie();
         }
-        const promise = submit();
+        const promise = form.submit();
         toastPromise({
           promise,
           loadingText: 'Saving results...',
@@ -199,7 +200,8 @@
               game.letterStatus(l) === LETTER_STATUS_CONTAINS && 'bg-putty-500 text-putty-900',
               game.letterStatus(l) === LETTER_STATUS_INCORRECT && 'bg-charade-800 text-charade-300 shadow-none',
               game.letterStatus(l) === LETTER_STATUS_NONE && 'bg-charade-600 text-charade-100',
-            ]}>{l}</button
+            ]}
+            >{l}</button
           >
         {:else}
           <div></div>

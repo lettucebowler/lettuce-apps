@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 1301421
+    title: The Sheep Detectives
+    released: 2026
+    directors:
+      - Kyle Balda
+    logDate: 2026-06-24
+    rating: 5
+    comment: Surprisingly good
   - tmdb: 7326
     title: Juno
     released: 2007
