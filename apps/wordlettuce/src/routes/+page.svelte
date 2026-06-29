@@ -200,8 +200,7 @@
               game.letterStatus(l) === LETTER_STATUS_CONTAINS && 'bg-putty-500 text-putty-900',
               game.letterStatus(l) === LETTER_STATUS_INCORRECT && 'bg-charade-800 text-charade-300 shadow-none',
               game.letterStatus(l) === LETTER_STATUS_NONE && 'bg-charade-600 text-charade-100',
-            ]}
-            >{l}</button
+            ]}>{l}</button
           >
         {:else}
           <div></div>

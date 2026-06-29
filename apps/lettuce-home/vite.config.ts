@@ -24,13 +24,8 @@ const svelteConfig: SvelteConfig = {
     'content-collections': './.content-collections/generated',
   },
   extensions: ['.svelte', '.svx', '.md'],
-}
+};
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    enhancedImages(),
-    sveltekit(svelteConfig),
-    contentCollections(),
-  ],
+  plugins: [tailwindcss(), enhancedImages(), sveltekit(svelteConfig), contentCollections()],
 });

@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1083381
+    title: Backrooms
+    released: 2026
+    directors:
+      - Kane Parsons
+    logDate: 2026-06-27
+    rating: 2
   - tmdb: 1301421
     title: The Sheep Detectives
     released: 2026

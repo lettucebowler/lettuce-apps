@@ -9,12 +9,12 @@ import type { Config as SvelteConfig } from '@sveltejs/kit';
 
 const svelteConfig: SvelteConfig = {
   preprocess: [vitePreprocess()],
-    adapter: adapter(),
-    experimental: {
-      remoteFunctions: true,
-      forkPreloads: true,
-      handleRenderingErrors: true,
-    },
+  adapter: adapter(),
+  experimental: {
+    remoteFunctions: true,
+    forkPreloads: true,
+    handleRenderingErrors: true,
+  },
   compilerOptions: {
     experimental: {
       async: true,
