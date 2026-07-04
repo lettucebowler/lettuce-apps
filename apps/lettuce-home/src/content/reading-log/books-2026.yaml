@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781250868299
+    title: The Well of Ascension
+    subtitle: A Mistborn Novel
+    authors:
+      - Brandon Sanderson
+    published: 2007
+    logDate: 2026-07-04
+    rating: 4
   - isbn: 9784046834706
     title: Re:Zero Vol. 37
     authors:

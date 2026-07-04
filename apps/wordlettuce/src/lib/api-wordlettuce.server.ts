@@ -1,17 +1,17 @@
-import { env as privateEnv } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
 import { getRequestEvent } from '$app/server';
 import ky, { HTTPError } from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
+import { API_WORDLETTUCE_TOKEN } from '$app/env/private';
+import { PUBLIC_API_WORDLETTUCE_HOST } from '$app/env/public';
 
 function createAPIWordlettuceClient() {
   const event = getRequestEvent();
   return ky.create({
-    prefix: publicEnv.PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: PUBLIC_API_WORDLETTUCE_HOST,
     fetch: event.fetch,
     headers: {
-      Authorization: `Bearer ${privateEnv.API_WORDLETTUCE_TOKEN}`,
+      Authorization: `Bearer ${API_WORDLETTUCE_TOKEN}`,
     },
   });
 }

@@ -1,13 +1,12 @@
-import { env } from '$env/dynamic/public';
 import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
 import { getGameNum } from './words';
-import { error } from '@sveltejs/kit';
+import { PUBLIC_API_WORDLETTUCE_HOST } from '$app/env/public';
 
 function createAPIWordlettuceClient() {
   return ky.create({
-    prefix: env.PUBLIC_API_WORDLETTUCE_HOST,
+    prefix: PUBLIC_API_WORDLETTUCE_HOST,
   });
 }
 

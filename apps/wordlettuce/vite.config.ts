@@ -14,6 +14,7 @@ const svelteConfig: SvelteConfig = {
     remoteFunctions: true,
     forkPreloads: true,
     handleRenderingErrors: true,
+    explicitEnvironmentVariables: true,
   },
   compilerOptions: {
     experimental: {

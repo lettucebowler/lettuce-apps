@@ -2,10 +2,13 @@
   import * as v from 'valibot';
   import { CalendarDate, today } from '@internationalized/date';
   import { ISODateString } from '$lib/schemas';
-  import FilteredEntries from '$lib/components/FilteredEntries.svelte';
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
   import { DateRangeFromISODateStrings } from '$lib/schemas.js';
+  import { filterBooks, filterMovies } from '$lib/collections';
+  import MediaGrid from '$lib/components/MediaGrid.svelte';
+  import MoviePoster from '$lib/components/MoviePoster.svelte';
+  import BookCover from '$lib/components/BookCover.svelte';
 
   const defaultStart = new CalendarDate(1998, 12, 12);
   const defaultEnd = today('America/Chicago');
@@ -52,11 +55,29 @@
     </div>
   </form>
   <section class="space-y-6">
-    <h2 class="text-2xl font-bold">Books read</h2>
-    <FilteredEntries type="book" {start} {end} />
+    {let books = $derived(filterBooks({ start, end }))}
+    <h2 class="text-2xl font-bold">
+      Books completed &nbsp;
+      <span class="font-medium text-charade-100 text-base">{books.length} book{books.length !== 1 ? 's' : ''}</span>
+    </h2>
+
+    <MediaGrid>
+      {#each books.toReversed() as { title, isbn }, i (`${isbn}-${i}`)}
+        <BookCover {title} {isbn} />
+      {/each}
+    </MediaGrid>
   </section>
   <section class="space-y-6">
-    <h2 class="text-2xl font-bold">Movies watched</h2>
-    <FilteredEntries type="movie" {start} {end} />
+    {let movies = $derived(filterMovies({ start, end }))}
+    <h2 class=" text-2xl font-bold">
+      Movies watched &nbsp;
+      <span class="font-medium text-charade-100 text-base">{movies.length} movie{movies.length !== 1 ? 's' : ''}</span>
+    </h2>
+
+    <MediaGrid>
+      {#each movies.toReversed() as { title, tmdb }, i (`${tmdb}-${i}`)}
+        <MoviePoster {title} {tmdb} />
+      {/each}
+    </MediaGrid>
   </section>
 </main>
