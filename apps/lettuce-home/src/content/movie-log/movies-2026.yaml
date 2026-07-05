@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1314481
+    title: The Devil Wears Prada 2
+    released: 2026
+    directors:
+      - David Frankel
+    logDate: 2026-07-04
+    rating: 3
   - tmdb: 1151039
     title: Nonnas
     released: 2025
