@@ -12,42 +12,27 @@
   import { page } from '$app/state';
   import type { Snippet } from 'svelte';
 
-  type Props =
-    | {
-        to: string;
-        class?: string;
-        label: string;
-        children?: undefined;
-      }
-    | {
-        to: string;
-        class?: string;
-        label?: undefined;
-        children: Snippet<[]>;
-      };
+  type Props = {
+    to: string;
+    class?: string;
+    children: Snippet<[]>;
+    current?: boolean;
+  };
 
-  let { to, class: className, label, children }: Props = $props();
+  let { to, class: className, children, current: currentProp }: Props = $props();
 
-  let current = $derived(page.url.pathname === to);
+  let current = $derived(currentProp ?? page.url.pathname === to);
 </script>
 
-<a
-  class={['text-charade-50 grid w-max text-base font-bold hover:underline sm:text-3xl', className]}
-  aria-current={current}
-  href={to}
->
-  {#if current}
-    <div
-      in:recieve={{ key: 'current-link' }}
-      out:send={{ key: 'current-link' }}
-      class="bg-charade-800 border-charade-700 col-start-1 row-start-1 box-border rounded-xl border-t shadow-md"
-    ></div>
-  {/if}
-  <div class={['z-10 col-start-1 row-start-1', label && 'px-4 py-2.5 first-letter:capitalize']}>
-    {#if label}
-      {label}
-    {:else}
-      {@render children?.()}
+<a class={[className]} aria-current={current} href={to}>
+  {@render children?.()}
+  <div class="mt-0.5 h-1">
+    {#if current}
+      <div
+        class="border-box mx-1 h-1 bg-charade-700"
+        in:recieve={{ key: 'current-link' }}
+        out:send={{ key: 'current-link' }}
+      ></div>
     {/if}
   </div>
 </a>

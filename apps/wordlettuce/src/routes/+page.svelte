@@ -1,7 +1,7 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
   import Cookies from 'js-cookie';
-  import { browser } from '$app/environment';
+  import { browser } from '$app/env';
   import { page } from '$app/state';
   import { pushState } from '$app/navigation';
   import * as v from 'valibot';
@@ -128,7 +128,7 @@
               class={[
                 'wiggler bg-charade-950 z-(--z-index) rounded-xl',
                 'aspect-square shadow-[inset_0_var(--tile-height)_var(--tile-height)_0_rgb(0_0_0/0.2),inset_0_calc(-1*var(--tile-height))_0_0_var(--color-charade-800)]',
-                !row.guess && row.current && action.fields.word.issues() && !browser && 'animate-wiggle-once',
+                // !row.guess && row.current && action.fields.word.issues() && !browser && 'animate-wiggle-once',
                 doWiggleOnce && 'animate-wiggle-once',
                 row.current && 'current',
               ]}

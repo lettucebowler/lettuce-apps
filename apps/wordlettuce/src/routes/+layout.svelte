@@ -6,9 +6,14 @@
   import { Toasts } from 'svoast';
   import favicon from '$lib/assets/favicon.svg';
   import { appName } from '$lib/app-constants';
+  import { page } from '$app/state';
 
   let { children } = $props();
   let session = $derived(await sessionQuery());
+
+  let isOnOwnProfilePage = $derived(
+    session.authenticated ? page.url.pathname === `/profile/${session.user.username}` : false,
+  );
 </script>
 
 <svelte:head>
@@ -17,30 +22,32 @@
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 sm:p-4" data-sveltekit-preload-data="hover">
-    <NavBar>
-      <NavLink to="/" label="home" />
-      <NavLink to="/rankings" label="rankings" />
-      <NavLink to="/about" label="about" />
+  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 text-sm sm:px-4" data-sveltekit-preload-data="hover">
+    <div class="flex justify-between bg-charade-950 rounded-lg text-charade-50">
+      <NavBar>
+        <NavLink to="/" class="hover:underline">Home</NavLink>
+        <NavLink to="/rankings" class="hover:underline">Rankings</NavLink>
+        <NavLink to="/about" class="hover:underline">About</NavLink>
+      </NavBar>
       {#if session.authenticated}
-        <NavLink to="/profile/{session.user.username}" class="ml-auto">
-          <div
-            class="grid aspect-square size-8 h-full place-items-center p-1 transition-all duration-150 hover:p-0 sm:size-14"
-          >
-            <div class="aspect-square w-full overflow-hidden rounded sm:rounded-lg">
-              <img
-                src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed={session
-                  .user.username}"
-                alt="{session.user.username} avatar"
-                class="pointer-events-none grid h-full max-w-full place-items-center"
-              />
-            </div>
-          </div>
-        </NavLink>
+        <a
+          href="/profile/{session.user.username}"
+          class={[
+            'flex items-stretch aspect-square block ml-auto hover:p-2 transition-all duration-150',
+            isOnOwnProfilePage ? 'p-2' : 'p-3',
+          ]}
+        >
+          <img
+            src="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&seed={session
+              .user.username}"
+            alt="{session.user.username} avatar"
+            class="rounded"
+          />
+        </a>
       {:else}
-        <NavLink to="/signin" class="ml-auto" label="sign in" />
+        <a href="/signin" class="ml-auto text-charade-50 text-2xl font-bold pr-4 pt-3 hover:underline">Sign in</a>
       {/if}
-    </NavBar>
+    </div>
     {@render children()}
   </div>
 </PageContentContainer>
