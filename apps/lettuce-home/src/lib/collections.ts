@@ -83,8 +83,8 @@ export function getPost(slug: string) {
   return allPosts.find((post) => post.slug === slug);
 }
 
-export function getRecentPosts() {
-  return allPostsDesc().slice(0, 5);
+export function getRecentPosts(count: number) {
+  return allPostsDesc().slice(0, count);
 }
 
 export function getPostsWithTag(tag?: string | null) {

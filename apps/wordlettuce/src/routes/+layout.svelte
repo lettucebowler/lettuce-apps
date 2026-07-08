@@ -23,7 +23,7 @@
 
 <PageContentContainer --tile-height="2px">
   <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 text-sm sm:px-4" data-sveltekit-preload-data="hover">
-    <div class="flex justify-between bg-charade-950 rounded-lg text-charade-50">
+    <div class="flex justify-between bg-charade-950 rounded-lg text-charade-50 items-stretch">
       <NavBar>
         <NavLink to="/" class="hover:underline">Home</NavLink>
         <NavLink to="/rankings" class="hover:underline">Rankings</NavLink>
@@ -33,8 +33,8 @@
         <a
           href="/profile/{session.user.username}"
           class={[
-            'flex items-stretch aspect-square block ml-auto hover:p-2 transition-all duration-150',
-            isOnOwnProfilePage ? 'p-2' : 'p-3',
+            'flex items-stretch aspect-square block hover:p-1 transition-all duration-150 w-11.5 sm:w-13.5 lg:w-14.5',
+            isOnOwnProfilePage ? 'p-1' : 'p-2',
           ]}
         >
           <img

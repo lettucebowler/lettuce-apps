@@ -14,7 +14,7 @@
   const latestBook = getLastReadBook();
   const activeProjects = getActiveProjects();
   const latestMovie = getLastWatchedMovie();
-  const recentPosts = getRecentPosts();
+  const recentPosts = getRecentPosts(4);
   const currentBook = getCurrentlyReading().at(0);
 </script>
 
@@ -33,10 +33,6 @@
         <div
           class="mx-auto flex max-w-120 flex-col flex-wrap justify-center text-center @min-[20rem]:flex-row @min-[30rem]:grid @min-[30rem]:grid-cols-3"
         >
-          <a href="https://twitter.com/lettucebowler" class="group flex flex-col justify-between p-4">
-            <span class="mx-auto icon-[mdi--twitter] size-10 text-frost-300"></span>
-            <span class="group-hover:underline">@Lettucebowler</span>
-          </a>
           <a href="https://github.com/lettucebowler" class="group flex flex-col justify-between p-4">
             <span class="mx-auto icon-[mdi--github] size-10 text-swamp-green-500"></span>
             <span class="group-hover:underline">@Lettucebowler</span>

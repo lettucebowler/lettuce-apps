@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781639730940
+    title: Throne of Glass
+    authors:
+      - Sarah J. Maas
+    published: 2012
+    logDate: 2026-07-08
+    rating: 3
   - isbn: 9781250868299
     title: The Well of Ascension
     subtitle: A Mistborn Novel

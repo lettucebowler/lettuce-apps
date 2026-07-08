@@ -62,7 +62,7 @@
     </h2>
 
     <MediaGrid>
-      {#each books.toReversed() as { title, isbn }, i (`${isbn}-${i}`)}
+      {#each books as { title, isbn }, i (`${isbn}-${i}`)}
         <BookCover {title} {isbn} />
       {/each}
     </MediaGrid>
@@ -75,7 +75,7 @@
     </h2>
 
     <MediaGrid>
-      {#each movies.toReversed() as { title, tmdb }, i (`${tmdb}-${i}`)}
+      {#each movies as { title, tmdb }, i (`${tmdb}-${i}`)}
         <MoviePoster {title} {tmdb} />
       {/each}
     </MediaGrid>
