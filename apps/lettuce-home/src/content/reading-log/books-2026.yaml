@@ -31,6 +31,7 @@ books:
     rating: 5
     reread: true
     comment: Had to give it a listen as well.
+    audio: true
   - isbn: 9781534306868
     title: Invincible Compendium Volume 3
     published: 2018
@@ -161,6 +162,7 @@ books:
     published: 2021
     logDate: 2026-03-30
     rating: 4
+    audio: true
   - isbn: 9780440418610
     title: The Subtle Knife
     authors:
@@ -168,6 +170,7 @@ books:
     published: 1997
     logDate: 2026-03-23
     rating: 4
+    audio: true
   - isbn: 9781933633862
     title: Debt
     subtitle: The First 5,000 years
@@ -207,6 +210,7 @@ books:
     logDate: 2026-02-25
     rating: 5
     comment: This series gets better with every book
+    audio: true
   - isbn: 9780440418603
     title: The Golden Compass
     authors:
@@ -216,6 +220,7 @@ books:
     rating: 4
     reread: true
     comment: This brought me back.
+    audio: true
   - isbn: 9780593956014
     title: The Eye of the Bedlam Bride
     authors:
@@ -223,6 +228,7 @@ books:
     published: 2023
     logDate: 2026-02-13
     rating: 5
+    audio: true
   - isbn: 9780593955994
     title: The Butcher's Masquerade
     authors:
@@ -230,6 +236,7 @@ books:
     published: 2022
     logDate: 2026-02-01
     rating: 5
+    audio: true
   - isbn: 9798520410171
     title: The Gate of the Feral Gods
     authors:
@@ -237,6 +244,7 @@ books:
     published: 2021
     logDate: 2026-01-25
     rating: 5
+    audio: true
   - isbn: 9780593820285
     title: The Dungeon Anarchist's Cookbook
     authors:

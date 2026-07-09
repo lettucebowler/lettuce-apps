@@ -10,12 +10,13 @@
   import Movie from '$lib/components/Movie.svelte';
   import Post from '$lib/components/Post.svelte';
   import Project from '$lib/components/Project.svelte';
+  import { currentlyReading } from 'content-collections';
 
   const latestBook = getLastReadBook();
   const activeProjects = getActiveProjects();
   const latestMovie = getLastWatchedMovie();
   const recentPosts = getRecentPosts(4);
-  const currentBook = getCurrentlyReading().at(0);
+  const currentBooks = getCurrentlyReading();
 </script>
 
 <svelte:head>
@@ -72,10 +73,12 @@
       {/if}
     </div>
     <div id="home-right" class="@container w-full space-y-8 md:ml-auto md:max-w-120">
-      {#if currentBook}
+      {#if currentBooks.length}
         <section class={['space-y-4']}>
           <h2 class="text-2xl font-bold">Currently reading</h2>
-          <Book {...currentBook} />
+          {#each currentBooks.slice(0, 1) as book (book.isbn)}
+            <Book {...book} />
+          {/each}
         </section>
       {/if}
       <section class="space-y-4">

@@ -4,3 +4,9 @@ books:
     authors:
       - Phillip Pullman
     published: 1999
+  - isbn: 9780593820308
+    title: Operation Bounce House
+    authors:
+      - Matt Dinniman
+    published: 2026
+    audio: true
