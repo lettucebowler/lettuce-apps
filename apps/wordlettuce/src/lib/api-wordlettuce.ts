@@ -1,7 +1,7 @@
 import ky from 'ky';
 import * as v from 'valibot';
 import type { GameResult } from './types';
-import { getGameNum } from './words';
+import { getGameNum } from '$lib/Wordlettuce/utils';
 import { PUBLIC_API_WORDLETTUCE_HOST } from '$app/env/public';
 
 function createAPIWordlettuceClient() {

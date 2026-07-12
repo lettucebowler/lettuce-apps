@@ -1,22 +1,22 @@
-import { successAnswer } from '$lib/app-constants';
-import { isAllowedGuess, getGameWord, getGameNum } from '$lib/words';
+import { isAllowedGuess, getGameWord, getGameNum } from './utils';
 import {
   GuessLetter,
   LETTER_STATUS_CONTAINS,
   LETTER_STATUS_EXACT,
   LETTER_STATUS_INCORRECT,
   LETTER_STATUS_NONE,
+  SUCCESS_ANSWER,
   LetterStatus,
-} from '$lib/game-schemas';
+} from './schemas';
 import * as v from 'valibot';
 
-export type WordlettuceGameInit = {
+export type WordlettuceInit = {
   gameNum?: number;
   currentGuess?: string;
   guesses?: Array<string>;
 };
 
-export const WordlettuceGameStateFromString = v.pipe(
+export const WordlettuceStateFromString = v.pipe(
   v.pipe(
     v.string(),
     v.base64(),
@@ -47,15 +47,15 @@ export const WordlettuceGameStateFromString = v.pipe(
   ),
 );
 
-export type WordlettuceGameState = v.InferOutput<typeof WordlettuceGameStateFromString>;
+export type WordlettuceState = v.InferOutput<typeof WordlettuceStateFromString>;
 
-export class WordlettuceGame {
+export class Wordlettuce {
   #gameNum: number = $state(1);
   #guesses: Array<string> = $state([]);
   #currentGuess: string = $state('');
   #answers: Array<string> = $state([]);
 
-  constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceGameInit = {}) {
+  constructor({ gameNum = getGameNum(), guesses = [], currentGuess = '' }: WordlettuceInit = {}) {
     this.#currentGuess = currentGuess;
     this.#gameNum = gameNum;
     this.#guesses = guesses;
@@ -63,30 +63,30 @@ export class WordlettuceGame {
   }
 
   static decode(state: string) {
-    const gameState = v.parse(WordlettuceGameStateFromString, state);
-    return new WordlettuceGame(gameState);
+    const gameState = v.parse(WordlettuceStateFromString, state);
+    return new Wordlettuce(gameState);
   }
 
-  static encode(state: WordlettuceGameState) {
+  static encode(state: WordlettuceState) {
     const stateString = `${state.gameNum};${state.guesses.join(',')};${state.currentGuess}`;
     return btoa(stateString);
   }
 
-  doLetter(letter: GuessLetter) {
+  letter(letter: GuessLetter) {
     if (this.success || this.#currentGuess.length >= 5) {
       return;
     }
     this.#currentGuess += letter;
   }
 
-  doUndo() {
+  undo() {
     if (!this.#currentGuess.length) {
       return;
     }
     this.#currentGuess = this.#currentGuess.slice(0, -1);
   }
 
-  doWord(word: string): WordlettuceGameSubmitResult {
+  submit(word: string): WordlettuceGameSubmitResult {
     if (this.success) {
       return {
         success: true,
@@ -104,7 +104,7 @@ export class WordlettuceGame {
     this.#guesses.push(this.#currentGuess);
     this.#currentGuess = '';
     this.#answers = checkWords({ guesses: this.#guesses, answer: getGameWord(this.gameNum) });
-    const success = this.#answers.at(-1) === successAnswer;
+    const success = this.#answers.at(-1) === SUCCESS_ANSWER;
     return {
       invalid: false,
       success,
@@ -112,7 +112,7 @@ export class WordlettuceGame {
   }
 
   letterStatus(l: GuessLetter) {
-    return this.letterStatusMap.get(l) ?? LETTER_STATUS_NONE;
+    return this.letterStatuses.get(l) ?? LETTER_STATUS_NONE;
   }
 
   get gameNum() {
@@ -132,10 +132,10 @@ export class WordlettuceGame {
   }
 
   get success() {
-    return this.#answers.at(-1) === successAnswer;
+    return this.#answers.at(-1) === SUCCESS_ANSWER;
   }
 
-  get letterStatusMap(): Map<GuessLetter, LetterStatus> {
+  get letterStatuses(): Map<GuessLetter, LetterStatus> {
     type LetterStatusTuple = [GuessLetter, LetterStatus];
     const statusOrder = [LETTER_STATUS_NONE, LETTER_STATUS_INCORRECT, LETTER_STATUS_CONTAINS, LETTER_STATUS_EXACT];
     const letters: Array<LetterStatusTuple> = Array.from(
@@ -163,7 +163,7 @@ export class WordlettuceGame {
     return new Map(letters);
   }
 
-  get gameState(): WordlettuceGameState {
+  get gameState(): WordlettuceState {
     return {
       gameNum: this.#gameNum,
       guesses: $state.snapshot(this.#guesses),
@@ -172,7 +172,7 @@ export class WordlettuceGame {
   }
 
   get encoded() {
-    return WordlettuceGame.encode(this.gameState);
+    return Wordlettuce.encode(this.gameState);
   }
 }
 

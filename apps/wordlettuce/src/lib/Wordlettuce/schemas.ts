@@ -1,4 +1,5 @@
 import * as v from 'valibot';
+import { isAllowedGuess } from './utils';
 
 export const GameHotKey = v.picklist(['enter', 'backspace']);
 
@@ -54,3 +55,10 @@ const LETTER_STATUSES = [
 export const LetterStatus = v.picklist(LETTER_STATUSES);
 
 export type LetterStatus = v.InferOutput<typeof LetterStatus>;
+
+export const AllowedGuess = v.pipe(
+  v.string(),
+  v.check((s) => isAllowedGuess({ guess: s }), `Invalid word`),
+);
+
+export const SUCCESS_ANSWER = 'xxxxx';

@@ -4,20 +4,18 @@
 <script lang="ts">
   import Dialog from '$lib/components/base/Dialog.svelte';
   import { ExpiringString, NewGameCountdownTimer } from './spells.svelte';
-  import { appName } from '$lib/app-constants';
-  import { getGameStatus } from '$lib/util';
   import ArrowRightEndOnBoxIcon from '$lib/components/icons/ArrowRightEndOnRectangleIcon.svelte';
 
   type ModalProps = {
     gameNum: number;
-    answers: Array<string>;
     authenticated?: boolean;
     open: boolean;
     onclose: () => void;
+    content: string;
+    attempts: number;
   };
 
-  const { gameNum, answers, authenticated, onclose, open }: ModalProps = $props();
-  let attempts = $derived(answers.length);
+  const { gameNum, authenticated, onclose, open, content, attempts }: ModalProps = $props();
   const clipboardMessage = new ExpiringString({ duration: 2000 });
   const timeUntilNextGame = new NewGameCountdownTimer();
 
@@ -36,7 +34,7 @@
     }
 
     navigator.clipboard
-      .writeText(getGameStatus({ gameNum, answers, appName }))
+      .writeText(content)
       .then(() => {
         clipboardMessage.write('Copied to clipboard!');
       })
@@ -64,7 +62,7 @@
   class="border-charade-700 space-y-2 border-t-2"
 >
   <p class="text-snow-300">
-    You solved today's WordLettuce in {attempts} guess{attempts > 1 ? 'es' : ''}. Come back tomorrow and play again!
+    You solved WordLettuce #{gameNum} in {attempts} guess{attempts > 1 ? 'es' : ''}. Come back tomorrow and play again!
   </p>
   <p class="text-snow-300 grid place-items-center text-center font-bold">
     Next word in {formatTime(timeUntilNextGame.value)}

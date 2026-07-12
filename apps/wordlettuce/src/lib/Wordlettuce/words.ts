@@ -1,12 +1,3 @@
-import { mulberry } from './util';
-
-const msInADay = 1000 * 60 * 60 * 24;
-const initial = new Date(1643673600000);
-export function getGameNum() {
-  const now = new Date();
-  return Math.floor((now.getTime() - initial.getTime()) / msInADay);
-}
-
 export const answerList: ReadonlyArray<string> = [
   'aback',
   'abase',
@@ -12982,13 +12973,3 @@ export const allowedGuesses: ReadonlyArray<string> = [
   'zymes',
   'zymic',
 ];
-
-export function getGameWord(gameNum: number) {
-  const wordIndex = mulberry(gameNum) * answerList.length;
-  return answerList.at(wordIndex) ?? 'slate';
-}
-
-export function isAllowedGuess({ guess }: { guess: string }) {
-  const allowed = answerList.includes(guess) || allowedGuesses.includes(guess);
-  return allowed;
-}

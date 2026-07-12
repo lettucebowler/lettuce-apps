@@ -1,7 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
-  import { getGameStatus } from '$lib/util';
+  import { getGameStatus } from '$lib/Wordlettuce/utils';
   import { appName } from '$lib/app-constants';
   import { toastError, toastSuccess } from '../../toast';
   import {
@@ -9,7 +9,7 @@
     LETTER_STATUS_EXACT,
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
-  } from '$lib/game-schemas';
+  } from '$lib/Wordlettuce/schemas';
 
   type GameSummaryProps = {
     answers: string;
@@ -35,7 +35,7 @@
     }
 
     navigator.clipboard
-      .writeText(getGameStatus({ gameNum, answers: chunkArray(answers, 5), appName }))
+      .writeText(getGameStatus({ gameNum, answers: chunkArray(answers, 5) }))
       .then(() => {
         toastSuccess(`Game ${gameNum} result copied to clipboard`);
       })

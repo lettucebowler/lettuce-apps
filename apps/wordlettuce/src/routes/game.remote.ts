@@ -14,7 +14,7 @@ export const action = form(ActionFormInput, async (input) => {
   await sessionQuery().refresh();
   const game = getGameStateFromCookie();
   if (input.letter) {
-    game.doLetter(input.letter);
+    game.letter(input.letter);
     saveGameStateToCookie(game);
     await getGameState().refresh();
     return {
@@ -22,7 +22,7 @@ export const action = form(ActionFormInput, async (input) => {
       invalid: false,
     };
   } else if (input.undo) {
-    game.doUndo();
+    game.undo();
     saveGameStateToCookie(game);
     await getGameState().refresh();
     return {
@@ -37,7 +37,7 @@ export const action = form(ActionFormInput, async (input) => {
         invalid: false,
       };
     }
-    const { success, invalid } = game.doWord(input.word);
+    const { success, invalid } = game.submit(input.word);
     if (invalid) {
       return {
         success: false,

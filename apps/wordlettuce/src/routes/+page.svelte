@@ -6,7 +6,7 @@
   import { pushState } from '$app/navigation';
   import * as v from 'valibot';
 
-  import { WordlettuceGame } from '$lib/wordlettuce-game.svelte';
+  import { Wordlettuce } from '$lib/Wordlettuce/Wordlettuce.svelte';
   import Tile from './Tile.svelte';
   import { toastError, toastPromise } from './toast';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
@@ -14,17 +14,18 @@
   import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
   import { appName, STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
   import {
+    AllowedGuess,
     GuessLetter,
     LETTER_STATUS_CONTAINS,
     LETTER_STATUS_EXACT,
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
     LetterStatus,
-  } from '$lib/game-schemas';
+  } from '$lib/Wordlettuce/schemas';
   import MegaModal from './MegaModal.svelte';
   import { action } from './game.remote';
   import { sessionQuery } from './auth.remote';
-  import { AllowedGuess } from './game.schemas';
+  import { getGameStatus } from '$lib/Wordlettuce/utils';
 
   function createGameActionKeyID(l: string) {
     return `wordlettuce-game-action-key-${l}`;
@@ -59,7 +60,7 @@
     });
   }
 
-  function getItemsForGrid(game: WordlettuceGame) {
+  function getItemsForGrid(game: Wordlettuce) {
     const maxPreviousGuesses = game.success ? 6 : 5;
     const maxFillerGuesses = 5;
     const previousGuesses = game.guesses
@@ -151,10 +152,10 @@
     {...action.enhance(async (form) => {
       const data = form.fields.value();
       if (data.letter) {
-        game.doLetter(data.letter);
+        game.letter(data.letter);
         return saveGameStateToCookie();
       } else if (data.undo) {
-        game.doUndo();
+        game.undo();
         return saveGameStateToCookie();
       } else if (data.word) {
         if (game.success) {
@@ -164,7 +165,7 @@
         if (!parseResult.success) {
           return badWord();
         }
-        const { success } = game.doWord(data.word);
+        const { success } = game.submit(data.word);
         if (!success) {
           return saveGameStateToCookie();
         }
@@ -246,8 +247,9 @@
   open={!!page.state.showModal}
   onclose={() => history.back()}
   gameNum={game.gameNum}
-  answers={game.answers}
   authenticated={(await sessionQuery()).authenticated}
+  attempts={game.answers.length}
+  content={game.success ? getGameStatus({ gameNum: game.gameNum, answers: game.answers }) : ''}
 />
 
 <style>
