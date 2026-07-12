@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getFirstDayOfTheMonth } from '$lib/utils/CalendarDate';
+  import { getFirstDayOfTheMonth } from '$lib/utils';
   import { DateRangePicker, type DateRange } from 'bits-ui';
 
   type Props = {

@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1339713
+    title: Obsession
+    released: 2026
+    directors:
+      - Curry Barker
+    logDate: 2026-07-10
+    rating: 5
   - tmdb: 1314481
     title: The Devil Wears Prada 2
     released: 2026
