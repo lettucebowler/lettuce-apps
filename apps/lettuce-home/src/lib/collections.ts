@@ -1,21 +1,57 @@
 import { parseDate } from '@internationalized/date';
 import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
-import type { Post } from './schemas';
+import type { Book, MovieLogEntry, Post } from './schemas';
+
+function getMoviesAsc() {
+  const moviesMap: Map<number, MovieLogEntry> = new Map();
+  return allMovieLogs
+    .sort((a, b) => a.year - b.year)
+    .flatMap((log) => log.movies.toReversed())
+    .map((movie) => {
+      const prev = moviesMap.get(movie.tmdb);
+      if (!prev) {
+        moviesMap.set(movie.tmdb, movie);
+        return movie;
+      }
+      return {
+        ...movie,
+        rewatch: true,
+      };
+    });
+}
+
+function getBooksAsc() {
+  const booksMap: Map<string, Book> = new Map();
+  return allReadingLogs
+    .sort((a, b) => a.year - b.year)
+    .flatMap((log) => log.books.toReversed())
+    .map((book) => {
+      const prev = booksMap.get(book.isbn);
+      if (!prev) {
+        booksMap.set(book.isbn, book);
+        return book;
+      }
+      return {
+        ...book,
+        reread: true,
+      };
+    });
+}
 
 export function getLastWatchedMovie() {
-  return getMovieLogsDesc().at(0)!.movies.at(0)!;
+  return getMoviesAsc().at(-1)!;
 }
 
 export function getMovieLogsDesc() {
-  return allMovieLogs
-    .sort((a, b) => {
-      return b.year - a.year;
-    })
-    .map((log) => {
+  const groups = Object.groupBy(getMoviesAsc(), (movie) => movie.logDate.substring(0, 4));
+  return Object.keys(groups)
+    .toSorted()
+    .toReversed()
+    .map((year) => {
       return {
-        year: log.year,
-        movies: log.movies,
+        year: Number(year),
+        movies: groups[year]!.toReversed(),
       };
     });
 }
@@ -25,16 +61,21 @@ export function getCurrentlyReading() {
 }
 
 export function getReadingLogsDesc() {
-  return allReadingLogs
-    .sort((a, b) => {
-      return b.year - a.year;
-    })
-    .map((log) => ({ year: log.year, books: log.books }));
+  const groups = Object.groupBy(getBooksAsc(), (book) => book.logDate.substring(0, 4));
+  return Object.keys(groups)
+    .toSorted()
+    .toReversed()
+    .map((year) => {
+      return {
+        year: Number(year),
+        books: groups[year]!.toReversed(),
+      };
+    });
 }
 
 export function filterBooks(dateRange: DateRange) {
-  return getReadingLogsDesc()
-    .flatMap((log) => log.books)
+  return getBooksAsc()
+    .toReversed()
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
       return (
@@ -44,8 +85,8 @@ export function filterBooks(dateRange: DateRange) {
 }
 
 export function filterMovies(dateRange: DateRange) {
-  return getMovieLogsDesc()
-    .flatMap((log) => log.movies)
+  return getMoviesAsc()
+    .toReversed()
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
       return (
@@ -55,7 +96,7 @@ export function filterMovies(dateRange: DateRange) {
 }
 
 export function getLastReadBook() {
-  return getReadingLogsDesc()[0].books.at(0)!;
+  return getBooksAsc().at(-1)!;
 }
 
 export function getProjectsDesc() {

@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 931285
+    title: Mortal Kombat II
+    directors:
+      - Simon McQuoid
+    released: 2026
+    logDate: 2026-07-12
+    rating: 2
+    comment: My low expectations were... met.
   - tmdb: 1339713
     title: Obsession
     released: 2026
@@ -7,6 +15,7 @@ movies:
       - Curry Barker
     logDate: 2026-07-10
     rating: 5
+    rewatch: true
   - tmdb: 1314481
     title: The Devil Wears Prada 2
     released: 2026
@@ -67,6 +76,7 @@ movies:
       - Tim Johnson
     logDate: 2026-06-13
     rating: 2
+    rewatch: true
   - tmdb: 1430077
     title: Hokum
     released: 2026
@@ -201,6 +211,7 @@ movies:
     logDate: 2026-02-23
     rating: 2
     comment: I think this is the first movie I've ever seen adapt 2/3rds of a book
+    rewatch: true
   - tmdb: 403119
     title: 47 Meters Down
     released: 2017

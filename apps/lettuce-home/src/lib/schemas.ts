@@ -65,13 +65,6 @@ export const MovieLogEntry = v.pipe(
     rating: v.optional(v.pipe(v.number(), v.integer())),
     comment: v.optional(v.string()),
     rewatch: v.optional(v.boolean(), false),
-    poster_path: v.optional(v.pipe(v.string())),
-  }),
-  v.transform((movie) => {
-    return {
-      ...movie,
-      url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
-    };
   }),
 );
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;

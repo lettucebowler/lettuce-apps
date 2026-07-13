@@ -85,7 +85,6 @@ movies:
     rating: 3
     rewatch: true
     comment: Infinitely quotable.
-  # November 2025
   - tmdb: 1097870
     title: Dear Santa
     released: 2024
@@ -177,7 +176,6 @@ movies:
       - Betty Thomas
     logDate: 2025-11-30
     rating: 3
-  # October 2025
   - tmdb: 440472
     title: The Upside
     released: 2019
@@ -218,7 +216,6 @@ movies:
       - Chris Stuckmann
     logDate: 2025-10-31
     rating: 3
-  # September 2025
   - tmdb: 1311031
     title: 'Demon Slayer: Kimetsu no Yaiba Infinity Castle'
     released: 2025
@@ -249,7 +246,6 @@ movies:
       - Andrew DeYoung
     logDate: 2025-09-01
     rating: 2
-  # August 2025
   - tmdb: 1084199
     title: Companion
     released: 2025
@@ -267,7 +263,6 @@ movies:
     logDate: 2025-08-31
     rating: 5
     comment: Movie of the year
-  # July 2025
   - tmdb: 1233413
     title: Sinners
     released: 2025
@@ -299,7 +294,13 @@ movies:
     logDate: 2025-07-31
     rewatch: true
     rating: 4
-  # June 2025
+  - tmdb: 1061474
+    title: Superman
+    directors:
+      - James Gunn
+    released: 2025
+    logDate: 2025-07-31
+    rating: 5
   - tmdb: 703451
     title: Your Place or Mine
     released: 2023
@@ -369,7 +370,6 @@ movies:
     logDate: 2025-06-30
     rating: 4
     rewatch: true
-  # May 2025
   - tmdb: 822119
     title: 'Captain America: Brave New World'
     directors:
@@ -400,7 +400,6 @@ movies:
     logDate: 2025-05-31
     rating: 4
     comment: I'm probably over-rating this because of my shock to finally watch a decent marvel movie for the first time in like 5 years
-  # April 2025
   - tmdb: 50359
     title: Hop
     released: 2011
@@ -432,7 +431,6 @@ movies:
       - Frank Coraci
     logDate: 2025-04-30
     rating: 3
-    # Match 2025
   - tmdb: 146216
     title: Red 2
     released: 2013
@@ -463,7 +461,6 @@ movies:
       - Bharat Nalluri
     logDate: 2025-03-31
     rating: 3
-  # February 2025
   - tmdb: 286217
     title: The Martian
     released: 2015
@@ -517,7 +514,6 @@ movies:
       - Antonio Campos
     logDate: 2025-02-28
     rating: 3
-  # January 2025
   - tmdb: 1397163
     title: 'Mobile Suit Gundam GQuuuuuuX -Beginning-'
     released: 2025
