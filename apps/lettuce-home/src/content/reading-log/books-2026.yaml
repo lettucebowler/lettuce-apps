@@ -1,5 +1,13 @@
 year: 2026
 books:
+  # - isbn: 9781635575606
+  #   title: A Court of Wings and Ruin
+  #   authors:
+  #     - Sarah J. Maas
+  #   published: 2017
+  #   logDate: 2026-12-31
+  #   rating: 3
+  #   comment: It's ass pull o'clock.
   - isbn: 9781639730940
     title: Throne of Glass
     authors:
@@ -29,7 +37,6 @@ books:
     published: 2026
     logDate: 2026-06-19
     rating: 5
-    reread: true
     comment: Had to give it a listen as well.
     audio: true
   - isbn: 9781534306868

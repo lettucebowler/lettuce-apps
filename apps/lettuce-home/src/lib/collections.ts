@@ -1,7 +1,7 @@
 import { parseDate } from '@internationalized/date';
 import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
-import type { Post } from './schemas';
+import type { Book, Post } from './schemas';
 
 export function getLastWatchedMovie() {
   return getMovieLogsDesc().at(0)!.movies.at(0)!;
@@ -25,16 +25,34 @@ export function getCurrentlyReading() {
 }
 
 export function getReadingLogsDesc() {
-  return allReadingLogs
-    .sort((a, b) => {
-      return b.year - a.year;
-    })
-    .map((log) => ({ year: log.year, books: log.books }));
+  const bookMap: Map<string, Book> = new Map();
+  const books = allReadingLogs.flatMap((log) => log.books.toReversed());
+  const checked = books.map((book) => {
+    const prev = bookMap.get(book.isbn);
+    if (!prev) {
+      bookMap.set(book.isbn, book);
+      return book;
+    } else {
+      return {
+        ...book,
+        reread: true,
+      };
+    }
+  });
+  const groups = Object.groupBy(checked, (book) => book.logDate.substring(0, 4));
+  return Object.keys(groups)
+    .toSorted()
+    .toReversed()
+    .map((key) => ({
+      year: key,
+      books: groups[key]!.toReversed(),
+    }));
 }
 
 export function filterBooks(dateRange: DateRange) {
-  return getReadingLogsDesc()
-    .flatMap((log) => log.books)
+  return allReadingLogs
+    .flatMap((log) => log.books.toReversed())
+    .toReversed()
     .filter((item) => {
       const completionDate = parseDate(item.logDate);
       return (
