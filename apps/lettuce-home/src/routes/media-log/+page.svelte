@@ -5,7 +5,7 @@
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
   import { DateRangeFromISODateStrings } from '$lib/schemas.js';
-  import { filterBooks, filterMovies } from '$lib/collections';
+  import { getBooksInDateRange, getMoviesInDateRange } from '$lib/collections';
   import MediaGrid from '$lib/components/MediaGrid.svelte';
   import MoviePoster from '$lib/components/MoviePoster.svelte';
   import BookCover from '$lib/components/BookCover.svelte';
@@ -55,10 +55,10 @@
     </div>
   </form>
   <section class="space-y-6">
-    {let books = $derived(filterBooks({ start, end }))}
+    {let books = $derived(getBooksInDateRange({ start, end }))}
     <h2 class="text-2xl font-bold">
       Books completed &nbsp;
-      <span class="font-medium text-charade-100 text-base">{books.length} book{books.length !== 1 ? 's' : ''}</span>
+      <span class="text-base font-medium text-charade-100">{books.length} book{books.length !== 1 ? 's' : ''}</span>
     </h2>
 
     <MediaGrid>
@@ -68,10 +68,10 @@
     </MediaGrid>
   </section>
   <section class="space-y-6">
-    {let movies = $derived(filterMovies({ start, end }))}
+    {let movies = $derived(getMoviesInDateRange({ start, end }))}
     <h2 class=" text-2xl font-bold">
       Movies watched &nbsp;
-      <span class="font-medium text-charade-100 text-base">{movies.length} movie{movies.length !== 1 ? 's' : ''}</span>
+      <span class="text-base font-medium text-charade-100">{movies.length} movie{movies.length !== 1 ? 's' : ''}</span>
     </h2>
 
     <MediaGrid>

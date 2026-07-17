@@ -66,6 +66,12 @@ export const MovieLogEntry = v.pipe(
     comment: v.optional(v.string()),
     rewatch: v.optional(v.boolean(), false),
   }),
+  v.transform((movie) => {
+    return {
+      ...movie,
+      url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
+    };
+  }),
 );
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 

@@ -22,8 +22,8 @@
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
-  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 sm:gap-4 text-sm sm:px-4" data-sveltekit-preload-data="hover">
-    <div class="flex justify-between bg-charade-950 rounded-lg text-charade-50 items-stretch">
+  <div class="flex h-full min-h-dvh flex-col gap-2 p-2 text-sm sm:gap-4 sm:px-4" data-sveltekit-preload-data="hover">
+    <div class="bg-charade-950 text-charade-50 flex items-stretch justify-between rounded-lg">
       <NavBar>
         <NavLink to="/" class="hover:underline">Home</NavLink>
         <NavLink to="/rankings" class="hover:underline">Rankings</NavLink>
@@ -33,7 +33,7 @@
         <a
           href="/profile/{session.user.username}"
           class={[
-            'flex items-stretch aspect-square block hover:p-1 transition-all duration-150 w-11.5 sm:w-13.5 lg:w-14.5',
+            'block flex aspect-square w-11.5 items-stretch transition-all duration-150 hover:p-1 sm:w-13.5 lg:w-14.5',
             isOnOwnProfilePage ? 'p-1' : 'p-2',
           ]}
         >
@@ -45,7 +45,7 @@
           />
         </a>
       {:else}
-        <a href="/signin" class="ml-auto text-charade-50 text-2xl font-bold pr-4 pt-3 hover:underline">Sign in</a>
+        <a href="/signin" class="text-charade-50 ml-auto pt-3 pr-4 text-2xl font-bold hover:underline">Sign in</a>
       {/if}
     </div>
     {@render children()}

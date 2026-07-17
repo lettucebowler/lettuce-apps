@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1242419
+    title: Roofman
+    released: 2025
+    directors:
+      - Derek Cianfrance
+    logDate: 2026-07-16
+    rating: 3
   - tmdb: 931285
     title: Mortal Kombat II
     directors:

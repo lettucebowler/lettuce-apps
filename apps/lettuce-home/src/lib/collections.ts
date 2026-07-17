@@ -1,57 +1,41 @@
 import { parseDate } from '@internationalized/date';
 import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
-import type { Book, MovieLogEntry, Post } from './schemas';
+import type { Post } from './schemas';
 
-function getMoviesAsc() {
-  const moviesMap: Map<number, MovieLogEntry> = new Map();
-  return allMovieLogs
-    .sort((a, b) => a.year - b.year)
-    .flatMap((log) => log.movies.toReversed())
-    .map((movie) => {
-      const prev = moviesMap.get(movie.tmdb);
-      if (!prev) {
-        moviesMap.set(movie.tmdb, movie);
-        return movie;
-      }
-      return {
-        ...movie,
-        rewatch: true,
-      };
-    });
+function getMoviesDesc() {
+  return allMovieLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.movies);
 }
 
-function getBooksAsc() {
-  const booksMap: Map<string, Book> = new Map();
-  return allReadingLogs
-    .sort((a, b) => a.year - b.year)
-    .flatMap((log) => log.books.toReversed())
-    .map((book) => {
-      const prev = booksMap.get(book.isbn);
-      if (!prev) {
-        booksMap.set(book.isbn, book);
-        return book;
-      }
-      return {
-        ...book,
-        reread: true,
-      };
-    });
+function getBooksDesc() {
+  return allReadingLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.books);
+}
+
+export function dedupe<T extends any, K extends any>(items: Array<T>, keyFunc: (item: T) => K) {
+  let itemMap: Map<K, T> = new Map();
+  return items.filter((item) => {
+    const key = keyFunc(item);
+    const prev = itemMap.get(key);
+    if (!prev) {
+      itemMap.set(key, item);
+      return true;
+    } else {
+      return false;
+    }
+  });
 }
 
 export function getLastWatchedMovie() {
-  return getMoviesAsc().at(-1)!;
+  return getMoviesDesc().at(0)!;
 }
 
 export function getMovieLogsDesc() {
-  const groups = Object.groupBy(getMoviesAsc(), (movie) => movie.logDate.substring(0, 4));
-  return Object.keys(groups)
-    .toSorted()
-    .toReversed()
-    .map((year) => {
+  return allMovieLogs
+    .sort((a, b) => b.year - a.year)
+    .map((log) => {
       return {
-        year: Number(year),
-        movies: groups[year]!.toReversed(),
+        year: log.year,
+        movies: dedupe(log.movies.toReversed(), (movie) => movie.tmdb).toReversed(),
       };
     });
 }
@@ -61,42 +45,36 @@ export function getCurrentlyReading() {
 }
 
 export function getReadingLogsDesc() {
-  const groups = Object.groupBy(getBooksAsc(), (book) => book.logDate.substring(0, 4));
-  return Object.keys(groups)
-    .toSorted()
-    .toReversed()
-    .map((year) => {
+  return allReadingLogs
+    .sort((a, b) => b.year - a.year)
+    .map((log) => {
       return {
-        year: Number(year),
-        books: groups[year]!.toReversed(),
+        year: log.year,
+        books: dedupe(log.books.toReversed(), (book) => book.isbn).toReversed(),
       };
     });
 }
 
-export function filterBooks(dateRange: DateRange) {
-  return getBooksAsc()
-    .toReversed()
-    .filter((item) => {
-      const completionDate = parseDate(item.logDate);
-      return (
-        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
-      );
-    });
+export function getBooksInDateRange(dateRange: DateRange) {
+  return getBooksDesc().filter((item) => {
+    const completionDate = parseDate(item.logDate);
+    return (
+      (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
+    );
+  });
 }
 
-export function filterMovies(dateRange: DateRange) {
-  return getMoviesAsc()
-    .toReversed()
-    .filter((item) => {
-      const completionDate = parseDate(item.logDate);
-      return (
-        (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
-      );
-    });
+export function getMoviesInDateRange(dateRange: DateRange) {
+  return getMoviesDesc().filter((item) => {
+    const completionDate = parseDate(item.logDate);
+    return (
+      (!dateRange.start || completionDate >= dateRange.start) && (!dateRange.end || completionDate <= dateRange.end)
+    );
+  });
 }
 
 export function getLastReadBook() {
-  return getBooksAsc().at(-1)!;
+  return getBooksDesc().at(0)!;
 }
 
 export function getProjectsDesc() {

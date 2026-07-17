@@ -42,7 +42,7 @@
         </div>
       </a>
     {:else}
-      <p class="text-snow-300 box-border px-4 text-lg text-center font-medium animate-pulse">
+      <p class="text-snow-300 box-border animate-pulse px-4 text-center text-lg font-medium">
         No game results from the last 7 days. Play now and take the #1 spot!
       </p>
     {/each}

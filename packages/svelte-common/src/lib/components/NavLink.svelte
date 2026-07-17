@@ -29,7 +29,7 @@
   <div class="mt-0.5 h-1">
     {#if current}
       <div
-        class="border-box mx-1 h-1 bg-charade-700"
+        class="border-box bg-charade-700 mx-1 h-1"
         in:recieve={{ key: 'current-link' }}
         out:send={{ key: 'current-link' }}
       ></div>

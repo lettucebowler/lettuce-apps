@@ -9,13 +9,12 @@ tags:
 <script lang="ts">
     import MediaGrid from '$lib/components/MediaGrid.svelte';
     import BookCover from '$lib/components/BookCover.svelte';
-    import MoviePoster from '$lib/components/MoviePoster.svelte';
-    import { filterBooks, filterMovies } from '$lib/collections';
+    import BookRoundup from '$lib/components/BookRoundup.svelte';
+    import MovieRoundup from '$lib/components/MovieRoundup.svelte';
 
     let start = '2026-01-01';
     let end = '2026-02-28';
 
-    const books = filterBooks({ start, end });
     const current = [
       {
         title: 'A Parade of Horribles',
@@ -26,22 +25,11 @@ tags:
         isbn: '9780440418610'
       }
     ];
-    const movies = filterMovies({ start, end });
 </script>
 
 I'm trying out doing bi-monthly roundups of the books I've read and movies that I've watched. Who knows if this is something that I keep doing long-term but I will try at least for a few months. I also retroactively wrote up a roundup for december of 2025.
 
-<h2 class="text-2xl font-bold">
-  Books completed
-  &nbsp;
-  <span class="font-medium text-charade-100 text-base">{books.length} book{books.length > 1 ? 's' : ''}</span>
-</h2>
-
-<MediaGrid>
-  {#each books.toReversed() as {title, isbn}, i (`${isbn}-${i}`)}
-    <BookCover {title} {isbn} />
-  {/each}
-</MediaGrid>
+<BookRoundup { start } { end } />
 
 I set myself a goal of reading 24 books this year. One month in and I'm already a quarter of the way there! I started
 reading Matt Dinniman's <a class="text-putty-500 italic" href="https://openlibrary.org/search?q=subject_key%3A%22seriesdungeon_crawler_carl%22" target="_blank">Dungeon Crawler Carl</a>
@@ -61,17 +49,7 @@ series and got hooked pretty quickly. I tore through all 7 currently-released bo
 
 I started A Parade of Horribles (unreleased) and <a class="italic" href="https://openlibrary.org/isbn/9780440418610">The Subtle Knife</a>, but didn't finish them in time. I am liking them so far so they will likely be the first entries in my March reading log.
 
-<h2 class=" text-2xl font-bold">
-  Movies watched
-  &nbsp;
-  <span class="font-medium text-charade-100 text-base">{movies.length} movie{movies.length > 1 ? 's' : ''}</span>
-</h2>
-
-<MediaGrid>
-  {#each movies.toReversed() as {title, tmdb}, i (`${tmdb}-${i}`)}
-    <MoviePoster {title} {tmdb} />
-  {/each}
-</MediaGrid>
+<MovieRoundup { start } { end } />
 
 Lots of movies. Quite a few of them were rewatches, but I also watched a number of other movies that I would definitely see myself watching again in the future. It surpassed my expectations. The Golden Compass movie was terrible in a way that sorta made me like it. I didn't have high expectations for the <a href="https://www.themoviedb.org/movie/1087192" class="italic">How to Train Your Dragon</a> life action remake, but I was pleasantly surprised. I haven't seen the original for a while, so I forgot most of the story. I really liked it.
 
