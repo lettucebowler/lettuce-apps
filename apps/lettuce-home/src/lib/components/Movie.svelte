@@ -20,9 +20,9 @@
   {#snippet media()}
     <MoviePoster {tmdb} {title} />
   {/snippet}
-  {#snippet feature()}
+  <!-- {#snippet feature()}
     {#if rewatch}
       <span class="-m-0.5 icon-[heroicons--arrow-path-16-solid] size-5 text-antique-brass-500" title="rewatch"></span>
     {/if}
-  {/snippet}
+  {/snippet} -->
 </MediaFigure>
