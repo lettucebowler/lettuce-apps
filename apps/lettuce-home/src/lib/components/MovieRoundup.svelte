@@ -18,7 +18,7 @@
 
 <h2 class="text-2xl font-bold">
   Movies watched &nbsp;
-  <span class="font-medium text-charade-100 text-base">{movies.length} movie{movies.length > 1 ? 's' : ''}</span>
+  <span class="text-base font-medium text-charade-100">{movies.length} movie{movies.length > 1 ? 's' : ''}</span>
 </h2>
 
 <MediaGrid>

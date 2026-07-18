@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { browser } from '$app/environment';
+  import { browser } from '$app/env';
   import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
   import { getGameStatus } from '$lib/Wordlettuce/utils';
-  import { appName } from '$lib/app-constants';
   import { toastError, toastSuccess } from '../../toast';
   import {
     LETTER_STATUS_CONTAINS,

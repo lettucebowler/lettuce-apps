@@ -1,5 +1,4 @@
-import { defineEnvVars } from '@sveltejs/kit/hooks';
-import * as v from 'valibot';
+import { defineEnvVars } from '@sveltejs/kit/env';
 
 export const variables = defineEnvVars({
   API_WORDLETTUCE_TOKEN: {},

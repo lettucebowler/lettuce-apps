@@ -9,7 +9,10 @@ export const transport: Transport = {
       }
       return [value.gameNum, value.currentGuess, ...value.guesses];
     },
-    decode: ([gameNum, currentGuess, ...guesses]) => new Wordlettuce({ gameNum, guesses, currentGuess }),
+    decode: ([gameNum, currentGuess, ...guesses]) => {
+      console.log(gameNum, currentGuess, guesses);
+      return new Wordlettuce({ gameNum, guesses, currentGuess });
+    },
   },
 };
 

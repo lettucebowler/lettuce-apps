@@ -1,7 +1,7 @@
 import { getRequestEvent } from '$app/server';
 import type { RequestEvent } from '@sveltejs/kit';
 import { createAuthClient } from '@lettuce-apps-packages/auth';
-import { dev } from '$app/environment';
+import { dev } from '$app/env';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 import { subjects } from '@lettuce-apps-packages/auth';
 import { AUTH_HOST } from '$app/env/private';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import GameSummary from './GameSummary.svelte';
-  import { browser } from '$app/environment';
+  import { browser } from '$app/env';
   import { getGameNum } from '$lib/Wordlettuce/utils';
   import { infiniteScroll } from './infinite-scroll.svelte.js';
   import { getGameResults, getProfileData } from '$lib/api-wordlettuce';

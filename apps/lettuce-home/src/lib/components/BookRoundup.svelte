@@ -18,7 +18,7 @@
 
 <h2 class="text-2xl font-bold">
   Books completed &nbsp;
-  <span class="font-medium text-charade-100 text-base">{books.length} book{books.length > 1 ? 's' : ''}</span>
+  <span class="text-base font-medium text-charade-100">{books.length} book{books.length > 1 ? 's' : ''}</span>
 </h2>
 
 <MediaGrid>
