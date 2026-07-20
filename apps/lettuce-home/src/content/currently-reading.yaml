@@ -4,11 +4,11 @@ books:
     authors:
       - Phillip Pullman
     published: 1999
-  - isbn: 9781639730964
-    title: Crown of Midnight
+  - isbn: 9781639731084
+    title: The Assassin's Blade
     authors:
       - Sarah J. Maas
-    published: 2013
+    published: 2014
   # - isbn: 9780063432888
   #   title: Babel
   #   authors:

@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781639730964
+    title: Crown of Midnight
+    authors:
+      - Sarah J. Maas
+    published: 2013
+    logDate: 2026-07-19
+    rating: 3
+    comment: Of course she is.
   - isbn: 9780593820308
     title: Operation Bounce House
     authors:
