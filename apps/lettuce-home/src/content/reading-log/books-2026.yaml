@@ -179,6 +179,7 @@ books:
     logDate: 2026-03-30
     rating: 4
     audio: true
+    comment: Rocky's existence contributes at least 1 to this score.
   - isbn: 9780440418610
     title: The Subtle Knife
     authors:
