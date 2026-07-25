@@ -5,7 +5,7 @@
   type Props = Pick<ReadingLogEntry, 'isbn' | 'title'>;
   let { isbn, title }: Props = $props();
 
-  const images = import.meta.glob('$lib/assets/media/covers/*', {
+  const images = import.meta.glob('$lib/assets/book-covers/*', {
     eager: true,
     import: 'default',
     query: {

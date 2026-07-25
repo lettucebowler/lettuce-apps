@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 980431
+    title: 'Avatar Aang: The Last Airbender'
+    directors:
+      - Lauren Montgomery
+    released: 2026
+    logDate: 2026-07-25
+    rating: 4
   - tmdb: 1242419
     title: Roofman
     released: 2025

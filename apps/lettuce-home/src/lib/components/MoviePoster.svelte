@@ -6,7 +6,7 @@
   type Props = Pick<MovieLogEntry, 'tmdb' | 'title'>;
   let { tmdb, title }: Props = $props();
 
-  const images = import.meta.glob('$lib/assets/media/posters/*', {
+  const images = import.meta.glob('$lib/assets/movie-posters/*', {
     eager: true,
     import: 'default',
     query: {
