@@ -6,7 +6,8 @@ movies:
       - Lauren Montgomery
     released: 2026
     logDate: 2026-07-25
-    rating: 4
+    rating: 3
+    comment: Beautifully animated. Story suffers from don't mess with the canon-itis.
   - tmdb: 1242419
     title: Roofman
     released: 2025
