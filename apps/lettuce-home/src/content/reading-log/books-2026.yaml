@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9780375890031
+    title: The Amber Spyglass
+    authors:
+      - Phillip Pullman
+    published: 1999
+    logDate: 2026-07-24
+    rating: 4
+    comment: What matters is where we are.
   - isbn: 9781639730964
     title: Crown of Midnight
     authors:

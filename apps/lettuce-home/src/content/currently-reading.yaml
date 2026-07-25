@@ -1,14 +1,14 @@
 books:
-  - isbn: 9780375890031
-    title: The Amber Spyglass
-    authors:
-      - Phillip Pullman
-    published: 1999
   - isbn: 9781639731084
     title: The Assassin's Blade
     authors:
       - Sarah J. Maas
     published: 2014
+  # - isbn: 9781668093290
+  #   title: The Will of the Many
+  #   authors:
+  #     - James Islington
+  #   published: 2023
   # - isbn: 9780063432888
   #   title: Babel
   #   authors:
