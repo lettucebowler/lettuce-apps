@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781639731084
+    title: The Assassin's Blade
+    authors:
+      - Sarah J. Maas
+    published: 2014
+    logDate: 2026-07-26
+    rating: 3
   - isbn: 9780375890031
     title: The Amber Spyglass
     authors:

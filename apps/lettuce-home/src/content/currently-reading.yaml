@@ -1,14 +1,14 @@
 books:
-  - isbn: 9781639731084
-    title: The Assassin's Blade
+  - isbn: 9781668093290
+    title: The Will of the Many
     authors:
-      - Sarah J. Maas
-    published: 2014
-  # - isbn: 9781668093290
-  #   title: The Will of the Many
-  #   authors:
-  #     - James Islington
-  #   published: 2023
+      - James Islington
+    published: 2023
+  - isbn: 9781250313195
+    title: Gideon the Ninth
+    authors:
+      - Tamsyn Muir
+    published: 2019
   # - isbn: 9780063432888
   #   title: Babel
   #   authors:
