@@ -1,27 +1,20 @@
 <script lang="ts">
-  import { getAllPostTags, getPostsByYear } from '#lib/collections';
+  import { getPostsByYear } from '#lib/collections';
   import Post from '#lib/components/Post.svelte';
+
+  const { params } = $props();
+
   const postGroups = $derived.by(() => {
-    return getPostsByYear();
+    const tag = params.tag;
+    return getPostsByYear((post) => !!post.tags?.includes(tag));
   });
-  const tags = getAllPostTags();
 </script>
 
 <svelte:head>
-  <title>Posts | Grant Montgomery</title>
+  <title>#{params.tag} | Grant Montgomery</title>
 </svelte:head>
 <main class="max-w-3xl">
-  <h1 class="mb-8 text-3xl font-bold">Posts</h1>
-  <nav class="mb-8">
-    <span class="mr-2 text-lg">Filter:</span>
-    <ul class="inline-flex gap-2">
-      {#each tags as tag (tag)}
-        <li>
-          <a href="/tag/{tag}" class="inline-flex text-frost-100 hover:underline">#{tag}</a>
-        </li>
-      {/each}
-    </ul>
-  </nav>
+  <h1 class="mb-8 text-3xl font-bold">#{params.tag}</h1>
   <div class="space-y-8">
     {#each postGroups as group (group.title)}
       <div class="space-y-2">

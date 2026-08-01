@@ -112,3 +112,6 @@ export const DateRangeFromISODateStrings = v.object({
   start: CalendarDateFromISODateString,
   end: CalendarDateFromISODateString,
 });
+
+export const ALL_POST_TAGS = ['media-log', 'vibe-check', 'probably-satire'] as const;
+export const PostTag = v.picklist(ALL_POST_TAGS);

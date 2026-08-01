@@ -21,7 +21,7 @@
       <ul class="m-0! flex list-none gap-2 p-0!">
         {#each data.meta.tags as tag (tag)}
           <li class="m-0! p-0!">
-            <a href="/posts?tag={tag}" class="inline-flex text-frost-100! hover:underline">#{tag}</a>
+            <a href="/tag/{tag}" class="inline-flex text-frost-100! hover:underline">#{tag}</a>
           </li>
         {/each}
       </ul>
