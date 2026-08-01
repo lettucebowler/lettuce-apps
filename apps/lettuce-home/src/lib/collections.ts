@@ -1,6 +1,6 @@
 import { parseDate } from '@internationalized/date';
 import type { DateRange } from 'bits-ui';
-import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from 'content-collections';
+import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from '#content-collections';
 import type { Post } from './schemas';
 
 function getMoviesDesc() {

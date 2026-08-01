@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { getProjectsDesc } from '$lib/collections';
-  import Project from '$lib/components/Project.svelte';
+  import { getProjectsDesc } from '#lib/collections';
+  import Project from '#lib/components/Project.svelte';
 
   const projects = getProjectsDesc();
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Post } from 'content-collections';
+  import type { Post } from '#content-collections';
 
   type Props = {
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

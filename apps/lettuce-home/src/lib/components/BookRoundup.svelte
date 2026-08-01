@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { dedupe, getBooksInDateRange } from '$lib/collections';
+  import { dedupe, getBooksInDateRange } from '#lib/collections';
   import { parseDate } from '@internationalized/date';
   import MediaGrid from './MediaGrid.svelte';
   import BookCover from './BookCover.svelte';

@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 969681
+    title: 'Spider-Man: Brand New Day'
+    directors:
+      - Destin Daniel Cretton
+    released: 2026
+    logDate: 2026-07-31
+    rating: 4
   - tmdb: 980431
     title: 'Avatar Aang: The Last Airbender'
     directors:

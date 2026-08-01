@@ -9,8 +9,8 @@ tags:
 ---
 
 <script lang="ts">
-    import BookRoundup from '$lib/components/BookRoundup.svelte';
-    import MovieRoundup from '$lib/components/MovieRoundup.svelte';
+    import BookRoundup from '#lib/components/BookRoundup.svelte';
+    import MovieRoundup from '#lib/components/MovieRoundup.svelte';
     
     let start = '2025-01-01';
     let end = '2025-12-31';

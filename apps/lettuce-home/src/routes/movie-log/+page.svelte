@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Movie from '$lib/components/Movie.svelte';
-  import MediaCollection from '$lib/components/MediaCollection.svelte';
-  import { getMovieLogsDesc } from '$lib/collections';
+  import Movie from '#lib/components/Movie.svelte';
+  import MediaCollection from '#lib/components/MediaCollection.svelte';
+  import { getMovieLogsDesc } from '#lib/collections';
   let movieLog = getMovieLogsDesc();
 </script>
 

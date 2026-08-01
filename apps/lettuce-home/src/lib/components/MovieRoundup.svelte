@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { dedupe, getMoviesInDateRange } from '$lib/collections';
+  import { dedupe, getMoviesInDateRange } from '#lib/collections';
   import { parseDate } from '@internationalized/date';
   import MediaGrid from './MediaGrid.svelte';
   import MoviePoster from './MoviePoster.svelte';

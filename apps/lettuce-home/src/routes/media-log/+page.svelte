@@ -1,14 +1,14 @@
 <script lang="ts">
   import * as v from 'valibot';
   import { CalendarDate, today } from '@internationalized/date';
-  import { ISODateString } from '$lib/schemas';
+  import { ISODateString } from '#lib/schemas';
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
-  import { DateRangeFromISODateStrings } from '$lib/schemas.js';
-  import { getBooksInDateRange, getMoviesInDateRange } from '$lib/collections';
-  import MediaGrid from '$lib/components/MediaGrid.svelte';
-  import MoviePoster from '$lib/components/MoviePoster.svelte';
-  import BookCover from '$lib/components/BookCover.svelte';
+  import { DateRangeFromISODateStrings } from '#lib/schemas.js';
+  import { getBooksInDateRange, getMoviesInDateRange } from '#lib/collections';
+  import MediaGrid from '#lib/components/MediaGrid.svelte';
+  import MoviePoster from '#lib/components/MoviePoster.svelte';
+  import BookCover from '#lib/components/BookCover.svelte';
 
   const defaultStart = new CalendarDate(1998, 12, 12);
   const defaultEnd = today('America/Chicago');

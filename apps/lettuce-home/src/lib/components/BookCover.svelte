@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { ReadingLogEntry } from '$lib/schemas';
+  import type { ReadingLogEntry } from '#lib/schemas';
   import type { Picture } from '@sveltejs/enhanced-img';
 
   type Props = Pick<ReadingLogEntry, 'isbn' | 'title'>;
   let { isbn, title }: Props = $props();
 
-  const images = import.meta.glob('$lib/assets/book-covers/*', {
+  const images = import.meta.glob('#lib/assets/book-covers/*', {
     eager: true,
     import: 'default',
     query: {

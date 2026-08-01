@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type MovieLogEntry } from '$lib/schemas';
+  import { type MovieLogEntry } from '#lib/schemas';
   import MediaFigure from './MediaFigure.svelte';
   import MoviePoster from './MoviePoster.svelte';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { getAllPostTags, getPostsByYear } from '$lib/collections';
-  import Post from '$lib/components/Post.svelte';
+  import { getAllPostTags, getPostsByYear } from '#lib/collections';
+  import Post from '#lib/components/Post.svelte';
   const postGroups = $derived.by(() => {
     const tag = page.url.searchParams.get('tag');
     if (!tag) {

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { MovieLogEntry } from '$lib/schemas';
+  import type { MovieLogEntry } from '#lib/schemas';
   import type { Picture } from '@sveltejs/enhanced-img';
   import { object } from 'valibot';
 
   type Props = Pick<MovieLogEntry, 'tmdb' | 'title'>;
   let { tmdb, title }: Props = $props();
 
-  const images = import.meta.glob('$lib/assets/movie-posters/*', {
+  const images = import.meta.glob('#lib/assets/movie-posters/*', {
     eager: true,
     import: 'default',
     query: {
