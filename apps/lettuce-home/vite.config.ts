@@ -16,10 +16,6 @@ const svelteConfig: SvelteConfig = {
     },
   },
   adapter: adapter(),
-  experimental: {
-    remoteFunctions: true,
-    forkPreloads: true,
-  },
   extensions: ['.svelte', '.svx', '.md'],
 };
 
