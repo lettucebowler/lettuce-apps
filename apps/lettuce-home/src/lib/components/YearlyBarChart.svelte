@@ -8,7 +8,7 @@
 
   let { year }: Props = $props();
 
-  const data = $derived(getBarChartData(year));
+  const data = $derived(getBarChartData(year).map((item) => ({ ...item, value: item.books })));
 </script>
 
 <div class="space-y-8 rounded-lg bg-charade-950 p-4">
@@ -18,15 +18,25 @@
       {data}
       x="month"
       series={[
-        { key: 'books', color: 'var(--color-swamp-green-500)' },
+        {
+          key: 'books',
+          color: 'var(--color-swamp-green-500)',
+          label: 'Books',
+        },
         {
           key: 'movies',
           color: 'var(--color-frost-400)',
+          label: 'Movies',
         },
       ]}
       seriesLayout="group"
       props={{
-        xAxis: { format: 'none', class: 'stroke-1!' },
+        xAxis: {
+          format: (v: string) => v.slice(0, 3) + '.',
+          tickLabelProps: {
+            dy: 8,
+          },
+        },
         yAxis: { format: 'metric' },
         tooltip: {
           header: { format: 'none' },
@@ -40,19 +50,26 @@
         },
         bars: {
           strokeWidth: 0,
+          insets: {
+            x: 2,
+          },
+          // motion: {
+          //   type: 'tween',
+          //   duration: 200,
+          // },
         },
       }}
       legend
       height={300}
-    />
+    ></BarChart>
   </div>
 </div>
 
 <style>
   :global(:where(.lc-axis-label, .lc-axis-tick-label)) {
-    font-size: 12px;
-    stroke: var(--color-surface-100, light-dark(white, black));
+    font-size: 13px;
+    stroke: var(--color-charade-50);
     stroke-width: 0.75px;
-    font-weight: 300;
+    font-weight: 400;
   }
 </style>

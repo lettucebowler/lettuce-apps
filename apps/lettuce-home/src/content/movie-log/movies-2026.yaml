@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 14926
+    title: Uptown Girls
+    directors:
+      - Boaz Yakin
+    released: 2004
+    logDate: 2026-08-02
+    rating: 4
   - tmdb: 969681
     title: 'Spider-Man: Brand New Day'
     directors:
