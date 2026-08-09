@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1081003
+    title: Supergirl
+    released: 2026
+    directors:
+      - Craig Gillespie
+    logDate: 2026-08-09
+    rating: 3
   - tmdb: 14926
     title: Uptown Girls
     directors:
