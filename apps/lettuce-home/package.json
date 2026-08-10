@@ -27,7 +27,7 @@
     "@lettuce-apps-packages/svelte-common": "workspace:*",
     "@sveltejs/adapter-cloudflare": "^7.2.9",
     "@sveltejs/enhanced-img": "^0.11.0",
-    "@sveltejs/kit": "https://pkg.svelte.dev/@sveltejs/kit/c/e76b3d778bacb429fdb40a41b13ff04b54d97c1f",
+    "@sveltejs/kit": "3.0.0-next.18",
     "@sveltejs/vite-plugin-svelte": "^7.2.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.20",
