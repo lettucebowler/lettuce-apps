@@ -14,7 +14,7 @@
     "ship": "wrangler deploy -c wrangler.jsonc"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260808.1",
+    "@cloudflare/workers-types": "^5.20260810.1",
     "@eslint/js": "^10.0.1",
     "@lettuce-apps-packages/auth": "workspace:*",
     "@lettuce-apps-packages/svelte-common": "workspace:*",
@@ -26,8 +26,8 @@
     "@tanstack/svelte-query": "^6.1.38",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^26.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.66.0",
-    "@typescript-eslint/parser": "^8.66.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
     "autoprefixer": "^10.5.4",
     "bits-ui": "^2.18.1",
     "dotenv": "^17.4.2",
@@ -47,12 +47,12 @@
     "svoast": "^3.0.3",
     "tailwindcss": "^4.3.3",
     "tslib": "^2.8.1",
-    "tsx": "^4.23.11",
+    "tsx": "^4.23.12",
     "typescript": "~7.0.2",
-    "typescript-eslint": "^8.66.0",
+    "typescript-eslint": "^8.67.0",
     "valibot": "^1.4.2",
     "vite": "^8.2.1",
-    "wrangler": "^4.120.0",
+    "wrangler": "^4.120.1",
     "vite-plugin-devtools-json": "^1.1.0"
   },
   "type": "module"
