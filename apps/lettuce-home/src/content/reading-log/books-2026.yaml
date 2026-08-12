@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781250313195
+    title: Gideon the Ninth
+    authors:
+      - Tamsyn Muir
+    published: 2019
+    logDate: 2026-08-11
+    rating: 3
   - isbn: 9781639731084
     title: The Assassin's Blade
     authors:
