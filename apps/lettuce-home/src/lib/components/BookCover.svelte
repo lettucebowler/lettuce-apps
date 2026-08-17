@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ReadingLogEntry } from '#lib/schemas';
+  import type { ReadingLogEntry } from '#lib/schemas.js';
   import type { Picture } from '@sveltejs/enhanced-img';
 
   type Props = Pick<ReadingLogEntry, 'isbn' | 'title'>;

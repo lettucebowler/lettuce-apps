@@ -1,11 +1,11 @@
 books:
-  - isbn: 9781668093290
-    title: The Will of the Many
+  - isbn: 9781982141233
+    title: The Strength of the Few
     authors:
       - James Islington
-    published: 2023
-  # - isbn: 9780063432888
-  #   title: Babel
-  #   authors:
-  #     - R. F. Kuang
-  #   published: 2022
+    published: 2025
+  - isbn: 9781639730988
+    title: Heir of Fire
+    authors:
+      - Sarah J. Maas
+    published: 2014

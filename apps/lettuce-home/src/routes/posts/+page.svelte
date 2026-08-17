@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAllPostTags, getPostsByYear } from '#lib/collections';
+  import { getAllPostTags, getPostsByYear } from '#lib/collections.js';
   import Post from '#lib/components/Post.svelte';
   const postGroups = $derived.by(() => {
     return getPostsByYear();

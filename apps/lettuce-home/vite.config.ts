@@ -1,14 +1,13 @@
 import tailwindcss from '@tailwindcss/vite';
-import { sveltekit } from '@sveltejs/kit/vite';
+import { Config, sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import contentCollections from '@content-collections/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import adapter from '@sveltejs/adapter-cloudflare';
 import { mdsvex } from 'mdsvex';
-import type { Config as SvelteConfig } from '@sveltejs/kit';
 
-const svelteConfig: SvelteConfig = {
+const svelteConfig: Config = {
   preprocess: [vitePreprocess(), mdsvex({ extensions: ['md'] })],
   compilerOptions: {
     experimental: {

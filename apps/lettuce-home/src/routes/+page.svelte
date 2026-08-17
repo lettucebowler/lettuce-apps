@@ -5,12 +5,11 @@
     getLastReadBook,
     getLastWatchedMovie,
     getRecentPosts,
-  } from '#lib/collections';
+  } from '#lib/collections.js';
   import Book from '#lib/components/Book.svelte';
   import Movie from '#lib/components/Movie.svelte';
   import Post from '#lib/components/Post.svelte';
   import Project from '#lib/components/Project.svelte';
-  import { currentlyReading } from '#content-collections';
 
   const latestBook = getLastReadBook();
   const activeProjects = getActiveProjects();

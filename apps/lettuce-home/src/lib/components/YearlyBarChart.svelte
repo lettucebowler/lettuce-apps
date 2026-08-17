@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getBarChartData } from '#lib/chart-data';
+  import { getBarChartData } from '#lib/chart-data.js';
   import { BarChart } from 'layerchart';
 
   type Props = {

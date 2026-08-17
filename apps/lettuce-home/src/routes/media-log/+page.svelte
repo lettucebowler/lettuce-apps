@@ -1,11 +1,11 @@
 <script lang="ts">
   import * as v from 'valibot';
   import { CalendarDate, today } from '@internationalized/date';
-  import { ISODateString } from '#lib/schemas';
+  import { ISODateString } from '#lib/schemas.js';
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
   import { DateRangeFromISODateStrings } from '#lib/schemas.js';
-  import { getBooksInDateRange, getMoviesInDateRange } from '#lib/collections';
+  import { getBooksInDateRange, getMoviesInDateRange, dedupe } from '#lib/collections.js';
   import MediaGrid from '#lib/components/MediaGrid.svelte';
   import MoviePoster from '#lib/components/MoviePoster.svelte';
   import BookCover from '#lib/components/BookCover.svelte';
@@ -48,14 +48,12 @@
           class="order-1 my-1 box-border h-10.5 cursor-pointer rounded bg-frost-400 px-3 py-1 font-medium text-charade-50 hover:bg-frost-400/90 focus-visible:bg-frost-400/90 active:bg-frost-400/70 sm:order-0"
           >Filter</button
         >
-        <a href={new URL(page.url).pathname} class="my-1 ml-auto block h-10.5 py-2 text-charade-100 sm:ml-0"
-          >Clear filters</a
-        >
+        <a href={page.url.pathname} class="my-1 ml-auto block h-10.5 py-2 text-charade-100 sm:ml-0">Clear filters</a>
       </div>
     </div>
   </form>
   <section class="space-y-6">
-    {let books = $derived(getBooksInDateRange({ start, end }))}
+    {let books = $derived(dedupe(getBooksInDateRange({ start, end }).toReversed(), (book) => book.isbn).toReversed())}
     <h2 class="text-2xl font-bold">
       Books completed &nbsp;
       <span class="text-base font-medium text-charade-100">{books.length} book{books.length !== 1 ? 's' : ''}</span>
@@ -68,7 +66,9 @@
     </MediaGrid>
   </section>
   <section class="space-y-6">
-    {let movies = $derived(getMoviesInDateRange({ start, end }))}
+    {let movies = $derived(
+      dedupe(getMoviesInDateRange({ start, end }).toReversed(), (movie) => movie.tmdb).toReversed(),
+    )}
     <h2 class=" text-2xl font-bold">
       Movies watched &nbsp;
       <span class="text-base font-medium text-charade-100">{movies.length} movie{movies.length !== 1 ? 's' : ''}</span>

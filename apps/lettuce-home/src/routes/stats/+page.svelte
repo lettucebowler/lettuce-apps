@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getReadingLogsDesc } from '#lib/collections';
+  import { getReadingLogsDesc } from '#lib/collections.js';
   import YearlyBarChart from '#lib/components/YearlyBarChart.svelte';
 
   const years = getReadingLogsDesc().map((log) => log.year);

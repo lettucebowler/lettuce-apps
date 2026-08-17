@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getPostsByYear } from '#lib/collections';
+  import { getPostsByYear } from '#lib/collections.js';
   import Post from '#lib/components/Post.svelte';
 
   const { params } = $props();

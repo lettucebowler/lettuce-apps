@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ReadingLogEntry } from '#lib/schemas';
+  import type { ReadingLogEntry } from '#lib/schemas.js';
   import BookCover from './BookCover.svelte';
   import MediaFigure from './MediaFigure.svelte';
 

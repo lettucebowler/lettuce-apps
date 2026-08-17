@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781668093290
+    title: The Will of the Many
+    authors:
+      - James Islington
+    published: 2023
+    logDate: 2026-08-14
+    rating: 4
   - isbn: 9781250313195
     title: Gideon the Ninth
     authors:

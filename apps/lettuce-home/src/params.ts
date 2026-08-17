@@ -1,5 +1,5 @@
+import { defineParams } from '@sveltejs/kit/params';
 import { PostTag } from './lib/schemas.ts';
-import { defineParams } from '@sveltejs/kit';
 import * as v from 'valibot';
 
 export const params = defineParams({

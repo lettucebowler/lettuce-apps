@@ -1,7 +1,7 @@
 <script lang="ts">
   import Book from '../../lib/components/Book.svelte';
   import MediaCollection from '#lib/components/MediaCollection.svelte';
-  import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections';
+  import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections.js';
 
   const current = getCurrentlyReading();
   const completed = getReadingLogsDesc();
