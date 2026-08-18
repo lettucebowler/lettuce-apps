@@ -3,22 +3,14 @@ import * as v from 'valibot';
 
 export const ISODateString = v.pipe(v.string(), v.nonEmpty(), v.isoDate());
 
-const Book = v.pipe(
-  v.object({
-    isbn: v.pipe(v.number(), v.toString(), v.isbn()),
-    title: v.string(),
-    subtitle: v.optional(v.string()),
-    authors: v.array(v.string()),
-    published: v.pipe(v.number(), v.integer()),
-    reread: v.optional(v.boolean(), false),
-  }),
-  v.transform((book) => {
-    return {
-      ...book,
-      url: `https://openlibrary.org/isbn/${book.isbn}`,
-    };
-  }),
-);
+const Book = v.object({
+  isbn: v.pipe(v.number(), v.toString(), v.isbn()),
+  title: v.string(),
+  subtitle: v.optional(v.string()),
+  authors: v.array(v.string()),
+  published: v.pipe(v.number(), v.integer()),
+  reread: v.optional(v.boolean(), false),
+});
 export type Book = v.InferOutput<typeof Book>;
 
 export const CurrentlyReadingList = v.object({

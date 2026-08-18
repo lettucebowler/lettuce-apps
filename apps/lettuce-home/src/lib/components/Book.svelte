@@ -3,8 +3,7 @@
   import BookCover from './BookCover.svelte';
   import MediaFigure from './MediaFigure.svelte';
 
-  let { title, subtitle, authors, published, comment, rating, isbn, reread }: Omit<ReadingLogEntry, 'logDate'> =
-    $props();
+  let { title, subtitle, authors, published, comment, rating, isbn }: Omit<ReadingLogEntry, 'logDate'> = $props();
 </script>
 
 <MediaFigure

@@ -7,6 +7,7 @@ books:
     published: 2023
     logDate: 2026-08-14
     rating: 4
+    comment: An interesting power system but I don't think the math makes sense.
   - isbn: 9781250313195
     title: Gideon the Ninth
     authors:
@@ -131,7 +132,7 @@ books:
       - Martha Wells
     logDate: 2026-05-23
     rating: 5
-    comment: I gobbled up this series. It's been incredible to see the main character's development throughout the series.
+    comment: I gobbled up this series. I loved seeing the main character's development.
   - isbn: 9781250826985
     title: System Collapse
     authors:
