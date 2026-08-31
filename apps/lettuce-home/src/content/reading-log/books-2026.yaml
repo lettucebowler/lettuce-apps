@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781639731015
+    title: Queen of Shadows
+    published: 2015
+    authors:
+      - Sarah J. Maas
+    logDate: 2026-08-31
+    rating: 3
   - isbn: 9781639730988
     title: Heir of Fire
     authors:

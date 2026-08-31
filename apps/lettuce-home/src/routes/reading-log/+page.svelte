@@ -18,7 +18,7 @@
         Currently reading
       {/snippet}
       {#snippet subtitle()}
-        {@render bookCount(current.length)}
+        {current.length} book{current.length === 1 ? '' : 's'}
       {/snippet}
       {#each current as book (book.isbn)}
         <Book {...book} reread={false} />
@@ -31,7 +31,7 @@
         {year}
       {/snippet}
       {#snippet subtitle()}
-        {@render bookCount(books.length)}
+        {books.length} book{books.length === 1 ? '' : 's'}
       {/snippet}
       {#each books as book (`${book.isbn}-${book.logDate}`)}
         <Book {...book} />
@@ -44,7 +44,3 @@
     >
   </p>
 </main>
-
-{#snippet bookCount(count: number)}
-  {count} book{count === 1 ? '' : 's'}
-{/snippet}

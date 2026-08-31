@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 810
+    title: Shrek the Third
+    released: 2007
+    directors:
+      - Chris Miller
+    logDate: 2026-08-30
+    rating: 4
   - tmdb: 1081003
     title: Supergirl
     released: 2026
