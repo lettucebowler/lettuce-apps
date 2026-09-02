@@ -47,24 +47,16 @@ export const ProjectLog = v.object({
 });
 export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
-export const MovieLogEntry = v.pipe(
-  v.object({
-    tmdb: v.pipe(v.number(), v.integer()),
-    title: v.string(),
-    directors: v.array(v.string()),
-    released: v.pipe(v.number(), v.integer()),
-    logDate: ISODateString,
-    rating: v.optional(v.pipe(v.number(), v.integer())),
-    comment: v.optional(v.string()),
-    rewatch: v.optional(v.boolean(), false),
-  }),
-  v.transform((movie) => {
-    return {
-      ...movie,
-      url: `https://www.themoviedb.org/movie/${movie.tmdb}`,
-    };
-  }),
-);
+export const MovieLogEntry = v.object({
+  tmdb: v.pipe(v.number(), v.integer()),
+  title: v.string(),
+  directors: v.array(v.string()),
+  released: v.pipe(v.number(), v.integer()),
+  logDate: ISODateString,
+  rating: v.optional(v.pipe(v.number(), v.integer())),
+  comment: v.optional(v.string()),
+  rewatch: v.optional(v.boolean(), false),
+});
 export type MovieLogEntry = v.InferOutput<typeof MovieLogEntry>;
 
 export const Post = v.object({
