@@ -24,7 +24,7 @@ tags:
 
 <BookRoundup { start } { end } />
 
-I started the Throne of Glass series and have been enjoying it. It's a fun series, if not sometimes a little ridiculous. I'm enjoying it, though. I am not the biggest fan of the writing style but the story is entertaining and I continue to want to know what happens next. I expect I will be finished with this series by the next bimonthly roundup.
+I started the Throne of Glass series and have been enjoying it. It's a fun series, if not sometimes a little ridiculous. The writing can get a bit repetitive but the story is entertaining and I continue to want to know what happens next.
 
 <h2 class=" text-2xl font-bold">
   Books carried over
