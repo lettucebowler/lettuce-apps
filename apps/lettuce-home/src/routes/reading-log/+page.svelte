@@ -14,11 +14,13 @@
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>
   {#if current.length}
     <MediaCollection>
-      {#snippet title()}
-        Currently reading
-      {/snippet}
-      {#snippet subtitle()}
-        {current.length} book{current.length === 1 ? '' : 's'}
+      {#snippet header()}
+        <header>
+          <h2 class="inline-block scroll-mt-4 text-2xl font-bold" id="currently-reading">Currently reading</h2>
+          <span class="ml-1 inline-block font-medium text-charade-100"
+            >{current.length} book{current.length === 1 ? '' : 's'}</span
+          >
+        </header>
       {/snippet}
       {#each current as book (book.isbn)}
         <Book {...book} reread={false} />
@@ -27,11 +29,13 @@
   {/if}
   {#each completed as { year, books } (year)}
     <MediaCollection>
-      {#snippet title()}
-        {year}
-      {/snippet}
-      {#snippet subtitle()}
-        {books.length} book{books.length === 1 ? '' : 's'}
+      {#snippet header()}
+        <header>
+          <h2 class="inline-block scroll-mt-4 text-2xl font-bold" id={year.toString()}>{year.toString()}</h2>
+          <span class="ml-1 inline-block font-medium text-charade-100"
+            >{books.length} book{books.length === 1 ? '' : 's'}</span
+          >
+        </header>
       {/snippet}
       {#each books as book (`${book.isbn}-${book.logDate}`)}
         <Book {...book} />

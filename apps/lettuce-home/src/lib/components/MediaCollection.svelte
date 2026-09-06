@@ -6,19 +6,15 @@
     subtitle?: Snippet;
     children?: Snippet;
     heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    header?: Snippet;
   };
 
-  let { title, children, heading = 'h2', subtitle }: Props = $props();
+  let { children, header }: Props = $props();
 </script>
 
 <div class="@container space-y-4">
-  {#if title}
-    <header>
-      <svelte:element this={heading} class="inline-block text-2xl font-bold">{@render title()}</svelte:element>
-      {#if subtitle}
-        <span class="ml-1 inline-block font-medium text-charade-100">{@render subtitle()}</span>
-      {/if}
-    </header>
+  {#if header}
+    {@render header()}
   {/if}
   <div
     class="grid grid-cols-1 gap-x-2 gap-y-4 sm:grid-cols-[repeat(auto-fill,minmax(10.75rem,1fr))] lg:gap-x-4 lg:gap-y-6"

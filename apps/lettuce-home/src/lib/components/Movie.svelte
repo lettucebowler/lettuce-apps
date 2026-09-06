@@ -7,16 +7,20 @@
     title,
     directors,
     released,
-    rewatch,
     rating,
     comment,
-    url,
     tmdb,
-  }: Pick<MovieLogEntry, 'title' | 'directors' | 'released' | 'rewatch' | 'rating' | 'comment' | 'url' | 'tmdb'> =
-    $props();
+  }: Pick<MovieLogEntry, 'title' | 'directors' | 'released' | 'rewatch' | 'rating' | 'comment' | 'tmdb'> = $props();
 </script>
 
-<MediaFigure {title} contributors={directors} year={released} {comment} {rating} href={url}>
+<MediaFigure
+  {title}
+  contributors={directors}
+  year={released}
+  {comment}
+  {rating}
+  href="https://www.themoviedb.org/movie/{tmdb}"
+>
   {#snippet media()}
     <MoviePoster {tmdb} {title} />
   {/snippet}
