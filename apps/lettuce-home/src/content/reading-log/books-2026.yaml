@@ -6,14 +6,14 @@ books:
     authors:
       - Sarah J. Maas
     logDate: 2026-08-31
-    rating: 3
+    rating: 2
   - isbn: 9781639730988
     title: Heir of Fire
     authors:
       - Sarah J. Maas
     published: 2014
     logDate: 2026-08-21
-    rating: 3
+    rating: 2
   - isbn: 9781668093290
     title: The Will of the Many
     authors:
@@ -35,7 +35,7 @@ books:
       - Sarah J. Maas
     published: 2014
     logDate: 2026-07-26
-    rating: 3
+    rating: 2
   - isbn: 9780375890031
     title: The Amber Spyglass
     authors:
@@ -50,7 +50,7 @@ books:
       - Sarah J. Maas
     published: 2013
     logDate: 2026-07-19
-    rating: 3
+    rating: 2
     comment: Of course she is.
   - isbn: 9780593820308
     title: Operation Bounce House
@@ -66,7 +66,7 @@ books:
       - Sarah J. Maas
     published: 2012
     logDate: 2026-07-08
-    rating: 3
+    rating: 2
   - isbn: 9781250868299
     title: The Well of Ascension
     subtitle: A Mistborn Novel
@@ -74,7 +74,7 @@ books:
       - Brandon Sanderson
     published: 2007
     logDate: 2026-07-04
-    rating: 4
+    rating: 3
   - isbn: 9784046834706
     title: Re:Zero Vol. 37
     authors:
@@ -176,7 +176,7 @@ books:
     authors:
       - Brandon Sanderson
     published: 2006
-    rating: 4
+    rating: 3
     comment: The power systems are interesting
     logDate: 2026-05-10
   - isbn: 9781250229861
@@ -247,13 +247,13 @@ books:
       - Sarah J. Maas
     published: 2021
     logDate: 2026-03-18
-    rating: 3
+    rating: 2
   - isbn: 9781635575620
     title: A Court of Frost and Starlight
     published: 2018
     authors:
       - Sarah J. Maas
-    rating: 3
+    rating: 2
     logDate: 2026-03-12
   - isbn: 9798217190065
     title: A Parade of Horribles
