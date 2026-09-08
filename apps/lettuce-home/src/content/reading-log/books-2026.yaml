@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781982141233
+    title: The Strength of the Few
+    authors:
+      - James Islington
+    published: 2025
+    logDate: 2026-09-07
+    rating: 4
+    comment: The beginning was confusing but once I grew to really like it!
   - isbn: 9781639731015
     title: Queen of Shadows
     published: 2015
