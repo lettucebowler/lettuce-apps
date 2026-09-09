@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781399645041
+    title: Scion
+    authors:
+      - James Islington
+    published: 2026
+    logDate: 2026-09-09
+    rating: 4
+    comment: A nice quick read. I would if this became a series!
   - isbn: 9781982141233
     title: The Strength of the Few
     authors:
