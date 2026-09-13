@@ -1,4 +1,9 @@
 books:
+  - isbn: 9780063432888
+    title: Babel
+    authors:
+      - R. F. Kuang
+    published: 2022
   - isbn: 9781639731046
     title: Tower of Dawn
     authors:

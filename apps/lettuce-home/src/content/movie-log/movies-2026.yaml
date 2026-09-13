@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 345887
+    title: The Equalizer 2
+    released: 2018
+    directors:
+      - Antoine Fuqua
+    logDate: 2026-09-11
+    rating: 3
+    comment: It's like Taxi Driver but in a Lyft
   - tmdb: 810
     title: Shrek the Third
     released: 2007
