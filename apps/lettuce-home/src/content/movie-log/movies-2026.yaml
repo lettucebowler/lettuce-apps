@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 926393
+    title: The Equalizer 3
+    released: 2018
+    directors:
+      - Antoine Fuqua
+    logDate: 2026-09-15
+    rating: 3
   - tmdb: 345887
     title: The Equalizer 2
     released: 2018
