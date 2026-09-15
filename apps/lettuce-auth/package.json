@@ -19,10 +19,9 @@
     "drizzle-kit": "^0.31.10",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.12.28",
-    "itty-fetcher": "^1.0.10",
-    "ky": "^2.0.2",
+    "ky": "catalog:",
     "uuid": "^14.0.1",
-    "valibot": "1.4.2",
-    "wrangler": "^4.107.1"
+    "valibot": "catalog:",
+    "wrangler": "catalog:"
   }
 }
