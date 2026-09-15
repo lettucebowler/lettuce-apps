@@ -1,6 +1,6 @@
 import tailwindcss from '@tailwindcss/vite';
 import { Config, sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import contentCollections from '@content-collections/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
@@ -20,4 +20,9 @@ const svelteConfig: Config = {
 
 export default defineConfig({
   plugins: [tailwindcss(), enhancedImages(), sveltekit(svelteConfig), contentCollections()],
+  server: {
+    fs: {
+      allow: [searchForWorkspaceRoot(process.cwd())],
+    },
+  },
 });

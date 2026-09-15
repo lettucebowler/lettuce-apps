@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import devtoolsJson from 'vite-plugin-devtools-json';
-import type { UserConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 
 import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
@@ -23,11 +23,14 @@ const svelteConfig: SvelteConfig = {
   },
 };
 
-const config: UserConfig = {
+export default defineConfig({
   plugins: [tailwindcss(), sveltekit(svelteConfig), devtoolsJson()],
   build: {
     cssMinify: 'esbuild',
   },
-};
-
-export default config;
+  server: {
+    fs: {
+      allow: [searchForWorkspaceRoot(process.cwd())],
+    },
+  },
+});

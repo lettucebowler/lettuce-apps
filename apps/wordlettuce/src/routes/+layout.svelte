@@ -45,7 +45,9 @@
           />
         </a>
       {:else}
-        <a href="/signin" class="text-charade-50 ml-auto pt-3 pr-4 text-2xl font-bold hover:underline">Sign in</a>
+        <a href="/signin" class="text-charade-50 ml-auto pt-3 pr-4 font-bold hover:underline sm:text-xl lg:text-2xl"
+          >Sign in</a
+        >
       {/if}
     </div>
     {@render children()}

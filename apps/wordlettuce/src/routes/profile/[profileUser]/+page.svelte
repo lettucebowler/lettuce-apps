@@ -49,19 +49,16 @@
       <div class="text-snow-300 bg-charade-700 mx-auto h-40 w-40 overflow-hidden rounded-3xl text-3xl shadow-lg">
         <LettuceAvatar name={profileData.profileUser} />
       </div>
-      <figcaption class="text-snow-300 text-center text-xl font-medium">
+      <figcaption class="text-snow-300 text-center text-xl font-semibold">
         {profileData.profileUser}
+        {#if isSelf}
+          <a
+            class="text-snow-100 grid h-full items-center rounded-xl text-base font-medium capitalize hover:underline"
+            href="/signout">Sign out</a
+          >
+        {/if}
       </figcaption>
     </figure>
-
-    {#if isSelf}
-      <div class="flex justify-center">
-        <a
-          class="text-snow-100 grid h-full items-center rounded-xl px-6 py-2 text-center font-medium capitalize hover:underline"
-          href="/signout">Sign out</a
-        >
-      </div>
-    {/if}
   </div>
 
   {#if profileData.currentResults.length}
