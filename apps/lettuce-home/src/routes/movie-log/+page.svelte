@@ -7,6 +7,7 @@
 
 <svelte:head>
   <title>Movie log | Grant Montgomery</title>
+  <meta name="description" content="Every movie I've watched since 2025." />
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Movies</h1>

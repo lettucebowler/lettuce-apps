@@ -38,6 +38,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>Media log | Grant Montgomery</title>
+  <meta name="description" content="Grant Montgomery's media log." />
+</svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold">Media Log</h1>
   <form method="get" onsubmit={onSubmit}>

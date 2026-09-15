@@ -29,7 +29,7 @@ function _createAuthClient() {
       dev || !event.platform?.env?.lettuce_auth
         ? event.fetch
         : (((a: URL | RequestInfo<unknown, CfProperties<unknown>>, b: RequestInit<CfProperties<unknown>> | undefined) =>
-          event.platform!.env!.lettuce_auth!.fetch(a, b)) as unknown as typeof fetch),
+            event.platform!.env!.lettuce_auth!.fetch(a, b)) as unknown as typeof fetch),
     storage: event.platform?.env?.lettuce_auth_signing_keys,
   });
 }

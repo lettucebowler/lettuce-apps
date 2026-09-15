@@ -20,6 +20,8 @@
 
 <svelte:head>
   <title>Grant Montgomery</title>
+  <meta name="og:title" content="The personal site of Grant Montgomery" />
+  <meta name="description" content="The personal site of Grant Montgomery, a web developer from Minneapolis, MN." />
 </svelte:head>
 <main class="@container mx-auto">
   <div class="grid gap-x-8 gap-y-12 md:grid-cols-2">

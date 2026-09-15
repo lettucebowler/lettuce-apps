@@ -9,6 +9,7 @@
 
 <svelte:head>
   <title>Reading log | Grant Montgomery</title>
+  <meta name="description" content="Every book I've read since 2025." />
 </svelte:head>
 <main class="space-y-8">
   <h1 class="text-3xl font-bold first-letter:capitalize">Books</h1>

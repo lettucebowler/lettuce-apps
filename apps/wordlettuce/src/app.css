@@ -1,11 +1,11 @@
-@import "@fontsource-variable/inter/wght.css";
-@import "@fontsource-variable/inter/wght-italic.css";
+@import '@fontsource-variable/inter/standard.css';
+@import '@fontsource-variable/inter/standard-italic.css';
 @import '@lettuce-apps-packages/svelte-common/theme';
 @import 'tailwindcss';
 @source '../node_modules/@lettuce-apps-packages/svelte-common';
 
 @theme {
-  --font-inter: "Inter Variable", sans-serif;
+  --font-inter: 'Inter Variable', sans-serif;
   --animate-jump: jump 0.3s ease-in-out 1;
   --animate-wiggle: wiggle 0.15s ease-in infinite;
   --animate-wiggle-once: wiggle 0.15s ease-in 1;
@@ -24,7 +24,6 @@
   }
 
   @keyframes wiggle {
-
     0%,
     100% {
       transform: translateX(0%);

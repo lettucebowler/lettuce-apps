@@ -12,6 +12,7 @@
 
 <svelte:head>
   <title>#{params.tag} | Grant Montgomery</title>
+  <meta name="description" content="Posts tagged with #{params.tag}" />
 </svelte:head>
 <main class="max-w-3xl">
   <h1 class="mb-8 text-3xl font-bold">#{params.tag}</h1>
