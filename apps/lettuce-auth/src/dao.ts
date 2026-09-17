@@ -1,7 +1,8 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { users, accounts } from '../drizzle/schema';
 import type { Account, User } from '@lettuce-apps-packages/auth';
-import { and, asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, eq, inArray, sql } from 'drizzle-orm';
+import { D1Database } from '@cloudflare/workers-types';
 
 export function createLettuceAuthDao(database: D1Database) {
   const db = drizzle(database);
@@ -82,6 +83,27 @@ export function createLettuceAuthDao(database: D1Database) {
     };
   }
 
+  const getUsersWithIDFilters = db
+    .select({
+      username: users.username,
+      id: users.id,
+    })
+    .from(users)
+    .where(inArray(users.id, sql.placeholder('ids')))
+    .orderBy(asc(users.id))
+    .limit(sql.placeholder('limit'))
+    .offset(sql.placeholder('offset'))
+    .prepare();
+  const getUsersWithoutIDFilters = db
+    .select({
+      username: users.username,
+      id: users.id,
+    })
+    .from(users)
+    .orderBy(asc(users.id))
+    .limit(sql.placeholder('limit'))
+    .offset(sql.placeholder('offset'))
+    .prepare();
   async function getUsers({
     userIDs,
     offset = 0,
@@ -91,18 +113,30 @@ export function createLettuceAuthDao(database: D1Database) {
     offset?: number;
     limit?: number;
   }) {
-    const query = db
-      .select({
-        username: users.username,
-        id: users.id,
-      })
-      .from(users)
-      .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))
-      .orderBy(asc(users.id))
-      .limit(limit)
-      .offset(offset);
-    const results = await query.all();
-    return results;
+    //     const before = performance.now();
+    let results;
+    if (userIDs.length) {
+      results = await getUsersWithIDFilters.all({ ids: userIDs, offset, limit });
+    } else {
+      results = await getUsersWithoutIDFilters.all({ offset, limit });
+    }
+    const after = performance.now();
+    // console.log(after - before);
+    // const before = performance.now();
+    // const query = db
+    //   .select({
+    //     username: users.username,
+    //     id: users.id,
+    //   })
+    //   .from(users)
+    //   .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))
+    //   .orderBy(asc(users.id))
+    //   .limit(limit)
+    //   .offset(offset);
+    // const results = await query.all();
+    // const after = performance.now();
+    // console.log(after - before);
+    // return results;
   }
 
   return {

@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm';
-import { sqliteTable, primaryKey, int, text, numeric } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, primaryKey, int, text, numeric, index } from 'drizzle-orm/sqlite-core';
 
 export const accounts = sqliteTable(
   'accounts',
@@ -11,11 +11,15 @@ export const accounts = sqliteTable(
   (table) => [primaryKey({ columns: [table.provider, table.providerID] })],
 );
 
-export const users = sqliteTable('users', {
-  id: int().primaryKey({ autoIncrement: true }),
-  email: text().notNull().unique(),
-  username: text('display_name').notNull().unique(),
-});
+export const users = sqliteTable(
+  'users',
+  {
+    id: int().primaryKey({ autoIncrement: true }),
+    email: text().notNull().unique(),
+    username: text('display_name').notNull().unique(),
+  },
+  (table) => [index('username_index').on(table.username)],
+);
 
 export const d1Migrations = sqliteTable('d1_migrations', {
   id: int().primaryKey({ autoIncrement: true }),

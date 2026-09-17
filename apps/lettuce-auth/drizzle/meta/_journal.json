@@ -57,6 +57,13 @@
       "when": 1739175080111,
       "tag": "0007_fat_gladiator",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1789664682025,
+      "tag": "0008_square_thunderbolt_ross",
+      "breakpoints": true
     }
   ]
 }
