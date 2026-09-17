@@ -36,6 +36,18 @@ export function createLettuceAuthDao(database: D1Database) {
       .then((users) => users.at(0));
   }
 
+  const getUserByIdStatement = db
+    .select()
+    .from(users)
+    .where(eq(users.id, sql.placeholder('id')))
+    .limit(1)
+    .prepare();
+  const getUserByUsernameStatement = db
+    .select()
+    .from(users)
+    .where(eq(users.username, sql.placeholder('username')))
+    .limit(1)
+    .prepare();
   type GetUserInput =
     | {
         userID: number;
@@ -44,17 +56,22 @@ export function createLettuceAuthDao(database: D1Database) {
         username: string;
       };
   async function getUser(input: GetUserInput) {
-    return db
-      .select()
-      .from(users)
-      .where(
-        and(
-          'userID' in input ? eq(users.id, input.userID) : undefined,
-          'username' in input ? eq(users.username, input.username) : undefined,
-        ),
-      )
-      .limit(1)
-      .then((r) => r.at(0));
+    if ('username' in input) {
+      return getUserByUsernameStatement.all({ username: input.username }).then((r) => r.at(0));
+    } else {
+      return getUserByIdStatement.all({ id: input.userID }).then((r) => r.at(0));
+    }
+    // return db
+    //   .select()
+    //   .from(users)
+    //   .where(
+    //     and(
+    //       'userID' in input ? eq(users.id, input.userID) : undefined,
+    //       'username' in input ? eq(users.username, input.username) : undefined,
+    //     ),
+    //   )
+    //   .limit(1)
+    //   .then((r) => r.at(0));
   }
 
   async function createUser({
@@ -83,7 +100,7 @@ export function createLettuceAuthDao(database: D1Database) {
     };
   }
 
-  const getUsersWithIDFilters = db
+  const getUsersWithIDFiltersStatement = db
     .select({
       username: users.username,
       id: users.id,
@@ -94,7 +111,7 @@ export function createLettuceAuthDao(database: D1Database) {
     .limit(sql.placeholder('limit'))
     .offset(sql.placeholder('offset'))
     .prepare();
-  const getUsersWithoutIDFilters = db
+  const getUsersWithoutIDFiltersStatement = db
     .select({
       username: users.username,
       id: users.id,
@@ -116,9 +133,9 @@ export function createLettuceAuthDao(database: D1Database) {
     //     const before = performance.now();
     let results;
     if (userIDs.length) {
-      results = await getUsersWithIDFilters.all({ ids: userIDs, offset, limit });
+      results = await getUsersWithIDFiltersStatement.all({ ids: userIDs, offset, limit });
     } else {
-      results = await getUsersWithoutIDFilters.all({ offset, limit });
+      results = await getUsersWithoutIDFiltersStatement.all({ offset, limit });
     }
     const after = performance.now();
     // console.log(after - before);
