@@ -6,7 +6,7 @@ movies:
     directors:
       - Antoine Fuqua
     logDate: 2026-09-15
-    rating: 3
+    rating: 2
   - tmdb: 345887
     title: The Equalizer 2
     released: 2018
