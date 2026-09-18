@@ -2,10 +2,11 @@ import { drizzle } from 'drizzle-orm/d1';
 import { users, accounts } from '../drizzle/schema';
 import type { Account, User } from '@lettuce-apps-packages/auth';
 import { and, asc, eq, inArray, sql } from 'drizzle-orm';
-import { D1Database } from '@cloudflare/workers-types';
+import { D1Database, D1DatabaseSession } from '@cloudflare/workers-types';
+import * as schema from '../drizzle/schema';
 
-export function createLettuceAuthDao(database: D1Database) {
-  const db = drizzle(database);
+export function createLettuceAuthDao(database: D1Database | D1DatabaseSession) {
+  const db = drizzle(database, { schema });
 
   async function getUserByAccount(account: Account): Promise<User | undefined> {
     const accountResults = db
@@ -61,17 +62,6 @@ export function createLettuceAuthDao(database: D1Database) {
     } else {
       return getUserByIdStatement.all({ id: input.userID }).then((r) => r.at(0));
     }
-    // return db
-    //   .select()
-    //   .from(users)
-    //   .where(
-    //     and(
-    //       'userID' in input ? eq(users.id, input.userID) : undefined,
-    //       'username' in input ? eq(users.username, input.username) : undefined,
-    //     ),
-    //   )
-    //   .limit(1)
-    //   .then((r) => r.at(0));
   }
 
   async function createUser({
@@ -130,30 +120,13 @@ export function createLettuceAuthDao(database: D1Database) {
     offset?: number;
     limit?: number;
   }) {
-    //     const before = performance.now();
     let results;
     if (userIDs.length) {
       results = await getUsersWithIDFiltersStatement.all({ ids: userIDs, offset, limit });
     } else {
       results = await getUsersWithoutIDFiltersStatement.all({ offset, limit });
     }
-    const after = performance.now();
-    // console.log(after - before);
-    // const before = performance.now();
-    // const query = db
-    //   .select({
-    //     username: users.username,
-    //     id: users.id,
-    //   })
-    //   .from(users)
-    //   .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))
-    //   .orderBy(asc(users.id))
-    //   .limit(limit)
-    //   .offset(offset);
-    // const results = await query.all();
-    // const after = performance.now();
-    // console.log(after - before);
-    // return results;
+    return results;
   }
 
   return {

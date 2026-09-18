@@ -1,4 +1,4 @@
-import type { KVNamespace } from '@cloudflare/workers-types';
+import type { KVNamespace, D1Database } from '@cloudflare/workers-types';
 
 export type ProviderUser = {
   email: string;

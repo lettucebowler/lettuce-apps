@@ -12,6 +12,7 @@ import { sValidator } from '@hono/standard-validator';
 import * as v from 'valibot';
 import * as githubClient from './clients/github';
 import { CloudflareD1Storage } from './storage/d1';
+import type { ExecutionContext } from 'hono';
 
 export default {
   async fetch(request: Request, env: LettuceAuthBindings, ctx: ExecutionContext) {
@@ -53,7 +54,7 @@ export default {
         }),
       ),
       async (c) => {
-        const dao = createLettuceAuthDao(c.env.lettuce_auth_db.withSession() as unknown as D1Database);
+        const dao = createLettuceAuthDao(c.env.lettuce_auth_db.withSession());
         const { user: userParam } = c.req.valid('param');
         const user =
           typeof userParam === 'string'
@@ -88,8 +89,9 @@ export default {
       sValidator('query', UsersQuery),
       async (c) => {
         const query = c.req.valid('query');
-        const dao = createLettuceAuthDao(c.env.lettuce_auth_db);
+        const dao = createLettuceAuthDao(c.env.lettuce_auth_db.withSession());
         const users = await dao.getUsers({ userIDs: query.userID, limit: query.limit, offset: query.offset });
+        console.log('users', users);
         return c.json({ users });
       },
     );
@@ -151,4 +153,4 @@ export default {
     app.route('/', auth);
     return app.fetch(request, env, ctx);
   },
-} satisfies ExportedHandler<LettuceAuthBindings>;
+};
