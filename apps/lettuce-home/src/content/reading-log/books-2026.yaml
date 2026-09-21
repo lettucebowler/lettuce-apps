@@ -1,5 +1,20 @@
 year: 2026
 books:
+  - isbn: 9781612624204
+    title: Vinland Saga 1
+    authors:
+      - Makoto Yukimura
+    published: 2013
+    logDate: 2026-09-18
+    rating: 4
+  - isbn: 9780063432888
+    title: Babel
+    authors:
+      - R. F. Kuang
+    published: 2022
+    logDate: 2026-09-18
+    rating: 3
+    comment: Baby's first
   - isbn: 9781399645041
     title: Scion
     authors:

@@ -91,7 +91,6 @@ export default {
         const query = c.req.valid('query');
         const dao = createLettuceAuthDao(c.env.lettuce_auth_db.withSession());
         const users = await dao.getUsers({ userIDs: query.userID, limit: query.limit, offset: query.offset });
-        console.log('users', users);
         return c.json({ users });
       },
     );

@@ -1,11 +1,11 @@
 books:
-  - isbn: 9780063432888
-    title: Babel
-    authors:
-      - R. F. Kuang
-    published: 2022
   - isbn: 9781639731046
     title: Tower of Dawn
     authors:
       - Sarah J. Maas
     published: 2017
+  - isbn: 9780593804216
+    title: Yesteryear
+    authors:
+      - Caro Claire Burke
+    published: 2026

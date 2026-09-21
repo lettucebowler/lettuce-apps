@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1423191
+    title: Resident Evil
+    released: 2026
+    directors:
+      - Zach Cregger
+    logDate: 2026-09-18
+    rating: 4
   - tmdb: 926393
     title: The Equalizer 3
     released: 2018

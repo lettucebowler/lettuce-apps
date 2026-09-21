@@ -6,7 +6,7 @@ import { D1Database, D1DatabaseSession } from '@cloudflare/workers-types';
 import * as schema from '../drizzle/schema';
 
 export function createLettuceAuthDao(database: D1Database | D1DatabaseSession) {
-  const db = drizzle(database, { schema });
+  const db = drizzle(database as unknown as D1Database, { schema });
 
   async function getUserByAccount(account: Account): Promise<User | undefined> {
     const accountResults = db
@@ -90,27 +90,6 @@ export function createLettuceAuthDao(database: D1Database | D1DatabaseSession) {
     };
   }
 
-  const getUsersWithIDFiltersStatement = db
-    .select({
-      username: users.username,
-      id: users.id,
-    })
-    .from(users)
-    .where(inArray(users.id, sql.placeholder('ids')))
-    .orderBy(asc(users.id))
-    .limit(sql.placeholder('limit'))
-    .offset(sql.placeholder('offset'))
-    .prepare();
-  const getUsersWithoutIDFiltersStatement = db
-    .select({
-      username: users.username,
-      id: users.id,
-    })
-    .from(users)
-    .orderBy(asc(users.id))
-    .limit(sql.placeholder('limit'))
-    .offset(sql.placeholder('offset'))
-    .prepare();
   async function getUsers({
     userIDs,
     offset = 0,
@@ -120,12 +99,17 @@ export function createLettuceAuthDao(database: D1Database | D1DatabaseSession) {
     offset?: number;
     limit?: number;
   }) {
-    let results;
-    if (userIDs.length) {
-      results = await getUsersWithIDFiltersStatement.all({ ids: userIDs, offset, limit });
-    } else {
-      results = await getUsersWithoutIDFiltersStatement.all({ offset, limit });
-    }
+    const query = db
+      .select({
+        username: users.username,
+        id: users.id,
+      })
+      .from(users)
+      .where(and(userIDs.length ? inArray(users.id, userIDs) : undefined))
+      .orderBy(asc(users.id))
+      .limit(limit)
+      .offset(offset);
+    const results = await query.all();
     return results;
   }
 
