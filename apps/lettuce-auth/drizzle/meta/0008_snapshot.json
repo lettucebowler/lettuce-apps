@@ -33,10 +33,7 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {
         "accounts_provider_provider_id_pk": {
-          "columns": [
-            "provider",
-            "provider_id"
-          ],
+          "columns": ["provider", "provider_id"],
           "name": "accounts_provider_provider_id_pk"
         }
       },
@@ -112,23 +109,17 @@
       "indexes": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         },
         "users_display_name_unique": {
           "name": "users_display_name_unique",
-          "columns": [
-            "display_name"
-          ],
+          "columns": ["display_name"],
           "isUnique": true
         },
         "username_index": {
           "name": "username_index",
-          "columns": [
-            "display_name"
-          ],
+          "columns": ["display_name"],
           "isUnique": false
         }
       },
