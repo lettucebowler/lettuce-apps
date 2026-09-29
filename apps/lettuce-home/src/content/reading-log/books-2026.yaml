@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9780063204157
+    title: Remarkably Bright Creatures
+    published: 2022
+    authors:
+      - Shelby Van Pelt
+    logDate: 2026-09-28
+    rating: 3
   - isbn: 9781612624204
     title: Vinland Saga 1
     authors:
