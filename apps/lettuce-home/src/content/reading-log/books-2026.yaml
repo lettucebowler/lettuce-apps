@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781639731046
+    title: Tower of Dawn
+    authors:
+      - Sarah J. Maas
+    published: 2017
+    logDate: 2026-09-30
+    rating: 2
+    comment: This concept has a 200 page limit but I just read 660 pages of it.
   - isbn: 9780063204157
     title: Remarkably Bright Creatures
     published: 2022

@@ -1,9 +1,4 @@
 books:
-  - isbn: 9781639731046
-    title: Tower of Dawn
-    authors:
-      - Sarah J. Maas
-    published: 2017
   - isbn: 9780593804216
     title: Yesteryear
     authors:
