@@ -4,3 +4,8 @@ books:
     authors:
       - Caro Claire Burke
     published: 2026
+  - isbn: 9781612624211
+    title: Vinland Saga 2
+    authors:
+      - Makoto Yukimura
+    published: 2014
