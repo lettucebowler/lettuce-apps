@@ -37,7 +37,7 @@ books:
     published: 2026
     logDate: 2026-09-09
     rating: 4
-    comment: A nice quick read. I would if this became a series!
+    comment: A nice quick read. I would love if this became a series!
   - isbn: 9781982141233
     title: The Strength of the Few
     authors:
@@ -45,7 +45,7 @@ books:
     published: 2025
     logDate: 2026-09-07
     rating: 4
-    comment: The beginning was confusing but once I grew to really like it!
+    comment: The beginning was confusing but I grew to really like it by the end!
   - isbn: 9781639731015
     title: Queen of Shadows
     published: 2015
