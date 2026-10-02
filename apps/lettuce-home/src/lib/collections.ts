@@ -11,6 +11,14 @@ function getBooksDesc() {
   return allReadingLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.books);
 }
 
+export function getMovieById(tmdb: number) {
+  return getMoviesDesc().find((movie) => movie.tmdb === tmdb);
+}
+
+export function getBookById(isbn: string) {
+  return getBooksDesc().find((book) => book.isbn === isbn);
+}
+
 export function dedupe<T extends any, K extends any>(items: Array<T>, keyFunc: (item: T) => K) {
   let itemMap: Map<K, T> = new Map();
   return items.filter((item) => {
