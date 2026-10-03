@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 1115544
+    title: Mike & Nick & Nick & Alice
+    released: 2026
+    directors:
+      - BenDavid Grabinski
+    logDate: 2026-10-02
+    rating: 3
   - tmdb: 256274
     title: As Above, So Below
     released: 2018

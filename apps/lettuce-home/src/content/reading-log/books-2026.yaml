@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9780593804216
+    title: Yesteryear
+    authors:
+      - Caro Claire Burke
+    published: 2026
+    logDate: 2026-10-02
+    rating: 4
   - isbn: 9781639731046
     title: Tower of Dawn
     authors:
@@ -201,7 +208,8 @@ books:
     logDate: 2026-05-18
     rating: 4
   - isbn: 9798888777794
-    title: 'Witch Hat Atelier: Grimoire Edition 1'
+    title: Witch Hat Atelier
+    subtitle: Grimoite Edition 1
     authors:
       - Kamome Shirahama
     published: 2026
