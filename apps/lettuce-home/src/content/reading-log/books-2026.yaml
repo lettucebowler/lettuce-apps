@@ -1,12 +1,19 @@
 year: 2026
 books:
+  - isbn: 9781612624211
+    title: Vinland Saga 2
+    authors:
+      - Makoto Yukimura
+    published: 2014
+    logDate: 2026-10-04
+    rating: 4
   - isbn: 9780593804216
     title: Yesteryear
     authors:
       - Caro Claire Burke
     published: 2026
     logDate: 2026-10-02
-    rating: 4
+    rating: 5
   - isbn: 9781639731046
     title: Tower of Dawn
     authors:
@@ -21,7 +28,8 @@ books:
     authors:
       - Shelby Van Pelt
     logDate: 2026-09-28
-    rating: 3
+    rating: 2
+    comment: Somehow this octopus knows what a cuckold is.
   - isbn: 9781612624204
     title: Vinland Saga 1
     authors:
@@ -315,7 +323,7 @@ books:
       - Matt Dinniman
     published: 2026
     logDate: 2026-03-08
-    rating: 4
+    rating: 3
     comment: I am now cursed to wait for the next book to come out
   - isbn: 9798217190041
     title: This Inevitable Ruin
@@ -324,7 +332,6 @@ books:
     published: 2024
     logDate: 2026-02-25
     rating: 5
-    comment: This series gets better with every book
     audio: true
   - isbn: 9780440418603
     title: The Golden Compass
@@ -332,7 +339,7 @@ books:
       - Philip Pullman
     published: 1995
     logDate: 2026-02-23
-    rating: 4
+    rating: 3
     reread: true
     comment: This brought me back.
     audio: true
@@ -342,7 +349,7 @@ books:
       - Matt Dinniman
     published: 2023
     logDate: 2026-02-13
-    rating: 5
+    rating: 4
     audio: true
   - isbn: 9780593955994
     title: The Butcher's Masquerade
