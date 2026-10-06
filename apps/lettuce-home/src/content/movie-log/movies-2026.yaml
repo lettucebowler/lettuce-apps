@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 521777
+    title: Good Boys
+    released: 2019
+    directors:
+      - Gene Stupnitsky
+    logDate: 2026-10-05
+    rating: 5
+    comment: Cleverly written
   - tmdb: 1115544
     title: Mike & Nick & Nick & Alice
     released: 2026
