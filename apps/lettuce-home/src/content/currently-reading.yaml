@@ -1,12 +1,12 @@
 books:
+  - isbn: 9780765324641
+    title: The Word for World is Forest
+    authors:
+      - Ursula K. Le Guin
+    published: 1972
   - isbn: 9798888777800
     title: Witch Hat Atelier
     subtitle: Grimoire Edition 2
     authors:
       - Kamome Shirahama
     published: 2026
-  - isbn: 9781639731022
-    title: Empire of Storms
-    authors:
-      - Sarah J. Maas
-    published: 2016

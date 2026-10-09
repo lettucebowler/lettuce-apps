@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781639731022
+    title: Empire of Storms
+    authors:
+      - Sarah J. Maas
+    published: 2016
+    logDate: 2026-10-09
+    rating: 2
   - isbn: 9781612624211
     title: Vinland Saga 2
     authors:
