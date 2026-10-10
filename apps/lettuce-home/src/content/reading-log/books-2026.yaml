@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9798888777800
+    title: Witch Hat Atelier
+    subtitle: Grimoire Edition 2
+    authors:
+      - Kamome Shirahama
+    published: 2026
+    logDate: 2026-10-09
+    rating: 5
   - isbn: 9781639731022
     title: Empire of Storms
     authors:
