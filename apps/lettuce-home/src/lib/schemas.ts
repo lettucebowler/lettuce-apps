@@ -1,14 +1,16 @@
-import { parseDate, today } from '@internationalized/date';
+import { CalendarDate, parseDate, today } from '@internationalized/date';
 import * as v from 'valibot';
 
 export const ISODateString = v.pipe(v.string(), v.nonEmpty(), v.isoDate());
+
+export const Integer = v.pipe(v.number(), v.integer());
 
 const Book = v.object({
   isbn: v.pipe(v.number(), v.toString(), v.isbn()),
   title: v.string(),
   subtitle: v.optional(v.string()),
   authors: v.array(v.string()),
-  published: v.pipe(v.number(), v.integer()),
+  published: Integer,
   reread: v.optional(v.boolean(), false),
 });
 export type Book = v.InferOutput<typeof Book>;
@@ -21,7 +23,7 @@ export const ReadingLogEntry = v.intersect([
   Book,
   v.object({
     logDate: ISODateString,
-    rating: v.optional(v.pipe(v.number(), v.integer())),
+    rating: v.optional(Integer),
     comment: v.optional(v.string()),
   }),
 ]);
@@ -48,12 +50,12 @@ export const ProjectLog = v.object({
 export type ProjectLog = v.InferOutput<typeof ProjectLog>;
 
 export const MovieLogEntry = v.object({
-  tmdb: v.pipe(v.number(), v.integer()),
+  tmdb: Integer,
   title: v.string(),
   directors: v.array(v.string()),
-  released: v.pipe(v.number(), v.integer()),
+  released: Integer,
   logDate: ISODateString,
-  rating: v.optional(v.pipe(v.number(), v.integer())),
+  rating: v.optional(Integer),
   comment: v.optional(v.string()),
   rewatch: v.optional(v.boolean(), false),
 });
@@ -99,3 +101,10 @@ export const DateRangeFromISODateStrings = v.object({
 
 export const ALL_POST_TAGS = ['media-log', 'vibe-check', 'probably-satire'] as const;
 export const PostTag = v.picklist(ALL_POST_TAGS);
+
+export const DateRange = v.object({
+  start: v.optional(v.instance(CalendarDate)),
+  end: v.optional(v.instance(CalendarDate)),
+});
+
+export type DateRange = v.InferOutput<typeof DateRange>;

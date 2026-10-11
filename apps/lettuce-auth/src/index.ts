@@ -94,6 +94,9 @@ export default {
         return c.json({ users });
       },
     );
+    app.get('/hello', async (c) => {
+      return c.json({ message: 'hello!' });
+    });
     const auth = issuer({
       providers: {
         github: GithubProvider({

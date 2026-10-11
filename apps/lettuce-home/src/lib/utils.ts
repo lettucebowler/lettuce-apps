@@ -19,3 +19,17 @@ export function getFirstDayOfTheMonth(): CalendarDate {
   let lettuceToday = today('America/Chicago');
   return startOfMonth(lettuceToday);
 }
+
+export function dedupe<T extends any, K extends any>(items: Array<T>, keyFunc: (item: T) => K) {
+  let itemMap: Map<K, T> = new Map();
+  return items.filter((item) => {
+    const key = keyFunc(item);
+    const prev = itemMap.get(key);
+    if (!prev) {
+      itemMap.set(key, item);
+      return true;
+    } else {
+      return false;
+    }
+  });
+}

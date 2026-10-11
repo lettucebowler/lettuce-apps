@@ -1,8 +1,8 @@
 <script lang="ts">
   import Movie from '#lib/components/Movie.svelte';
   import MediaCollection from '#lib/components/MediaCollection.svelte';
-  import { getMovieLogsDesc } from '#lib/collections.js';
-  let movieLog = getMovieLogsDesc();
+  import { getMovieLogsDesc } from '#lib/collections.remote.js';
+  let movieLog = await getMovieLogsDesc();
 </script>
 
 <svelte:head>

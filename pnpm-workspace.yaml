@@ -8,8 +8,6 @@ allowBuilds:
   sharp: true
   workerd: true
 minimumReleaseAge: 60
-onlyBuiltDependencies:
-  - esbuild
 overrides:
   cookie: ^1.0.2
 catalogPrune: true

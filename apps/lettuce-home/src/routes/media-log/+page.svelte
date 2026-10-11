@@ -1,14 +1,15 @@
 <script lang="ts">
   import * as v from 'valibot';
-  import { CalendarDate, today } from '@internationalized/date';
+  import { CalendarDate, parseDate, today } from '@internationalized/date';
   import { ISODateString } from '#lib/schemas.js';
   import DateRangePicker from './DateRangePicker.svelte';
   import { page } from '$app/state';
   import { DateRangeFromISODateStrings } from '#lib/schemas.js';
-  import { getBooksInDateRange, getMoviesInDateRange, dedupe } from '#lib/collections.js';
+  import { getBooksDesc, getMoviesDesc } from '#lib/collections.remote.js';
   import MediaGrid from '#lib/components/MediaGrid.svelte';
   import MoviePoster from '#lib/components/MoviePoster.svelte';
   import BookCover from '#lib/components/BookCover.svelte';
+  import { dedupe } from '#lib/utils.js';
 
   const defaultStart = new CalendarDate(1998, 12, 12);
   const defaultEnd = today('America/Chicago');
@@ -36,6 +37,32 @@
     };
     return v.parse(DateRangeFromISODateStrings, input);
   });
+
+  const books = await getBooksDesc();
+  const movies = await getMoviesDesc();
+
+  let filteredBooks = $derived(
+    dedupe(
+      books
+        .filter((item) => {
+          const completionDate = parseDate(item.logDate);
+          return (!start || completionDate >= start) && (!end || completionDate <= end);
+        })
+        .toReversed(),
+      (book) => book.isbn,
+    ).toReversed(),
+  );
+  let filteredMovies = $derived(
+    dedupe(
+      movies
+        .filter((item) => {
+          const completionDate = parseDate(item.logDate);
+          return (!start || completionDate >= start) && (!end || completionDate <= end);
+        })
+        .toReversed(),
+      (movie) => movie.tmdb,
+    ).toReversed(),
+  );
 </script>
 
 <svelte:head>
@@ -57,29 +84,29 @@
     </div>
   </form>
   <section class="space-y-6">
-    {let books = $derived(dedupe(getBooksInDateRange({ start, end }).toReversed(), (book) => book.isbn).toReversed())}
     <h2 class="text-2xl font-bold">
       Books completed &nbsp;
-      <span class="text-base font-medium text-charade-100">{books.length} book{books.length !== 1 ? 's' : ''}</span>
+      <span class="text-base font-medium text-charade-100"
+        >{filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}</span
+      >
     </h2>
 
     <MediaGrid>
-      {#each books as { title, isbn }, i (`${isbn}-${i}`)}
+      {#each filteredBooks as { title, isbn }, i (`${isbn}-${i}`)}
         <BookCover {title} {isbn} />
       {/each}
     </MediaGrid>
   </section>
   <section class="space-y-6">
-    {let movies = $derived(
-      dedupe(getMoviesInDateRange({ start, end }).toReversed(), (movie) => movie.tmdb).toReversed(),
-    )}
     <h2 class=" text-2xl font-bold">
       Movies watched &nbsp;
-      <span class="text-base font-medium text-charade-100">{movies.length} movie{movies.length !== 1 ? 's' : ''}</span>
+      <span class="text-base font-medium text-charade-100"
+        >{filteredMovies.length} movie{filteredMovies.length !== 1 ? 's' : ''}</span
+      >
     </h2>
 
     <MediaGrid>
-      {#each movies as { title, tmdb }, i (`${tmdb}-${i}`)}
+      {#each filteredMovies as { title, tmdb }, i (`${tmdb}-${i}`)}
         <MoviePoster {title} {tmdb} />
       {/each}
     </MediaGrid>

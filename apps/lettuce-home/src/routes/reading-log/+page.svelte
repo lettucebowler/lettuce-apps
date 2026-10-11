@@ -1,10 +1,10 @@
 <script lang="ts">
   import Book from '../../lib/components/Book.svelte';
   import MediaCollection from '#lib/components/MediaCollection.svelte';
-  import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections.js';
+  import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections.remote.js';
 
-  const current = getCurrentlyReading();
-  const completed = getReadingLogsDesc();
+  const current = await getCurrentlyReading();
+  const completed = await getReadingLogsDesc();
 </script>
 
 <svelte:head>

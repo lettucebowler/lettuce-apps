@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { dedupe, getMoviesInDateRange } from '#lib/collections.js';
+  import { getMoviesInDateRange } from '#lib/collections.remote.js';
   import { parseDate } from '@internationalized/date';
   import MediaGrid from './MediaGrid.svelte';
   import MoviePoster from './MoviePoster.svelte';
+  import { dedupe } from '#lib/utils.js';
 
   type Props = {
     start: string;
@@ -12,7 +13,7 @@
   let { start, end }: Props = $props();
   let { startDate, endDate } = $derived({ startDate: parseDate(start), endDate: parseDate(end) });
   let movies = $derived(
-    dedupe(getMoviesInDateRange({ start: startDate, end: endDate }).toReversed(), (movie) => movie.tmdb),
+    dedupe((await getMoviesInDateRange({ start: startDate, end: endDate })).toReversed(), (movie) => movie.tmdb),
   );
 </script>
 

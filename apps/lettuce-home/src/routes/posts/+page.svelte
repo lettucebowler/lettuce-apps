@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { getAllPostTags, getPostsByYear } from '#lib/collections.js';
+  import { getAllPostTags, getPostsByYear } from '#lib/collections.remote.js';
   import Post from '#lib/components/Post.svelte';
-  const postGroups = $derived.by(() => {
-    return getPostsByYear();
-  });
-  const tags = getAllPostTags();
+  const [postGroups, tags] = await Promise.all([getPostsByYear(), getAllPostTags()]);
 </script>
 
 <svelte:head>

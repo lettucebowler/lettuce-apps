@@ -1,4 +1,4 @@
-import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections.js';
+import { getCurrentlyReading, getReadingLogsDesc } from '#lib/collections.server.js';
 
 export async function GET() {
   const currentlyReading = getCurrentlyReading();

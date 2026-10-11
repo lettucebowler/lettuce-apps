@@ -1,5 +1,6 @@
 import { parseDate } from '@internationalized/date';
-import { getMoviesInDateRange, getBooksInDateRange, dedupe } from './collections';
+import { getMoviesInDateRange, getBooksInDateRange } from './collections.server';
+import { dedupe } from './utils';
 
 const months = [
   'January',
@@ -16,7 +17,7 @@ const months = [
   'December',
 ];
 
-export type MediaData = {
+type MediaData = {
   month: string;
   books: number;
   movies: number;

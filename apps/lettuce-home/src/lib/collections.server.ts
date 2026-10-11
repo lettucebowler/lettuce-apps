@@ -1,36 +1,26 @@
 import { parseDate } from '@internationalized/date';
-import type { DateRange } from 'bits-ui';
 import { allMovieLogs, allProjects, allReadingLogs, allPosts, currentlyReading } from '#content-collections';
-import type { Post } from './schemas';
+import type { Post, DateRange } from './schemas';
+import { dedupe } from './utils';
 
-function getMoviesDesc() {
+export function getMoviesDesc() {
   return allMovieLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.movies);
 }
 
-function getBooksDesc() {
+export function getBooksDesc() {
   return allReadingLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.books);
 }
 
 export function getMovieById(tmdb: number) {
-  return getMoviesDesc().find((movie) => movie.tmdb === tmdb);
+  const movie = getMoviesDesc().find((movie) => movie.tmdb === tmdb);
+  if (!movie) {
+    throw new Error('Movie not found');
+  }
+  return movie;
 }
 
 export function getBookById(isbn: string) {
   return getBooksDesc().find((book) => book.isbn === isbn);
-}
-
-export function dedupe<T extends any, K extends any>(items: Array<T>, keyFunc: (item: T) => K) {
-  let itemMap: Map<K, T> = new Map();
-  return items.filter((item) => {
-    const key = keyFunc(item);
-    const prev = itemMap.get(key);
-    if (!prev) {
-      itemMap.set(key, item);
-      return true;
-    } else {
-      return false;
-    }
-  });
 }
 
 export function getLastWatchedMovie() {
@@ -86,16 +76,14 @@ export function getLastReadBook() {
 }
 
 export function getProjectsDesc() {
-  return allProjects.toReversed();
+  return allProjects.toReversed().map((project) => {
+    const { _meta, ...rest } = project;
+    return rest;
+  });
 }
 
 export function getActiveProjects() {
-  return getProjectsDesc()
-    .filter((project) => project.status === 'active')
-    .map((project) => {
-      const { _meta, ...rest } = project;
-      return rest;
-    });
+  return getProjectsDesc().filter((project) => project.status === 'active');
 }
 
 export function allPostsDesc() {
@@ -135,8 +123,8 @@ export function getAllPostTags() {
   ).toSorted();
 }
 
-export function getPostsByYear(filter: (post: Post) => boolean = () => true) {
-  const grouped = Object.groupBy(filterPosts(filter), (post) => {
+export function getPostsByYear(tag?: string) {
+  const grouped = Object.groupBy(tag ? getPostsWithTag(tag) : allPostsDesc(), (post) => {
     return post.date.slice(0, 4);
   });
 

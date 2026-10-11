@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getBarChartData } from '#lib/chart-data.js';
+  import { getBarChartData } from '#lib/chart-data.remote.js';
   import { BarChart } from 'layerchart';
 
   type Props = {
@@ -8,7 +8,7 @@
 
   let { year }: Props = $props();
 
-  const data = $derived(getBarChartData(year).map((item) => ({ ...item, value: item.books })));
+  const data = $derived((await getBarChartData(year)).map((item) => ({ ...item, value: item.books })));
 </script>
 
 <div class="space-y-8 rounded-lg bg-charade-950 p-4">

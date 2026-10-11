@@ -1,5 +1,19 @@
 year: 2026
 movies:
+  - tmdb: 1330021
+    title: Remarkably Bright Creatures
+    directors:
+      - Olivia Newman
+    released: 2026
+    logDate: 2026-10-10
+    rating: 3
+  - tmdb: 1400837
+    title: Other Mommy
+    directors:
+      - Rob Savage
+    released: 2026
+    logDate: 2026-10-10
+    rating: 3
   - tmdb: 521777
     title: Good Boys
     released: 2019

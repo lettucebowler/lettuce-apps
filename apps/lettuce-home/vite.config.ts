@@ -14,6 +14,10 @@ const svelteConfig: Config = {
       async: true,
     },
   },
+  experimental: {
+    remoteFunctions: true,
+    forkPreloads: true,
+  },
   adapter: adapter(),
   extensions: ['.svelte', '.svx', '.md'],
 };
@@ -24,5 +28,8 @@ export default defineConfig({
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd())],
     },
+  },
+  ssr: {
+    noExternal: ['@internationalized/date'],
   },
 });

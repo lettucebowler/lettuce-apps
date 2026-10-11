@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { getPostsByYear } from '#lib/collections.js';
+  import { getPostsByYear, getPostsByYearWithTag } from '#lib/collections.remote.js';
   import Post from '#lib/components/Post.svelte';
 
   const { params } = $props();
 
-  const postGroups = $derived.by(() => {
-    const tag = params.tag;
-    return getPostsByYear((post) => !!post.tags?.includes(tag));
-  });
+  let postGroups = $derived(params.tag ? await getPostsByYearWithTag(params.tag) : await getPostsByYear());
 </script>
 
 <svelte:head>

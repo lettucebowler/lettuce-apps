@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { getProjectsDesc } from '#lib/collections.js';
+  import { getProjectsDesc } from '#lib/collections.remote.js';
   import Project from '#lib/components/Project.svelte';
 
-  const projects = getProjectsDesc();
+  const projects = await getProjectsDesc();
 </script>
 
 <svelte:head>

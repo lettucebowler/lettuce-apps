@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { dedupe, getBooksInDateRange } from '#lib/collections.js';
+  import { getBooksInDateRange } from '#lib/collections.remote.js';
   import { parseDate } from '@internationalized/date';
   import MediaGrid from './MediaGrid.svelte';
   import BookCover from './BookCover.svelte';
+  import { dedupe } from '#lib/utils.js';
 
   type Props = {
     start: string;
@@ -12,7 +13,7 @@
   let { start, end }: Props = $props();
   let { startDate, endDate } = $derived({ startDate: parseDate(start), endDate: parseDate(end) });
   let books = $derived(
-    dedupe(getBooksInDateRange({ start: startDate, end: endDate }).toReversed(), (book) => book.isbn),
+    dedupe((await getBooksInDateRange({ start: startDate, end: endDate })).toReversed(), (book) => book.isbn),
   );
 </script>
 

@@ -1,21 +1,11 @@
 <script lang="ts">
-  import {
-    getActiveProjects,
-    getCurrentlyReading,
-    getLastReadBook,
-    getLastWatchedMovie,
-    getRecentPosts,
-  } from '#lib/collections.js';
   import Book from '#lib/components/Book.svelte';
   import Movie from '#lib/components/Movie.svelte';
   import Post from '#lib/components/Post.svelte';
   import Project from '#lib/components/Project.svelte';
+  import { getHomepageData } from './page.remote';
 
-  const latestBook = getLastReadBook();
-  const activeProjects = getActiveProjects();
-  const latestMovie = getLastWatchedMovie();
-  const recentPosts = getRecentPosts(4);
-  const currentBooks = getCurrentlyReading();
+  let data = await getHomepageData();
 </script>
 
 <svelte:head>
@@ -50,18 +40,18 @@
           Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
           >
         </h2>
-        {#each recentPosts as post (post.slug)}
+        {#each data.recentPosts as post (post.slug)}
           <Post {...post} />
         {/each}
       </section>
-      {#if activeProjects.length}
+      {#if data.activeProjects.length}
         <section id="activity-section" class="space-y-4">
           <h2 class="text-2xl font-bold">
             Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
               >View all projects →</a
             >
           </h2>
-          {#each activeProjects as project (project.title)}
+          {#each data.activeProjects as project (project.title)}
             <Project
               description={[]}
               title={project.title}
@@ -74,21 +64,21 @@
       {/if}
     </div>
     <div id="home-right" class="@container w-full space-y-8 md:ml-auto md:max-w-120">
-      {#if currentBooks.length}
+      {#if data.currentBooks.length}
         <section class={['space-y-4']}>
           <h2 class="text-2xl font-bold">Currently reading</h2>
-          {#each currentBooks.slice(0, 1) as book (book.isbn)}
+          {#each data.currentBooks.slice(0, 1) as book (book.isbn)}
             <Book {...book} />
           {/each}
         </section>
       {/if}
       <section class="space-y-4">
         <h2 class="text-2xl font-bold">Last read</h2>
-        <Book {...latestBook} />
+        <Book {...data.latestBook} />
       </section>
       <section class="space-y-4">
         <h2 class="text-2xl font-bold">Last watched</h2>
-        <Movie {...latestMovie} />
+        <Movie {...data.latestMovie} />
       </section>
     </div>
   </div>
