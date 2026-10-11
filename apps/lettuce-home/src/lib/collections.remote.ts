@@ -5,9 +5,9 @@ import { DateRange, Integer, PostTag } from './schemas';
 
 export const getProjectsDesc = prerender(() => collections.getProjectsDesc());
 
-export const getMoviesDesc = prerender(() => collections.getMoviesDesc());
+export const getMoviesDesc = prerender(() => collections.getMoviesDesc(), { dynamic: true });
 
-export const getBooksDesc = prerender(() => collections.getBooksDesc());
+export const getBooksDesc = prerender(() => collections.getBooksDesc(), { dynamic: true });
 
 export const getCurrentlyReading = prerender(() => collections.getCurrentlyReading());
 
