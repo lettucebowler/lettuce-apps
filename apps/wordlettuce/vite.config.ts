@@ -5,7 +5,7 @@ import { defineConfig, searchForWorkspaceRoot } from 'vite';
 
 import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import type { Config as SvelteConfig } from '@sveltejs/kit';
+import type { Config as SvelteConfig } from '@sveltejs/kit/vite';
 
 const svelteConfig: SvelteConfig = {
   preprocess: [vitePreprocess()],
@@ -13,8 +13,6 @@ const svelteConfig: SvelteConfig = {
   experimental: {
     remoteFunctions: true,
     forkPreloads: true,
-    handleRenderingErrors: true,
-    explicitEnvironmentVariables: true,
   },
   compilerOptions: {
     experimental: {

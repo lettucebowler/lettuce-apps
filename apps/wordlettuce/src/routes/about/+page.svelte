@@ -1,5 +1,5 @@
 <script>
-  import { appName } from '$lib/app-constants';
+  import { appName } from '#lib/app-constants.js';
 </script>
 
 <svelte:head>

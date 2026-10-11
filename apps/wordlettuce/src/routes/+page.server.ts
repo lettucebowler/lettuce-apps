@@ -1,4 +1,4 @@
-import { getGameStateFromCookie } from '$lib/server/game';
+import { getGameStateFromCookie } from '#lib/server/game.js';
 
 export async function load() {
   const game = getGameStateFromCookie();

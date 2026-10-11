@@ -1,5 +1,4 @@
-import { sequence } from '@sveltejs/kit/hooks';
-import { type Handle } from '@sveltejs/kit';
+import { sequence, type Handle } from '@sveltejs/kit/hooks';
 
 const fetchHandler: Handle = ({ event, resolve }) => {
   return resolve(event, {
@@ -7,7 +6,7 @@ const fetchHandler: Handle = ({ event, resolve }) => {
   });
 };
 
-import { verifySession } from '$lib/server/auth';
+import { verifySession } from '#lib/server/auth.js';
 
 const authHandler: Handle = async ({ event, resolve }) => {
   event.locals.session = await verifySession();

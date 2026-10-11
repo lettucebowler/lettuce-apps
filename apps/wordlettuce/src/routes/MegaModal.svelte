@@ -2,9 +2,9 @@
 </script>
 
 <script lang="ts">
-  import Dialog from '$lib/components/base/Dialog.svelte';
+  import Dialog from '#lib/components/base/Dialog.svelte';
   import { ExpiringString, NewGameCountdownTimer } from './spells.svelte';
-  import ArrowRightEndOnBoxIcon from '$lib/components/icons/ArrowRightEndOnRectangleIcon.svelte';
+  import ArrowRightEndOnBoxIcon from '#lib/components/icons/ArrowRightEndOnRectangleIcon.svelte';
 
   type ModalProps = {
     gameNum: number;

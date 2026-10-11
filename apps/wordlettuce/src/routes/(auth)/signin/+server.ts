@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-import { createAuthClient } from '$lib/server/auth';
+import { createAuthClient } from '#lib/server/auth.js';
 
 import * as v from 'valibot';
 
@@ -15,5 +15,5 @@ export async function GET(event) {
     event.cookies.set('signin-referrer', '/profile/lettucebowler', { path: '/' });
   }
   const { url } = await authClient.authorize(`${event.url.origin}/callback`, 'code', {});
-  redirect(302, url);
+  redirect(302, url, { external: true });
 }

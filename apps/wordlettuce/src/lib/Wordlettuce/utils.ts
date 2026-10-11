@@ -1,11 +1,10 @@
 import { LETTER_STATUS_CONTAINS, LETTER_STATUS_EXACT, LETTER_STATUS_INCORRECT } from './schemas';
 import { answerList, allowedGuesses } from './words';
-import { appName } from '$lib/app-constants';
+import { appName } from '#lib/app-constants.js';
 
 const msInADay = 1000 * 60 * 60 * 24;
 const initial = new Date(1643673600000);
 export function getGameNum() {
-  return 1710;
   const now = new Date();
   return Math.floor((now.getTime() - initial.getTime()) / msInADay);
 }

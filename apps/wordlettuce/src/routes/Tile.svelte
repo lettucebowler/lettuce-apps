@@ -5,7 +5,7 @@
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
     type LetterStatus,
-  } from '$lib/Wordlettuce/schemas';
+  } from '#lib/Wordlettuce/schemas.js';
   import type { Snippet } from 'svelte';
 
   type TileProps = {

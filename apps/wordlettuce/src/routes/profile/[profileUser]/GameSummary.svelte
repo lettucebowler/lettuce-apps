@@ -1,14 +1,14 @@
 <script lang="ts">
   import { browser } from '$app/env';
-  import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
-  import { getGameStatus } from '$lib/Wordlettuce/utils';
+  import ShareIcon from '#lib/components/icons/ShareIcon.svelte';
+  import { getGameStatus } from '#lib/Wordlettuce/utils.js';
   import { toastError, toastSuccess } from '../../toast';
   import {
     LETTER_STATUS_CONTAINS,
     LETTER_STATUS_EXACT,
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
-  } from '$lib/Wordlettuce/schemas';
+  } from '#lib/Wordlettuce/schemas.js';
 
   type GameSummaryProps = {
     answers: string;

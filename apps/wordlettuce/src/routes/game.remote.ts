@@ -1,12 +1,12 @@
 import { form, getRequestEvent, query } from '$app/server';
 import { error as svelteError } from '@sveltejs/kit';
 
-import * as apiWordlettuce from '$lib/api-wordlettuce.server';
-import { getGameStateFromCookie, saveGameStateToCookie } from '$lib/server/game';
+import * as apiWordlettuce from '#lib/api-wordlettuce.server.js';
+import { getGameStateFromCookie, saveGameStateToCookie } from '#lib/server/game.js';
 import { ActionFormInput } from './game.schemas';
 import { sessionQuery } from './auth.remote';
 
-export const getGameState = query(async () => {
+export const getGameState = query(() => {
   return getGameStateFromCookie();
 });
 

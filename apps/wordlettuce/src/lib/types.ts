@@ -14,3 +14,15 @@ export type GameResult = {
   userID: number;
   score: number;
 };
+
+export type Session =
+  | {
+      authenticated: true;
+      user: {
+        username: string;
+        userID: number;
+      };
+    }
+  | {
+      authenticated: false;
+    };

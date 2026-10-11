@@ -1,7 +1,7 @@
 import { getRequestEvent } from '$app/server';
 import { STATE_COOKIE_NAME_V2, STATE_COOKIE_SETTINGS } from '../app-constants';
-import { Wordlettuce } from '$lib/Wordlettuce/Wordlettuce.svelte';
-import { getGameNum } from '$lib/Wordlettuce/utils';
+import { Wordlettuce } from '#lib/Wordlettuce/Wordlettuce.svelte.js';
+import { getGameNum } from '#lib/Wordlettuce/utils.js';
 
 export function getGameStateFromCookie() {
   try {

@@ -4,8 +4,8 @@
   import '../app.css';
   import { sessionQuery } from './auth.remote';
   import { Toasts } from 'svoast';
-  import favicon from '$lib/assets/favicon.svg';
-  import { appName } from '$lib/app-constants';
+  import favicon from '#lib/assets/favicon.svg';
+  import { appName } from '#lib/app-constants.js';
   import { page } from '$app/state';
 
   let { children } = $props();

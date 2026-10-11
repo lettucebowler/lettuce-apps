@@ -2,13 +2,13 @@
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
   import GameSummary from './GameSummary.svelte';
   import { browser } from '$app/env';
-  import { getGameNum } from '$lib/Wordlettuce/utils';
+  import { getGameNum } from '#lib/Wordlettuce/utils.js';
   import { infiniteScroll } from './infinite-scroll.svelte.js';
-  import { getGameResults, getProfileData } from '$lib/api-wordlettuce';
+  import { getGameResults, getProfileData } from '#lib/api-wordlettuce.js';
   import { page } from '$app/state';
   import { sessionQuery } from '../../auth.remote';
   import { hydratable } from 'svelte';
-  import { appName } from '$lib/app-constants';
+  import { appName } from '#lib/app-constants.js';
 
   const { params } = $props();
   const gameNum = getGameNum();

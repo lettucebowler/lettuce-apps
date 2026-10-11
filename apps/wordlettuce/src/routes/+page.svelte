@@ -3,16 +3,16 @@
   import Cookies from 'js-cookie';
   import { browser } from '$app/env';
   import { page } from '$app/state';
-  import { pushState } from '$app/navigation';
+  import { goto } from '$app/navigation';
   import * as v from 'valibot';
 
-  import { Wordlettuce } from '$lib/Wordlettuce/Wordlettuce.svelte';
+  import { Wordlettuce } from '#lib/Wordlettuce/Wordlettuce.svelte.js';
   import Tile from './Tile.svelte';
   import { toastError, toastPromise } from './toast';
-  import ShareIcon from '$lib/components/icons/ShareIcon.svelte';
-  import EnterIcon from '$lib/components/icons/EnterIcon.svelte';
-  import BackSpaceIcon from '$lib/components/icons/BackSpaceIcon.svelte';
-  import { appName, STATE_COOKIE_NAME_V2 } from '$lib/app-constants';
+  import ShareIcon from '#lib/components/icons/ShareIcon.svelte';
+  import EnterIcon from '#lib/components/icons/EnterIcon.svelte';
+  import BackSpaceIcon from '#lib/components/icons/BackSpaceIcon.svelte';
+  import { appName, STATE_COOKIE_NAME_V2 } from '#lib/app-constants.js';
   import {
     AllowedGuess,
     GuessLetter,
@@ -21,11 +21,11 @@
     LETTER_STATUS_INCORRECT,
     LETTER_STATUS_NONE,
     LetterStatus,
-  } from '$lib/Wordlettuce/schemas';
+  } from '#lib/Wordlettuce/schemas.js';
   import MegaModal from './MegaModal.svelte';
   import { action } from './game.remote';
   import { sessionQuery } from './auth.remote';
-  import { getGameStatus } from '$lib/Wordlettuce/utils';
+  import { getGameStatus } from '#lib/Wordlettuce/utils.js';
 
   function createGameActionKeyID(l: string) {
     return `wordlettuce-game-action-key-${l}`;
@@ -55,9 +55,7 @@
   }
 
   function showModal() {
-    pushState('', {
-      showModal: true,
-    });
+    goto('', { shallow: true, state: { showModal: true } });
   }
 
   function getItemsForGrid(game: Wordlettuce) {
@@ -90,6 +88,7 @@
 
   let { data } = $props();
   let game = $derived(data.game);
+  let session = $derived(await sessionQuery());
 
   let tileGridEl: HTMLDivElement | null = $state(null);
   let timeout: NodeJS.Timeout;
@@ -111,7 +110,8 @@
       }
     }
   }}
-/>
+></svelte:body>
+
 <main class="game-grid grid flex-auto grid-rows-[1fr_160px] gap-2 sm:gap-4">
   <div class="size-container grid w-full">
     <div
@@ -137,10 +137,8 @@
             >
               <Tile
                 status={(answer as LetterStatus) ?? LETTER_STATUS_NONE}
-                class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}
+                class={doJump ? 'animate-jump [animation-delay:var(--animation-delay)]' : ''}>{letter}</Tile
               >
-                {letter}
-              </Tile>
             </div>
           {/each}
         </div>
@@ -247,7 +245,7 @@
   open={!!page.state.showModal}
   onclose={() => history.back()}
   gameNum={game.gameNum}
-  authenticated={(await sessionQuery()).authenticated}
+  authenticated={session.authenticated}
   attempts={game.answers.length}
   content={game.success ? getGameStatus({ gameNum: game.gameNum, answers: game.answers }) : ''}
 />

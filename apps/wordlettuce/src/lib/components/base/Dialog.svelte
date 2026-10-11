@@ -4,7 +4,7 @@
 </script>
 
 <script lang="ts">
-  import { focusTrap, outsideClick } from '$lib/attachments.svelte';
+  import { focusTrap, outsideClick } from '#lib/attachments.svelte.js';
   import type { Snippet } from 'svelte';
   import { fade, scale } from 'svelte/transition';
   import { PressedKeys } from 'runed';

@@ -1,5 +1,5 @@
-import { Wordlettuce } from '$lib/Wordlettuce/Wordlettuce.svelte';
-import type { Reroute, Transport } from '@sveltejs/kit';
+import type { Reroute, Transport } from '@sveltejs/kit/hooks';
+import { Wordlettuce } from '#lib/Wordlettuce/Wordlettuce.svelte.js';
 
 export const transport: Transport = {
   WordlettuceGame: {

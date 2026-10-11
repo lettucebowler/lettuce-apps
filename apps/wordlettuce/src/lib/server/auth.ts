@@ -5,8 +5,9 @@ import { dev } from '$app/env';
 import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 import { subjects } from '@lettuce-apps-packages/auth';
 import { AUTH_HOST } from '$app/env/private';
+import type { Session } from '#lib/types.js';
 
-export async function getSession() {
+export async function getSession(): Promise<Session> {
   const event = getRequestEvent();
   if (!event.locals.session) {
     return {

@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { GuessLetter, AllowedGuess } from '$lib/Wordlettuce/schemas';
+import { GuessLetter, AllowedGuess } from '#lib/Wordlettuce/schemas.js';
 
 export const ActionFormInput = v.union([
   v.object({

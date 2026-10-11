@@ -1,9 +1,9 @@
 <script lang="ts">
-  import FireIcon from '$lib/components/icons/FireIcon.svelte';
+  import FireIcon from '#lib/components/icons/FireIcon.svelte';
   import { LettuceAvatar } from '@lettuce-apps-packages/svelte-common';
-  import { getRankings } from '$lib/api-wordlettuce';
+  import { getRankings } from '#lib/api-wordlettuce.js';
   import { hydratable } from 'svelte';
-  import { appName } from '$lib/app-constants';
+  import { appName } from '#lib/app-constants.js';
 
   const rankings = await hydratable('rankings', () => getRankings());
 </script>
