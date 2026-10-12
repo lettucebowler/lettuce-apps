@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9780765324641
+    title: The Word for World is Forest
+    authors:
+      - Ursula K. Le Guin
+    published: 1972
+    logDate: 2026-10-11
+    rating: 3
+    comment: A bit heavy-handed for my taste
   - isbn: 9798888777800
     title: Witch Hat Atelier
     subtitle: Grimoire Edition 2
@@ -142,7 +150,7 @@ books:
       - Sarah J. Maas
     published: 2012
     logDate: 2026-07-08
-    rating: 2
+    rating: 3
   - isbn: 9781250868299
     title: The Well of Ascension
     subtitle: A Mistborn Novel
