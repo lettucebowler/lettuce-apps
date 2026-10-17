@@ -9,7 +9,7 @@
 
 <MediaFigure {title} {subtitle} contributors={authors} year={published} {comment} {rating}>
   {#snippet media()}
-    <BookLink {isbn}>
+    <BookLink {isbn} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-40 @min-[18.5rem]:flex-1">
       <BookCover {isbn} {title} />
     </BookLink>
   {/snippet}
