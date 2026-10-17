@@ -11,14 +11,6 @@ export function getBooksDesc() {
   return allReadingLogs.sort((a, b) => b.year - a.year).flatMap((log) => log.books);
 }
 
-export function getMovieById(tmdb: number) {
-  const movie = getMoviesDesc().find((movie) => movie.tmdb === tmdb);
-  if (!movie) {
-    throw new Error('Movie not found');
-  }
-  return movie;
-}
-
 export function getBookById(isbn: string) {
   return getBooksDesc().find((book) => book.isbn === isbn);
 }

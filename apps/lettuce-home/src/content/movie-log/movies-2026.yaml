@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 14001
+    title: Dead Silence
+    directors:
+      - James want
+    released: 2007
+    logDate: 2026-10-16
+    rating: 3
   - tmdb: 1330021
     title: Remarkably Bright Creatures
     directors:
@@ -71,7 +78,7 @@ movies:
     directors:
       - Craig Gillespie
     logDate: 2026-08-09
-    rating: 3
+    rating: 2
   - tmdb: 14926
     title: Uptown Girls
     directors:

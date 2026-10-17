@@ -3,18 +3,12 @@
     title: string;
     subtitle?: string;
     contributors: Array<string>;
-    href: string;
     year: number;
     comment?: string;
     rating?: number;
     feature?: Snippet;
-  } & (
-    | {
-        imageSrc?: undefined;
-        media: Snippet;
-      }
-    | { imageSrc: string; media?: undefined }
-  );
+    media: Snippet;
+  };
 
   type MediaFigureProps = MediaInfo & {
     headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -29,8 +23,6 @@
     title,
     subtitle,
     contributors,
-    href,
-    imageSrc,
     year,
     comment,
     rating,
@@ -44,13 +36,7 @@
 
 <div class="@container min-w-43">
   <figure class="flex flex-col gap-x-4 gap-y-3 @min-[18.5rem]:flex-row">
-    <a {href} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-40 @min-[18.5rem]:flex-1">
-      {#if media}
-        {@render media()}
-      {:else}
-        <enhanced:img class="aspect-2/3 w-full rounded shadow-lg" loading="lazy" alt={title} src={imageSrc} />
-      {/if}
-    </a>
+    {@render media()}
     <figcaption class="w-full min-w-40 @min-[18.5rem]:flex-2">
       <svelte:element this={headingTag ?? 'h3'}>
         <span class="font-medium">{title}{subtitle ? ':' : ''}</span>

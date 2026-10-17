@@ -1,6 +1,7 @@
 <script lang="ts">
   import { type MovieLogEntry } from '#lib/schemas.js';
   import MediaFigure from './MediaFigure.svelte';
+  import MovieLink from './MovieLink.svelte';
   import MoviePoster from './MoviePoster.svelte';
 
   let {
@@ -13,20 +14,10 @@
   }: Pick<MovieLogEntry, 'title' | 'directors' | 'released' | 'rewatch' | 'rating' | 'comment' | 'tmdb'> = $props();
 </script>
 
-<MediaFigure
-  {title}
-  contributors={directors}
-  year={released}
-  {comment}
-  {rating}
-  href="https://www.themoviedb.org/movie/{tmdb}"
->
+<MediaFigure {title} contributors={directors} year={released} {comment} {rating}>
   {#snippet media()}
-    <MoviePoster {tmdb} {title} />
+    <MovieLink {tmdb} class="mb-auto block w-full max-w-60 flex-1 @min-[18.5rem]:max-w-40 @min-[18.5rem]:flex-1">
+      <MoviePoster {tmdb} {title} />
+    </MovieLink>
   {/snippet}
-  <!-- {#snippet feature()}
-    {#if rewatch}
-      <span class="-m-0.5 icon-[heroicons--arrow-path-16-solid] size-5 text-antique-brass-500" title="rewatch"></span>
-    {/if}
-  {/snippet} -->
 </MediaFigure>

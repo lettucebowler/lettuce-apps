@@ -23,8 +23,6 @@ export const getBooksInDateRange = prerender(DateRange, (dateRange) => collectio
 
 export const getMoviesInDateRange = prerender(DateRange, (dateRange) => collections.getMoviesInDateRange(dateRange));
 
-export const getMovieById = prerender(Integer, (tmdb: number) => collections.getMovieById(tmdb));
-
 export const getMovieLogsDesc = prerender(() => collections.getMovieLogsDesc());
 
 export const getReadingLogsDesc = prerender(() => collections.getReadingLogsDesc());

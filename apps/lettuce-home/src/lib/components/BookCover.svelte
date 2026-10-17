@@ -15,13 +15,14 @@
       format: 'avif;webp',
     },
   });
-  const image = $derived.by(() => {
+
+  function getBookCoverImage(isbn: string) {
     const path = Object.keys(images).find((key) => key.includes(`book-${isbn}`));
     if (!path) {
-      return undefined;
+      throw new Error(`no image for isbn: ${isbn}`);
     }
-    return images[path];
-  }) as Picture;
+    return images[path] as Picture;
+  }
 </script>
 
-<enhanced:img src={image} alt={title} class="aspect-2/3 w-full rounded shadow-lg" loading="lazy" />
+<enhanced:img src={getBookCoverImage(isbn)} alt={title} class="aspect-2/3 w-full rounded shadow-lg" loading="lazy" />
