@@ -1,5 +1,13 @@
 year: 2026
 movies:
+  - tmdb: 8966
+    title: Twilight
+    directors:
+      - Catherine Hardwicka
+    released: 2008
+    logDate: 2026-10-17
+    rating: 5
+    comment: A classic needs no notes.
   - tmdb: 14001
     title: Dead Silence
     directors:
