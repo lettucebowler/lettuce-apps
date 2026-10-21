@@ -1,5 +1,19 @@
 year: 2026
 movies:
+  - tmdb: 649609
+    title: Renfield
+    directors:
+      - Chris McKay
+    released: 2023
+    logDate: 2026-10-20
+    rating: 4
+  - tmdb: 34560
+    title: Halloweentown High
+    directors:
+      - Mark A.Z. Dippé
+    released: 2004
+    logDate: 2026-10-20
+    rating: 3
   - tmdb: 8966
     title: Twilight
     directors:
