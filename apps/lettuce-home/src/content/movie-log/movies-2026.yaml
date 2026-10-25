@@ -1,5 +1,20 @@
 year: 2026
 movies:
+  - tmdb: 10192
+    title: Shrek Forever after
+    directors:
+      - Mike Mitchell
+    released: 2010
+    logDate: 2026-10-24
+    rating: 5
+    comment: You always need a chimichanga stand.
+  - tmdb: 18239
+    title: New Moon
+    directors:
+      - Chris Weitz
+    released: 2009
+    logDate: 2026-10-24
+    rating: 3
   - tmdb: 649609
     title: Renfield
     directors:
