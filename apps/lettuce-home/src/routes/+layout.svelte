@@ -2,15 +2,17 @@
   import { page } from '$app/state';
   import './layout.css';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
+  import interWoff2 from '@fontsource-variable/inter/files/inter-latin-standard-normal.woff2?url';
   let { children } = $props();
 </script>
 
-<svelte:head
-  ><link
+<svelte:head>
+  <link
     rel="icon"
     href="https://api.dicebear.com/9.x/bottts-neutral/svg?backgroundColor=BF616A&backgroundColor=D08770&backgroundColor=EBCB8B&backgroundColor=A3BE8C&backgroundColor=B48EAD&backgroundColor=88C0D0&backgroundType=gradientLinear&radius=20&seed=lettucebowler"
-  /></svelte:head
->
+  />
+  <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin="anonymous" />
+</svelte:head>
 <div class="mx-auto h-full space-y-16">
   <div class="container mx-auto box-border">
     <div class="mx-2 mt-2">

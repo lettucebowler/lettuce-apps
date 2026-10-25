@@ -1,6 +1,7 @@
 <script lang="ts">
   import { PageContentContainer } from '@lettuce-apps-packages/svelte-common';
   import { NavBar, NavLink } from '@lettuce-apps-packages/svelte-common';
+  import interWoff2 from '@fontsource-variable/inter/files/inter-latin-standard-normal.woff2?url';
   import '../app.css';
   import { sessionQuery } from './auth.remote';
   import { Toasts } from 'svoast';
@@ -19,6 +20,7 @@
 <svelte:head>
   <link rel="icon" href={favicon} />
   <meta name="title" content={appName} />
+  <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin="anonymous" />
 </svelte:head>
 
 <PageContentContainer --tile-height="2px">
