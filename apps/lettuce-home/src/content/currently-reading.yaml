@@ -1,6 +1,12 @@
 books:
-  - isbn: 9781639731060
-    title: Kingdom of Ash
+  - isbn: 9781668221570
+    title: We are Legion
+    subtitle: We are Bob
     authors:
-      - Sarah J. Maas
-    published: 2018
+      - Dennis E. Taylor
+    published: 2016
+  - isbn: 9780983748441
+    title: A Short Stay in Hell
+    authors:
+      - Steven L. Peck
+    published: 2009

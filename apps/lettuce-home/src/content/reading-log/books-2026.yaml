@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781639731060
+    title: Kingdom of Ash
+    authors:
+      - Sarah J. Maas
+    published: 2018
+    logDate: 2026-10-27
+    rating: 2
+    comment: Too long
   - isbn: 9780765324641
     title: The Word for World is Forest
     authors:
