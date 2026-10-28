@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9780983748441
+    title: A Short Stay in Hell
+    authors:
+      - Steven L. Peck
+    published: 2009
+    logDate: 2026-10-28
+    rating: 3
   - isbn: 9781639731060
     title: Kingdom of Ash
     authors:
