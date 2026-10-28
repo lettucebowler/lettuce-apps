@@ -1,7 +1,7 @@
 books:
   - isbn: 9781668221570
     title: We are Legion
-    subtitle: We are Bob
+    subtitle: (We are Bob)
     authors:
       - Dennis E. Taylor
     published: 2016
