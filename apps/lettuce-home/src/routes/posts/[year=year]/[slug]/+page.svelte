@@ -7,9 +7,9 @@
   <title>{data.meta.title} | Grant Montgomery</title>
 </svelte:head>
 <main class="max-w-screen-md">
-  <h1 class="mb-8 text-3xl font-bold">{data.meta.title}</h1>
-  <div class="flex gap-x-4">
-    <time
+  <header>
+    <h1 class="mb-2 text-3xl font-bold">{data.meta.title}</h1>
+    <time class="mb-0 block font-light text-charade-100"
       >{new Date(data.meta.date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
@@ -26,7 +26,7 @@
         {/each}
       </ul>
     </nav>
-  </div>
+  </header>
   <div
     class="prose mt-4 mb-40 max-w-screen-md prose-brand prose-headings:font-bold prose-h1:mb-8 prose-h1:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:mt-4 prose-h3:mb-2 prose-h3:text-lg prose-h3:font-bold prose-a:cursor-pointer prose-a:text-putty-500 prose-img:w-full prose-picture:my-0"
   >
