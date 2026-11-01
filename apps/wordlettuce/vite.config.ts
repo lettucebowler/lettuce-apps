@@ -12,7 +12,7 @@ const svelteConfig: SvelteConfig = {
   adapter: adapter(),
   experimental: {
     remoteFunctions: true,
-    forkPreloads: true,
+    forkPreloads: false,
   },
   compilerOptions: {
     experimental: {
