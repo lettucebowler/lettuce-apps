@@ -1,7 +1,7 @@
 ---
 title: 'September-October 2026'
 date: 2026-11-01
-published: false
+published: true
 tags:
   - media-log
 ---

@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 298312
+    title: The Visit
+    released: 2015
+    directors:
+      - M. Night Shyamalan
+    logDate: 2026-10-30
+    rating: 4
   - tmdb: 10192
     title: Shrek Forever after
     directors:
