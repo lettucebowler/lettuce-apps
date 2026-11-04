@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 791523
+    title: Wildwood
+    released: 2026
+    directors:
+      - Travis Knight
+    logDate: 2026-11-03
+    rating: 5
   - tmdb: 298312
     title: The Visit
     released: 2015
