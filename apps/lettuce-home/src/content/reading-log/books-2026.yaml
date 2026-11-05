@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9781668221570
+    title: We are Legion
+    subtitle: (We are Bob)
+    authors:
+      - Dennis E. Taylor
+    published: 2016
+    logDate: 2026-11-04
+    rating: 3
   - isbn: 9780983748441
     title: A Short Stay in Hell
     authors:

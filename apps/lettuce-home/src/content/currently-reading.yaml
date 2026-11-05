@@ -1,10 +1,4 @@
 books:
-  - isbn: 9781668221570
-    title: We are Legion
-    subtitle: (We are Bob)
-    authors:
-      - Dennis E. Taylor
-    published: 2016
   - isbn: 9780063031319
     title: Daughter of the Moon Goddess
     authors:
