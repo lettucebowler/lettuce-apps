@@ -1,5 +1,13 @@
 year: 2026
 books:
+  - isbn: 9780063031319
+    title: Daughter of the Moon Goddess
+    authors:
+      - Sue Lynn Tan
+    published: 2022
+    logDate: 2026-11-13
+    rating: 2
+    comment: the relationships didn't develop they just happened.
   - isbn: 9781668221570
     title: We are Legion
     subtitle: (We are Bob)
