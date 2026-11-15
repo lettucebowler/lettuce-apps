@@ -116,7 +116,7 @@
   <div class="size-container grid w-full">
     <div
       bind:this={tileGridEl}
-      class="m-auto grid w-full max-w-[min(100%,min(calc((100cqh)/6*5)),720px))] grid-rows-[repeat(6,1fr)] gap-2"
+      class="m-auto grid w-full max-w-[min(720px,calc(5/6*100cqh))] grid-rows-[repeat(6,1fr)] gap-2"
     >
       {#each getItemsForGrid(game) as row (row.index)}
         <div class="grid grid-cols-[repeat(5,1fr)] gap-2" data-index={row.index} animate:flip={{ duration: 150 }}>
