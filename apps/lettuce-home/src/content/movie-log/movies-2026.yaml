@@ -1,5 +1,12 @@
 year: 2026
 movies:
+  - tmdb: 10096
+    title: 13 Going on 30
+    directors:
+      - Gary Winick
+    released: 2004
+    logDate: 2026-11-17
+    rating: 4
   - tmdb: 693
     title: Meet the Fockers
     directors:
