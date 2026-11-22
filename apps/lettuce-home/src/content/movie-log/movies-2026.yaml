@@ -1,5 +1,19 @@
 year: 2026
 movies:
+  - tmdb: 1629051
+    title: Never After Dark
+    directors:
+      - Dave Boyle
+    released: 2026
+    logDate: 2026-11-21
+    rating: 3
+  - tmdb: 417859
+    title: Puss in Boots
+    directors:
+      - Chris Miller
+    released: 2011
+    logDate: 2026-11-21
+    rating: 4
   - tmdb: 10096
     title: 13 Going on 30
     directors:

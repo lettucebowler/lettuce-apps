@@ -4,3 +4,8 @@ books:
     authors:
       - Dennis E. Taylor
     published: 2017
+  - isbn: 9781649374042
+    title: Fourth Wing
+    authors:
+      - Rebecca Yarros
+    published: 2023
