@@ -1,5 +1,12 @@
 year: 2026
 books:
+  - isbn: 9781668221594
+    title: For We Are Many
+    authors:
+      - Dennis E. Taylor
+    published: 2017
+    logDate: 2026-11-22
+    rating: 3
   - isbn: 9780063031319
     title: Daughter of the Moon Goddess
     authors:
