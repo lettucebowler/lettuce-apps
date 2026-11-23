@@ -8,7 +8,7 @@ import adapter from '@sveltejs/adapter-cloudflare';
 import { mdsvex } from 'mdsvex';
 
 const svelteConfig: Config = {
-  preprocess: [vitePreprocess(), mdsvex({ extensions: ['md'] })],
+  preprocess: [vitePreprocess()],
   compilerOptions: {
     experimental: {
       async: true,
@@ -23,7 +23,13 @@ const svelteConfig: Config = {
 };
 
 export default defineConfig({
-  plugins: [tailwindcss(), enhancedImages(), sveltekit(svelteConfig), contentCollections()],
+  plugins: [
+    tailwindcss(),
+    enhancedImages(),
+    sveltekit(svelteConfig),
+    contentCollections(),
+    mdsvex({ extensions: ['md'] }),
+  ],
   server: {
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd())],

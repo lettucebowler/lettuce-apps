@@ -2,10 +2,10 @@ import { getRequestEvent } from '$app/server';
 import type { RequestEvent } from '@sveltejs/kit';
 import { createAuthClient } from '@lettuce-apps-packages/auth';
 import { dev } from '$app/env';
-import type { URL, RequestInfo, CfProperties, RequestInit } from '@cloudflare/workers-types';
 import { subjects } from '@lettuce-apps-packages/auth';
 import { AUTH_HOST } from '$app/env/private';
 import type { Session } from '#lib/types.js';
+import { env } from 'cloudflare:workers';
 
 export async function getSession(): Promise<Session> {
   const event = getRequestEvent();
@@ -23,15 +23,20 @@ export async function getSession(): Promise<Session> {
 
 function _createAuthClient() {
   const event = getRequestEvent();
+  const storage = {
+    get: (key: string) =>
+      env.lettuce_auth_signing_keys.get(key, {
+        type: 'json',
+        cacheTtl: 3600,
+      }),
+    put: (key: string, value: string) => env.lettuce_auth_signing_keys.put(key, value),
+  };
   return createAuthClient({
     clientID: 'lettuce-auth-test',
     issuer: AUTH_HOST,
     fetch:
-      dev || !event.platform?.env?.lettuce_auth
-        ? event.fetch
-        : (((a: URL | RequestInfo<unknown, CfProperties<unknown>>, b: RequestInit<CfProperties<unknown>> | undefined) =>
-            event.platform!.env!.lettuce_auth!.fetch(a, b)) as unknown as typeof fetch),
-    storage: event.platform?.env?.lettuce_auth_signing_keys,
+      dev || !env.lettuce_auth ? event.fetch : (a, b) => (env.lettuce_auth!.fetch as unknown as typeof fetch)(a, b),
+    storage,
   });
 }
 

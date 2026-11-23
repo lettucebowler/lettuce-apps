@@ -17,7 +17,9 @@
     <a
       class="text-swamp-green-500"
       target="_blank"
-      href="https://github.com/lettucebowler/lettuce-apps/tree/main/apps/wordlettuce">Github</a
-    >.
+      href="https://github.com/lettucebowler/lettuce-apps/tree/main/apps/wordlettuce"
+    >
+      Github
+    </a>.
   </p>
 </main>

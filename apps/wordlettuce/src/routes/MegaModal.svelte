@@ -71,17 +71,20 @@
     {#if !authenticated}
       <a
         class="bg-antique-brass-500 text-snow-300 border-antique-brass-400 box-border block w-full rounded-lg border-t-1 p-2 text-center font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
-        href="/signin">Login to save your results <ArrowRightEndOnBoxIcon class="inline w-6" /></a
+        href="/signin"
       >
+        Login to save your results <ArrowRightEndOnBoxIcon class="inline w-6" />
+      </a>
     {/if}
     <button
       onclick={() => shareGame()}
       class="bg-frost-400 text-snow-300 border-frost-300 box-border block w-full rounded-lg border-t-1 p-2 font-bold shadow-sm hover:brightness-90 active:mb-[1px] active:border-none"
-      >{#if clipboardMessage.value}
+    >
+      {#if clipboardMessage.value}
         <span class="text-snow-300 -z-10 p-2 text-center">{clipboardMessage.value}</span>
       {:else}
         Share
-      {/if}</button
-    >
+      {/if}
+    </button>
   </div>
 </Dialog>

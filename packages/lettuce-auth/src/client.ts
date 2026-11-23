@@ -2,25 +2,24 @@ import type { KVNamespace } from '@cloudflare/workers-types';
 import { createLocalJWKSet, errors, JSONWebKeySet, jwtVerify } from 'jose';
 import type { StandardSchemaV1 as v1 } from '@standard-schema/spec';
 
-import {
-  ClientInput,
-  WellKnown,
-  createClient,
-  VerifyOptions,
-  VerifyResult,
-  VerifyError,
-} from '@openauthjs/openauth/client';
-import { SubjectSchema } from '@openauthjs/openauth/subject';
-import { InvalidAccessTokenError, InvalidSubjectError } from '@openauthjs/openauth/error';
+import { ClientInput, WellKnown, createClient, VerifyOptions, VerifyResult, VerifyError } from '@kagii/openauth/client';
+import { SubjectSchema } from '@kagii/openauth/subject';
+import { InvalidAccessTokenError, InvalidSubjectError } from '@kagii/openauth/error';
 import ky from 'ky';
 import { User } from './schemas';
 
-type AuthClientInput = Omit<ClientInput, 'fetch'> & {
-  storage?: KVNamespace;
+export type WellKnownCache = {
+  get: (key: string) => Promise<unknown>;
+  put: (key: string, value: string) => Promise<void>;
+};
+
+export type AuthClientInput = Omit<ClientInput, 'fetch'> & {
+  storage?: WellKnownCache;
   issuer: string;
   keyset?: JSONWebKeySet;
   fetch: typeof fetch;
 };
+export type LettuceAuthKVNamespace = KVNamespace;
 export function createAuthClient(input: AuthClientInput) {
   const f = input.fetch ?? fetch;
 
@@ -31,10 +30,7 @@ export function createAuthClient(input: AuthClientInput) {
 
   async function getIssuer(): Promise<WellKnown> {
     if (input.storage) {
-      const cached = await input.storage.get(getIssuerKey(input.issuer), {
-        type: 'json',
-        cacheTtl: 3600,
-      });
+      const cached = await input.storage.get(getIssuerKey(input.issuer));
       if (cached) {
         return cached as WellKnown;
       }
@@ -59,9 +55,7 @@ export function createAuthClient(input: AuthClientInput) {
     let keyset: JSONWebKeySet | undefined = undefined;
     const cacheKey = getJWKSKey(input.issuer);
     if (input.storage) {
-      const cachedKeyset = await input.storage
-        .get(cacheKey, { type: 'json', cacheTtl: 3600 })
-        .then((r) => r as JSONWebKeySet);
+      const cachedKeyset = await input.storage.get(cacheKey).then((r) => r as JSONWebKeySet);
       if (cachedKeyset) {
         keyset = cachedKeyset;
         return createLocalJWKSet(keyset);

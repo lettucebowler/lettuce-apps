@@ -19,9 +19,10 @@
         <header>
           <h2 class="inline text-2xl font-bold">{group.title}</h2>
           &nbsp;
-          <span class=" font-medium text-charade-100"
-            >{group.items.length} {group.items.length > 1 ? 'posts' : 'post'}</span
-          >
+          <span class=" font-medium text-charade-100">
+            {group.items.length}
+            {group.items.length > 1 ? 'posts' : 'post'}
+          </span>
         </header>
         <ul class="space-y-4">
           {#each group.items as post (post.slug)}

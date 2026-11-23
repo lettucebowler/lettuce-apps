@@ -54,8 +54,10 @@
         {#if isSelf}
           <a
             class="text-snow-100 grid h-full items-center rounded-xl text-base font-medium capitalize hover:underline"
-            href="/signout">Sign out</a
+            href="/signout"
           >
+            Sign out
+          </a>
         {/if}
       </figcaption>
     </figure>
@@ -117,15 +119,19 @@
             <a
               href="?start={gameNum}"
               title="Back to start"
-              class="text-snow-300 mr-auto text-lg font-medium hover:underline">Back to start</a
+              class="text-snow-300 mr-auto text-lg font-medium hover:underline"
             >
+              Back to start
+            </a>
           {/if}
           {#if profileData.next}
             <a
               href="?start={profileData.next}&prevStart={profileData.start}"
               title="Next"
-              class="text-snow-300 text-lg font-medium hover:underline">Next</a
+              class="text-snow-300 text-lg font-medium hover:underline"
             >
+              Next
+            </a>
           {/if}
         </nav>
       {/if}

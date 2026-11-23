@@ -1,4 +1,4 @@
-import { joinKey, splitKey, type StorageAdapter } from '@openauthjs/openauth/storage/storage';
+import { joinKey, splitKey, type StorageAdapter } from '@kagii/openauth/storage/storage';
 
 export async function CloudflareD1Storage(d1: D1Database): Promise<StorageAdapter> {
   const tableName = 'openauth';

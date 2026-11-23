@@ -12,8 +12,8 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260708.1",
     "@hono/standard-validator": "^0.2.3",
+    "@kagii/openauth": "catalog:",
     "@lettuce-apps-packages/auth": "workspace:*",
-    "@openauthjs/openauth": "0.4.3",
     "@types/node": "^26.1.1",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",

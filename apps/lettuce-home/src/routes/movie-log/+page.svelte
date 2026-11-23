@@ -16,9 +16,9 @@
       {#snippet header()}
         <header>
           <h2 class="inline-block scroll-mt-4 text-2xl font-bold" id={year.toString()}>{year.toString()}</h2>
-          <span class="ml-1 inline-block font-medium text-charade-100"
-            >{movies.length} movie{movies.length === 1 ? '' : 's'}</span
-          >
+          <span class="ml-1 inline-block font-medium text-charade-100">
+            {movies.length} movie{movies.length === 1 ? '' : 's'}
+          </span>
         </header>
       {/snippet}
       {#each movies as movie (movie.tmdb + ':' + movie.rating + ':' + movie.logDate)}

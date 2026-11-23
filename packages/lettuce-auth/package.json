@@ -15,14 +15,14 @@
     }
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260914.1",
-    "@openauthjs/openauth": "^0.4.3",
+    "@cloudflare/workers-types": "^5.20261122.2",
     "@standard-schema/spec": "^1.1.0",
-    "jose": "^6.2.12",
+    "jose": "^6.2.18",
     "ky": "catalog:",
     "typescript": "~6.0.3",
     "valibot": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-dts": "^5.1.0"
+    "@kagii/openauth": "catalog:",
+    "vite-plugin-dts": "^5.1.2"
   }
 }

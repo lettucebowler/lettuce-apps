@@ -9,14 +9,14 @@
 <main class="max-w-screen-md">
   <header>
     <h1 class="mb-2 text-3xl font-bold">{data.meta.title}</h1>
-    <time class="mb-0 block font-light text-charade-100"
-      >{new Date(data.meta.date).toLocaleDateString('en-US', {
+    <time class="mb-0 block font-light text-charade-100">
+      {new Date(data.meta.date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
         timeZone: 'UTC',
-      })}</time
-    >
+      })}
+    </time>
     <nav>
       <ul class="m-0! flex list-none gap-2 p-0!">
         {#each data.meta.tags as tag (tag)}

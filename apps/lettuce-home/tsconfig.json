@@ -2,6 +2,7 @@
   "extends": "$app/tsconfig",
   "include": ["src"],
   "compilerOptions": {
+    "module": "ESNext",
     "rewriteRelativeImportExtensions": true,
     "sourceMap": true,
     "strict": true,

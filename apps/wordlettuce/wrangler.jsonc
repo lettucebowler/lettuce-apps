@@ -5,8 +5,7 @@
     "directory": ".svelte-kit/cloudflare",
     "binding": "ASSETS",
   },
-  "main": ".svelte-kit/cloudflare/_worker.js",
-  "compatibility_date": "2025-05-29",
+  "compatibility_date": "2026-08-04",
   "compatibility_flags": ["nodejs_compat"],
   "services": [
     {

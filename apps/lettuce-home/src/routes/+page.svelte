@@ -37,8 +37,9 @@
       </section>
       <section id="activity-section" class="space-y-4">
         <h2 class="text-2xl font-bold">
-          Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">View all posts →</a
-          >
+          Latest posts<a href="/posts" class="ml-8 text-base font-medium text-charade-100 underline">
+            View all posts →
+          </a>
         </h2>
         {#each data.recentPosts as post (post.slug)}
           <Post {...post} />
@@ -47,9 +48,9 @@
       {#if data.activeProjects.length}
         <section id="activity-section" class="space-y-4">
           <h2 class="text-2xl font-bold">
-            Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline"
-              >View all projects →</a
-            >
+            Active projects <a href="/projects" class="ml-8 text-base font-medium text-charade-100 underline">
+              View all projects →
+            </a>
           </h2>
           {#each data.activeProjects as project (project.title)}
             <Project

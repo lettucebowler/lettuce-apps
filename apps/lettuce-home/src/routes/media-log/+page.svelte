@@ -77,8 +77,9 @@
       <div class="flex gap-4">
         <button
           class="order-1 my-1 box-border h-10.5 cursor-pointer rounded bg-frost-400 px-3 py-1 font-medium text-charade-50 hover:bg-frost-400/90 focus-visible:bg-frost-400/90 active:bg-frost-400/70 sm:order-0"
-          >Filter</button
         >
+          Filter
+        </button>
         <a href={page.url.pathname} class="my-1 ml-auto block h-10.5 py-2 text-charade-100 sm:ml-0">Clear filters</a>
       </div>
     </div>
@@ -86,9 +87,9 @@
   <section class="space-y-6">
     <h2 class="text-2xl font-bold">
       Books completed &nbsp;
-      <span class="text-base font-medium text-charade-100"
-        >{filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}</span
-      >
+      <span class="text-base font-medium text-charade-100">
+        {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
+      </span>
     </h2>
 
     <MediaGrid>
@@ -100,9 +101,9 @@
   <section class="space-y-6">
     <h2 class=" text-2xl font-bold">
       Movies watched &nbsp;
-      <span class="text-base font-medium text-charade-100"
-        >{filteredMovies.length} movie{filteredMovies.length !== 1 ? 's' : ''}</span
-      >
+      <span class="text-base font-medium text-charade-100">
+        {filteredMovies.length} movie{filteredMovies.length !== 1 ? 's' : ''}
+      </span>
     </h2>
 
     <MediaGrid>

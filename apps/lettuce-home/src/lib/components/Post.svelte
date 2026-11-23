@@ -20,14 +20,14 @@
 <div>
   <svelte:element this={heading} class={headingClassname}><a href="/posts/{slug}">{title}</a></svelte:element>
   <p class="mb-1 flex max-w-120 flex-wrap items-end gap-x-2">
-    <time
-      >{new Date(date).toLocaleDateString('en-US', {
+    <time>
+      {new Date(date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
         timeZone: 'utc',
-      })}</time
-    >
+      })}
+    </time>
     {#each tags as tag}
       <a href="/tag/{tag}" class="inline-flex text-frost-100 hover:underline">#{tag}</a>
     {/each}

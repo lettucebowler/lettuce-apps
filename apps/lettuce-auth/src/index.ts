@@ -1,7 +1,7 @@
-import { issuer } from '@openauthjs/openauth';
+import { issuer } from '@kagii/openauth';
 import { Account, subjects } from '@lettuce-apps-packages/auth';
 
-import { GithubProvider } from '@openauthjs/openauth/provider/github';
+import { GithubProvider } from '@kagii/openauth/provider/github';
 
 import type { LettuceAuthBindings, ProviderUser } from './types';
 

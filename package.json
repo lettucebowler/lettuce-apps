@@ -8,11 +8,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "format": "prettier --write .",
+    "format": "pnpm -r --if-present run format",
     "packages": "pnpm --filter './packages/*'",
     "lettuce-auth-common": "pnpm --filter 'lettuce-auth-common'",
     "lettuce-auth": "pnpm --filter 'lettuce-auth'",
-    "lettuce-auth-test": "pnpm --filter 'lettuce-auth-test'",
     "wordlettuce": "pnpm --filter 'wordlettuce'",
     "api-wordlettuce": "pnpm --filter 'api-wordlettuce'",
     "svelte-common": "pnpm --filter @lettuce-apps-packages/svelte-common",
@@ -25,13 +24,13 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.14.0",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
     "globals": "^17.14.0",
-    "prettier": "^3.9.10",
-    "prettier-plugin-svelte": "^4.1.1",
+    "prettier": "^3.10.1",
+    "prettier-plugin-svelte": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "typescript-eslint": "^8.72.1"
+    "typescript-eslint": "^8.73.0"
   }
 }
