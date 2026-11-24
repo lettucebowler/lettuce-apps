@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 5173 --debug",
+    "dev": "vite dev --port 5173",
     "build": "vite build",
     "preview": "wrangler dev --port 5173",
     "prepare": "pnpm run types && svelte-kit sync || echo ''",

@@ -7,6 +7,27 @@ books:
     published: 2017
     logDate: 2026-11-22
     rating: 3
+  - isbn: 9781974755752
+    title: Dandadan 14
+    authors:
+      - Yukinobu Tatsu
+    published: 2025
+    logDate: 2026-11-21
+    rating: 4
+  - isbn: 9781974755110
+    title: Dandadan 13
+    authors:
+      - Yukinobu Tatsu
+    published: 2025
+    logDate: 2026-11-21
+    rating: 4
+  - isbn: 9781974752270
+    title: Dandadan 12
+    authors:
+      - Yukinobu Tatsu
+    published: 2025
+    logDate: 2026-11-21
+    rating: 4
   - isbn: 9780063031319
     title: Daughter of the Moon Goddess
     authors:

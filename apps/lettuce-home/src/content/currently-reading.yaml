@@ -1,4 +1,9 @@
 books:
+  - isbn: 9781668221617
+    title: All These Worlds
+    authors:
+      - Dennis E. Taylor
+    published: 2017
   - isbn: 9781649374042
     title: Fourth Wing
     authors:
