@@ -1,5 +1,20 @@
 year: 2026
 movies:
+  - tmdb: 10719
+    title: Elf
+    released: 2003
+    directors:
+      - Jon Favreau
+    logDate: 2026-11-25
+    rating: 4
+    rewatch: true
+  - tmdb: 1233413
+    title: Sinners
+    released: 2025
+    directors:
+      - Ryan Coogler
+    logDate: 2026-11-24
+    rating: 5
   - tmdb: 1629051
     title: Never After Dark
     directors:
